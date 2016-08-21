@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="YMDLL.Class.YM_SQLServer">
+    <Position X="2.75" Y="7" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAlAYAARAAQACBAAgAAEAAAAAEgIIAACAELAIRA=</HashCode>
+      <FileName>Class\YM_SQLServer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="YMDLL.Class.CS_RealEstateInfo">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAACAAAAAAAAAAAAAgAAAEAAAAAAAAAAAAABEQJACA=</HashCode>
+      <FileName>Class\CS_RealEstateInfo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="YMDLL.Class.CS_CityCode">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAACAAAAAAEABAgA=</HashCode>
+      <FileName>Class\CS_CityCode.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="YMDLL.Class.CS_GetWebpageSourceCode">
+    <Position X="12.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAACAACAAAAEABAAA=</HashCode>
+      <FileName>Class\CS_GetWebpageSourceCode.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="YMDLL.Class.CS_InterceptWebInfo">
+    <Position X="17.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAEAAAAgAAAAAEAAAgAAggAAAEABAAA=</HashCode>
+      <FileName>Class\CS_InterceptWebInfo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="InterceptWebInfo.Cutout" Collapsed="true">
+    <Position X="4" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAgAAAACAgACAADQBwIhACABCAIACAAABBCAACA=</HashCode>
+      <FileName>Class\Cutout.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YMDLL.Class.CS_CalcDateTime" Collapsed="true">
+    <Position X="2.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAQAAEAAAAAAAAAAQAAIIAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Class\CS_CalcDateTime.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="YMDLL.Class.CS_OperaWeb">
+    <Position X="6.25" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>IAAgGAQsQAAAiAMAAAAAAAAAAAAAAABAAAAAARAAIAA=</HashCode>
+      <FileName>Class\CS_OperaWeb.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="YMDLL.Class.CS_OperaExcel">
+    <Position X="10.75" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAABAAAEAAAAACAAAAAA=</HashCode>
+      <FileName>Class\CS_OperaExcel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="YMDLL.Class.Web.YM_InterceptWebInfo_51job">
+    <Position X="17.5" Y="4.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAEAAAAAAAAAAEAAAAIAggAAAEAAAAA=</HashCode>
+      <FileName>Class\Web\YM_InterceptWebInfo_51job.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="YMDLL.Class.YM_MySQL">
+    <Position X="0.5" Y="6" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BoSAAEAAAAAAUQBEAAADABQAAQHAAAgAAAAAQgAAAgI=</HashCode>
+      <FileName>Class\YM_MySQL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="YMDLL.Interface.IRealEstateInfo">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAACAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAABEQAAAA=</HashCode>
+      <FileName>Interface\IRealEstateInfo.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="YMDLL.Interface.ICityCode">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAACAAAAAAEAAAAA=</HashCode>
+      <FileName>Interface\ICityCode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="YMDLL.Interface.IGetWebpageSourceCode">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAACAAAAEAAAAA=</HashCode>
+      <FileName>Interface\IGetWebpageSourceCode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="YMDLL.Interface.IInterceptWebInfo">
+    <Position X="14.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAEAAAAAAAAAAEAAAAAAggAAAEAAAAA=</HashCode>
+      <FileName>Interface\IInterceptWebInfo.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="YMDLL.Interface.ICalcDateTime" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAEAAAAAAAAAAAAAAIAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Interface\ICalcDateTime.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="YMDLL.Interface.IOperaWeb">
+    <Position X="4" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAACAQoQAAAAAAAAAAAAAAAAAAAAAAAAAAAARAAAAA=</HashCode>
+      <FileName>Interface\IOperaWeb.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="YMDLL.Interface.IOperaExcel">
+    <Position X="8.75" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Interface\IOperaExcel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="YMDLL.Interface.InterceptOrder">
+    <Position X="20.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interface\IInterceptWebInfo.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>
