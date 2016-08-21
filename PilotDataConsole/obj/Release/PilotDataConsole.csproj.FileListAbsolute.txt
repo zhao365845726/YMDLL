@@ -1,0 +1,12 @@
+E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\bin\Release\PilotDataConsole.exe.config
+E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\bin\Release\PilotDataConsole.exe
+E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\bin\Release\PilotDataConsole.pdb
+E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\bin\Release\AgencyEntity.dll
+E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\bin\Release\YMDLL.dll
+E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\bin\Release\AgencyEntity.pdb
+E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\bin\Release\YMDLL.pdb
+E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\obj\Release\PilotDataConsole.csprojResolveAssemblyReference.cache
+E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\obj\Release\PilotDataConsole.exe
+E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\obj\Release\PilotDataConsole.pdb
+E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\obj\Release\PilotDataConsole.Properties.Resources.resources
+E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\obj\Release\PilotDataConsole.csproj.GenerateResource.Cache
