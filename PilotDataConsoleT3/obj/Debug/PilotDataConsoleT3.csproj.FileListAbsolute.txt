@@ -1,0 +1,11 @@
+F:\working-zhdcCode\common\YMDLL\PilotDataConsoleT3\bin\Debug\PilotDataConsoleT3.exe.config
+F:\working-zhdcCode\common\YMDLL\PilotDataConsoleT3\bin\Debug\PilotDataConsoleT3.exe
+F:\working-zhdcCode\common\YMDLL\PilotDataConsoleT3\bin\Debug\PilotDataConsoleT3.pdb
+F:\working-zhdcCode\common\YMDLL\PilotDataConsoleT3\bin\Debug\AgencyToERP_PHP.dll
+F:\working-zhdcCode\common\YMDLL\PilotDataConsoleT3\bin\Debug\YMDLL.dll
+F:\working-zhdcCode\common\YMDLL\PilotDataConsoleT3\bin\Debug\MySql.Data.dll
+F:\working-zhdcCode\common\YMDLL\PilotDataConsoleT3\bin\Debug\AgencyToERP_PHP.pdb
+F:\working-zhdcCode\common\YMDLL\PilotDataConsoleT3\bin\Debug\YMDLL.pdb
+F:\working-zhdcCode\common\YMDLL\PilotDataConsoleT3\obj\Debug\PilotDataConsoleT3.csprojResolveAssemblyReference.cache
+F:\working-zhdcCode\common\YMDLL\PilotDataConsoleT3\obj\Debug\PilotDataConsoleT3.exe
+F:\working-zhdcCode\common\YMDLL\PilotDataConsoleT3\obj\Debug\PilotDataConsoleT3.pdb
