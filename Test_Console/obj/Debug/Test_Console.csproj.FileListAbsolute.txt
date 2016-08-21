@@ -1,0 +1,9 @@
+F:\working-zhdcCode\common\YMDLL\Test_Console\bin\Debug\Test_Console.exe.config
+F:\working-zhdcCode\common\YMDLL\Test_Console\bin\Debug\Test_Console.exe
+F:\working-zhdcCode\common\YMDLL\Test_Console\bin\Debug\Test_Console.pdb
+F:\working-zhdcCode\common\YMDLL\Test_Console\bin\Debug\YMDLL.dll
+F:\working-zhdcCode\common\YMDLL\Test_Console\bin\Debug\MySql.Data.dll
+F:\working-zhdcCode\common\YMDLL\Test_Console\bin\Debug\YMDLL.pdb
+F:\working-zhdcCode\common\YMDLL\Test_Console\obj\Debug\Test_Console.csprojResolveAssemblyReference.cache
+F:\working-zhdcCode\common\YMDLL\Test_Console\obj\Debug\Test_Console.exe
+F:\working-zhdcCode\common\YMDLL\Test_Console\obj\Debug\Test_Console.pdb
