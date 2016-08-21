@@ -1,0 +1,13 @@
+E:\程序设计\_C#_Download\YMDLL\PilotData\bin\Release\PilotData.exe.config
+E:\程序设计\_C#_Download\YMDLL\PilotData\bin\Release\PilotData.exe
+E:\程序设计\_C#_Download\YMDLL\PilotData\bin\Release\PilotData.pdb
+E:\程序设计\_C#_Download\YMDLL\PilotData\bin\Release\AgencyEntity.dll
+E:\程序设计\_C#_Download\YMDLL\PilotData\bin\Release\YMDLL.dll
+E:\程序设计\_C#_Download\YMDLL\PilotData\bin\Release\AgencyEntity.pdb
+E:\程序设计\_C#_Download\YMDLL\PilotData\bin\Release\YMDLL.pdb
+E:\程序设计\_C#_Download\YMDLL\PilotData\obj\Release\PilotData.csprojResolveAssemblyReference.cache
+E:\程序设计\_C#_Download\YMDLL\PilotData\obj\Release\PilotData.frmMain.resources
+E:\程序设计\_C#_Download\YMDLL\PilotData\obj\Release\PilotData.Properties.Resources.resources
+E:\程序设计\_C#_Download\YMDLL\PilotData\obj\Release\PilotData.csproj.GenerateResource.Cache
+E:\程序设计\_C#_Download\YMDLL\PilotData\obj\Release\PilotData.exe
+E:\程序设计\_C#_Download\YMDLL\PilotData\obj\Release\PilotData.pdb
