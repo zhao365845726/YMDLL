@@ -1,0 +1,8 @@
+F:\working-zhdcCode\common\YMDLL\AgencyToERP_PHP\bin\Debug\AgencyToERP_PHP.dll
+F:\working-zhdcCode\common\YMDLL\AgencyToERP_PHP\bin\Debug\AgencyToERP_PHP.pdb
+F:\working-zhdcCode\common\YMDLL\AgencyToERP_PHP\bin\Debug\YMDLL.dll
+F:\working-zhdcCode\common\YMDLL\AgencyToERP_PHP\bin\Debug\MySql.Data.dll
+F:\working-zhdcCode\common\YMDLL\AgencyToERP_PHP\bin\Debug\YMDLL.pdb
+F:\working-zhdcCode\common\YMDLL\AgencyToERP_PHP\obj\Debug\AgencyToERP_PHP.dll
+F:\working-zhdcCode\common\YMDLL\AgencyToERP_PHP\obj\Debug\AgencyToERP_PHP.pdb
+F:\working-zhdcCode\common\YMDLL\AgencyToERP_PHP\obj\Debug\AgencyToERP_PHP.csprojResolveAssemblyReference.cache
