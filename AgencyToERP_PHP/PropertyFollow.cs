@@ -25,8 +25,6 @@ namespace AgencyToERP_PHP
             sTableName = "Follow";
             sColumns = "FollowID,PropertyID,EmpID,FollowDate,Content,FollowType";
             sOrder = "FollowDate";
-            sPageIndex = 1;
-            sPageSize = 10000;
             dTableName = "erp_house_follow";
             dColumns = "fy_followId,erp_house_id,erp_user_id,follow_up_date,content,follow_way,company_id,if_deleted,create_time";
             //导入时间 00:23:18.5830269分
@@ -97,7 +95,7 @@ namespace AgencyToERP_PHP
                     string strTemp = "'" + row["FollowID"].ToString().Trim() + "','" +
                         row["PropertyID"].ToString().Trim() + "','" +
                         row["EmpID"].ToString().Trim() + "','" +
-                        row["FollowDate"].ToString().Trim() + "','" +
+                        _dateTime.DateTimeToStamp(row["FollowDate"].ToString().Trim()).ToString() + "','" +
                         strContent + "','" +
                         row["FollowType"].ToString().Trim() + "','" +
                         dCompanyId + "','" + dDeleteMark + "','" +
