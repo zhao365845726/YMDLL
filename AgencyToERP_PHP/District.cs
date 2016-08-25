@@ -40,7 +40,8 @@ namespace AgencyToERP_PHP
                 foreach (DataRow row in dt.Rows)
                 {
                     string strTemp = "'" + row["DistrictName"].ToString() + "'," +
-                        "102,0,'" + _dateTime.DateTimeToStamp(DateTime.Now) + 
+                        dCompanyId + 
+                        "," + dDeleteMark + ",'" + _dateTime.DateTimeToStamp(DateTime.Now) + 
                         "','" + _dateTime.DateTimeToStamp(DateTime.Now) +
                         "','" + row["DistrictNo"].ToString() + "'";
                     lstValue.Add(strTemp);

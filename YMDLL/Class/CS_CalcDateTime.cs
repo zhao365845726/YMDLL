@@ -172,6 +172,17 @@ namespace YMDLL.Class
             return (int)(time - startTime).TotalSeconds;
         }
 
+        /// <summary>
+        /// 字符串格式转换为Unix时间戳格式
+        /// </summary>
+        /// <param name="time">时间格式</param>
+        public int DateTimeToStamp(string strDateTime)
+        {
+            DateTime time = Convert.ToDateTime(strDateTime);
+            DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            return (int)(time - startTime).TotalSeconds;
+        }
+
         ///// <summary>
         ///// 计算日期时间构造函数
         ///// </summary>

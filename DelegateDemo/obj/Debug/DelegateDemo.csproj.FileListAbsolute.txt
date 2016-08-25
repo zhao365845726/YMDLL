@@ -22,3 +22,9 @@ F:\working-zhdcCode\common\YMDLL\DelegateDemo\bin\Debug\DelegateDemo.pdb
 F:\working-zhdcCode\common\YMDLL\DelegateDemo\obj\Debug\DelegateDemo.csprojResolveAssemblyReference.cache
 F:\working-zhdcCode\common\YMDLL\DelegateDemo\obj\Debug\DelegateDemo.exe
 F:\working-zhdcCode\common\YMDLL\DelegateDemo\obj\Debug\DelegateDemo.pdb
+F:\_GitCode\YMDLL\DelegateDemo\bin\Debug\DelegateDemo.exe.config
+F:\_GitCode\YMDLL\DelegateDemo\bin\Debug\DelegateDemo.exe
+F:\_GitCode\YMDLL\DelegateDemo\bin\Debug\DelegateDemo.pdb
+F:\_GitCode\YMDLL\DelegateDemo\obj\Debug\DelegateDemo.csprojResolveAssemblyReference.cache
+F:\_GitCode\YMDLL\DelegateDemo\obj\Debug\DelegateDemo.exe
+F:\_GitCode\YMDLL\DelegateDemo\obj\Debug\DelegateDemo.pdb

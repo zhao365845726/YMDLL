@@ -129,7 +129,8 @@ namespace AgencyToERP_PHP
                         _dateTime.DateTimeToStamp(DateTime.Now) + "','" +
                         _dateTime.DateTimeToStamp(DateTime.Now) + "','" +
                         row["DistrictName"].ToString() + "'," +
-                        "0,102," +
+                        dDeleteMark + 
+                        "," + dCompanyId + "," +
                         row["FlagLocked"].ToString() + ",'" +
                         row["EstateID"].ToString() + "','" + 
                         row["AreaID"].ToString() + "'"

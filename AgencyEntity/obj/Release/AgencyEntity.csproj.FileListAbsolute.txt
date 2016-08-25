@@ -5,3 +5,11 @@ E:\程序设计\_C#_Download\YMDLL\AgencyEntity\bin\Release\YMDLL.pdb
 E:\程序设计\_C#_Download\YMDLL\AgencyEntity\obj\Release\AgencyEntity.csprojResolveAssemblyReference.cache
 E:\程序设计\_C#_Download\YMDLL\AgencyEntity\obj\Release\AgencyEntity.dll
 E:\程序设计\_C#_Download\YMDLL\AgencyEntity\obj\Release\AgencyEntity.pdb
+F:\_GitCode\YMDLL\AgencyEntity\bin\Release\AgencyEntity.dll
+F:\_GitCode\YMDLL\AgencyEntity\bin\Release\AgencyEntity.pdb
+F:\_GitCode\YMDLL\AgencyEntity\bin\Release\YMDLL.dll
+F:\_GitCode\YMDLL\AgencyEntity\bin\Release\MySql.Data.dll
+F:\_GitCode\YMDLL\AgencyEntity\bin\Release\YMDLL.pdb
+F:\_GitCode\YMDLL\AgencyEntity\obj\Release\AgencyEntity.csprojResolveAssemblyReference.cache
+F:\_GitCode\YMDLL\AgencyEntity\obj\Release\AgencyEntity.dll
+F:\_GitCode\YMDLL\AgencyEntity\obj\Release\AgencyEntity.pdb

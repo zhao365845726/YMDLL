@@ -40,7 +40,8 @@ namespace AgencyToERP_PHP
                 {
                     string strTemp = "'" + row["AreaName"].ToString() + "','" +
                         row["DistrictName"].ToString() + "'" +
-                        ",102,0,'" + _dateTime.DateTimeToStamp(DateTime.Now) + 
+                        "," + dCompanyId + "," + dDeleteMark + 
+                        ",'" + _dateTime.DateTimeToStamp(DateTime.Now) + 
                         "','" + _dateTime.DateTimeToStamp(DateTime.Now) +
                         "','" + row["AreaID"].ToString() + "'";
                     lstValue.Add(strTemp);

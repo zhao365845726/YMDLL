@@ -37,3 +37,11 @@ F:\working-zhdcCode\common\YMDLL\AgencyEntity\bin\Debug\YMDLL.pdb
 F:\working-zhdcCode\common\YMDLL\AgencyEntity\obj\Debug\AgencyEntity.csprojResolveAssemblyReference.cache
 F:\working-zhdcCode\common\YMDLL\AgencyEntity\obj\Debug\AgencyEntity.dll
 F:\working-zhdcCode\common\YMDLL\AgencyEntity\obj\Debug\AgencyEntity.pdb
+F:\_GitCode\YMDLL\AgencyEntity\bin\Debug\AgencyEntity.dll
+F:\_GitCode\YMDLL\AgencyEntity\bin\Debug\AgencyEntity.pdb
+F:\_GitCode\YMDLL\AgencyEntity\bin\Debug\YMDLL.dll
+F:\_GitCode\YMDLL\AgencyEntity\bin\Debug\MySql.Data.dll
+F:\_GitCode\YMDLL\AgencyEntity\bin\Debug\YMDLL.pdb
+F:\_GitCode\YMDLL\AgencyEntity\obj\Debug\AgencyEntity.csprojResolveAssemblyReference.cache
+F:\_GitCode\YMDLL\AgencyEntity\obj\Debug\AgencyEntity.dll
+F:\_GitCode\YMDLL\AgencyEntity\obj\Debug\AgencyEntity.pdb

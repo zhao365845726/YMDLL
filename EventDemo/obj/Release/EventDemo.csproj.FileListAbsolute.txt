@@ -3,3 +3,8 @@ E:\程序设计\_C#_Download\YMDLL\EventDemo\bin\Release\EventDemo.exe
 E:\程序设计\_C#_Download\YMDLL\EventDemo\bin\Release\EventDemo.pdb
 E:\程序设计\_C#_Download\YMDLL\EventDemo\obj\Release\EventDemo.exe
 E:\程序设计\_C#_Download\YMDLL\EventDemo\obj\Release\EventDemo.pdb
+F:\_GitCode\YMDLL\EventDemo\bin\Release\EventDemo.exe.config
+F:\_GitCode\YMDLL\EventDemo\bin\Release\EventDemo.exe
+F:\_GitCode\YMDLL\EventDemo\bin\Release\EventDemo.pdb
+F:\_GitCode\YMDLL\EventDemo\obj\Release\EventDemo.exe
+F:\_GitCode\YMDLL\EventDemo\obj\Release\EventDemo.pdb

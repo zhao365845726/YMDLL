@@ -10,3 +10,16 @@ E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\obj\Release\PilotDataConsole
 E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\obj\Release\PilotDataConsole.pdb
 E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\obj\Release\PilotDataConsole.Properties.Resources.resources
 E:\程序设计\_C#_Download\YMDLL\PilotDataConsole\obj\Release\PilotDataConsole.csproj.GenerateResource.Cache
+F:\_GitCode\YMDLL\PilotDataConsole\bin\Release\PilotDataConsole.exe.config
+F:\_GitCode\YMDLL\PilotDataConsole\bin\Release\PilotDataConsole.exe
+F:\_GitCode\YMDLL\PilotDataConsole\bin\Release\PilotDataConsole.pdb
+F:\_GitCode\YMDLL\PilotDataConsole\bin\Release\AgencyEntity.dll
+F:\_GitCode\YMDLL\PilotDataConsole\bin\Release\YMDLL.dll
+F:\_GitCode\YMDLL\PilotDataConsole\bin\Release\MySql.Data.dll
+F:\_GitCode\YMDLL\PilotDataConsole\bin\Release\AgencyEntity.pdb
+F:\_GitCode\YMDLL\PilotDataConsole\bin\Release\YMDLL.pdb
+F:\_GitCode\YMDLL\PilotDataConsole\obj\Release\PilotDataConsole.csprojResolveAssemblyReference.cache
+F:\_GitCode\YMDLL\PilotDataConsole\obj\Release\PilotDataConsole.Properties.Resources.resources
+F:\_GitCode\YMDLL\PilotDataConsole\obj\Release\PilotDataConsole.csproj.GenerateResource.Cache
+F:\_GitCode\YMDLL\PilotDataConsole\obj\Release\PilotDataConsole.exe
+F:\_GitCode\YMDLL\PilotDataConsole\obj\Release\PilotDataConsole.pdb

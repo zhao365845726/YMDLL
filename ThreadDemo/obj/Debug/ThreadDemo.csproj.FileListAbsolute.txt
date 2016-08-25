@@ -22,3 +22,9 @@ F:\working-zhdcCode\common\YMDLL\ThreadDemo\bin\Debug\ThreadDemo.pdb
 F:\working-zhdcCode\common\YMDLL\ThreadDemo\obj\Debug\ThreadDemo.csprojResolveAssemblyReference.cache
 F:\working-zhdcCode\common\YMDLL\ThreadDemo\obj\Debug\ThreadDemo.exe
 F:\working-zhdcCode\common\YMDLL\ThreadDemo\obj\Debug\ThreadDemo.pdb
+F:\_GitCode\YMDLL\ThreadDemo\bin\Debug\ThreadDemo.exe.config
+F:\_GitCode\YMDLL\ThreadDemo\bin\Debug\ThreadDemo.exe
+F:\_GitCode\YMDLL\ThreadDemo\bin\Debug\ThreadDemo.pdb
+F:\_GitCode\YMDLL\ThreadDemo\obj\Debug\ThreadDemo.csprojResolveAssemblyReference.cache
+F:\_GitCode\YMDLL\ThreadDemo\obj\Debug\ThreadDemo.exe
+F:\_GitCode\YMDLL\ThreadDemo\obj\Debug\ThreadDemo.pdb

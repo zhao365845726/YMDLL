@@ -6,3 +6,11 @@ F:\working-zhdcCode\common\YMDLL\Entity_Base\bin\Debug\YMDLL.pdb
 F:\working-zhdcCode\common\YMDLL\Entity_Base\obj\Debug\Entity_Base.csprojResolveAssemblyReference.cache
 F:\working-zhdcCode\common\YMDLL\Entity_Base\obj\Debug\Entity_Base.dll
 F:\working-zhdcCode\common\YMDLL\Entity_Base\obj\Debug\Entity_Base.pdb
+F:\_GitCode\YMDLL\Entity_Base\bin\Debug\Entity_Base.dll
+F:\_GitCode\YMDLL\Entity_Base\bin\Debug\Entity_Base.pdb
+F:\_GitCode\YMDLL\Entity_Base\bin\Debug\YMDLL.dll
+F:\_GitCode\YMDLL\Entity_Base\bin\Debug\MySql.Data.dll
+F:\_GitCode\YMDLL\Entity_Base\bin\Debug\YMDLL.pdb
+F:\_GitCode\YMDLL\Entity_Base\obj\Debug\Entity_Base.csprojResolveAssemblyReference.cache
+F:\_GitCode\YMDLL\Entity_Base\obj\Debug\Entity_Base.dll
+F:\_GitCode\YMDLL\Entity_Base\obj\Debug\Entity_Base.pdb

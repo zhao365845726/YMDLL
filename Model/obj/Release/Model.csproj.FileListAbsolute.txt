@@ -3,3 +3,8 @@ E:\程序设计\_C#_Download\YMDLL\Model\bin\Release\Model.pdb
 E:\程序设计\_C#_Download\YMDLL\Model\obj\Release\Model.csprojResolveAssemblyReference.cache
 E:\程序设计\_C#_Download\YMDLL\Model\obj\Release\Model.dll
 E:\程序设计\_C#_Download\YMDLL\Model\obj\Release\Model.pdb
+F:\_GitCode\YMDLL\Model\bin\Release\Model.dll
+F:\_GitCode\YMDLL\Model\bin\Release\Model.pdb
+F:\_GitCode\YMDLL\Model\obj\Release\Model.csprojResolveAssemblyReference.cache
+F:\_GitCode\YMDLL\Model\obj\Release\Model.dll
+F:\_GitCode\YMDLL\Model\obj\Release\Model.pdb

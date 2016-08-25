@@ -47,3 +47,12 @@ F:\working-zhdcCode\common\YMDLL\YMDevelopToolHelper\obj\Debug\YMDevelopToolHelp
 F:\working-zhdcCode\common\YMDLL\YMDevelopToolHelper\obj\Debug\YMDevelopToolHelper.csproj.GenerateResource.Cache
 F:\working-zhdcCode\common\YMDLL\YMDevelopToolHelper\obj\Debug\YMDevelopToolHelper.exe
 F:\working-zhdcCode\common\YMDLL\YMDevelopToolHelper\obj\Debug\YMDevelopToolHelper.pdb
+F:\_GitCode\YMDLL\YMDevelopToolHelper\bin\Debug\YMDevelopToolHelper.exe
+F:\_GitCode\YMDLL\YMDevelopToolHelper\bin\Debug\YMDevelopToolHelper.pdb
+F:\_GitCode\YMDLL\YMDevelopToolHelper\obj\Debug\YMDevelopToolHelper.csprojResolveAssemblyReference.cache
+F:\_GitCode\YMDLL\YMDevelopToolHelper\obj\Debug\YMDevelopToolHelper.csproj.ResolveComReference.cache
+F:\_GitCode\YMDLL\YMDevelopToolHelper\obj\Debug\YMDevelopToolHelper.Form1.resources
+F:\_GitCode\YMDLL\YMDevelopToolHelper\obj\Debug\YMDevelopToolHelper.Properties.Resources.resources
+F:\_GitCode\YMDLL\YMDevelopToolHelper\obj\Debug\YMDevelopToolHelper.csproj.GenerateResource.Cache
+F:\_GitCode\YMDLL\YMDevelopToolHelper\obj\Debug\YMDevelopToolHelper.exe
+F:\_GitCode\YMDLL\YMDevelopToolHelper\obj\Debug\YMDevelopToolHelper.pdb

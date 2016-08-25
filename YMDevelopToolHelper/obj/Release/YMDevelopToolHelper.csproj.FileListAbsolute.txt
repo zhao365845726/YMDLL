@@ -7,3 +7,12 @@ E:\程序设计\_C#_Download\YMDLL\YMDevelopToolHelper\obj\Release\YMDevelopTool
 E:\程序设计\_C#_Download\YMDLL\YMDevelopToolHelper\obj\Release\YMDevelopToolHelper.csproj.GenerateResource.Cache
 E:\程序设计\_C#_Download\YMDLL\YMDevelopToolHelper\obj\Release\YMDevelopToolHelper.exe
 E:\程序设计\_C#_Download\YMDLL\YMDevelopToolHelper\obj\Release\YMDevelopToolHelper.pdb
+F:\_GitCode\YMDLL\YMDevelopToolHelper\bin\Release\YMDevelopToolHelper.exe
+F:\_GitCode\YMDLL\YMDevelopToolHelper\bin\Release\YMDevelopToolHelper.pdb
+F:\_GitCode\YMDLL\YMDevelopToolHelper\obj\Release\YMDevelopToolHelper.csprojResolveAssemblyReference.cache
+F:\_GitCode\YMDLL\YMDevelopToolHelper\obj\Release\YMDevelopToolHelper.csproj.ResolveComReference.cache
+F:\_GitCode\YMDLL\YMDevelopToolHelper\obj\Release\YMDevelopToolHelper.Form1.resources
+F:\_GitCode\YMDLL\YMDevelopToolHelper\obj\Release\YMDevelopToolHelper.Properties.Resources.resources
+F:\_GitCode\YMDLL\YMDevelopToolHelper\obj\Release\YMDevelopToolHelper.csproj.GenerateResource.Cache
+F:\_GitCode\YMDLL\YMDevelopToolHelper\obj\Release\YMDevelopToolHelper.exe
+F:\_GitCode\YMDLL\YMDevelopToolHelper\obj\Release\YMDevelopToolHelper.pdb

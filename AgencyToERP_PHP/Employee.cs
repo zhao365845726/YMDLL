@@ -28,12 +28,12 @@ namespace AgencyToERP_PHP
         public Employee()
         {
             sTableName = "Employee";
-            sColumns = "EmpName,Tel,Password,Sex,Birthday,IDCard,EmpNo,EMail,JoinDate,ExDate,AwayDate,EmpID,PositionID,DeptID,Status";
+            sColumns = "EmpName,Tel,Password,Sex,Birthday,IDCard,EmpNo,EMail,JoinDate,ExDate,AwayDate,EmpID,PositionID,DeptID,Status,Brief";
             sOrder = "EmpName";
             sPageIndex = 1;
             sPageSize = 1000;
             dTableName = "erp_user";
-            dColumns = "username,tel,pwd,company_id,gender,birthday,id_card_number,fy_PositionId,user_code,email,enroll_date,resign_date,create_time,update_time,if_deleted,erp_id,erp_role_id,erp_department_id,user_status";
+            dColumns = "username,tel,pwd,company_id,gender,birthday,id_card_number,fy_PositionId,user_code,email,enroll_date,resign_date,create_time,update_time,if_deleted,erp_id,erp_role_id,erp_department_id,user_status,introduce";
             dIsDelete = true;
         }
 
@@ -116,7 +116,8 @@ namespace AgencyToERP_PHP
 
                     string strTemp = "'" + row["EmpName"].ToString() + "','" +
                         row["Tel"].ToString() + "','" +
-                        row["Password"].ToString() + "',102,'" +
+                        row["Password"].ToString() + "'," + 
+                        dCompanyId + ",'" +
                         row["Sex"].ToString() + "'," +
                         strBirthday + ",'" +
                         row["IDCard"].ToString() + "','" +
@@ -126,11 +127,14 @@ namespace AgencyToERP_PHP
                         strExDate + "," +
                         strAwayDate + ",'" +
                         _dateTime.DateTimeToStamp(DateTime.Now).ToString() + "','" +
-                        _dateTime.DateTimeToStamp(DateTime.Now).ToString() + "',0,'" +
+                        _dateTime.DateTimeToStamp(DateTime.Now).ToString() + "'," + 
+                        dDeleteMark + ",'" +
                         row["EmpID"].ToString() + "','" +
                         row["PositionID"].ToString() + "','" +
                         row["DeptID"].ToString() + "','" +
-                        row["Status"].ToString() + "'";
+                        row["Status"].ToString() + "','" + 
+                        row["Brief"].ToString() + "'"
+                        ;
                     lstValue.Add(strTemp);
                 }
                 //如果允许删除，清空目标表数据
@@ -185,6 +189,34 @@ namespace AgencyToERP_PHP
         {
             _mysql.UpdateField("drop ", dTableName, FieldName, "");
             m_Result = _mysql.m_Message;
+        }
+
+        /// <summary>
+        /// 更新关联数据
+        /// </summary>
+        public bool UpdateData()
+        {
+            try
+            {
+                //更新部门
+                string tmpTable = "erp_user as a ,erp_department as b";
+                string tmpValues = "a.department_id = b.dept_id";
+                string tmpWhere = "and a.erp_department_id = b.fy_dept_id";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //更新角色|职务
+                tmpTable = "erp_user as a ,erp_role as c";
+                tmpValues = "a.role_id = c.role_id,a.user_duty = c.role_name";
+                tmpWhere = "and a.erp_role_id = c.erp_id";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                m_Result += "\n用户表中归属部门|职务|角色更新成功";
+                return true;
+            }
+            catch (Exception ex)
+            {
+                m_Result += "\n用户表中归属部门|职务|角色更新异常.\n异常原因：" + ex.Message;
+                return false;
+            }
         }
     }
 }

@@ -3,3 +3,8 @@ E:\程序设计\_C#_Download\YMDLL\ThreadDemo\bin\Release\ThreadDemo.exe
 E:\程序设计\_C#_Download\YMDLL\ThreadDemo\bin\Release\ThreadDemo.pdb
 E:\程序设计\_C#_Download\YMDLL\ThreadDemo\obj\Release\ThreadDemo.exe
 E:\程序设计\_C#_Download\YMDLL\ThreadDemo\obj\Release\ThreadDemo.pdb
+F:\_GitCode\YMDLL\ThreadDemo\bin\Release\ThreadDemo.exe.config
+F:\_GitCode\YMDLL\ThreadDemo\bin\Release\ThreadDemo.exe
+F:\_GitCode\YMDLL\ThreadDemo\bin\Release\ThreadDemo.pdb
+F:\_GitCode\YMDLL\ThreadDemo\obj\Release\ThreadDemo.exe
+F:\_GitCode\YMDLL\ThreadDemo\obj\Release\ThreadDemo.pdb

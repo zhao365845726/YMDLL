@@ -7,3 +7,12 @@ F:\working-zhdcCode\common\YMDLL\CodeBrainTruster\obj\Debug\CodeBrainTruster.Pro
 F:\working-zhdcCode\common\YMDLL\CodeBrainTruster\obj\Debug\CodeBrainTruster.csproj.GenerateResource.Cache
 F:\working-zhdcCode\common\YMDLL\CodeBrainTruster\obj\Debug\CodeBrainTruster.exe
 F:\working-zhdcCode\common\YMDLL\CodeBrainTruster\obj\Debug\CodeBrainTruster.pdb
+F:\_GitCode\YMDLL\CodeBrainTruster\bin\Debug\CodeBrainTruster.exe.config
+F:\_GitCode\YMDLL\CodeBrainTruster\bin\Debug\CodeBrainTruster.exe
+F:\_GitCode\YMDLL\CodeBrainTruster\bin\Debug\CodeBrainTruster.pdb
+F:\_GitCode\YMDLL\CodeBrainTruster\obj\Debug\CodeBrainTruster.csprojResolveAssemblyReference.cache
+F:\_GitCode\YMDLL\CodeBrainTruster\obj\Debug\CodeBrainTruster.Form1.resources
+F:\_GitCode\YMDLL\CodeBrainTruster\obj\Debug\CodeBrainTruster.Properties.Resources.resources
+F:\_GitCode\YMDLL\CodeBrainTruster\obj\Debug\CodeBrainTruster.csproj.GenerateResource.Cache
+F:\_GitCode\YMDLL\CodeBrainTruster\obj\Debug\CodeBrainTruster.exe
+F:\_GitCode\YMDLL\CodeBrainTruster\obj\Debug\CodeBrainTruster.pdb

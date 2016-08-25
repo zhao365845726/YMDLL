@@ -1,0 +1,9 @@
+F:\_GitCode\YMDLL\Test_Console\bin\Release\Test_Console.exe.config
+F:\_GitCode\YMDLL\Test_Console\bin\Release\Test_Console.exe
+F:\_GitCode\YMDLL\Test_Console\bin\Release\Test_Console.pdb
+F:\_GitCode\YMDLL\Test_Console\bin\Release\YMDLL.dll
+F:\_GitCode\YMDLL\Test_Console\bin\Release\MySql.Data.dll
+F:\_GitCode\YMDLL\Test_Console\bin\Release\YMDLL.pdb
+F:\_GitCode\YMDLL\Test_Console\obj\Release\Test_Console.csprojResolveAssemblyReference.cache
+F:\_GitCode\YMDLL\Test_Console\obj\Release\Test_Console.exe
+F:\_GitCode\YMDLL\Test_Console\obj\Release\Test_Console.pdb

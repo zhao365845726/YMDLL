@@ -19,3 +19,8 @@ F:\working-zhdcCode\common\YMDLL\EventDemo\bin\Debug\EventDemo.exe
 F:\working-zhdcCode\common\YMDLL\EventDemo\bin\Debug\EventDemo.pdb
 F:\working-zhdcCode\common\YMDLL\EventDemo\obj\Debug\EventDemo.exe
 F:\working-zhdcCode\common\YMDLL\EventDemo\obj\Debug\EventDemo.pdb
+F:\_GitCode\YMDLL\EventDemo\bin\Debug\EventDemo.exe.config
+F:\_GitCode\YMDLL\EventDemo\bin\Debug\EventDemo.exe
+F:\_GitCode\YMDLL\EventDemo\bin\Debug\EventDemo.pdb
+F:\_GitCode\YMDLL\EventDemo\obj\Debug\EventDemo.exe
+F:\_GitCode\YMDLL\EventDemo\obj\Debug\EventDemo.pdb

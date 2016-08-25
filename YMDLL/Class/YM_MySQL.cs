@@ -178,6 +178,28 @@ namespace YMDLL.Class
         }
 
         /// <summary>
+        /// 更新数据不关闭连接
+        /// </summary>
+        /// <param name="tableName">表名</param>
+        /// <param name="setValues">列和值：key-value形式</param>
+        /// <param name="where">where语句</param>
+        public void UpdateNoClose(string tableName, string setValues, string where)
+        {
+            string query = "UPDATE " + tableName + " SET " + setValues + " WHERE 1=1 " + where;
+
+            //create mysql command  
+            MySqlCommand cmd = new MySqlCommand();
+            //Assign the query using CommandText  
+            cmd.CommandText = query;
+            //Assign the connection using Connection  
+            cmd.Connection = connection;
+
+            //Execute query  
+            cmd.ExecuteNonQuery();
+
+        }
+
+        /// <summary>
         /// 更新数据使用SQL语句
         /// </summary>
         public void Update(string sql)
@@ -219,9 +241,27 @@ namespace YMDLL.Class
         /// 查询数据表中单个字段，并返回列表
         /// </summary>
         /// <param name="tableName">表名</param>
-        public List<string>[] Select(string tableName,string colName,string sWhere)
+        public MySqlDataReader SelectMul(string tableName, string colName, string sWhere)
         {
             string query = "SELECT " + colName + " FROM " + tableName + " WHERE 1=1 ";
+            //OpenConnection();
+            if(this.OpenConnection() == true)
+            {
+                MySqlCommand mysqlcom = new MySqlCommand(query, connection);
+                MySqlDataReader mysqlread = mysqlcom.ExecuteReader(CommandBehavior.CloseConnection);
+                //this.CloseConnection();
+                return mysqlread;
+            }
+            return null;            
+        }
+
+        /// <summary>
+        /// 查询数据表中单个字段，并返回列表
+        /// </summary>
+        /// <param name="tableName">表名</param>
+        public List<string>[] Select(string tableName,string colName,string sWhere)
+        {
+            string query = "SELECT " + colName + " FROM " + tableName + " WHERE 1=1 " + sWhere;
 
             //Create a list to store the result  
             List<string>[] list = new List<string>[1];

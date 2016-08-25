@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YMDLL.Class;
 using YMDLL.Common;
+using MySql.Data.MySqlClient;
 
 namespace AgencyToERP_PHP
 {
@@ -30,7 +31,7 @@ namespace AgencyToERP_PHP
             sColumns = "DeptName,DeptNo,Address,Tel,DeptType,DeptID,Header";
             sOrder = "DeptNo";
             dTableName = "erp_department";
-            dColumns = "dept_name,company_id,address,tel,dept_type,if_deleted,create_time,update_time,erp_id,erp_pid,dept_code,status";
+            dColumns = "dept_name,company_id,address,tel,dept_type,if_deleted,create_time,update_time,erp_id,erp_pid,dept_code,status,fy_dept_id";
         }
 
         /// <summary>
@@ -101,7 +102,8 @@ namespace AgencyToERP_PHP
                         row["DeptNo"].ToString() + "','" +
                         row["DeptNo"].ToString().Substring(0, row["DeptNo"].ToString().Length - 2) + "','" +
                         row["Header"].ToString() + "','" +
-                        strStatus + "'"
+                        strStatus + "','" + 
+                        row["DeptID"].ToString() + "'"
                         ;
                     lstValue.Add(strTemp);
                 }
@@ -129,6 +131,34 @@ namespace AgencyToERP_PHP
                 m_Result = "导出部门异常.\n异常原因：" + ex.Message;
                 return false;
             }
+        }
+
+        /// <summary>
+        /// 添加字段
+        /// </summary>
+        public void AddField(string FieldName, string FieldType)
+        {
+            _mysql.UpdateField("add", dTableName, FieldName, FieldType);
+            m_Result = _mysql.m_Message;
+            //throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// 修改字段
+        /// </summary>
+        public void ModifyField(string FieldName, string FieldType)
+        {
+            _mysql.UpdateField("modify column ", dTableName, FieldName, FieldType);
+            m_Result = _mysql.m_Message;
+        }
+
+        /// <summary>
+        /// 移除字段
+        /// </summary>
+        public void DropField(string FieldName)
+        {
+            _mysql.UpdateField("drop ", dTableName, FieldName, "");
+            m_Result = _mysql.m_Message;
         }
 
         /// <summary>
@@ -162,11 +192,25 @@ namespace AgencyToERP_PHP
                     m_Result += "\n部门表中更新成功";
                 }else if(typeName == "更新归属")
                 {
-                    List<string>[] lstDeptId = _mysql.Select("erp_department","dept_id","and erp_pid = ''");
-                    foreach(string did in lstDeptId[0])
+                    MySqlDataReader dr = _mysql.SelectMul("erp_department", "dept_id,dept_name,dept_code,pid,erp_id,erp_pid", "");
+                    List<string> lstUp = new List<string>();
+                    while (dr.Read())
                     {
-                        _mysql.Update("erp_department", "pid = (select dept_id from erp_department where erp_id = (SELECT erp_pid from erp_department WHERE dept_id = " + did + "))", "and dept_id = " + did);
+                        lstUp.Add("UPDATE erp_department SET pid = (select dept_id from erp_department where erp_id = (SELECT erp_pid from erp_department WHERE dept_id = " + dr[0].ToString() + ")) WHERE 1 = 1 and dept_id = " + dr[0].ToString());
+
+                        //_mysql.UpdateNoClose("erp_department", "pid = (select dept_id from erp_department where erp_id = (SELECT erp_pid from erp_department WHERE dept_id = " + dr[0].ToString() + "))", "and dept_id = " + dr[0].ToString());
                     }
+                    _mysql.CloseConnection();
+
+                    foreach(string esql in lstUp)
+                    {
+                        _mysql.Update(esql);
+                    }
+
+                    //foreach (string colValue in dr)
+                    //{
+                    //    _mysql.Update("erp_department", "pid = (select dept_id from erp_department where erp_id = (SELECT erp_pid from erp_department WHERE dept_id = " + colValue[0].ToString() + "))", "and dept_id = " + colValue[1].ToString());
+                    //}
                 }
                 else
                 {

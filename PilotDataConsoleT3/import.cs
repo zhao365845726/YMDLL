@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,7 +79,9 @@ namespace PilotDataConsoleT3
                         //声明部门对象
                         Department department = new Department();
                         //执行导数据的方法
+                        department.AddField("fy_dept_id", "varchar(100)");
                         department.importDepartment();
+                        //更新数据
                         department.UpdateData("职能");
                         department.UpdateData("大区");
                         department.UpdateData("其他");
@@ -94,11 +97,11 @@ namespace PilotDataConsoleT3
                         employee.AddField("fy_PositionId", "varchar(100)");
                         //执行导数据的方法
                         employee.importEmployee();
-                        //增加更新数据的方法调用
-                        // code is here...
-
                         //
                         employee.DropField("fy_PositionId");
+
+                        //增加更新数据的方法调用
+                        employee.UpdateData();
                         //输出结果
                         strResult = employee.m_Result;
                         break;
@@ -106,27 +109,39 @@ namespace PilotDataConsoleT3
                 case TableType.PROPERTY:
                     {
                         //声明房源对象
-                        //Property property = new Property();
-                        ////property.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        ////property.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        ////property.m_ThreadEnabled = Convert.ToBoolean(ConfigurationSettings.AppSettings["ThreadEnabled"].ToString());
-                        ////执行导数据的方法
-                        //property.importProperty();
-                        ////输出结果
-                        //strResult = property.m_Result;
+                        Property property = new Property();
+                        property.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        property.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
+
+                        property.AddField("fy_community", "varchar(100)");
+                        property.AddField("fy_empid", "varchar(100)");
+                        property.AddField("fy_deptid", "varchar(100)");
+                        property.AddField("fy_visit_way", "varchar(20)");
+                        property.AddField("fy_common_telephone", "varchar(50)");
+                        //执行导数据的方法
+                        property.importProperty();
+
+                        //更新数据
+                        property.UpdateData();
+
+                        //输出结果
+                        strResult = property.m_Result;
                         break;
                     }
                 case TableType.FOLLOW:
                     {
-                        ////声明房源跟进对象
-                        //PropertyFollow propertyfollow = new PropertyFollow();
-                        ////propertyfollow.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        ////propertyfollow.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
+                        //声明房源跟进对象
+                        PropertyFollow propertyfollow = new PropertyFollow();
+                        propertyfollow.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        propertyfollow.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
                         ////propertyfollow.m_ThreadEnabled = Convert.ToBoolean(ConfigurationSettings.AppSettings["ThreadEnabled"].ToString());
-                        ////执行导数据的方法
+                        //新增字段
+                        propertyfollow.AddField("fy_followId", "varchar(100)");
+                        
+                        //执行导数据的方法
                         //propertyfollow.importPropertyFollow();
-                        ////输出结果
-                        //strResult = propertyfollow.m_Result;
+                        //输出结果
+                        strResult = propertyfollow.m_Result;
                         break;
                     }
                 case TableType.PHOTO:
@@ -202,8 +217,11 @@ namespace PilotDataConsoleT3
                         //property.AddField("fy_community", "varchar(100)");
                         //property.AddField("fy_empid", "varchar(100)");
                         //property.AddField("fy_deptid", "varchar(100)");
+                        //property.AddField("fy_visit_way", "varchar(20)");
+                        //property.AddField("fy_common_telephone", "varchar(50)");
                         //执行导数据的方法
                         //property.importProperty();
+                        property.UpdateData();
 
                         //输出结果
                         strResult = property.m_Result;

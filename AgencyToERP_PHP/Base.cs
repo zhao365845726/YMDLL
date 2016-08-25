@@ -138,7 +138,7 @@ namespace AgencyToERP_PHP
             dPageIndex = 1;
             dPageSize = 2500;
             dTotalCount = 0;
-            dCompanyId = "102";
+            dCompanyId = "104";
             dDeleteMark = "0";
             m_ThreadEnabled = false;
             _dateTime = new CS_CalcDateTime();

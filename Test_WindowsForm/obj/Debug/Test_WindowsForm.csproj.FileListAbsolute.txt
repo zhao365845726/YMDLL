@@ -51,3 +51,14 @@ F:\working-zhdcCode\common\YMDLL\Test_WindowsForm\obj\Debug\Test_WindowsForm.Pro
 F:\working-zhdcCode\common\YMDLL\Test_WindowsForm\obj\Debug\Test_WindowsForm.csproj.GenerateResource.Cache
 F:\working-zhdcCode\common\YMDLL\Test_WindowsForm\obj\Debug\Test_WindowsForm.exe
 F:\working-zhdcCode\common\YMDLL\Test_WindowsForm\obj\Debug\Test_WindowsForm.pdb
+F:\_GitCode\YMDLL\Test_WindowsForm\bin\Debug\Test_WindowsForm.exe
+F:\_GitCode\YMDLL\Test_WindowsForm\bin\Debug\Test_WindowsForm.pdb
+F:\_GitCode\YMDLL\Test_WindowsForm\bin\Debug\YMDLL.dll
+F:\_GitCode\YMDLL\Test_WindowsForm\bin\Debug\MySql.Data.dll
+F:\_GitCode\YMDLL\Test_WindowsForm\bin\Debug\YMDLL.pdb
+F:\_GitCode\YMDLL\Test_WindowsForm\obj\Debug\Test_WindowsForm.csprojResolveAssemblyReference.cache
+F:\_GitCode\YMDLL\Test_WindowsForm\obj\Debug\Test_WindowsForm.Form1.resources
+F:\_GitCode\YMDLL\Test_WindowsForm\obj\Debug\Test_WindowsForm.Properties.Resources.resources
+F:\_GitCode\YMDLL\Test_WindowsForm\obj\Debug\Test_WindowsForm.csproj.GenerateResource.Cache
+F:\_GitCode\YMDLL\Test_WindowsForm\obj\Debug\Test_WindowsForm.exe
+F:\_GitCode\YMDLL\Test_WindowsForm\obj\Debug\Test_WindowsForm.pdb

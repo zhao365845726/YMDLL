@@ -1,3 +1,6 @@
 E:\程序设计\_C#_Download\YMDLL\ckfinder\_source\bin\Release\CKFinder.dll
 E:\程序设计\_C#_Download\YMDLL\ckfinder\_source\obj\Release\CKFinder.Net.csprojResolveAssemblyReference.cache
 E:\程序设计\_C#_Download\YMDLL\ckfinder\_source\obj\Release\CKFinder.dll
+F:\_GitCode\YMDLL\ckfinder\_source\bin\Release\CKFinder.dll
+F:\_GitCode\YMDLL\ckfinder\_source\obj\Release\CKFinder.Net.csprojResolveAssemblyReference.cache
+F:\_GitCode\YMDLL\ckfinder\_source\obj\Release\CKFinder.dll

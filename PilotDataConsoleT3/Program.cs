@@ -17,8 +17,8 @@ namespace PilotDataConsoleT3
             WriteLog("\n开始监听...");
             import import = new import();
             //读取配置文件信息
-            //import.ExecCommand((TableType)Enum.Parse(typeof(TableType), ReadAppSetting("EnumType"), false));
-            import.ExecCommand(TableType.TEST);
+            import.ExecCommand((TableType)Enum.Parse(typeof(TableType), ReadAppSetting("EnumType"), false));
+            //import.ExecCommand(TableType.DISTRICT);
             WriteLog(import.strResult);
             watch.Stop();
             WriteLog("\n-----------------------\n导入完毕，监听结束\n总运行时间为:" + watch.Elapsed.ToString() + "秒.");
