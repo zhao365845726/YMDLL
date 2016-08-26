@@ -14,13 +14,6 @@ namespace AgencyToERP_PHP
     {
         public void Descript()
         {
-            /* 1.目标库中attrBrokerOld为int类型，增加归属人ID  FY_attrBrokerOld
-             * 2.目标库中pupr为int类型，增加公私客  FY_pupr
-             * 3.目标库中quality为int类型，增加优质客户  FY_quality
-             * 4.目标库中attrBroker为int类型，增加优质客户  FY_attrBroker
-             * 5.目标库中floor为float类型，增加优质客户  FY_floor
-             * 6.目标库中remark内容太长 FY_remark
-             */
         }
 
         /// <summary>
@@ -28,12 +21,11 @@ namespace AgencyToERP_PHP
         /// </summary>
         public Inquiry()
         {
-            sTableName = "Inquiry20160623";
-            sColumns = "InquiryID,CustName,CustTel,Contact,SquareMin,SquareMax,PriceMin,PriceMax,AreaID,Position,Floor,Trade,Status,CountF,CountT,CountW,CountY,PropertyUsage,PropertyType,PropertyDirection,PropertyDecoration,PropertyCommission,TrustDate,DeptID,EmpID,Remark,RegPerson,RegDate,FlagPrivate,FlagRecommand,CustAddress,LastFollowDate,CustType,InquiryNo,CustGrade,InquirySource,PropertyFloor,UnitName,Country,CustOccupy,CustIntent,CustPeriod";
+            sTableName = "Inquiry";
+            sColumns = "InquiryID,CustName,Contact,SquareMin,SquareMax,PriceMin,PriceMax,AreaID,Trade,Status,PropertyUsage,PropertyDirection,PropertyDecoration,DeptID,EmpID,Remark,RegPerson,RegDate,FlagPrivate,LastFollowDate,InquiryNo,CustGrade,InquirySource,Country,CustOccupy";
             sOrder = "InquiryID";
-            //sPageSize = 10000;
-            dTableName = "c_resource_20160623";
-            dColumns = "oldId,customer,phone,contact,area1,area2,price1,price2,district,reach,floors,business,status,room,hall,wei,ytai,usages,type,orient,fixtrue,compayment,entrDate,organOld,FY_attrBrokerOld,FY_remark,FY_attrBroker,importDate,FY_pupr,FY_quality,living,followDate,mold,customerNoOld,grade,source,FY_floor,units,natives,trade,intends,expDate";
+            dTableName = "erp_client";
+            dColumns = "erp_id,customer_name,fy_Contact,area_min,area_max,pay_min,pay_max,fy_AreaID,type,status,purpose,orientation,decoration,fy_DeptID,fy_EmpID,remark,input_username,create_time,public,last_follow,client_code,rank,source,nationality,profession";
         }
 
         /// <summary>
@@ -95,17 +87,13 @@ namespace AgencyToERP_PHP
                     strCustName = strCustName.Replace("'", "");
                     strCustName = strCustName.Replace("\\", "");
 
-                    string strCustTel = row["CustTel"].ToString().Trim();
-                    strCustTel = strCustTel.Replace("'", "");
-                    strCustTel = strCustTel.Replace("\\", "");
-
                     string strContact = row["Contact"].ToString().Trim();
                     strContact = strContact.Replace("'", "");
                     strContact = strContact.Replace("\\", "");
-
-                    string strPosition = row["Position"].ToString().Trim();
-                    strPosition = strPosition.Replace("'", "");
-                    strPosition = strPosition.Replace("\\", "");
+                    if(strContact == "")
+                    {
+                        strContact = "0";
+                    }
 
                     string strRemark = row["Remark"].ToString().Trim();
                     strRemark = strRemark.Replace("'", "");
@@ -114,10 +102,6 @@ namespace AgencyToERP_PHP
                     string strRegPerson = row["RegPerson"].ToString().Trim();
                     strRegPerson = strRegPerson.Replace("'", "");
                     strRegPerson = strRegPerson.Replace("\\", "");
-                    
-                    string strCustAddress = row["CustAddress"].ToString().Trim();
-                    strCustAddress = strCustAddress.Replace("'", "");
-                    strCustAddress = strCustAddress.Replace("\\", "");
 
                     string strCustOccupy = row["CustOccupy"].ToString().Trim();
                     strCustOccupy = strCustOccupy.Replace("'", "");
@@ -125,46 +109,29 @@ namespace AgencyToERP_PHP
                     
                     string strTemp = "'" + row["InquiryID"].ToString().Trim() + "','" +
                         strCustName + "','" +
-                        strCustTel + "','" +
                         strContact + "','" +
                         Convert.ToDecimal(row["SquareMin"].ToString().Trim()) + "','" +
                         Convert.ToDecimal(row["SquareMax"].ToString().Trim()) + "','" +
                         Convert.ToDecimal(row["PriceMin"].ToString().Trim()) + "','" +
                         Convert.ToDecimal(row["PriceMax"].ToString().Trim()) + "','" +
                         row["AreaID"].ToString().Trim() + "','" +
-                        strPosition + "','" +
-                        row["Floor"].ToString().Trim() + "','" +
                         row["Trade"].ToString().Trim() + "','" +
                         row["Status"].ToString().Trim() + "','" +
-                        row["CountF"].ToString().Trim() + "','" +
-                        row["CountT"].ToString().Trim() + "','" +
-                        row["CountW"].ToString().Trim() + "','" +
-                        row["CountY"].ToString().Trim() + "','" +
                         row["PropertyUsage"].ToString().Trim() + "','" +
-                        row["PropertyType"].ToString().Trim() + "','" +
                         row["PropertyDirection"].ToString().Trim() + "','" +
                         row["PropertyDecoration"].ToString().Trim() + "','" +
-                        row["PropertyCommission"].ToString().Trim() + "','" +
-                        row["TrustDate"].ToString().Trim() + "','" +
                         row["DeptID"].ToString().Trim() + "','" +
                         row["EmpID"].ToString().Trim() + "','" +
                         strRemark + "','" +
                         strRegPerson + "','" +
-                        row["RegDate"].ToString().Trim() + "','" +
+                        _dateTime.DateTimeToStamp(row["RegDate"].ToString().Trim()).ToString() + "','" +
                         row["FlagPrivate"].ToString().Trim() + "','" +
-                        row["FlagRecommand"].ToString().Trim() + "','" +
-                        strCustAddress + "','" +
-                        row["LastFollowDate"].ToString().Trim() + "','" +
-                        row["CustType"].ToString().Trim() + "','" +
+                        _dateTime.DateTimeToStamp(row["LastFollowDate"].ToString().Trim()).ToString() + "','" +
                         row["InquiryNo"].ToString().Trim() + "','" +
                         row["CustGrade"].ToString().Trim() + "','" +
                         row["InquirySource"].ToString().Trim() + "','" +
-                        row["PropertyFloor"].ToString().Trim() + "','" +
-                        row["UnitName"].ToString().Trim() + "','" +
                         row["Country"].ToString().Trim() + "','" +
-                        strCustOccupy + "','" +
-                        row["CustIntent"].ToString().Trim() + "','" +
-                        row["CustPeriod"].ToString().Trim() + "'";
+                        strCustOccupy + "'";
                     lstValue.Add(strTemp);
                 }
                 //如果允许删除，清空目标表数据

@@ -137,9 +137,9 @@ namespace PilotDataConsoleT3
                         ////propertyfollow.m_ThreadEnabled = Convert.ToBoolean(ConfigurationSettings.AppSettings["ThreadEnabled"].ToString());
                         //新增字段
                         propertyfollow.AddField("fy_followId", "varchar(100)");
-                        
+
                         //执行导数据的方法
-                        //propertyfollow.importPropertyFollow();
+                        propertyfollow.importPropertyFollow();
                         //输出结果
                         strResult = propertyfollow.m_Result;
                         break;
@@ -157,27 +157,38 @@ namespace PilotDataConsoleT3
                 case TableType.INQUIRY:
                     {
                         //声明客源对象
-                        //Inquiry inquiry = new Inquiry();
-                        ////inquiry.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        ////inquiry.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        ////inquiry.m_ThreadEnabled = Convert.ToBoolean(ConfigurationSettings.AppSettings["ThreadEnabled"].ToString());
-                        ////执行导数据的方法
-                        //inquiry.importInquiry();
-                        ////输出结果
-                        //strResult = inquiry.m_Result;
+                        Inquiry inquiry = new Inquiry();
+                        inquiry.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        inquiry.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
+                        //inquiry.m_ThreadEnabled = Convert.ToBoolean(ConfigurationSettings.AppSettings["ThreadEnabled"].ToString());
+                        //inquiry.AddField("fy_AreaID", "varchar(100)");
+                        //inquiry.AddField("fy_DeptID", "varchar(100)");
+                        //inquiry.AddField("fy_EmpID", "varchar(100)");
+                        //inquiry.AddField("fy_Contact", "varchar(50)");
+
+                        //执行导数据的方法
+                        inquiry.importInquiry();
+
+                        //inquiry.DropField("fy_AreaID");
+                        //inquiry.DropField("fy_DeptID");
+                        //inquiry.DropField("fy_EmpID");
+                        //inquiry.DropField("fy_Contact");
+                        //输出结果
+                        strResult = inquiry.m_Result;
                         break;
                     }
                 case TableType.INQUIRYFOLLOW:
                     {
                         //声明客源跟进对象
-                        //InquiryFollow inquiryfollow = new InquiryFollow();
-                        ////inquiryfollow.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        ////inquiryfollow.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        ////inquiryfollow.m_ThreadEnabled = Convert.ToBoolean(ConfigurationSettings.AppSettings["ThreadEnabled"].ToString());
-                        ////执行导数据的方法
-                        //inquiryfollow.importInquiryFollow();
-                        ////输出结果
-                        //strResult = inquiryfollow.m_Result;
+                        InquiryFollow inquiryfollow = new InquiryFollow();
+                        inquiryfollow.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        inquiryfollow.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
+                        //inquiryfollow.m_ThreadEnabled = Convert.ToBoolean(ConfigurationSettings.AppSettings["ThreadEnabled"].ToString());
+                        inquiryfollow.AddField("fy_followId", "varchar(100)");
+                        //执行导数据的方法
+                        inquiryfollow.importInquiryFollow();
+                        //输出结果
+                        strResult = inquiryfollow.m_Result;
                         break;
                     }
                 case TableType.CONTRACT:
