@@ -36,7 +36,7 @@ namespace AgencyToERP_PHP
             //sPageIndex = 97;
             //sPageSize = 1;
             dTableName = "erp_house";
-            dColumns = "room_code,block,fy_community,district,owner_name,tao_bao,if_entertained,if_key,key_code,status,entrust_code,input_username,fy_empid,fy_deptid,exclusive,exclusive_date,usable_area,floor_sale_price,floor_rent_price,fitment,remark,building_age,company_id,contract_code,unit_price,public,source,launch_date,fy_visit_way,last_follow,type,sale_price,rent_price,rent_unit,old_sale_price,purpose,decoration,area,floor,top_floor,room,living_room,washroom,balcony,direction,property,fy_common_telephone,if_deleted,create_time,update_time,erp_id,licence,house_tax";
+            dColumns = "room_code,block,fy_community,district,owner_name,tao_bao,if_entertained,if_key,key_code,status,entrust_code,input_username,fy_empid,fy_deptid,exclusive,exclusive_date,usable_area,floor_sale_price,floor_rent_price,fitment,remark,fy_building_age,company_id,contract_code,unit_price,public,source,launch_date,fy_visit_way,last_follow,type,sale_price,rent_price,rent_unit,old_sale_price,purpose,decoration,area,floor,top_floor,fy_room,living_room,washroom,balcony,direction,property,fy_common_telephone,if_deleted,create_time,update_time,erp_id,licence,house_tax";
             //dIsDelete = true;
             //img_username,img_department_id,img_user_id,img_time,image_count,cover_image_url,
         }

@@ -112,17 +112,40 @@ namespace PilotDataConsoleT3
                         Property property = new Property();
                         property.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
                         property.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
+                        property.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
+                        property.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
+                        property.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
 
-                        property.AddField("fy_community", "varchar(100)");
-                        property.AddField("fy_empid", "varchar(100)");
-                        property.AddField("fy_deptid", "varchar(100)");
-                        property.AddField("fy_visit_way", "varchar(20)");
-                        property.AddField("fy_common_telephone", "varchar(50)");
+                        if (property.dFieldAdd == "true")
+                        {
+                            property.AddField("fy_community", "varchar(100)");
+                            property.AddField("fy_empid", "varchar(100)");
+                            property.AddField("fy_deptid", "varchar(100)");
+                            property.AddField("fy_visit_way", "varchar(20)");
+                            property.AddField("fy_common_telephone", "varchar(50)");
+                            property.AddField("fy_building_age", "varchar(50)");
+                            property.AddField("fy_room", "varchar(20)");
+                        }
                         //执行导数据的方法
                         property.importProperty();
 
-                        //更新数据
-                        property.UpdateData();
+                        if(property.dUpdateData == "true")
+                        {
+                            //更新数据
+                            property.UpdateData();
+                        }
+
+                        //删除字段
+                        if(property.dFieldDrop == "true")
+                        {
+                            property.DropField("fy_community");
+                            property.DropField("fy_empid");
+                            property.DropField("fy_deptid");
+                            property.DropField("fy_visit_way");
+                            property.DropField("fy_common_telephone");
+                            property.DropField("fy_building_age");
+                            property.DropField("fy_room");
+                        }
 
                         //输出结果
                         strResult = property.m_Result;
@@ -135,8 +158,15 @@ namespace PilotDataConsoleT3
                         propertyfollow.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
                         propertyfollow.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
                         ////propertyfollow.m_ThreadEnabled = Convert.ToBoolean(ConfigurationSettings.AppSettings["ThreadEnabled"].ToString());
-                        //新增字段
-                        propertyfollow.AddField("fy_followId", "varchar(100)");
+                        propertyfollow.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
+                        propertyfollow.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
+                        propertyfollow.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
+
+                        if(propertyfollow.dFieldAdd == "true")
+                        {
+                            //新增字段
+                            propertyfollow.AddField("fy_followId", "varchar(100)");
+                        }
 
                         //执行导数据的方法
                         propertyfollow.importPropertyFollow();
@@ -167,12 +197,15 @@ namespace PilotDataConsoleT3
                         //inquiry.AddField("fy_Contact", "varchar(50)");
 
                         //执行导数据的方法
-                        inquiry.importInquiry();
+                        //inquiry.importInquiry();
 
                         //inquiry.DropField("fy_AreaID");
                         //inquiry.DropField("fy_DeptID");
                         //inquiry.DropField("fy_EmpID");
                         //inquiry.DropField("fy_Contact");
+
+                        inquiry.UpdateData();
+
                         //输出结果
                         strResult = inquiry.m_Result;
                         break;
@@ -194,11 +227,15 @@ namespace PilotDataConsoleT3
                 case TableType.CONTRACT:
                     {
                         //声明合同对象
-                        //Contract contract = new Contract();
-                        ////执行导数据的方法
-                        //contract.importContract();
-                        ////输出结果
-                        //strResult = contract.m_Result;
+                        Contract contract = new Contract();
+                        contract.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        contract.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
+                        //执行导数据的方法
+                        contract.importContract();
+                        //更新数据
+                        contract.UpdateData();
+                        //输出结果
+                        strResult = contract.m_Result;
                         break;
                     }
                 case TableType.POSITION:

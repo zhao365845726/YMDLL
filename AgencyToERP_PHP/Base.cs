@@ -12,6 +12,7 @@ namespace AgencyToERP_PHP
 {
     public class Base
     {
+        #region ----变量声明----
         /// <summary>
         /// 连接SQL Server数据库的对象
         /// </summary>
@@ -113,6 +114,10 @@ namespace AgencyToERP_PHP
         /// </summary>
         public string dFieldDrop;
         /// <summary>
+        /// 目标-更新数据
+        /// </summary>
+        public string dUpdateData;
+        /// <summary>
         /// 目标-公司Id
         /// </summary>
         public string dCompanyId;
@@ -120,6 +125,8 @@ namespace AgencyToERP_PHP
         /// 目标-删除标识
         /// </summary>
         public string dDeleteMark;
+        #endregion
+
 
         /// <summary>
         /// 基类的构造函数
@@ -276,5 +283,84 @@ namespace AgencyToERP_PHP
             strResult = strValue.Replace("\\", "");
             return strResult;
         }
+
+        /// <summary>
+        /// 组合房友数据的值
+        /// </summary>
+        /// <returns></returns>
+        public string GetConcatValues(Dictionary<string, string> dicData, DataRow drRow)
+        {
+            string strResult = "";
+            foreach (KeyValuePair<string, string> dicItem in dicData)
+            {
+                strResult += "'" + FilterSpecialCharacter(drRow[dicItem.Value].ToString().Trim()) + "',";
+            }
+            strResult = strResult.Substring(0, strResult.Length - 1);
+            return strResult;
+        }
+
+        //public string GetConcatValues(Dictionary<Dictionary<>>)
+
+        /// <summary>
+        /// 合并Key字段(合并目标数据库字段)
+        /// </summary>
+        /// <param name="dicData"></param>
+        /// <returns></returns>
+        public string CombineDestField(Dictionary<string,string> dicData)
+        {
+            string strResult = "";
+            foreach(KeyValuePair<string,string> dicItem in dicData)
+            {
+                strResult += dicItem.Key + ",";
+            }
+            strResult = strResult.Substring(0, strResult.Length - 1);
+            return strResult;
+        }
+
+        /// <summary>
+        /// 合并Value字段(合并源数据库字段)
+        /// </summary>
+        /// <param name="dicData"></param>
+        /// <returns></returns>
+        public string CombineSourceField(Dictionary<string, string> dicData)
+        {
+            string strResult = "";
+            foreach (KeyValuePair<string, string> dicItem in dicData)
+            {
+                strResult += dicItem.Value + ",";
+            }
+            strResult = strResult.Substring(0, strResult.Length - 1);
+            return strResult;
+        }
+
+        #region ----字段操作区域----
+        /// <summary>
+        /// 添加字段
+        /// </summary>
+        public void AddField(string FieldName, string FieldType)
+        {
+            _mysql.UpdateField("add", dTableName, FieldName, FieldType);
+            m_Result = _mysql.m_Message;
+        }
+
+        /// <summary>
+        /// 修改字段
+        /// </summary>
+        public void ModifyField(string FieldName, string FieldType)
+        {
+            _mysql.UpdateField("modify column ", dTableName, FieldName, FieldType);
+            m_Result = _mysql.m_Message;
+        }
+
+        /// <summary>
+        /// 移除字段
+        /// </summary>
+        public void DropField(string FieldName)
+        {
+            _mysql.UpdateField("drop ", dTableName, FieldName, "");
+            m_Result = _mysql.m_Message;
+        }
+        #endregion
+
     }
 }
