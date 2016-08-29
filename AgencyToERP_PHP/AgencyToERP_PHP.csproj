@@ -45,6 +45,7 @@
     <Compile Include="Area.cs" />
     <Compile Include="Base.cs" />
     <Compile Include="Building.cs" />
+    <Compile Include="Contract.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="District.cs" />
     <Compile Include="Employee.cs" />
