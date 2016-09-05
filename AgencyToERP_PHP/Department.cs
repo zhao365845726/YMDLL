@@ -134,49 +134,26 @@ namespace AgencyToERP_PHP
         }
 
         /// <summary>
-        /// 添加字段
-        /// </summary>
-        public void AddField(string FieldName, string FieldType)
-        {
-            _mysql.UpdateField("add", dTableName, FieldName, FieldType);
-            m_Result = _mysql.m_Message;
-            //throw new System.NotImplementedException();
-        }
-
-        /// <summary>
-        /// 修改字段
-        /// </summary>
-        public void ModifyField(string FieldName, string FieldType)
-        {
-            _mysql.UpdateField("modify column ", dTableName, FieldName, FieldType);
-            m_Result = _mysql.m_Message;
-        }
-
-        /// <summary>
-        /// 移除字段
-        /// </summary>
-        public void DropField(string FieldName)
-        {
-            _mysql.UpdateField("drop ", dTableName, FieldName, "");
-            m_Result = _mysql.m_Message;
-        }
-
-        /// <summary>
         /// 更新数据
         /// </summary>
         public bool UpdateData(string typeName)
         {
             try
             {
-                if(typeName == "职能")
+                if(typeName == "状态")
+                {
+                    _mysql.Update("erp_department", "status = '有效'", "and status <> '关闭'");
+                    m_Result += "\n部门表中状态更新成功";
+                }
+                else if(typeName == "职能")
                 {
                     _mysql.Update("erp_department", "dept_type = '职能'", "");
-                    m_Result += "\n部门表中更新成功";
+                    m_Result += "\n部门表中职能更新成功";
                 }
                 else if(typeName == "大区")
                 {
                     _mysql.Update("erp_department", "dept_type = '大区'", "and LENGTH(erp_id)=2 and erp_id > 01 and erp_id < 99 ");
-                    m_Result += "\n部门表中更新成功";
+                    m_Result += "\n部门表中大区更新成功";
                 }
                 else if(typeName == "其他")
                 {
@@ -189,28 +166,37 @@ namespace AgencyToERP_PHP
                         _mysql.Update("erp_department", "dept_type = '组'", "and LENGTH(erp_id)=8 and erp_id like '" + aid + "%'");
                     }
 
-                    m_Result += "\n部门表中更新成功";
+                    m_Result += "\n部门表中区|店|组更新成功";
                 }else if(typeName == "更新归属")
                 {
-                    MySqlDataReader dr = _mysql.SelectMul("erp_department", "dept_id,dept_name,dept_code,pid,erp_id,erp_pid", "");
-                    List<string> lstUp = new List<string>();
+                    MySqlDataReader dr = _mysql.SelectMul("erp_department", "dept_id,pid,erp_id,erp_pid", "");
+                    Dictionary<string, string> dicUp = new Dictionary<string, string>();
+                    Dictionary<string, string> pdicUp = new Dictionary<string, string>();
                     while (dr.Read())
                     {
-                        lstUp.Add("UPDATE erp_department SET pid = (select dept_id from erp_department where erp_id = (SELECT erp_pid from erp_department WHERE dept_id = " + dr[0].ToString() + ")) WHERE 1 = 1 and dept_id = " + dr[0].ToString());
-
-                        //_mysql.UpdateNoClose("erp_department", "pid = (select dept_id from erp_department where erp_id = (SELECT erp_pid from erp_department WHERE dept_id = " + dr[0].ToString() + "))", "and dept_id = " + dr[0].ToString());
+                        dicUp.Add(dr[2].ToString(), dr[1].ToString());
+                        pdicUp.Add(dr[3].ToString(), dr[0].ToString());
                     }
                     _mysql.CloseConnection();
 
-                    foreach(string esql in lstUp)
+                    foreach (var pitem in pdicUp)
                     {
-                        _mysql.Update(esql);
+                        if(pitem.Key == "" || pitem.Key == null)
+                        {
+                            _mysql.UpdateNoClose("erp_department", "pid = 0", "and dept_id = " + pitem.Value);
+                        }
+                        else
+                        {
+                            foreach(var item in dicUp)
+                            {
+                                if(pitem.Key == item.Key)
+                                {
+                                    _mysql.UpdateNoClose("erp_department", "pid = '" + item.Value + "'", "and dept_id = " + pitem.Value);
+                                    break;
+                                }
+                            }
+                        }
                     }
-
-                    //foreach (string colValue in dr)
-                    //{
-                    //    _mysql.Update("erp_department", "pid = (select dept_id from erp_department where erp_id = (SELECT erp_pid from erp_department WHERE dept_id = " + colValue[0].ToString() + "))", "and dept_id = " + colValue[1].ToString());
-                    //}
                 }
                 else
                 {

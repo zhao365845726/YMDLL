@@ -90,6 +90,16 @@ namespace YMDLL.Interface
     }
 
     /// <summary>
+    /// MYSQL索引类型
+    /// </summary>
+    public enum MysqlIndexType
+    {
+        INDEX = 0,          //普通索引
+        UNIQUE = 1,         //唯一索引
+        PRIMARYKEY = 2,     //主键索引
+    }
+
+    /// <summary>
     /// SQLSERVER数据类型
     /// </summary>
     /// <remarks>SQLSERVER数据类型</remarks>

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YMDLL.Class;
 using YMDLL.Common;
+using YMDLL.Interface;
 
 namespace AgencyToERP_PHP
 {
@@ -21,6 +22,10 @@ namespace AgencyToERP_PHP
         /// 连接mysql数据库的对象
         /// </summary>
         public YM_MySQL _mysql;
+        /// <summary>
+        /// 时间计算对象
+        /// </summary>
+        public CS_CalcDateTime _dateTime;
         /// <summary>
         /// 源-表名
         /// </summary>
@@ -98,10 +103,6 @@ namespace AgencyToERP_PHP
         /// </summary>
         public bool m_ThreadEnabled;
         /// <summary>
-        /// 时间计算对象
-        /// </summary>
-        public CS_CalcDateTime _dateTime;
-        /// <summary>
         /// 目标-字段添加
         /// </summary>
         public string dFieldAdd;
@@ -117,6 +118,10 @@ namespace AgencyToERP_PHP
         /// 目标-更新数据
         /// </summary>
         public string dUpdateData;
+        /// <summary>
+        /// 目标-执行
+        /// </summary>
+        public string dExec;
         /// <summary>
         /// 目标-公司Id
         /// </summary>
@@ -145,7 +150,7 @@ namespace AgencyToERP_PHP
             dPageIndex = 1;
             dPageSize = 2500;
             dTotalCount = 0;
-            dCompanyId = "104";
+            dCompanyId = "999";
             dDeleteMark = "0";
             m_ThreadEnabled = false;
             _dateTime = new CS_CalcDateTime();
@@ -285,21 +290,32 @@ namespace AgencyToERP_PHP
         }
 
         /// <summary>
-        /// 组合房友数据的值
+        /// 组合房友数据的值【导入的目标是mysql数据库的时候】
         /// </summary>
         /// <returns></returns>
         public string GetConcatValues(Dictionary<string, string> dicData, DataRow drRow)
         {
             string strResult = "";
+            string[] saItem;
             foreach (KeyValuePair<string, string> dicItem in dicData)
             {
-                strResult += "'" + FilterSpecialCharacter(drRow[dicItem.Value].ToString().Trim()) + "',";
+                if(dicItem.Value.IndexOf(":") == -1)
+                {
+                    strResult += "'" + FilterSpecialCharacter(drRow[dicItem.Value].ToString().Trim()) + "',";
+                }
+                else
+                {
+                    //判断如果值里面的格式是 XXXX:DATETIME 的时候
+                    saItem = dicItem.Value.Split(':');
+                    if(saItem[1].ToUpper() == "DATETIME" || saItem[1].ToUpper() == "DATE" || saItem[1].ToUpper() == "TIME")
+                    {
+                        strResult += "'" + _dateTime.DateTimeToStamp(drRow[saItem[0]].ToString().Trim()).ToString() + "',";
+                    }
+                }
             }
             strResult = strResult.Substring(0, strResult.Length - 1);
             return strResult;
         }
-
-        //public string GetConcatValues(Dictionary<Dictionary<>>)
 
         /// <summary>
         /// 合并Key字段(合并目标数据库字段)
@@ -325,9 +341,18 @@ namespace AgencyToERP_PHP
         public string CombineSourceField(Dictionary<string, string> dicData)
         {
             string strResult = "";
+            string[] saField;
             foreach (KeyValuePair<string, string> dicItem in dicData)
             {
-                strResult += dicItem.Value + ",";
+                if(dicItem.Value.IndexOf(":") == -1)
+                {
+                    strResult += dicItem.Value + ",";
+                }
+                else
+                {
+                    saField = dicItem.Value.Split(':');
+                    strResult += saField[0] + ",";
+                }
             }
             strResult = strResult.Substring(0, strResult.Length - 1);
             return strResult;
@@ -362,5 +387,42 @@ namespace AgencyToERP_PHP
         }
         #endregion
 
+        #region ----索引操作区域----
+        /// <summary>
+        /// 新增表字段索引
+        /// </summary>
+        public bool AddIndex(List<string> lstField,MysqlIndexType type)
+        {
+            switch (type)
+            {
+                case MysqlIndexType.INDEX:
+
+                    break;
+                case MysqlIndexType.UNIQUE:
+
+                    break;
+                case MysqlIndexType.PRIMARYKEY:
+
+                    break;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 修改表字段索引
+        /// </summary>
+        public bool ModifyIndex(List<string> lstField,MysqlIndexType type)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// 移除表字段索引
+        /// </summary>
+        public bool DropIndex(List<string> lstField, MysqlIndexType type)
+        {
+            return true;
+        }
+        #endregion
     }
 }

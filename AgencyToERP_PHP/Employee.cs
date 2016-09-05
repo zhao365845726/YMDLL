@@ -209,12 +209,17 @@ namespace AgencyToERP_PHP
                 tmpWhere = "and a.erp_role_id = c.erp_id";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
-                m_Result += "\n用户表中归属部门|职务|角色更新成功";
+                tmpTable = "erp_user";
+                tmpValues = "user_status = '在职'";
+                tmpWhere = "and user_status = '正式'";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                m_Result += "\n用户表中归属部门|职务|角色|就职状态更新成功";
                 return true;
             }
             catch (Exception ex)
             {
-                m_Result += "\n用户表中归属部门|职务|角色更新异常.\n异常原因：" + ex.Message;
+                m_Result += "\n用户表中归属部门|职务|角色|就职状态更新异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }

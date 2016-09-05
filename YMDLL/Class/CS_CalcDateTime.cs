@@ -178,7 +178,15 @@ namespace YMDLL.Class
         /// <param name="time">时间格式</param>
         public int DateTimeToStamp(string strDateTime)
         {
-            DateTime time = Convert.ToDateTime(strDateTime);
+            DateTime time;
+            //如果时间为空，则设置时间为当前的时间
+            if(strDateTime == "")
+            {
+                return 0;
+            }else
+            {
+                time = Convert.ToDateTime(strDateTime);
+            }
             DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
             return (int)(time - startTime).TotalSeconds;
         }

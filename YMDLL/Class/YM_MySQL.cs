@@ -7,11 +7,12 @@ using System.Diagnostics;
 using System.IO;
 //Add MySql Library  
 using MySql.Data.MySqlClient;
-using System.Data;  
+using System.Data;
+using YMDLL.Interface; 
 
 namespace YMDLL.Class
 {
-    public class YM_MySQL
+    public class YM_MySQL : IDBProperty
     {
         #region MyRegion
 
@@ -248,7 +249,7 @@ namespace YMDLL.Class
             if(this.OpenConnection() == true)
             {
                 MySqlCommand mysqlcom = new MySqlCommand(query, connection);
-                MySqlDataReader mysqlread = mysqlcom.ExecuteReader(CommandBehavior.CloseConnection);
+                MySqlDataReader mysqlread = mysqlcom.ExecuteReader();
                 //this.CloseConnection();
                 return mysqlread;
             }

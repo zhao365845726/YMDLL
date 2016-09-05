@@ -169,8 +169,9 @@ namespace AgencyToERP_PHP
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
                 //tmpTable = "erp_deal as a,erp_house as b";
+                //tmpValues = "a.room_code = b.room_code,a.block = b.block,a.district = b.district";
                 //tmpValues = "a.district = b.district,a.district_id = b.district_id,a.region = b.region,a.biz_area_id = b.region_id,a.community = b.community,a.community_id = b.community_id,a.block = b.block,a.block_id = b.block_id,a.unit_name = b.unit_name,a.unit_id = b.unit_id,a.room_code = b.room_code,a.room_id = b.room_id";
-                //tmpWhere = "and a.erp_house_id = b.erp_id";
+                //tmpWhere = "and a.erp_house_id = b.erp_id and a.erp_house_id <> ''";
                 //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
 
