@@ -75,6 +75,14 @@ namespace AgencyToERP_PHP
         /// </summary>
         public string dTableName;
         /// <summary>
+        /// 目标-表描述
+        /// </summary>
+        public string dTableDescript;
+        /// <summary>
+        /// 目标-导入内容描述
+        /// </summary>
+        public string dPolitContentDescript;
+        /// <summary>
         /// 目标-获取的表数据的总结果集数量
         /// </summary>
         public int dTotalCount;
@@ -285,18 +293,24 @@ namespace AgencyToERP_PHP
             //去掉文字中包含的单引号
             strResult = strValue.Replace("'", "");
             //去掉文字中包含的反斜杠符号
-            strResult = strValue.Replace("\\", "");
+            strResult = strResult.Replace("\\", "");
             return strResult;
         }
 
         /// <summary>
         /// 组合房友数据的值【导入的目标是mysql数据库的时候】
         /// </summary>
+        /// Dictionary<DestField, SourceField>
+        /// Dictionary<DestField, SourceField:DateTime>
+        /// Dictionary<DestField, SourceField:String?Default=Value>
+        /// Dictionary<DestField, SourceField:Array?Key1=Value1;Key2=Value2;Key3=Value3>
         /// <returns></returns>
         public string GetConcatValues(Dictionary<string, string> dicData, DataRow drRow)
         {
             string strResult = "";
-            string[] saItem;
+            string[] saItem;    //是否有数据类型跟随
+            string[] strItemOne,strItemTwo,strItemThree;   //是字符串的时候是否有默认值
+
             foreach (KeyValuePair<string, string> dicItem in dicData)
             {
                 if(dicItem.Value.IndexOf(":") == -1)
@@ -310,6 +324,36 @@ namespace AgencyToERP_PHP
                     if(saItem[1].ToUpper() == "DATETIME" || saItem[1].ToUpper() == "DATE" || saItem[1].ToUpper() == "TIME")
                     {
                         strResult += "'" + _dateTime.DateTimeToStamp(drRow[saItem[0]].ToString().Trim()).ToString() + "',";
+                    }else if(saItem[1].IndexOf('?') != -1)
+                    {
+                        strItemOne = saItem[1].Split('?');
+                        if(strItemOne[0].ToString().Trim().ToUpper() == "STRING")
+                        {
+                            //判断是字符串的
+                            if (strItemOne[1].ToString().IndexOf('=') != -1)
+                            {
+                                //判断字符串中有Default或者其他值
+                                strItemTwo = strItemOne[1].ToString().Trim().Split('=');
+                                //string strTemp = drRow[saItem[0]].ToString();
+                                if (strItemTwo[0].ToString().Trim().ToUpper() == "DEFAULT")
+                                {
+                                    //增加内容为默认值
+                                    strResult += "'" + strItemTwo[1].ToString().Trim() + "',";
+                                }else if (strItemTwo[0].ToString().Trim().ToUpper() == "" && drRow[saItem[0]].ToString().Trim() == "")
+                                {
+                                    //判断源字段存储的值为空，默认参数的key为空的时候走默认值
+                                    strResult += "'" + strItemTwo[1].ToString().Trim() + "',";
+                                }
+                                else
+                                {
+                                    strResult += "'" + FilterSpecialCharacter(drRow[saItem[0]].ToString().Trim()) + "',";
+                                }
+                            }
+                        }
+                        else if(strItemOne[0].ToString().Trim().ToUpper() == "ARRAY")
+                        {
+
+                        }
                     }
                 }
             }
@@ -351,7 +395,13 @@ namespace AgencyToERP_PHP
                 else
                 {
                     saField = dicItem.Value.Split(':');
-                    strResult += saField[0] + ",";
+                    if(saField[0].ToString().Trim() == "")
+                    {
+                        strResult += "";
+                    }else
+                    {
+                        strResult += saField[0] + ",";
+                    }
                 }
             }
             strResult = strResult.Substring(0, strResult.Length - 1);
@@ -413,6 +463,18 @@ namespace AgencyToERP_PHP
         /// </summary>
         public bool ModifyIndex(List<string> lstField,MysqlIndexType type)
         {
+            switch (type)
+            {
+                case MysqlIndexType.INDEX:
+
+                    break;
+                case MysqlIndexType.UNIQUE:
+
+                    break;
+                case MysqlIndexType.PRIMARYKEY:
+
+                    break;
+            }
             return true;
         }
 
@@ -421,6 +483,18 @@ namespace AgencyToERP_PHP
         /// </summary>
         public bool DropIndex(List<string> lstField, MysqlIndexType type)
         {
+            switch (type)
+            {
+                case MysqlIndexType.INDEX:
+
+                    break;
+                case MysqlIndexType.UNIQUE:
+
+                    break;
+                case MysqlIndexType.PRIMARYKEY:
+
+                    break;
+            }
             return true;
         }
         #endregion

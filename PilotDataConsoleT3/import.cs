@@ -128,11 +128,15 @@ namespace PilotDataConsoleT3
                         if(department.dUpdateData == "true")
                         {
                             //更新数据
-                            //department.UpdateData("职能");
-                            //department.UpdateData("大区");
-                            //department.UpdateData("其他");
-                            //department.UpdateData("状态");
-                            department.UpdateData("更新归属");
+                            department.UpdateData("职能");
+                            department.UpdateData("大区");
+                            department.UpdateData("其他");
+                            department.UpdateData("状态");
+                            //department.UpdateData("更新归属");
+                        }
+                        if(department.dFieldDrop == "true")
+                        {
+                            department.DropField("fy_dept_id");
                         }
 
                         //输出结果
@@ -157,17 +161,17 @@ namespace PilotDataConsoleT3
                             //执行导数据的方法
                             employee.importEmployee();
                         }
-                        if(employee.dFieldDrop == "true")
-                        {
-                            //删除字段
-                            employee.DropField("fy_PositionId");
-                        }
                         if(employee.dUpdateData == "true")
                         {
                             //增加更新数据的方法调用
                             employee.UpdateData();
                         }
-                        
+                        if (employee.dFieldDrop == "true")
+                        {
+                            //删除字段
+                            employee.DropField("fy_PositionId");
+                        }
+
                         //输出结果
                         strResult = employee.m_Result;
                         break;
@@ -183,16 +187,17 @@ namespace PilotDataConsoleT3
                         property.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
                         property.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
 
-
                         if (property.dFieldAdd == "true")
                         {
                             property.AddField("fy_community", "varchar(100)");
                             property.AddField("fy_empid", "varchar(100)");
                             property.AddField("fy_deptid", "varchar(100)");
-                            property.AddField("fy_visit_way", "varchar(20)");
-                            property.AddField("fy_common_telephone", "varchar(50)");
                             property.AddField("fy_building_age", "varchar(50)");
+                            property.AddField("fy_visit_way", "varchar(20)");
                             property.AddField("fy_room", "varchar(20)");
+                            property.AddField("fy_common_telephone", "varchar(100)");
+                            property.AddField("fy_key_userid", "varchar(100)");
+                            property.AddField("fy_key_deptid", "varchar(100)");
                         }
 
                         if(property.dExec == "true")
@@ -213,10 +218,12 @@ namespace PilotDataConsoleT3
                             property.DropField("fy_community");
                             property.DropField("fy_empid");
                             property.DropField("fy_deptid");
-                            property.DropField("fy_visit_way");
-                            property.DropField("fy_common_telephone");
                             property.DropField("fy_building_age");
                             property.DropField("fy_room");
+                            property.DropField("fy_visit_way");
+                            property.DropField("fy_common_telephone");
+                            property.DropField("fy_key_userid");
+                            property.DropField("fy_key_deptid");
                         }
 
                         //输出结果
@@ -442,6 +449,76 @@ namespace PilotDataConsoleT3
                         strResult = joinstores.m_Result;
                         break;
                     }
+                case TableType.NEWS:
+                    {
+                        //声明新闻公告对象
+                        News news = new News();
+                        news.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        news.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
+                        news.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
+                        news.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
+                        news.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
+                        news.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
+                        if (news.dFieldAdd == "true")
+                        {
+                            //添加字段
+                            news.AddField("erp_user_id", "varchar(60)");
+                        }
+                        if (news.dExec == "true")
+                        {
+                            //执行导数据的方法
+                            news.importNews();
+                        }
+                        if (news.dUpdateData == "true")
+                        {
+                            //更新数据
+                            news.UpdateData();
+                        }
+                        if(news.dFieldDrop == "true")
+                        {
+                            news.DropField("erp_user_id");
+                        }
+
+                        //输出结果
+                        strResult = news.m_Result;
+                        break;
+                    }
+                case TableType.MESSAGE:
+                    {
+                        //声明情报站|业务审批对象
+                        Message msg = new Message();
+                        msg.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        msg.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
+                        msg.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
+                        msg.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
+                        msg.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
+                        msg.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
+                        if (msg.dFieldAdd == "true")
+                        {
+                            //添加字段
+                            msg.AddField("erp_id", "varchar(60)");
+                            msg.AddField("erp_title", "varchar(100)");
+                        }
+                        if (msg.dExec == "true")
+                        {
+                            //执行导数据的方法
+                            msg.importMessage();
+                        }
+                        if (msg.dUpdateData == "true")
+                        {
+                            //更新数据
+                            msg.UpdateData();
+                        }
+                        if (msg.dFieldDrop == "true")
+                        {
+                            msg.DropField("erp_id");
+                            msg.DropField("erp_title");
+                        }
+
+                        //输出结果
+                        strResult = msg.m_Result;
+                        break;
+                    }
                 case TableType.TEST:
                     {
                         //声明房源对象
@@ -512,6 +589,9 @@ namespace PilotDataConsoleT3
 
         POSITION = 25,          //职务
         JOINSTORE = 26,         //加盟店
+
+        NEWS = 27,              //新闻公告
+        MESSAGE = 28,           //情报站|业务审批
 
         TEST = 99,              //测试
     }

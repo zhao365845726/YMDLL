@@ -6,5 +6,6 @@ E:\程序设计\_C#_Download\YMDLL\YMDLL\obj\Release\YMDLL.csprojResolveAssembly
 F:\_GitCode\YMDLL\YMDLL\bin\Release\YMDLL.dll
 F:\_GitCode\YMDLL\YMDLL\bin\Release\YMDLL.pdb
 F:\_GitCode\YMDLL\YMDLL\bin\Release\MySql.Data.dll
+F:\_GitCode\YMDLL\YMDLL\obj\Release\YMDLL.csprojResolveAssemblyReference.cache
 F:\_GitCode\YMDLL\YMDLL\obj\Release\YMDLL.dll
 F:\_GitCode\YMDLL\YMDLL\obj\Release\YMDLL.pdb
