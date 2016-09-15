@@ -24,41 +24,33 @@ namespace AgencyToERP_PHP
         {
             //Dictionary<目标数据库,源数据库>
             Dictionary<string, string> dicMap = new Dictionary<string, string>();
-            dicMap.Add("contract_code", "ContractNo");      //合同编号
-            dicMap.Add("house_code", "PropertyNo");         //房源编号
-            dicMap.Add("client_code", "InquiryNo");         //客源编号
-            dicMap.Add("erp_house_id", "PropertyID");       //房源ID
-            dicMap.Add("erp_client_id", "InquiryID");       //客源ID
-            dicMap.Add("client_name", "CustName");          //客户姓名
-            dicMap.Add("client_tel", "CustMobile");         //客户电话
-            dicMap.Add("client_address", "CustAdd");        //客户地址
-            dicMap.Add("client_id_card", "CustCard");       //客户身份证
-            dicMap.Add("erp_deal_id", "ContractID");        //成交ID
-            dicMap.Add("type", "Trade");                    //交易状态：出售|出租（old);买卖|租赁（new)
-            dicMap.Add("house_address", "Address");         //房源地址
-            dicMap.Add("payment", "Price");                 //成交价格
-            dicMap.Add("payarea", "Square");                //成交面积
-            dicMap.Add("purpose", "Usage");                 //房屋用途
-            dicMap.Add("licence", "CertificateNo");         //房产证号
-            dicMap.Add("contract_category", "ContractType");//成交类别
-            dicMap.Add("owner_name", "OwnerName");          //业主姓名
-            dicMap.Add("owner_tel", "OwnerMobile");         //业主电话
-            dicMap.Add("owner_address", "OwnerAdd");        //业主地址
-            dicMap.Add("owner_id_card", "OwnerCard");       //业主身份证
-            dicMap.Add("contractor_place", "SignCenter");   //签约地点|签约中心
-            dicMap.Add("deal_status", "Audit");             //合同审核状态
+            dicMap.Add("fy_FeeID", "FeeID");
+            dicMap.Add("fy_deal_id", "ContractID");
+            dicMap.Add("price_name", "FeeType");
+            dicMap.Add("fy_shou_fee", "Money0");
+            dicMap.Add("fy_fu_fee", "Money1");
+            dicMap.Add("finance_date", "FeeDate:DateTime");
+            dicMap.Add("memo", "Remark");
+            dicMap.Add("update_time", "ModDate:DateTime");
+            dicMap.Add("if_deleted", "FlagDeleted");
+            dicMap.Add("create_time", "ExDate:DateTime");
+            dicMap.Add("fee_user", "FeeSource");
+            dicMap.Add("status", "Audit");
+            dicMap.Add("price_type", ":String?Default=");
             return dicMap;
         }
 
         /// <summary>
-        /// 合同类的构造函数
+        /// 应收应付类的构造函数
         /// </summary>
         public ContractCon()
         {
-            sTableName = "Contract";
+            sTableName = "ContractCon";
             sColumns = CombineSourceField(FieldMap());
-            sOrder = "RegDate";
-            dTableName = "erp_deal";
+            sOrder = "FeeDate";
+            dTableName = "erp_receivable";
+            dTableDescript = "应收应付表";
+            dPolitContentDescript = "公司ID|删除标记|费用状态|收付状态|收付金额";
             dColumns = CombineDestField(FieldMap());
         }
 
@@ -126,18 +118,18 @@ namespace AgencyToERP_PHP
                 Console.Write("\n数据已经成功写入" + sPageSize * sPageIndex + "条");
                 if (isResult)
                 {
-                    m_Result = "\n合同数据插入成功";
+                    m_Result = "\n" + dTableDescript + "数据插入成功";
                     return true;
                 }
                 else
                 {
-                    m_Result = "\n合同数据插入失败";
+                    m_Result = "\n" + dTableDescript + "数据插入失败";
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                m_Result = "导出合同异常.\n异常原因：" + ex.Message;
+                m_Result = "导出" + dTableDescript + "异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }
@@ -150,22 +142,34 @@ namespace AgencyToERP_PHP
             string tmpTable = "", tmpValues = "", tmpWhere = "";
             try
             {
-                tmpTable = "erp_deal";
-                //更新交易状态字段
-                tmpValues = "type = '买卖'";
-                tmpWhere = "and type = '出售'";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                //更新合同类别字段
-                tmpValues = "type = '租赁'";
-                tmpWhere = "and type = '出租'";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                //更新合同表中company_id字段和if_deleted字段
+                tmpTable = "erp_receivable";
+                //更新合同实收费用表中company_id字段和if_deleted字段
                 tmpValues = "company_id = '" + dCompanyId + "',if_deleted = '" + dDeleteMark + "'";
                 tmpWhere = "";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                //更新合同表审核状态字段
-                tmpValues = "deal_status = '已审核'";
-                tmpWhere = "";
+
+                tmpValues = "status = '待确认'";
+                tmpWhere = "and status = '0'";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                tmpValues = "status = '出纳确认'";
+                tmpWhere = "and status = '1'";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                tmpValues = "status = '会计审核'";
+                tmpWhere = "and status = '2'";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                tmpValues = "status = '已归档'";
+                tmpWhere = "and status = '3'";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                tmpValues = "price_charge = '实付',price_num = fy_fu_fee";
+                tmpWhere = "and fy_shou_fee = '0'";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                tmpValues = "price_charge = '实收',price_num = fy_shou_fee";
+                tmpWhere = "and fy_fu_fee = '0'";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
                 //tmpTable = "erp_deal as a,erp_house as b";
@@ -175,12 +179,12 @@ namespace AgencyToERP_PHP
                 //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
 
-                m_Result += "\n合同表中交易类型|房源信息更新成功";
+                m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新成功";
                 return true;
             }
             catch (Exception ex)
             {
-                m_Result += "\n合同表中交易类型|房源信息更新异常.\n异常原因：" + ex.Message;
+                m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }

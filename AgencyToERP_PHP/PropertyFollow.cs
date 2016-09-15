@@ -18,16 +18,43 @@ namespace AgencyToERP_PHP
         }
 
         /// <summary>
+        /// 字段映射方法
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, string> FieldMap()
+        {
+            //Dictionary<目标数据库,源数据库>
+            Dictionary<string, string> dicMap = new Dictionary<string, string>();
+            dicMap.Add("fy_followId", "FollowID");              //源房源跟进ID
+            dicMap.Add("erp_house_id", "PropertyID");           //房源ID
+            dicMap.Add("erp_user_id", "EmpID");                 //用户ID
+            dicMap.Add("follow_up_date", "FollowDate:DateTime");            //跟进日期
+            dicMap.Add("content", "Content");                   //跟进内容
+            dicMap.Add("follow_way", "FollowType");             //跟进方式
+            dicMap.Add("company_id", ":String?Default=" + dCompanyId);      //公司ID
+            dicMap.Add("if_deleted", ":String?Default=" + dDeleteMark);     //删除标记
+            dicMap.Add("create_time", "ExDate:DateTime");                   //录入日期
+            dicMap.Add("update_time", "ModDate:DateTime");                  //更新日期
+            dicMap.Add("longitude", ":String?Default=0");                   //经度
+            dicMap.Add("latitude", ":String?Default=0");                    //纬度
+            dicMap.Add("if_abnormal", ":String?Default=0");                 //是否异常
+            dicMap.Add("if_stick", ":String?Default=0");                    //是否置顶
+
+            return dicMap;
+        }
+
+        /// <summary>
         /// 房源跟进类的构造函数
         /// </summary>
         public PropertyFollow()
         {
             sTableName = "Follow";
-            sColumns = "FollowID,PropertyID,EmpID,FollowDate,Content,FollowType";
+            sColumns = CombineSourceField(FieldMap());
             sOrder = "FollowDate";
             dTableName = "erp_house_follow";
-            dColumns = "fy_followId,erp_house_id,erp_user_id,follow_up_date,content,follow_way,company_id,if_deleted,create_time";
-            //导入时间 00:23:18.5830269分
+            dTableDescript = "房源跟进表";
+            dPolitContentDescript = "字段";
+            dColumns = CombineDestField(FieldMap());
         }
 
         /// <summary>
@@ -85,22 +112,7 @@ namespace AgencyToERP_PHP
                 List<String> lstValue = new List<String>();
                 foreach (DataRow row in dt.Rows)
                 {
-                    string strContent = row["Content"].ToString().Trim();
-                    strContent = strContent.Replace("'", "");
-                    strContent = strContent.Replace("\\", "");
-                    strContent = strContent.Replace("\n", "");
-                    strContent = strContent.Replace("\r", "");
-                    strContent = strContent.Replace(" ", "");
-
-                    string strTemp = "'" + row["FollowID"].ToString().Trim() + "','" +
-                        row["PropertyID"].ToString().Trim() + "','" +
-                        row["EmpID"].ToString().Trim() + "','" +
-                        _dateTime.DateTimeToStamp(row["FollowDate"].ToString().Trim()).ToString() + "','" +
-                        strContent + "','" +
-                        row["FollowType"].ToString().Trim() + "','" +
-                        dCompanyId + "','" + dDeleteMark + "','" +
-                        _dateTime.DateTimeToStamp(DateTime.Now).ToString() + "'"
-                        ;
+                    string strTemp = GetConcatValues(FieldMap(), row);
                     lstValue.Add(strTemp);
                 }
                 //如果允许删除，清空目标表数据
@@ -113,48 +125,20 @@ namespace AgencyToERP_PHP
                 Console.Write("\n数据已经成功写入" + sPageSize * sPageIndex + "条");
                 if (isResult)
                 {
-                    m_Result = "\n房源跟进数据插入成功";
+                    m_Result = "\n" + dTableName + "数据插入成功";
                     return true;
                 }
                 else
                 {
-                    m_Result = "\n房源跟进数据插入失败";
+                    m_Result = "\n" + dTableName + "数据插入失败";
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                m_Result = "导出房源跟进异常.\n异常原因：" + ex.Message;
+                m_Result = "导出" + dTableName + "异常.\n异常原因：" + ex.Message;
                 return false;
             }
-        }
-
-        /// <summary>
-        /// 添加字段
-        /// </summary>
-        public void AddField(string FieldName, string FieldType)
-        {
-            _mysql.UpdateField("add", dTableName, FieldName, FieldType);
-            m_Result = _mysql.m_Message;
-            //throw new System.NotImplementedException();
-        }
-
-        /// <summary>
-        /// 修改字段
-        /// </summary>
-        public void ModifyField(string FieldName, string FieldType)
-        {
-            _mysql.UpdateField("modify column ", dTableName, FieldName, FieldType);
-            m_Result = _mysql.m_Message;
-        }
-
-        /// <summary>
-        /// 移除字段
-        /// </summary>
-        public void DropField(string FieldName)
-        {
-            _mysql.UpdateField("drop ", dTableName, FieldName, "");
-            m_Result = _mysql.m_Message;
         }
 
         /// <summary>
@@ -181,12 +165,12 @@ namespace AgencyToERP_PHP
                     _mysql.Update(tmpTable, tmpValues, tmpWhere);
                 }
 
-                m_Result += "\n房源的行政区|片区|楼盘字典及ID更新成功";
+                m_Result += "\n" + dTableName + "的行政区|片区|楼盘字典及ID更新成功";
                 return true;
             }
             catch (Exception ex)
             {
-                m_Result += "\n房源的行政区|片区|楼盘字典及ID更新异常.\n异常原因：" + ex.Message;
+                m_Result += "\n" + dTableName + "的行政区|片区|楼盘字典及ID更新异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }

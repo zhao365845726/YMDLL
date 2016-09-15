@@ -155,7 +155,17 @@ namespace AgencyToERP_PHP
                 tmpWhere = "and sub_type = '砍价'";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
-                //增加更新用户id，部门id,房源编号，房源id
+                //更新业务审批申请人，申请人部门
+                List<string>[] lstMsgId = new List<string>[1];
+                lstMsgId = _mysql.Select("erp_business_review", "document_id", "");
+                foreach (string strId in lstMsgId[0])
+                {
+                    //更新业务审批申请人，申请人部门
+                    tmpTable = "erp_business_review as a,erp_user as b";
+                    tmpValues = "a.user_id = b.id,a.department_id = b.department_id";
+                    tmpWhere = "and SUBSTRING_INDEX(a.username,'.',-1) = b.username and a.document_id = " + strId;
+                    _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                }
 
                 m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新成功";
                 return true;

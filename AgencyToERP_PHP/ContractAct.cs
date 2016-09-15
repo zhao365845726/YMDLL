@@ -55,6 +55,8 @@ namespace AgencyToERP_PHP
             sColumns = CombineSourceField(FieldMap());
             sOrder = "RegDate";
             dTableName = "erp_collect_pay";
+            dTableDescript = "实收实付表";
+            dPolitContentDescript = "公司ID|删除标记|费用状态|收付状态|收付金额";
             dColumns = CombineDestField(FieldMap());
         }
 
@@ -122,18 +124,18 @@ namespace AgencyToERP_PHP
                 Console.Write("\n数据已经成功写入" + sPageSize * sPageIndex + "条");
                 if (isResult)
                 {
-                    m_Result = "\n合同实收费用数据插入成功";
+                    m_Result = "\n" + dTableDescript + "数据插入成功";
                     return true;
                 }
                 else
                 {
-                    m_Result = "\n合同实收费用数据插入失败";
+                    m_Result = "\n" + dTableDescript + "数据插入失败";
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                m_Result = "导出合同实收费用异常.\n异常原因：" + ex.Message;
+                m_Result = "导出" + dTableDescript + "异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }
@@ -188,12 +190,12 @@ namespace AgencyToERP_PHP
                 //tmpWhere = "and a.fy_deal_id = b.erp_deal_id";
                 //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
-                m_Result += "\n合同实收费用表中公司ID|删除标记|费用状态|收付状态|收付金额更新成功";
+                m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新成功";
                 return true;
             }
             catch (Exception ex)
             {
-                m_Result += "\n合同实收费用表中公司ID|删除标记|费用状态|收付状态|收付金额更新异常.\n异常原因：" + ex.Message;
+                m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }

@@ -25,3 +25,62 @@
 1.首先初始化数据
 2.更新redis
 3.
+
+
+
+导入房源后，执行的更新的操作
+1.更新维护人，录入人【代码更新】
+UPDATE erp_house as a,erp_user as b
+SET a.input_user_id = b.id,a.principal_user_id = b.id,a.principal_username = b.username,a.input_username = b.username
+WHERE and SUBSTRING_INDEX(a.input_username,'.',-1) = b.username and a.input_department_id = b.department_id and a.id = 1
+
+2.更新维护人部门，录入人部门【代码更新】
+UPDATE erp_house as a,erp_department as b
+SET a.input_department_id = b.dept_id,a.principal_department_id = b.dept_id
+WHERE SUBSTRING_INDEX(a.input_username,'.',1) = b.dept_name and a.id = 1
+
+3.更新钥匙人，钥匙人部门【代码更新】
+UPDATE erp_house as a,erp_user as b
+SET a.input_user_id = b.id,a.principal_user_id = b.id,a.principal_username = b.username,a.input_username = b.username
+WHERE SUBSTRING_INDEX(a.input_username,'.',-1) = b.username and a.input_department_id = b.department_id and a.id = 1
+
+4.更新房源小区和小区名称
+UPDATE erp_house a,erp_community b
+SET a.community = b.community_name,a.community_id = b.community_id,a.region = b.biz_area_name,a.region_id = b.biz_area_id,a.district_id = b.district_id
+WHERE a.fy_community = b.erp_id
+
+
+导入部门后更新部门的状态操作
+1.调用存储过程UpdateDepartment 更新部门归属
+	可能出现的问题：
+	a).多个部门的erp_id是一样的，必须要询问长沙方面这个部门的归属是什么才能执行存储过程
+	b).查询多个部门的erp_id的sql语句
+		SELECT dept_id,erp_id,erp_pid,count(erp_id) as total FROM erp_department GROUP BY erp_id HAVING count(erp_id) > 1;
+		SELECT dept_id,erp_id,erp_pid FROM erp_department WHERE `status` = '有效';
+		SELECT * FROM erp_department WHERE erp_id in(210106,290102);
+	c).有可能部门多个是因为有有效的，也有关闭的
+	d).更新部门表中加盟店id,加盟店名称的字段
+		UPDATE erp_department a JOIN erp_join_stores b ON a.dept_name = b.Fstores_name 
+		SET a.join_stores_id = b.Fdocument_id,a.join_stores_name = a.dept_name
+		WHERE a.dept_name = b.Fstores_name
+
+导入房源跟进后更新操作
+1.调用存储过程UpdateHouseFollow 更新房源的信息，小区ID,小区信息，人员信息
+
+
+导入客源更新后
+1.查询出客源需求区域的内容
+SELECT a.prefer_region,a.prefer_region_json,b.biz_area_id,b.biz_area_name,b.district_id,b.district,c.community_name,c.community_id,
+CONCAT('-',c.community_name,'-',b.district,'-',b.biz_area_name,';'),
+CONCAT('[{\"district_id\":\"',b.district_id,'\",\"district\":\"',b.district,'\",\"region_id\":\"',b.biz_area_id,'\",\"region\":\"',b.biz_area_name,'\",\"community_id\":\"',c.community_id,'\",\"community\":\"',c.community_name,'\",\"type\":\"district\"}]')
+FROM erp_client a JOIN erp_region b ON a.fy_AreaId = b.erp_id JOIN erp_community c ON b.biz_area_name = c.biz_area_name
+WHERE c.community_name = '安居乐'
+LIMIT 100
+
+-- 更新语句
+UPDATE erp_client a JOIN erp_region b ON a.fy_AreaId = b.erp_id JOIN erp_community c ON b.biz_area_name = c.biz_area_name
+SET a.prefer_region = CONCAT('-',c.community_name,'-',b.district,'-',b.biz_area_name,';'),
+a.prefer_region_json = CONCAT('[{\"district_id\":\"',b.district_id,'\",\"district\":\"',b.district,'\",\"region_id\":\"',b.biz_area_id,'\",\"region\":\"',b.biz_area_name,'\",\"community_id\":\"',c.community_id,'\",\"community\":\"',c.community_name,'\",\"type\":\"district\"}]')
+
+-- prefer_region_json字段格式
+[{"district_id":"9","district":"青山湖","region_id":"","region":"","community_id":"","community":"","type":"district"}]

@@ -294,6 +294,12 @@ namespace AgencyToERP_PHP
             strResult = strValue.Replace("'", "");
             //去掉文字中包含的反斜杠符号
             strResult = strResult.Replace("\\", "");
+            //去掉文字中包含的换行符号
+            strResult = strResult.Replace("\n", "");
+            //去掉文字中包含的制表符号
+            strResult = strResult.Replace("\r", "");
+            //去掉文字中包含的空格符号
+            strResult = strResult.Replace(" ", "");
             return strResult;
         }
 

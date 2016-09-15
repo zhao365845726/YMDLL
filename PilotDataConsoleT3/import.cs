@@ -110,7 +110,7 @@ namespace PilotDataConsoleT3
                 case TableType.DEPARTMENT:
                     {
                         //声明部门对象
-                        Department department = new Department();
+                        DepartmentNew department = new DepartmentNew();
                         department.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
                         department.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
                         department.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
@@ -247,9 +247,21 @@ namespace PilotDataConsoleT3
                             //新增字段
                             propertyfollow.AddField("fy_followId", "varchar(100)");
                         }
+                        if(propertyfollow.dUpdateData == "true")
+                        {
+                            
+                        }
+                        if(propertyfollow.dExec == "true")
+                        {
+                            //执行导数据的方法
+                            propertyfollow.importPropertyFollow();
+                        }
 
-                        //执行导数据的方法
-                        propertyfollow.importPropertyFollow();
+                        if(propertyfollow.dFieldDrop == "true")
+                        {
+                            propertyfollow.DropField("fy_followId");
+                        }
+                        
                         //输出结果
                         strResult = propertyfollow.m_Result;
                         break;
@@ -401,6 +413,42 @@ namespace PilotDataConsoleT3
                     }
                 case TableType.CONTRACTCON:
                     {
+                        //声明合同实收实付对象
+                        ContractCon contractcon = new ContractCon();
+                        contractcon.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        contractcon.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
+                        contractcon.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
+                        contractcon.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
+                        contractcon.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
+                        contractcon.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
+                        if (contractcon.dFieldAdd == "true")
+                        {
+                            //添加字段
+                            contractcon.AddField("fy_FeeID", "varchar(100)");
+                            contractcon.AddField("fy_deal_id", "varchar(100)");
+                            contractcon.AddField("fy_shou_fee", "varchar(20)");
+                            contractcon.AddField("fy_fu_fee", "varchar(20)");
+                        }
+                        if (contractcon.dExec == "true")
+                        {
+                            //执行导数据的方法
+                            contractcon.importContractCon();
+                        }
+                        if (contractcon.dUpdateData == "true")
+                        {
+                            //更新数据
+                            contractcon.UpdateData();
+                        }
+                        if (contractcon.dFieldDrop == "true")
+                        {
+                            contractcon.DropField("fy_shou_fee");
+                            contractcon.DropField("fy_fu_fee");
+                            contractcon.DropField("fy_deal_id");
+                            contractcon.DropField("fy_FeeID");
+                        }
+
+                        //输出结果
+                        strResult = contractcon.m_Result;
                         break;
                     }
                 case TableType.CONTRACTFEE:

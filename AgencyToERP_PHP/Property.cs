@@ -14,14 +14,7 @@ namespace AgencyToERP_PHP
     {
         public void Descript()
         {
-            /* 1.目标库中houseDict为int类型，增加楼盘字典ID  FY_houseDict
-             * 2.目标库中importBroker为int类型，增加录入经纪人  FY_importBroker
-             * 3.目标库中entrustDate，houseDict，attrBroker，importBroker，importDate，followDate,status,handingDate,totalFloor类型无法导入，增加字段FY_entrustDate，FY_houseDict，FY_attrBroker，FY_importBroker，FY_importDate,FY_followDate,FY_status,FY_handingDate,FY_totalFloor
-             */
 
-            /* 导数据注意事项
-             * 避免'，\，
-             */
         }
 
         /// <summary>
@@ -248,17 +241,18 @@ namespace AgencyToERP_PHP
                     tmpValues = "a.input_user_id = b.id,a.principal_user_id = b.id,a.principal_username = b.username,a.input_username = b.username";
                     tmpWhere = "and SUBSTRING_INDEX(a.input_username,'.',-1) = b.username and a.input_department_id = b.department_id and a.id = " + strId;
                     _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                    //更新钥匙人ID,钥匙人部门ID
-                    tmpTable = "erp_house as a,erp_user as b";
-                    tmpValues = "a.input_user_id = b.id,a.principal_user_id = b.id,a.principal_username = b.username,a.input_username = b.username";
-                    tmpWhere = "and SUBSTRING_INDEX(a.input_username,'.',-1) = b.username and a.input_department_id = b.department_id and a.id = " + strId;
-                    _mysql.Update(tmpTable, tmpValues, tmpWhere);
                 }
 
                 //更新房源的小区id和小区名称
                 tmpTable = "erp_house a,erp_community b";
                 tmpValues = "a.community = b.community_name,a.community_id = b.community_id,a.region = b.biz_area_name,a.region_id = b.biz_area_id,a.district_id = b.district_id";
                 tmpWhere = "and a.fy_community = b.erp_id";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                //更新钥匙人和钥匙人所在部门
+                tmpTable = "erp_house a LEFT JOIN erp_user b ON a.fy_key_userid = b.erp_id";
+                tmpValues = "a.key_user_id = b.id,a.key_username = b.username,a.key_department_id = b.department_id,a.if_key = 1";
+                tmpWhere = "and a.fy_key_userid = b.erp_id";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
                 m_Result += "\n" + dTableName + "中的" + dTableDescript + "更新成功";
                 return true;
