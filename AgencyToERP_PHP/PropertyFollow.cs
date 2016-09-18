@@ -125,18 +125,18 @@ namespace AgencyToERP_PHP
                 Console.Write("\n数据已经成功写入" + sPageSize * sPageIndex + "条");
                 if (isResult)
                 {
-                    m_Result = "\n" + dTableName + "数据插入成功";
+                    m_Result = "\n" + dTableDescript + "数据插入成功";
                     return true;
                 }
                 else
                 {
-                    m_Result = "\n" + dTableName + "数据插入失败";
+                    m_Result = "\n" + dTableDescript + "数据插入失败";
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                m_Result = "导出" + dTableName + "异常.\n异常原因：" + ex.Message;
+                m_Result = "导出" + dTableDescript + "异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }
@@ -165,12 +165,12 @@ namespace AgencyToERP_PHP
                     _mysql.Update(tmpTable, tmpValues, tmpWhere);
                 }
 
-                m_Result += "\n" + dTableName + "的行政区|片区|楼盘字典及ID更新成功";
+                m_Result += "\n" + dTableDescript + "的" + dPolitContentDescript + "更新成功";
                 return true;
             }
             catch (Exception ex)
             {
-                m_Result += "\n" + dTableName + "的行政区|片区|楼盘字典及ID更新异常.\n异常原因：" + ex.Message;
+                m_Result += "\n" + dTableDescript + "的" + dPolitContentDescript + "更新异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }

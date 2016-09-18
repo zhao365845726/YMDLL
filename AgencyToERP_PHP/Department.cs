@@ -13,13 +13,29 @@ namespace AgencyToERP_PHP
 {
     public class Department : Base
     {
-        public void Descript()
+        /// <summary>
+        /// 字段映射方法
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, string> FieldMap()
         {
-            /*
-             操作流程：
-             1.3.0系统中dept_id为自增，所以不需要导入
-             2.
-             */
+            //Dictionary<目标数据库,源数据库>
+            Dictionary<string, string> dicMap = new Dictionary<string, string>();
+            dicMap.Add("dept_name", "DeptName");            //部门名称
+            dicMap.Add("company_id", ":String?Default=" + dCompanyId);    //公司ID
+            dicMap.Add("address", "Address");               //部门地址
+            dicMap.Add("fy_tel", "Tel");                    //部门电话
+            dicMap.Add("dept_type", "Layer");               //部门类型(职能|区|大区)
+            dicMap.Add("if_deleted", "FlagDeleted");        //删除标记
+            dicMap.Add("create_time", "ExDate:DateTime");   //创建时间
+            dicMap.Add("update_time", "ModDate:DateTime");  //更新时间
+            dicMap.Add("dept_code", "Header");              //部门简拼
+            dicMap.Add("erp_id", "DeptNo");                 //部门编码
+            dicMap.Add("status", "DeptType");               //部门的状态
+            dicMap.Add("fy_dept_id", "DeptID");             //原房友部门ID
+            dicMap.Add("longitude", ":String?Default=0");   //经度
+            dicMap.Add("latitude", ":String?Default=0");    //纬度
+            return dicMap;
         }
 
         /// <summary>
@@ -28,10 +44,12 @@ namespace AgencyToERP_PHP
         public Department()
         {
             sTableName = "Department";
-            sColumns = "DeptName,DeptNo,Address,Tel,DeptType,DeptID,Header";
+            sColumns = CombineSourceField(FieldMap());
             sOrder = "DeptNo";
             dTableName = "erp_department";
-            dColumns = "dept_name,company_id,address,tel,dept_type,if_deleted,create_time,update_time,erp_id,erp_pid,dept_code,status,fy_dept_id";
+            dTableDescript = "部门表";
+            dPolitContentDescript = "父级ID|状态|职能|区|店|组";
+            dColumns = CombineDestField(FieldMap());
         }
 
         /// <summary>
@@ -80,31 +98,7 @@ namespace AgencyToERP_PHP
                 List<String> lstValue = new List<String>();
                 foreach (DataRow row in dt.Rows)
                 {
-                    string strStatus = "",strType = "";
-                    if(row["DeptType"].ToString() == "关闭")
-                    {
-                        strStatus = row["DeptType"].ToString();
-                    }
-
-                    if (row["DeptType"].ToString() != "关闭")
-                    {
-                        strType = row["DeptType"].ToString();
-                    }
-
-                    string strTemp = "'" + row["DeptName"].ToString() + "'," +
-                        dCompanyId + ",'" +
-                        row["Address"].ToString() + "','" +
-                        row["Tel"].ToString() + "','" +
-                        strType + "'," +
-                        dDeleteMark + ",'" +
-                        _dateTime.DateTimeToStamp(DateTime.Now).ToString() + "','" +
-                        _dateTime.DateTimeToStamp(DateTime.Now).ToString() + "','" +
-                        row["DeptNo"].ToString() + "','" +
-                        row["DeptNo"].ToString().Substring(0, row["DeptNo"].ToString().Length - 2) + "','" +
-                        row["Header"].ToString() + "','" +
-                        strStatus + "','" + 
-                        row["DeptID"].ToString() + "'"
-                        ;
+                    string strTemp = GetConcatValues(FieldMap(), row);
                     lstValue.Add(strTemp);
                 }
                 //如果允许删除，清空目标表数据
@@ -117,18 +111,18 @@ namespace AgencyToERP_PHP
                 Console.Write("\n数据已经成功写入" + sPageSize * sPageIndex + "条");
                 if (isResult)
                 {
-                    m_Result = "部门数据插入成功";
+                    m_Result = dTableDescript + "数据插入成功";
                     return true;
                 }
                 else
                 {
-                    m_Result = "部门数据插入失败";
+                    m_Result = dTableDescript + "数据插入失败";
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                m_Result = "导出部门异常.\n异常原因：" + ex.Message;
+                m_Result = "导出" + dTableDescript + "异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }
@@ -140,20 +134,30 @@ namespace AgencyToERP_PHP
         {
             try
             {
-                if(typeName == "状态")
+                if (typeName == "删除")
+                {
+                    _mysql.Update("erp_department", "if_deleted = 1", "and if_deleted = -1");
+                    m_Result += "\n" + dTableDescript + "中删除标识更新成功";
+                }
+                else if(typeName == "父级ID")
+                {
+                    _mysql.Update("erp_department", "erp_pid = SUBSTRING(erp_id,1,(LENGTH(erp_id)-2))", "");
+                    m_Result += "\n" + dTableDescript + "中父级ID更新成功";
+                }
+                else if(typeName == "状态")
                 {
                     _mysql.Update("erp_department", "status = '有效'", "and status <> '关闭'");
-                    m_Result += "\n部门表中状态更新成功";
+                    m_Result += "\n" + dTableDescript + "中状态更新成功";
                 }
                 else if(typeName == "职能")
                 {
                     _mysql.Update("erp_department", "dept_type = '职能'", "");
-                    m_Result += "\n部门表中职能更新成功";
+                    m_Result += "\n" + dTableDescript + "中职能更新成功";
                 }
                 else if(typeName == "大区")
                 {
                     _mysql.Update("erp_department", "dept_type = '大区'", "and LENGTH(erp_id)=2 and erp_id > 01 and erp_id < 99 ");
-                    m_Result += "\n部门表中大区更新成功";
+                    m_Result += "\n" + dTableDescript + "中大区更新成功";
                 }
                 else if(typeName == "其他")
                 {
@@ -166,37 +170,15 @@ namespace AgencyToERP_PHP
                         _mysql.Update("erp_department", "dept_type = '组'", "and LENGTH(erp_id)=8 and erp_id like '" + aid + "%'");
                     }
 
-                    m_Result += "\n部门表中区|店|组更新成功";
-                }else if(typeName == "更新归属")
+                    m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新成功";
+                }
+                else if (typeName == "加盟店")
                 {
-                    MySqlDataReader dr = _mysql.SelectMul("erp_department", "dept_id,pid,erp_id,erp_pid", "");
-                    Dictionary<string, string> dicUp = new Dictionary<string, string>();
-                    Dictionary<string, string> pdicUp = new Dictionary<string, string>();
-                    while (dr.Read())
-                    {
-                        dicUp.Add(dr[2].ToString(), dr[1].ToString());
-                        pdicUp.Add(dr[3].ToString(), dr[0].ToString());
-                    }
-                    _mysql.CloseConnection();
-
-                    foreach (var pitem in pdicUp)
-                    {
-                        if(pitem.Key == "" || pitem.Key == null)
-                        {
-                            _mysql.UpdateNoClose("erp_department", "pid = 0", "and dept_id = " + pitem.Value);
-                        }
-                        else
-                        {
-                            foreach(var item in dicUp)
-                            {
-                                if(pitem.Key == item.Key)
-                                {
-                                    _mysql.UpdateNoClose("erp_department", "pid = '" + item.Value + "'", "and dept_id = " + pitem.Value);
-                                    break;
-                                }
-                            }
-                        }
-                    }
+                    strTable = "erp_department a JOIN erp_join_stores b ON a.dept_name = b.Fstores_name ";
+                    strValues = "a.join_stores_id = b.Fdocument_id,a.join_stores_name = a.dept_name";
+                    strWhere = "and a.dept_name = b.Fstores_name";
+                    _mysql.Update(strTable, strValues, strWhere);
+                    m_Result += "\n" + dTableDescript + "中状态更新成功";
                 }
                 else
                 {
@@ -207,7 +189,7 @@ namespace AgencyToERP_PHP
             }
             catch (Exception ex)
             {
-                m_Result += "\n部门表中更新异常.\n异常原因：" + ex.Message;
+                m_Result += "\n" + dTableDescript + "中更新异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }

@@ -12,10 +12,32 @@ namespace AgencyToERP_PHP
 {
     public class Building : Base
     {
-        public void Descript()
+        /// <summary>
+        /// 字段映射方法
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, string> FieldMap()
         {
-            /* 1.目标库中house_dict_id为int类型，增加楼盘字典ID  FY_EstateID
-             */
+            //Dictionary<目标数据库,源数据库>
+            Dictionary<string, string> dicMap = new Dictionary<string, string>();
+            dicMap.Add("erp_id", "BuildingID");                 //座栋ID
+            dicMap.Add("fy_CommunityId", "EstateID");           //楼盘字典ID
+            dicMap.Add("building_code", "BuildingName");        //座栋名称
+            dicMap.Add("create_time", "ExDate:DateTime");       //创建时间
+            dicMap.Add("update_time", "ModDate:DateTime");      //更新时间
+            dicMap.Add("company_id", ":String?Default=" + dCompanyId);      //公司ID
+            dicMap.Add("if_deleted", "FlagDeleted");            //删除标识
+            dicMap.Add("up_total_floors", "FloorAll:String?Default=1");     //地上楼层
+            dicMap.Add("down_total_floors", ":String?Default=0");           //地下总层数
+            dicMap.Add("lifts", "CountT:String?Default=0");                 //梯
+            dicMap.Add("rooms", "CountH:String?Default=0");                 //户
+            dicMap.Add("units", "Cell:String?Default=0");                   //单元
+            dicMap.Add("longitude", ":String?Default=0");       //经度
+            dicMap.Add("latitude", ":String?Default=0");        //纬度
+            dicMap.Add("city_id", ":String?Default=0");         //城市ID
+            dicMap.Add("unit_suffix",":String?Default=单元");   //单元后缀
+            dicMap.Add("floor_alias_json", ":String?Default={}");           //楼层别名
+            return dicMap;
         }
 
         /// <summary>
@@ -24,12 +46,12 @@ namespace AgencyToERP_PHP
         public Building()
         {
             sTableName = "Building";
-            sColumns = "EstateID,BuildingName,FloorAll,CountT,CountH,ExDate,Cell,BuildingID";
-            sOrder = "BuildingID";
-            dTableName = "b_house_unit_dict";
-            dColumns = "FY_EstateID,name,layer,elevator,family,createDate,unitNo,oldId";
-            dIsDelete = true;
-            //,layerTo,unitNo,years,yearsTest
+            sColumns = CombineSourceField(FieldMap());
+            sOrder = "ExDate";
+            dTableName = "erp_community_block";
+            dTableDescript = "座栋信息表";
+            dPolitContentDescript = "";
+            dColumns = CombineDestField(FieldMap());
         }
 
 
@@ -82,14 +104,7 @@ namespace AgencyToERP_PHP
                 List<String> lstValue = new List<String>();
                 foreach (DataRow row in dt.Rows)
                 {
-                    string strTemp = "'" + row["EstateID"].ToString() + "','" +
-                        row["BuildingName"].ToString() + "'," +
-                        Convert.ToInt32(row["FloorAll"].ToString()) + ",'" + 
-                        row["CountT"].ToString() + "','" +
-                        row["CountH"].ToString() + "','" +
-                        Convert.ToDateTime(row["ExDate"].ToString()) + "','" +
-                        row["Cell"].ToString() + "','" +
-                        row["BuildingID"].ToString() + "'";
+                    string strTemp = GetConcatValues(FieldMap(), row);
                     lstValue.Add(strTemp);
                 }
                 //如果允许删除，清空目标表数据
@@ -102,18 +117,43 @@ namespace AgencyToERP_PHP
                 Console.Write("\n数据已经成功写入" + sPageSize * sPageIndex + "条");
                 if (isResult)
                 {
-                    m_Result = "\n栋座单元数据插入成功";
+                    m_Result = "\n" + dTableDescript + "数据插入成功";
                     return true;
                 }
                 else
                 {
-                    m_Result = "\n栋座单元数据插入失败";
+                    m_Result = "\n" + dTableDescript + "数据插入失败";
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                m_Result = "导出栋座单元异常.\n异常原因：" + ex.Message;
+                m_Result = "导出" + dTableDescript + "异常.\n异常原因：" + ex.Message;
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 更新关联数据
+        /// </summary>
+        public bool UpdateData()
+        {
+            string tmpTable = "", tmpValues = "", tmpWhere = "";
+            try
+            {
+                tmpTable = "erp_community_block";
+                tmpValues = "if_deleted = 1";
+                tmpWhere = "and if_deleted = -1";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                //_mysql.ExecuteSQL("CALL UpdateCommunityBlock");
+
+                m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新成功";
+                return true;
+            }
+            catch (Exception ex)
+            {
+                m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }

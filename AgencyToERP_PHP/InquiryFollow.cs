@@ -18,15 +18,39 @@ namespace AgencyToERP_PHP
         }
 
         /// <summary>
+        /// 字段映射方法
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, string> FieldMap()
+        {
+            //Dictionary<目标数据库,源数据库>
+            Dictionary<string, string> dicMap = new Dictionary<string, string>();
+            dicMap.Add("fy_followId", "FollowID");          //客源跟进ID
+            dicMap.Add("erp_client_id", "InquiryID");       //客源ID
+            dicMap.Add("erp_user_id", "EmpID");             //人员ID
+            dicMap.Add("follow_up_date", "FollowDate:DateTime");            //跟进日期
+            dicMap.Add("content", "Content");               //跟进内容
+            dicMap.Add("follow_way", "FollowType");         //跟进方式
+            dicMap.Add("company_id", ":String?Default=" + dCompanyId);      //公司ID
+            dicMap.Add("if_deleted", ":String?Default=" + dDeleteMark);     //删除标识
+            dicMap.Add("create_time", "ExDate:DateTime");   //录入时间
+            dicMap.Add("update_time", "ModDate:DateTime");  //修改时间
+
+            return dicMap;
+        }
+
+        /// <summary>
         /// 客源跟进类的构造函数
         /// </summary>
         public InquiryFollow()
         {
             sTableName = "InquiryFollow";
-            sColumns = "FollowID,InquiryID,EmpID,FollowDate,Content,FollowType";
+            sColumns = CombineSourceField(FieldMap());
             sOrder = "FollowDate";
             dTableName = "erp_client_follow";
-            dColumns = "fy_followId,erp_client_id,erp_user_id,follow_up_date,content,follow_way,company_id,if_deleted,create_time";
+            dTableDescript = "客源跟进表";
+            dPolitContentDescript = "";
+            dColumns = CombineDestField(FieldMap());
         }
 
         /// <summary>
@@ -84,19 +108,7 @@ namespace AgencyToERP_PHP
                 List<String> lstValue = new List<String>();
                 foreach (DataRow row in dt.Rows)
                 {
-                    string strContent = row["Content"].ToString().Trim();
-                    strContent = strContent.Replace("'", "");
-                    strContent = strContent.Replace("\\", "");
-
-                    string strTemp = "'" + row["FollowID"].ToString().Trim() + "','" +
-                        row["InquiryID"].ToString().Trim() + "','" +
-                        row["EmpID"].ToString().Trim() + "','" +
-                        _dateTime.DateTimeToStamp(row["FollowDate"].ToString().Trim()).ToString() + "','" +
-                        strContent + "','" +
-                        row["FollowType"].ToString().Trim() + "','" + 
-                        dCompanyId + "','" + dDeleteMark + "','" +
-                        _dateTime.DateTimeToStamp(DateTime.Now).ToString() + "'"
-                        ;
+                    string strTemp = GetConcatValues(FieldMap(), row);
                     lstValue.Add(strTemp);
                 }
                 //如果允许删除，清空目标表数据
@@ -109,50 +121,22 @@ namespace AgencyToERP_PHP
                 Console.Write("\n数据已经成功写入" + sPageSize * sPageIndex + "条");
                 if (isResult)
                 {
-                    m_Result = "\n客源跟进数据插入成功";
+                    m_Result = "\n" + dTableDescript + "数据插入成功";
                     return true;
                 }
                 else
                 {
-                    m_Result = "\n客源跟进数据插入失败";
+                    m_Result = "\n" + dTableDescript + "数据插入失败";
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                m_Result = "导出客源跟进异常.\n异常原因：" + ex.Message;
+                m_Result = "导出" + dTableDescript + "异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }
-
-        /// <summary>
-        /// 添加字段
-        /// </summary>
-        public void AddField(string FieldName, string FieldType)
-        {
-            _mysql.UpdateField("add", dTableName, FieldName, FieldType);
-            m_Result = _mysql.m_Message;
-            //throw new System.NotImplementedException();
-        }
-
-        /// <summary>
-        /// 修改字段
-        /// </summary>
-        public void ModifyField(string FieldName, string FieldType)
-        {
-            _mysql.UpdateField("modify column ", dTableName, FieldName, FieldType);
-            m_Result = _mysql.m_Message;
-        }
-
-        /// <summary>
-        /// 移除字段
-        /// </summary>
-        public void DropField(string FieldName)
-        {
-            _mysql.UpdateField("drop ", dTableName, FieldName, "");
-            m_Result = _mysql.m_Message;
-        }
-
+        
         /// <summary>
         /// 更新关联数据
         /// </summary>
@@ -178,12 +162,12 @@ namespace AgencyToERP_PHP
                 }
 
 
-                m_Result += "\n房源的行政区|片区|楼盘字典及ID更新成功";
+                m_Result += "\n" + dTableDescript + "的" + dPolitContentDescript + "更新成功";
                 return true;
             }
             catch (Exception ex)
             {
-                m_Result += "\n房源的行政区|片区|楼盘字典及ID更新异常.\n异常原因：" + ex.Message;
+                m_Result += "\n" + dTableDescript + "的" + dPolitContentDescript + "更新异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }

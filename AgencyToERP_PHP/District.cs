@@ -12,6 +12,25 @@ namespace AgencyToERP_PHP
 {
     public class District : Base
     {
+        /// <summary>
+        /// 字段映射方法
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, string> FieldMap()
+        {
+            //Dictionary<目标数据库,源数据库>
+            Dictionary<string, string> dicMap = new Dictionary<string, string>();
+            dicMap.Add("district_name", "DistrictName");                //行政区名称
+            dicMap.Add("company_id", ":String?Default=" + dCompanyId);  //公司ID
+            dicMap.Add("if_deleted", ":String?Default=0"); //删除标记
+            dicMap.Add("erp_id", "DistrictNo");                         //行政区编号
+            dicMap.Add("create_time", ":String?Default=1472011552");    //创建时间
+            dicMap.Add("update_time", ":String?Default=1472011552");    //创建时间
+            dicMap.Add("longitude", ":String?Default=0");               //经度
+            dicMap.Add("latitude", ":String?Default=0");                //纬度
+            dicMap.Add("status", ":String?Default=0");                  //状态
+            return dicMap;
+        }
 
         /// <summary>
         /// 行政区类的构造函数
@@ -19,12 +38,12 @@ namespace AgencyToERP_PHP
         public District()
         {
             sTableName = "District";
-            sColumns = "DistrictName,DistrictNo,CityName";
+            sColumns = CombineSourceField(FieldMap());
             sOrder = "DistrictNo";
-            //sPageIndex = 1;
-            //sPageSize = 1000;
             dTableName = "erp_district";
-            dColumns = "district_name,company_id,if_deleted,create_time,update_time,erp_id";
+            dTableDescript = "行政区信息表";
+            dPolitContentDescript = "";
+            dColumns = CombineDestField(FieldMap());
         }
 
         /// <summary>
@@ -39,11 +58,7 @@ namespace AgencyToERP_PHP
                 List<String> lstValue = new List<String>();
                 foreach (DataRow row in dt.Rows)
                 {
-                    string strTemp = "'" + row["DistrictName"].ToString() + "'," +
-                        dCompanyId + 
-                        "," + dDeleteMark + ",'" + _dateTime.DateTimeToStamp(DateTime.Now) + 
-                        "','" + _dateTime.DateTimeToStamp(DateTime.Now) +
-                        "','" + row["DistrictNo"].ToString() + "'";
+                    string strTemp = GetConcatValues(FieldMap(), row);
                     lstValue.Add(strTemp);
                 }
                 //清空目标表数据
@@ -52,18 +67,18 @@ namespace AgencyToERP_PHP
                 bool isResult = _mysql.BatchInsert(dTableName, dColumns, lstValue);
                 if (isResult)
                 {
-                    m_Result = "行政区数据插入成功";
+                    m_Result = dTableDescript + "数据插入成功";
                     return true;
                 }
                 else
                 {
-                    m_Result = "行政区数据插入失败";
+                    m_Result = dTableDescript + "数据插入失败";
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                m_Result = "导出行政区异常.\n异常原因：" + ex.Message;
+                m_Result = "导出" + dTableDescript + "异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }

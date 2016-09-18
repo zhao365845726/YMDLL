@@ -12,11 +12,6 @@ namespace AgencyToERP_PHP
 {
     public class Property : Base
     {
-        public void Descript()
-        {
-
-        }
-
         /// <summary>
         /// 字段映射方法
         /// </summary>
@@ -99,11 +94,6 @@ namespace AgencyToERP_PHP
             dTableDescript = "房源表";
             dPolitContentDescript = "行政区|片区|楼盘字典及ID";
             dColumns = CombineDestField(FieldMap());
-
-            //"CityName,FlagRecommand,PropertyType,PropertyLook,PropertyBuy,PropertyCommission,RentPriceUnit,MgtPrice,ModPerson,PropertyOccupy,FlagTrashed,ContactName,PropertyFurniture,PropertyCertificate,PropertyElectric,ExDate,UnitName,PhotoCount,Usage1,Usage2,OwnerMobile,Country,DeptID1,EmpID2,DeptID2,EmpID1,Usage,BusDatas,FlagWeb,Word,IDCard";
-
-            //dIsDelete = true;
-            //img_username,img_department_id,img_user_id,img_time,image_count,cover_image_url,
         }
 
         /// <summary>
@@ -167,12 +157,6 @@ namespace AgencyToERP_PHP
                     //}else
                     //{
                     //    strPropertyTrust = "0";
-                    //}
-
-                    //string strif_Key = "0";
-                    //if(row["KeyNo"].ToString().Trim().Length > 0)
-                    //{
-                    //    strif_Key = "1";
                     //}
 
                     //string strStatus = row["Status"].ToString().Trim();
@@ -253,6 +237,12 @@ namespace AgencyToERP_PHP
                 tmpTable = "erp_house a LEFT JOIN erp_user b ON a.fy_key_userid = b.erp_id";
                 tmpValues = "a.key_user_id = b.id,a.key_username = b.username,a.key_department_id = b.department_id,a.if_key = 1";
                 tmpWhere = "and a.fy_key_userid = b.erp_id";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                //更新钥匙管理的状态
+                tmpTable = "erp_house";
+                tmpValues = "key_status = '已收'";
+                tmpWhere = "if_key = 1";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
                 m_Result += "\n" + dTableName + "中的" + dTableDescript + "更新成功";
                 return true;

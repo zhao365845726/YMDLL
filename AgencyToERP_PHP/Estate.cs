@@ -12,16 +12,33 @@ namespace AgencyToERP_PHP
 {
     public class Estate : Base
     {
-        public void Descript()
+        /// <summary>
+        /// 字段映射方法
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, string> FieldMap()
         {
-            /*
-             操作流程：
-             1.在3.0系统erp_community表中新增fy_AreaID
-             2.读取房友数据库中的数据
-             3.将读取的数据写入到3.0系统中
-             4.更新写入数据库后行政区ID,片区ID,片区名对应不上的问题
-             5.删除erp_community表中fy_AreaID，保证前后数据的完整
-             */
+            //Dictionary<目标数据库,源数据库>
+            Dictionary<string, string> dicMap = new Dictionary<string, string>();
+            dicMap.Add("community_name", "EstateName");     //楼盘字典名称                 
+            dicMap.Add("community_spell", "Spell");         //楼盘字典简拼
+            dicMap.Add("address", "Address");               //详细地址
+            dicMap.Add("longitude", "CoX");                 //经度
+            dicMap.Add("latitude", "CoY");                  //纬度
+            dicMap.Add("district_name", "DistrictName");    //行政区名称
+            dicMap.Add("company_id", ":String?Default=" + dCompanyId);      //公司ID
+            dicMap.Add("if_deleted", "FlagDeleted");        //删除标记
+            dicMap.Add("erp_id", "EstateID");               //房友楼盘字典ID
+            dicMap.Add("fy_AreaID", "AreaID");              //房友片区ID
+            dicMap.Add("create_time", "ExDate:DateTime");   //创建时间
+            dicMap.Add("update_time", "ModDate:DateTime");  //更新时间
+            dicMap.Add("if_start", "BuildingRule");         //是否开启座栋规则
+            dicMap.Add("if_hot", ":String?Default=0");      //是否是热门小区
+            dicMap.Add("check_status", ":String?Default=1");//审核状态
+            dicMap.Add("status", ":String?Default=0");      //状态
+            dicMap.Add("average", "Price");                 //均价
+            dicMap.Add("community_alias", ":String?Default=");              //楼盘字典别名
+            return dicMap;
         }
 
         /// <summary>
@@ -30,15 +47,12 @@ namespace AgencyToERP_PHP
         public Estate()
         {
             sTableName = "Estate";
-            sColumns = "EstateName,Spell,Address,CoX,CoY,DistrictName,FlagLocked,EstateID,AreaID";
+            sColumns = CombineSourceField(FieldMap());
             sOrder = "EstateName";
-            sPageIndex = 1;
-            sPageSize = 1000;
             dTableName = "erp_community";
-            dFieldAdd = "fy_AreaID";
-            dColumns = "community_name,community_spell,address,longitude,latitude,create_time,update_time,district_name,if_deleted,company_id,if_start,erp_id" + "," + dFieldAdd;
-            dIsDelete = true;
-            //,biz_area_id
+            dTableDescript = "小区信息表";
+            dPolitContentDescript = "行政区ID|区域ID|区域名称";
+            dColumns = CombineDestField(FieldMap());
         }
 
         /// <summary>
@@ -91,51 +105,7 @@ namespace AgencyToERP_PHP
                 List<String> lstValue = new List<String>();
                 foreach (DataRow row in dt.Rows)
                 {
-                    int iFlagLocked = 0;
-                    int iBuildingRule = 0;
-                    string strAddress = "";
-                    //决定是否锁盘的值
-                    if (row["FlagLocked"].ToString().ToLower() == "false")
-                    {
-                        iFlagLocked = 0;
-                    }
-                    else
-                    {
-                        iFlagLocked = 1;
-                    }
-                    //决定是否开启栋座单元的值
-                    //if (row["BuildingRule"].ToString().ToLower() == "false")
-                    //{
-                    //    iBuildingRule = 0;
-                    //}
-                    //else
-                    //{
-                    //    iBuildingRule = 1;
-                    //}
-                    //过滤Address,Address2,Remark字段的'号
-                    if (row["Address"].ToString().IndexOf("'") != -1 || row["Address"].ToString().IndexOf("’") != -1 || row["Address"].ToString().IndexOf("‘") != -1)
-                    {
-                        strAddress = row["Address"].ToString().Replace('\'', '"');
-                    }
-                    else
-                    {
-                        strAddress = row["Address"].ToString();
-                    }
-                    string strTemp = "'" + row["EstateName"].ToString() + "','" +
-                        row["Spell"].ToString() + row["EstateName"].ToString() + "','" +
-                        strAddress + "','" +
-                        row["CoX"].ToString() + "','" +
-                        row["CoY"].ToString() + "','" +
-                        _dateTime.DateTimeToStamp(DateTime.Now) + "','" +
-                        _dateTime.DateTimeToStamp(DateTime.Now) + "','" +
-                        row["DistrictName"].ToString() + "'," +
-                        dDeleteMark + 
-                        "," + dCompanyId + "," +
-                        row["FlagLocked"].ToString() + ",'" +
-                        row["EstateID"].ToString() + "','" + 
-                        row["AreaID"].ToString() + "'"
-                        ;
-
+                    string strTemp = GetConcatValues(FieldMap(), row);
                     lstValue.Add(strTemp);
                 }
                 //如果允许删除，清空目标表数据
@@ -148,50 +118,22 @@ namespace AgencyToERP_PHP
                 Console.Write("\n数据已经成功写入" + sPageSize * sPageIndex + "条");
                 if (isResult)
                 {
-                    m_Result = "\n楼盘字典数据插入成功";
+                    m_Result = "\n" + dTableDescript + "数据插入成功";
                     return true;
                 }
                 else
                 {
-                    m_Result = "\n楼盘字典数据插入失败";
+                    m_Result = "\n" + dTableDescript + "数据插入失败";
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                m_Result = "导出楼盘字典异常.\n异常原因：" + ex.Message;
+                m_Result = "导出" + dTableDescript + "异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }
-
-        /// <summary>
-        /// 添加字段
-        /// </summary>
-        public void AddField(string FieldName,string FieldType)
-        {
-            _mysql.UpdateField("add", dTableName, FieldName, FieldType);
-            m_Result = _mysql.m_Message;
-            //throw new System.NotImplementedException();
-        }
-
-        /// <summary>
-        /// 修改字段
-        /// </summary>
-        public void ModifyField(string FieldName, string FieldType)
-        {
-            _mysql.UpdateField("modify column ", dTableName, FieldName, FieldType);
-            m_Result = _mysql.m_Message;
-        }
-
-        /// <summary>
-        /// 移除字段
-        /// </summary>
-        public void DropField(string FieldName)
-        {
-            _mysql.UpdateField("drop ", dTableName, FieldName, "");
-            m_Result = _mysql.m_Message;
-        }
-
+        
         /// <summary>
         /// 更新关联数据
         /// </summary>
@@ -203,12 +145,18 @@ namespace AgencyToERP_PHP
                 string tmpValues = "a.district_id = b.district_id,a.biz_area_id = b.biz_area_id,a.biz_area_name = b.biz_area_name";
                 string tmpWhere = "and a.fy_AreaId = b.erp_id";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                m_Result += "\n楼盘字典表中行政区ID|区域ID|区域名称更新成功";
+
+                tmpTable = "erp_community";
+                tmpValues = "if_deleted = 1";
+                tmpWhere = "and if_deleted = -1";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新成功";
                 return true;
             }
             catch (Exception ex)
             {
-                m_Result += "\n楼盘字典表中行政区ID|区域ID|区域名称更新异常.\n异常原因：" + ex.Message;
+                m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }

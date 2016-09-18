@@ -1,0 +1,127 @@
+﻿================================计算可用数据和非可用数据 Start=================================
+-- 行政区信息表
+SELECT * FROM erp_district LIMIT 100;
+SELECT count(1) FROM erp_district;
+SELECT count(1) FROM erp_district WHERE if_deleted = 0;
+SELECT count(1) FROM erp_district WHERE if_deleted <> 0;
+
+-- 片区/商圈信息表
+SELECT * FROM erp_region LIMIT 100;
+SELECT count(1) FROM erp_region;
+SELECT count(1) FROM erp_region WHERE if_deleted = 0;
+SELECT count(1) FROM erp_region WHERE if_deleted <> 0;
+
+-- 楼盘字典表
+SELECT * FROM erp_community LIMIT 100;
+SELECT count(1) FROM erp_community;
+SELECT count(1) FROM erp_community WHERE if_deleted = 0;
+SELECT count(1) FROM erp_community WHERE if_deleted <> 0;
+
+-- 座栋信息表
+SELECT * FROM erp_community_block LIMIT 100;
+SELECT count(1) FROM erp_community_block;
+SELECT count(1) FROM erp_community_block WHERE if_deleted = 0;
+SELECT count(1) FROM erp_community_block WHERE if_deleted <> 0;
+
+-- 部门表
+SELECT * FROM erp_department LIMIT 100;
+SELECT count(1) FROM erp_department;
+SELECT count(1) FROM erp_department WHERE if_deleted = 0;
+SELECT count(1) FROM erp_department WHERE if_deleted <> 0;
+
+-- 加盟店表
+SELECT * FROM erp_join_stores LIMIT 100;
+SELECT count(1) FROM erp_join_stores;
+SELECT count(1) FROM erp_join_stores WHERE if_deleted = 0;
+SELECT count(1) FROM erp_join_stores WHERE if_deleted <> 0;
+
+-- 角色表
+SELECT * FROM erp_role LIMIT 100;
+SELECT count(1) FROM erp_role;
+SELECT count(1) FROM erp_role WHERE if_deleted = 0;
+SELECT count(1) FROM erp_role WHERE if_deleted <> 0;
+
+-- 用户表
+SELECT * FROM erp_user LIMIT 100;
+SELECT count(1) FROM erp_user;
+SELECT count(1) FROM erp_user WHERE if_deleted = 0;
+SELECT count(1) FROM erp_user WHERE if_deleted <> 0;
+
+-- 房源表
+SELECT * FROM erp_house LIMIT 100;
+SELECT count(1) FROM erp_house;
+SELECT count(1) FROM erp_house WHERE if_deleted = 0;
+SELECT count(1) FROM erp_house WHERE if_deleted <> 0;
+
+-- 房源跟进表
+SELECT * FROM erp_house_follow LIMIT 100;
+SELECT count(1) FROM erp_house_follow;
+SELECT count(1) FROM erp_house_follow WHERE if_deleted = 0;
+SELECT count(1) FROM erp_house_follow WHERE if_deleted <> 0;
+
+-- 客源表
+SELECT * FROM erp_client LIMIT 100;
+SELECT count(1) FROM erp_client;
+SELECT count(1) FROM erp_client WHERE if_deleted = 0;
+SELECT count(1) FROM erp_client WHERE if_deleted <> 0;
+
+-- 客源跟进表
+SELECT * FROM erp_client_follow LIMIT 100;
+SELECT count(1) FROM erp_client_follow;
+SELECT count(1) FROM erp_client_follow WHERE if_deleted = 0;
+SELECT count(1) FROM erp_client_follow WHERE if_deleted <> 0;
+
+-- 合同成交表
+SELECT * FROM erp_deal LIMIT 100;
+SELECT count(1) FROM erp_deal;
+SELECT count(1) FROM erp_deal WHERE if_deleted = 0;
+SELECT count(1) FROM erp_deal WHERE if_deleted <> 0;
+
+-- 应收应付表
+SELECT * FROM erp_receivable LIMIT 100;
+SELECT count(1) FROM erp_receivable;
+SELECT count(1) FROM erp_receivable WHERE if_deleted = 0;
+SELECT count(1) FROM erp_receivable WHERE if_deleted <> 0;
+
+-- 实收实付表
+SELECT * FROM erp_collect_pay LIMIT 100;
+SELECT count(1) FROM erp_collect_pay;
+SELECT count(1) FROM erp_collect_pay WHERE if_deleted = 0;
+SELECT count(1) FROM erp_collect_pay WHERE if_deleted <> 0;
+
+-- 公司公告表
+SELECT * FROM erp_office_notice LIMIT 100;
+SELECT count(1) FROM erp_office_notice;
+SELECT count(1) FROM erp_office_notice WHERE if_deleted = 0;
+SELECT count(1) FROM erp_office_notice WHERE if_deleted <> 0;
+
+-- 业务审批表
+SELECT * FROM erp_business_review LIMIT 100;
+SELECT count(1) FROM erp_business_review;
+SELECT count(1) FROM erp_business_review WHERE if_deleted = 0;
+SELECT count(1) FROM erp_business_review WHERE if_deleted <> 0;
+
+
+================================计算可用数据和非可用数据 End=================================
+
+
+
+
+================================执行导入后附加执行的sql Start=================================
+
+-- 导入部门后
+SELECT dept_id,erp_id,erp_pid FROM erp_department WHERE `status` = '有效' and if_deleted = 0 ;
+SELECT erp_id,count(erp_id) FROM erp_department WHERE `status` = '有效' and if_deleted = 0 GROUP BY erp_id HAVING count(erp_id)>1 ;
+
+SELECT * FROM erp_department WHERE erp_id in ('210106');
+SELECT * FROM erp_department WHERE erp_id in ('290102');
+
+
+
+================================执行导入后附加执行的sql Start=================================
+
+
+
+
+
+

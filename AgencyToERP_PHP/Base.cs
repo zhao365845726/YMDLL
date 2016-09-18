@@ -91,6 +91,10 @@ namespace AgencyToERP_PHP
         /// </summary>
         public string dWhere;
         /// <summary>
+        /// 目标-默认时间戳
+        /// </summary>
+        public string dDefaultTime;
+        /// <summary>
         /// 返回的结果
         /// </summary>
         public string m_Result;
@@ -138,6 +142,19 @@ namespace AgencyToERP_PHP
         /// 目标-删除标识
         /// </summary>
         public string dDeleteMark;
+
+        /// <summary>
+        /// 临时的表名
+        /// </summary>
+        public string strTable;
+        /// <summary>
+        /// 临时的值
+        /// </summary>
+        public string strValues;
+        /// <summary>
+        /// 临时的条件
+        /// </summary>
+        public string strWhere;
         #endregion
 
 
@@ -160,6 +177,7 @@ namespace AgencyToERP_PHP
             dTotalCount = 0;
             dCompanyId = "999";
             dDeleteMark = "0";
+            dDefaultTime = "1472011552";
             m_ThreadEnabled = false;
             _dateTime = new CS_CalcDateTime();
         }

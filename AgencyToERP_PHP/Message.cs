@@ -33,6 +33,16 @@ namespace AgencyToERP_PHP
             dicMap.Add("erp_title", "Title");               //情报站标题
             dicMap.Add("username", "SendPerson");           //申请人
             dicMap.Add("review_username", "RecvPerson");    //审核人
+            dicMap.Add("company_id", ":String?Default=" + dCompanyId);      //公司id
+            dicMap.Add("if_deleted", ":String?Default=" + dDeleteMark);     //删除标记
+            dicMap.Add("status", ":String?Default=已审核");//审批状态
+            dicMap.Add("reject_reason",":String?Default="); //驳回原因
+            dicMap.Add("type",":String?Default=房源");     //资源类型
+            dicMap.Add("fk_code", ":String?Default=");      //资源编号
+            dicMap.Add("house_status", ":String?Default=有效");             //房源状态
+            dicMap.Add("process_mode", ":String?Default=");                //举报后，处理的方式
+            dicMap.Add("is_import", ":String?Default=0");   //
+            dicMap.Add("review_condition", ":String?Default=");              //审核后的操作
             return dicMap;
         }
 
@@ -140,9 +150,9 @@ namespace AgencyToERP_PHP
             {
                 tmpTable = "erp_business_review";
                 //更新公司公告表中company_id字段和if_deleted字段
-                tmpValues = "company_id = '" + dCompanyId + "',if_deleted = '" + dDeleteMark + "',status = '已审核',reject_reason = '',type = '房源',fk_code = '',house_status = '有效',process_mode = '',is_import = 0,review_condition = ''";
-                tmpWhere = "";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //tmpValues = "status = '已审核',reject_reason = '',type = '房源',fk_code = '',house_status = '有效',process_mode = '',is_import = 0,review_condition = ''";
+                //tmpWhere = "";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
                 tmpWhere = "and sub_type in ('出售','广告','留言','端口申报','综合','')";
                 _mysql.Delete(tmpTable, tmpWhere);
@@ -153,6 +163,11 @@ namespace AgencyToERP_PHP
 
                 tmpValues = "sub_type = '房源议价'";
                 tmpWhere = "and sub_type = '砍价'";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                //更新业务审批的房源编号
+                tmpValues = "fk_code = erp_title";
+                tmpWhere = "and erp_title REGEXP '^[A-Za-z]*[0-9]*$'";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
                 //更新业务审批申请人，申请人部门

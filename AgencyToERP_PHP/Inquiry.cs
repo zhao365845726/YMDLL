@@ -43,7 +43,7 @@ namespace AgencyToERP_PHP
             dicMap.Add("input_username", "RegPerson");      //录入人
             dicMap.Add("create_time", "RegDate:DateTime");  //录入日期
             dicMap.Add("update_time", "ModDate:DateTime");  //更新日期
-            dicMap.Add("public", "FlagPrivate");            //公私标记
+            dicMap.Add("public", "FlagPrivate");            //公私标记【房友里面的0为私客】
             dicMap.Add("last_follow", "LastFollowDate:DateTime");       //最后跟进日
             //dicMap.Add("last_principal_follow", "LastFollowDate:DateTime");     //维护人最后跟进日
             dicMap.Add("client_code", "InquiryNo");         //客源编号
@@ -204,6 +204,10 @@ namespace AgencyToERP_PHP
                 
                 tmpValues = "purpose = '住宅'";
                 tmpWhere = "and purpose = '' or purpose is NULL";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                tmpValues = "public = 1";
+                tmpWhere = "and public = 0";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
                 //更新客源需求区域的内容

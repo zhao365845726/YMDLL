@@ -11,12 +11,6 @@ namespace AgencyToERP_PHP
 {
     public class News : Base
     {
-        public void Descript()
-        {
-            //Dictionary<目标数据库,源数据库>
-            //表增加索引：
-        }
-
         /// <summary>
         /// 字段映射方法
         /// </summary>
@@ -30,11 +24,16 @@ namespace AgencyToERP_PHP
             dicMap.Add("erp_user_id", "EmpID");             //人员ID
             dicMap.Add("title", "Title");                   //公告标题
             dicMap.Add("content", "Content");               //公告内容
-            //dicMap.Add("create_time", "RegDate:DateTime");  //创建时间
+            //dicMap.Add("create_time", "ExDate:DateTime");   //创建时间
             dicMap.Add("update_time", "ModDate:DateTime");  //更新时间
             dicMap.Add("if_recycle", "FlagTrashed");        //回收标记
             dicMap.Add("if_deleted", "FlagDeleted");        //删除标记
             dicMap.Add("title_color", "TitleColor");        //标题颜色
+            dicMap.Add("company_id", ":String?Default=" + dCompanyId);      //公司ID
+            dicMap.Add("if_alert", ":String?Default=0");    //是否提醒
+            dicMap.Add("file", ":String?Default=");         //文件附件
+            dicMap.Add("if_bold", ":String?Default=0");     //是否粗体
+            dicMap.Add("tab_order", ":String?Default=0");   //公告顺序
             return dicMap;
         }
 
@@ -141,9 +140,8 @@ namespace AgencyToERP_PHP
             try
             {
                 tmpTable = "erp_office_notice";
-                //更新公司公告表中company_id字段和if_deleted字段
-                tmpValues = "company_id = '" + dCompanyId + "',if_deleted = '" + dDeleteMark + "',if_alert = 0,file = '',if_bold = 0,tab_order = 0";
-                tmpWhere = "";
+                tmpValues = "if_deleted = 1";
+                tmpWhere = "and if_deleted = -1";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
                 //更新创建时间

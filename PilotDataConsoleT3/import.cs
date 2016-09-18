@@ -33,6 +33,8 @@ namespace PilotDataConsoleT3
                     {
                         //声明行政区对象
                         District district = new District();
+                        district.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        district.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
                         district.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
                         district.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
                         district.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
@@ -50,6 +52,8 @@ namespace PilotDataConsoleT3
                     {
                         //声明片区对象
                         Area area = new Area();
+                        area.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        area.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
                         area.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
                         area.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
                         area.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
@@ -72,6 +76,8 @@ namespace PilotDataConsoleT3
                     {
                         //声明楼盘字典对象
                         Estate estate = new Estate();
+                        estate.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        estate.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
                         estate.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
                         estate.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
                         estate.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
@@ -91,8 +97,11 @@ namespace PilotDataConsoleT3
                             //更新数据
                             estate.UpdateData();
                         }
+                        if(estate.dFieldDrop == "true")
+                        {
+                            estate.DropField("fy_AreaID");
+                        }
                         
-                        estate.DropField(estate.dFieldAdd);
                         //输出结果
                         strResult = estate.m_Result;
                         break;
@@ -100,17 +109,44 @@ namespace PilotDataConsoleT3
                 case TableType.BUILDING:
                     {
                         //声明栋座单元对象
-                        //Building building = new Building();
-                        ////执行导数据的方法
-                        //building.importBuilding();
-                        ////输出结果
-                        //strResult = building.m_Result;
+                        Building building = new Building();
+                        building.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        building.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
+                        building.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
+                        building.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
+                        building.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
+                        building.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
+                        if (building.dFieldAdd == "true")
+                        {
+                            //添加字段
+                            building.AddField("fy_CommunityId", "varchar(100)");
+                        }
+                        if (building.dExec == "true")
+                        {
+                            //执行导数据的方法
+                            building.importBuilding();
+                        }
+                        if (building.dUpdateData == "true")
+                        {
+                            //更新数据
+                            building.UpdateData();
+                        }
+                        if(building.dFieldDrop == "true")
+                        {
+                            building.DropField("fy_CommunityId");
+                        }
+                        
+                        //输出结果
+                        strResult = building.m_Result;
+
                         break;
                     }
                 case TableType.DEPARTMENT:
                     {
                         //声明部门对象
-                        DepartmentNew department = new DepartmentNew();
+                        Department department = new Department();
+                        department.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        department.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
                         department.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
                         department.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
                         department.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
@@ -119,6 +155,7 @@ namespace PilotDataConsoleT3
                         {
                             //添加字段
                             department.AddField("fy_dept_id", "varchar(100)");
+                            department.AddField("fy_tel", "varchar(100)");
                         }
                         if(department.dExec == "true")
                         {
@@ -128,15 +165,18 @@ namespace PilotDataConsoleT3
                         if(department.dUpdateData == "true")
                         {
                             //更新数据
+                            department.UpdateData("删除");
+                            department.UpdateData("父级ID");
                             department.UpdateData("职能");
                             department.UpdateData("大区");
                             department.UpdateData("其他");
                             department.UpdateData("状态");
-                            //department.UpdateData("更新归属");
+                            department.UpdateData("加盟店");
                         }
                         if(department.dFieldDrop == "true")
                         {
                             department.DropField("fy_dept_id");
+                            department.DropField("fy_tel");
                         }
 
                         //输出结果
@@ -147,6 +187,8 @@ namespace PilotDataConsoleT3
                     {
                         //声明人员对象
                         Employee employee = new Employee();
+                        employee.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        employee.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
                         employee.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
                         employee.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
                         employee.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
@@ -154,7 +196,7 @@ namespace PilotDataConsoleT3
                         if(employee.dFieldAdd == "true")
                         {
                             //添加字段
-                            employee.AddField("fy_PositionId", "varchar(100)");
+                            //employee.AddField("fy_PositionId", "varchar(100)");
                         }
                         if(employee.dExec == "true")
                         {
@@ -169,7 +211,7 @@ namespace PilotDataConsoleT3
                         if (employee.dFieldDrop == "true")
                         {
                             //删除字段
-                            employee.DropField("fy_PositionId");
+                            //employee.DropField("fy_PositionId");
                         }
 
                         //输出结果
@@ -463,6 +505,8 @@ namespace PilotDataConsoleT3
                     {
                         //声明合同对象
                         Position position = new Position();
+                        position.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        position.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
                         position.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
                         position.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
                         position.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
@@ -473,6 +517,11 @@ namespace PilotDataConsoleT3
                             //执行导数据的方法
                             position.importPosition();
                         }
+                        if(position.dUpdateData == "true")
+                        {
+                            //更新角色数据
+                            position.UpdateData();
+                        }
                         
                         //输出结果
                         strResult = position.m_Result;
@@ -482,6 +531,8 @@ namespace PilotDataConsoleT3
                     {
                         //声明加盟店对象
                         JoinStores joinstores = new JoinStores();
+                        joinstores.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        joinstores.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
                         joinstores.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
                         joinstores.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
                         joinstores.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
@@ -571,6 +622,8 @@ namespace PilotDataConsoleT3
                     {
                         //声明房源对象
                         Property property = new Property();
+                        property.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
+                        property.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
                         property.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
                         property.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
                         property.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
