@@ -5,18 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AgencyToERP_PHP;
+using YMDLL.Interface;
 
 namespace PilotDataConsoleT3
 {
     public class import
     {
         public string strResult = "";
+        public Base bObject = new Base();
         /// <summary>
         /// 执行命令行
         /// </summary>
         /// <param name="Value"></param>
         public void ExecCommand(TableType Value)
         {
+            bObject.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
+            bObject.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
+            bObject.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
+            bObject.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
             switch (Value)
             {
                 case TableType.CITY:
@@ -33,13 +39,7 @@ namespace PilotDataConsoleT3
                     {
                         //声明行政区对象
                         District district = new District();
-                        district.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        district.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        district.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        district.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        district.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        district.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-                        if(district.dExec == "true")
+                        if(bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             district.importDistrict();
@@ -52,18 +52,12 @@ namespace PilotDataConsoleT3
                     {
                         //声明片区对象
                         Area area = new Area();
-                        area.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        area.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        area.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        area.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        area.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        area.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-                        if(area.dExec == "true")
+                        if(bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             area.importArea();
                         }
-                        if(area.dUpdateData == "true")
+                        if(bObject.dUpdateData == "true")
                         {
                             //更新小区的行政区ID数据
                             area.updateData();
@@ -76,28 +70,22 @@ namespace PilotDataConsoleT3
                     {
                         //声明楼盘字典对象
                         Estate estate = new Estate();
-                        estate.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        estate.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        estate.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        estate.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        estate.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        estate.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-                        if(estate.dFieldAdd == "true")
+                        if(bObject.dFieldAdd == "true")
                         {
                             //添加字段
                             estate.AddField("fy_AreaID", "varchar(100)");
                         }
-                        if(estate.dExec == "true")
+                        if(bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             estate.importEstate();
                         }
-                        if(estate.dUpdateData == "true")
+                        if(bObject.dUpdateData == "true")
                         {
                             //更新数据
                             estate.UpdateData();
                         }
-                        if(estate.dFieldDrop == "true")
+                        if(bObject.dFieldDrop == "true")
                         {
                             estate.DropField("fy_AreaID");
                         }
@@ -110,28 +98,22 @@ namespace PilotDataConsoleT3
                     {
                         //声明栋座单元对象
                         Building building = new Building();
-                        building.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        building.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        building.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        building.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        building.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        building.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-                        if (building.dFieldAdd == "true")
+                        if (bObject.dFieldAdd == "true")
                         {
                             //添加字段
                             building.AddField("fy_CommunityId", "varchar(100)");
                         }
-                        if (building.dExec == "true")
+                        if (bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             building.importBuilding();
                         }
-                        if (building.dUpdateData == "true")
+                        if (bObject.dUpdateData == "true")
                         {
                             //更新数据
                             building.UpdateData();
                         }
-                        if(building.dFieldDrop == "true")
+                        if(bObject.dFieldDrop == "true")
                         {
                             building.DropField("fy_CommunityId");
                         }
@@ -145,24 +127,18 @@ namespace PilotDataConsoleT3
                     {
                         //声明部门对象
                         Department department = new Department();
-                        department.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        department.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        department.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        department.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        department.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        department.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-                        if(department.dFieldAdd == "true")
+                        if(bObject.dFieldAdd == "true")
                         {
                             //添加字段
                             department.AddField("fy_dept_id", "varchar(100)");
                             department.AddField("fy_tel", "varchar(100)");
                         }
-                        if(department.dExec == "true")
+                        if(bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             department.importDepartment();
                         }
-                        if(department.dUpdateData == "true")
+                        if(bObject.dUpdateData == "true")
                         {
                             //更新数据
                             department.UpdateData("删除");
@@ -173,7 +149,7 @@ namespace PilotDataConsoleT3
                             department.UpdateData("状态");
                             department.UpdateData("加盟店");
                         }
-                        if(department.dFieldDrop == "true")
+                        if(bObject.dFieldDrop == "true")
                         {
                             department.DropField("fy_dept_id");
                             department.DropField("fy_tel");
@@ -187,28 +163,22 @@ namespace PilotDataConsoleT3
                     {
                         //声明人员对象
                         Employee employee = new Employee();
-                        employee.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        employee.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        employee.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        employee.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        employee.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        employee.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-                        if(employee.dFieldAdd == "true")
+                        if(bObject.dFieldAdd == "true")
                         {
                             //添加字段
                             //employee.AddField("fy_PositionId", "varchar(100)");
                         }
-                        if(employee.dExec == "true")
+                        if(bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             employee.importEmployee();
                         }
-                        if(employee.dUpdateData == "true")
+                        if(bObject.dUpdateData == "true")
                         {
                             //增加更新数据的方法调用
                             employee.UpdateData();
                         }
-                        if (employee.dFieldDrop == "true")
+                        if (bObject.dFieldDrop == "true")
                         {
                             //删除字段
                             //employee.DropField("fy_PositionId");
@@ -222,14 +192,7 @@ namespace PilotDataConsoleT3
                     {
                         //声明房源对象
                         Property property = new Property();
-                        property.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        property.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        property.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        property.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        property.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        property.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-
-                        if (property.dFieldAdd == "true")
+                        if (bObject.dFieldAdd == "true")
                         {
                             property.AddField("fy_community", "varchar(100)");
                             property.AddField("fy_empid", "varchar(100)");
@@ -237,25 +200,29 @@ namespace PilotDataConsoleT3
                             property.AddField("fy_building_age", "varchar(50)");
                             property.AddField("fy_visit_way", "varchar(20)");
                             property.AddField("fy_room", "varchar(20)");
-                            property.AddField("fy_common_telephone", "varchar(100)");
+                            property.AddField("fy_common_telephone", "varchar(1000)");
                             property.AddField("fy_key_userid", "varchar(100)");
                             property.AddField("fy_key_deptid", "varchar(100)");
+                            property.CreateIndex("erp_house", "fy_community", "fy_community", MysqlIndexType.INDEX);
+                            property.CreateIndex("erp_house", "fy_empid", "fy_empid", MysqlIndexType.INDEX);
+                            property.CreateIndex("erp_house", "fy_key_userid", "fy_key_userid", MysqlIndexType.INDEX);
+                            property.CreateIndex("erp_house", "id", "id", MysqlIndexType.INDEX);
                         }
 
-                        if(property.dExec == "true")
+                        if(bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             property.importProperty();
                         }
 
-                        if(property.dUpdateData == "true")
+                        if(bObject.dUpdateData == "true")
                         {
                             //更新数据
                             property.UpdateData();
                         }
 
                         //删除字段
-                        if(property.dFieldDrop == "true")
+                        if(bObject.dFieldDrop == "true")
                         {
                             property.DropField("fy_community");
                             property.DropField("fy_empid");
@@ -266,6 +233,10 @@ namespace PilotDataConsoleT3
                             property.DropField("fy_common_telephone");
                             property.DropField("fy_key_userid");
                             property.DropField("fy_key_deptid");
+                            property.DropIndex("erp_house", "fy_community", MysqlIndexType.INDEX);
+                            property.DropIndex("erp_house", "fy_empid", MysqlIndexType.INDEX);
+                            property.DropIndex("erp_house", "fy_key_userid", MysqlIndexType.INDEX);
+                            property.DropIndex("erp_house", "id", MysqlIndexType.INDEX);
                         }
 
                         //输出结果
@@ -276,30 +247,22 @@ namespace PilotDataConsoleT3
                     {
                         //声明房源跟进对象
                         PropertyFollow propertyfollow = new PropertyFollow();
-                        propertyfollow.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        propertyfollow.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        ////propertyfollow.m_ThreadEnabled = Convert.ToBoolean(ConfigurationSettings.AppSettings["ThreadEnabled"].ToString());
-                        propertyfollow.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        propertyfollow.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        propertyfollow.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        propertyfollow.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-
-                        if (propertyfollow.dFieldAdd == "true")
+                        if (bObject.dFieldAdd == "true")
                         {
                             //新增字段
                             propertyfollow.AddField("fy_followId", "varchar(100)");
                         }
-                        if(propertyfollow.dUpdateData == "true")
+                        if(bObject.dUpdateData == "true")
                         {
-                            
+                            propertyfollow.UpdateData();
                         }
-                        if(propertyfollow.dExec == "true")
+                        if(bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             propertyfollow.importPropertyFollow();
                         }
 
-                        if(propertyfollow.dFieldDrop == "true")
+                        if(bObject.dFieldDrop == "true")
                         {
                             propertyfollow.DropField("fy_followId");
                         }
@@ -322,36 +285,36 @@ namespace PilotDataConsoleT3
                     {
                         //声明客源对象
                         Inquiry inquiry = new Inquiry();
-                        inquiry.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        inquiry.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        //inquiry.m_ThreadEnabled = Convert.ToBoolean(ConfigurationSettings.AppSettings["ThreadEnabled"].ToString());
-                        inquiry.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        inquiry.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        inquiry.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        inquiry.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-
-                        if(inquiry.dFieldAdd == "true")
+                        if(bObject.dFieldAdd == "true")
                         {
                             //添加字段
                             inquiry.AddField("fy_AreaID", "varchar(100)");
                             inquiry.AddField("fy_DeptID", "varchar(100)");
                             inquiry.AddField("fy_EmpID", "varchar(100)");
                             inquiry.AddField("fy_Contact", "varchar(50)");
+                            inquiry.AddField("fy_floor_max", "varchar(100)");
+                            inquiry.CreateIndex("erp_client", "fy_EmpID", "fy_EmpID", MysqlIndexType.INDEX);
+                            inquiry.CreateIndex("erp_client", "erp_id", "erp_id", MysqlIndexType.INDEX);
+                            inquiry.CreateIndex("erp_client", "fy_AreaID", "fy_AreaID", MysqlIndexType.INDEX);
                         }
-                        if(inquiry.dExec == "true")
+                        if(bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             inquiry.importInquiry();
                         }
-                        if(inquiry.dFieldDrop == "true")
+                        if(bObject.dFieldDrop == "true")
                         {
                             //删除字段
                             inquiry.DropField("fy_AreaID");
                             inquiry.DropField("fy_DeptID");
                             inquiry.DropField("fy_EmpID");
                             inquiry.DropField("fy_Contact");
+                            inquiry.DropField("fy_floor_max");
+                            inquiry.DropIndex("erp_client", "erp_id", MysqlIndexType.INDEX);
+                            inquiry.DropIndex("erp_client", "fy_EmpID", MysqlIndexType.INDEX);
+                            inquiry.DropIndex("erp_client", "fy_AreaID", MysqlIndexType.INDEX);
                         }
-                        if(inquiry.dUpdateData == "true")
+                        if(bObject.dUpdateData == "true")
                         {
                             //更新数据
                             inquiry.UpdateData();
@@ -365,23 +328,28 @@ namespace PilotDataConsoleT3
                     {
                         //声明客源跟进对象
                         InquiryFollow inquiryfollow = new InquiryFollow();
-                        inquiryfollow.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        inquiryfollow.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        //inquiryfollow.m_ThreadEnabled = Convert.ToBoolean(ConfigurationSettings.AppSettings["ThreadEnabled"].ToString());
-                        inquiryfollow.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        inquiryfollow.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        inquiryfollow.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        inquiryfollow.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-
-                        if(inquiryfollow.dFieldAdd == "true")
+                        if(bObject.dFieldAdd == "true")
                         {
                             //添加字段
                             inquiryfollow.AddField("fy_followId", "varchar(100)");
+                            inquiryfollow.AddField("fy_client_id", "varchar(100)");
+                            inquiryfollow.AddField("fy_user_id", "varchar(100)");
+                            inquiryfollow.CreateIndex("erp_client_follow", "fy_client_id", "fy_client_id", MysqlIndexType.INDEX);
+                            inquiryfollow.CreateIndex("erp_client_follow", "fy_user_id", "fy_user_id", MysqlIndexType.INDEX);
                         }
-                        if(inquiryfollow.dExec == "true")
+                        if(bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             inquiryfollow.importInquiryFollow();
+                        }
+                        if(bObject.dFieldDrop == "true")
+                        {
+                            //删除字段
+                            inquiryfollow.DropField("fy_followId");
+                            inquiryfollow.DropField("fy_client_id");
+                            inquiryfollow.DropField("fy_user_id");
+                            inquiryfollow.DropIndex("erp_client_follow", "fy_client_id", MysqlIndexType.INDEX);
+                            inquiryfollow.DropIndex("erp_client_follow", "fy_user_id", MysqlIndexType.INDEX);
                         }
                         
                         //输出结果
@@ -392,22 +360,27 @@ namespace PilotDataConsoleT3
                     {
                         //声明合同对象
                         Contract contract = new Contract();
-                        contract.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        contract.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        contract.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        contract.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        contract.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        contract.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-
-                        if(contract.dExec == "true")
+                        if(bObject.dFieldAdd == "true")
+                        {
+                            contract.CreateIndex("erp_deal", "erp_deal_id", "erp_deal_id", MysqlIndexType.INDEX);
+                            contract.CreateIndex("erp_deal", "erp_house_id", "erp_house_id", MysqlIndexType.INDEX);
+                            contract.CreateIndex("erp_deal", "erp_client_id", "erp_client_id", MysqlIndexType.INDEX);
+                        }
+                        if(bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             contract.importContract();
                         }
-                        if(contract.dUpdateData == "true")
+                        if(bObject.dUpdateData == "true")
                         {
                             //更新数据
                             contract.UpdateData();
+                        }
+                        if(bObject.dFieldDrop == "true")
+                        {
+                            contract.DropIndex("erp_deal", "erp_deal_id", MysqlIndexType.INDEX);
+                            contract.DropIndex("erp_deal", "erp_house_id", MysqlIndexType.INDEX);
+                            contract.DropIndex("erp_deal", "erp_client_id", MysqlIndexType.INDEX);
                         }
                         
                         //输出结果
@@ -418,13 +391,7 @@ namespace PilotDataConsoleT3
                     {
                         //声明合同实收实付对象
                         ContractAct contractact = new ContractAct();
-                        contractact.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        contractact.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        contractact.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        contractact.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        contractact.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        contractact.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-                        if(contractact.dFieldAdd == "true")
+                        if(bObject.dFieldAdd == "true")
                         {
                             //添加字段
                             contractact.AddField("fy_FeeID", "varchar(100)");
@@ -432,14 +399,13 @@ namespace PilotDataConsoleT3
                             contractact.AddField("fy_shou_fee", "varchar(20)");
                             contractact.AddField("fy_fu_fee", "varchar(20)");
                             //contractact.AddField("fy_feedate", "varchar(100)");
-
                         }
-                        if (contractact.dExec == "true")
+                        if (bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             contractact.importContractAct();
                         }
-                        if (contractact.dUpdateData == "true")
+                        if (bObject.dUpdateData == "true")
                         {
                             //更新数据
                             contractact.UpdateData();
@@ -451,19 +417,42 @@ namespace PilotDataConsoleT3
                     }
                 case TableType.CONTRACTCOMM:
                     {
+                        //声明合同实收实付对象
+                        ContractComm contractcomm = new ContractComm();
+                        if (bObject.dFieldAdd == "true")
+                        {
+                            //添加字段
+                            contractcomm.AddField("fy_DealId", "varchar(100)");
+                            contractcomm.AddField("fy_UserId", "varchar(100)");
+                            contractcomm.CreateIndex("erp_deal_separate", "fy_DealId", "fy_DealId",MysqlIndexType.INDEX);
+                            contractcomm.CreateIndex("erp_deal_separate", "fy_UserId", "fy_UserId", MysqlIndexType.INDEX);
+                        }
+                        if (bObject.dExec == "true")
+                        {
+                            //执行导数据的方法
+                            contractcomm.importContractComm();
+                        }
+                        if (bObject.dUpdateData == "true")
+                        {
+                            //更新数据
+                            //contractcomm.UpdateData();
+                        }
+                        if(bObject.dFieldDrop == "true")
+                        {
+                            //删除字段
+                            contractcomm.DropField("fy_DealId");
+                            contractcomm.DropField("fy_UserId");
+                            contractcomm.DropIndex("erp_deal_separate", "fy_DealId", MysqlIndexType.INDEX);
+                            contractcomm.DropIndex("erp_deal_separate", "fy_UserId", MysqlIndexType.INDEX);
+                        }
                         break;
                     }
                 case TableType.CONTRACTCON:
                     {
                         //声明合同实收实付对象
                         ContractCon contractcon = new ContractCon();
-                        contractcon.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        contractcon.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        contractcon.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        contractcon.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        contractcon.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        contractcon.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-                        if (contractcon.dFieldAdd == "true")
+                        
+                        if (bObject.dFieldAdd == "true")
                         {
                             //添加字段
                             contractcon.AddField("fy_FeeID", "varchar(100)");
@@ -471,17 +460,17 @@ namespace PilotDataConsoleT3
                             contractcon.AddField("fy_shou_fee", "varchar(20)");
                             contractcon.AddField("fy_fu_fee", "varchar(20)");
                         }
-                        if (contractcon.dExec == "true")
+                        if (bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             contractcon.importContractCon();
                         }
-                        if (contractcon.dUpdateData == "true")
+                        if (bObject.dUpdateData == "true")
                         {
                             //更新数据
                             contractcon.UpdateData();
                         }
-                        if (contractcon.dFieldDrop == "true")
+                        if (bObject.dFieldDrop == "true")
                         {
                             contractcon.DropField("fy_shou_fee");
                             contractcon.DropField("fy_fu_fee");
@@ -505,19 +494,12 @@ namespace PilotDataConsoleT3
                     {
                         //声明合同对象
                         Position position = new Position();
-                        position.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        position.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        position.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        position.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        position.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        position.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-
-                        if(position.dExec == "true")
+                        if(bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             position.importPosition();
                         }
-                        if(position.dUpdateData == "true")
+                        if(bObject.dUpdateData == "true")
                         {
                             //更新角色数据
                             position.UpdateData();
@@ -531,14 +513,7 @@ namespace PilotDataConsoleT3
                     {
                         //声明加盟店对象
                         JoinStores joinstores = new JoinStores();
-                        joinstores.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        joinstores.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        joinstores.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        joinstores.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        joinstores.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        joinstores.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-
-                        if(joinstores.dExec == "true")
+                        if(bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             joinstores.importJoinStores();
@@ -552,28 +527,22 @@ namespace PilotDataConsoleT3
                     {
                         //声明新闻公告对象
                         News news = new News();
-                        news.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        news.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        news.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        news.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        news.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        news.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-                        if (news.dFieldAdd == "true")
+                        if (bObject.dFieldAdd == "true")
                         {
                             //添加字段
                             news.AddField("erp_user_id", "varchar(60)");
                         }
-                        if (news.dExec == "true")
+                        if (bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             news.importNews();
                         }
-                        if (news.dUpdateData == "true")
+                        if (bObject.dUpdateData == "true")
                         {
                             //更新数据
                             news.UpdateData();
                         }
-                        if(news.dFieldDrop == "true")
+                        if(bObject.dFieldDrop == "true")
                         {
                             news.DropField("erp_user_id");
                         }
@@ -586,29 +555,24 @@ namespace PilotDataConsoleT3
                     {
                         //声明情报站|业务审批对象
                         Message msg = new Message();
-                        msg.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        msg.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        msg.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        msg.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        msg.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        msg.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-                        if (msg.dFieldAdd == "true")
+                        
+                        if (bObject.dFieldAdd == "true")
                         {
                             //添加字段
                             msg.AddField("erp_id", "varchar(60)");
                             msg.AddField("erp_title", "varchar(100)");
                         }
-                        if (msg.dExec == "true")
+                        if (bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             msg.importMessage();
                         }
-                        if (msg.dUpdateData == "true")
+                        if (bObject.dUpdateData == "true")
                         {
                             //更新数据
                             msg.UpdateData();
                         }
-                        if (msg.dFieldDrop == "true")
+                        if (bObject.dFieldDrop == "true")
                         {
                             msg.DropField("erp_id");
                             msg.DropField("erp_title");
@@ -622,27 +586,21 @@ namespace PilotDataConsoleT3
                     {
                         //声明房源对象
                         Property property = new Property();
-                        property.sPageIndex = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageIndex"].ToString());
-                        property.sPageSize = Convert.ToInt32(ConfigurationSettings.AppSettings["SourcePageSize"].ToString());
-                        property.dFieldAdd = ConfigurationSettings.AppSettings["DestAddField"].ToString();
-                        property.dFieldDrop = ConfigurationSettings.AppSettings["DestDropField"].ToString();
-                        property.dUpdateData = ConfigurationSettings.AppSettings["DestUpdateData"].ToString();
-                        property.dExec = ConfigurationSettings.AppSettings["DestExec"].ToString();
-                        if(property.dFieldAdd == "true")
+                        if(bObject.dFieldAdd == "true")
                         {
                             //添加字段
                             property.AddField("fy_community", "varchar(100)");
                             property.AddField("fy_empid", "varchar(100)");
                             property.AddField("fy_deptid", "varchar(100)");
                             property.AddField("fy_visit_way", "varchar(20)");
-                            property.AddField("fy_common_telephone", "varchar(50)");
+                            property.AddField("fy_common_telephone", "varchar(1000)");
                         }
-                        if(property.dExec == "true")
+                        if(bObject.dExec == "true")
                         {
                             //执行导数据的方法
                             property.importProperty();
                         }
-                        if(property.dUpdateData == "true")
+                        if(bObject.dUpdateData == "true")
                         {
                             //更新数据
                             property.UpdateData();

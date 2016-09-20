@@ -12,11 +12,6 @@ namespace AgencyToERP_PHP
 {
     public class PropertyFollow : Base
     {
-        public void Descript()
-        {
-
-        }
-
         /// <summary>
         /// 字段映射方法
         /// </summary>
@@ -53,7 +48,7 @@ namespace AgencyToERP_PHP
             sOrder = "FollowDate";
             dTableName = "erp_house_follow";
             dTableDescript = "房源跟进表";
-            dPolitContentDescript = "字段";
+            dPolitContentDescript = "录入人|录入人部门|维护人|维护人部门";
             dColumns = CombineDestField(FieldMap());
         }
 
@@ -148,23 +143,7 @@ namespace AgencyToERP_PHP
         {
             try
             {
-                List<string>[] lstHouseId = new List<string>[1];
-                lstHouseId = _mysql.Select("erp_house", "id", "");
-                string tmpTable = "", tmpValues = "", tmpWhere = "";
-                foreach (string strId in lstHouseId[0])
-                {
-                    //更新录入人ID，录入人部门ID
-                    tmpTable = "erp_house as a,erp_department as b";
-                    tmpValues = "a.input_department_id = b.dept_id,a.principal_department_id = b.dept_id";
-                    tmpWhere = "and SUBSTRING_INDEX(a.input_username,'.',1) = b.dept_name and a.id = " + strId;
-                    _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                    //更新维护人ID,维护人部门ID
-                    tmpTable = "erp_house as a,erp_user as b";
-                    tmpValues = "a.input_user_id = b.id,a.principal_user_id = b.id,a.principal_username = b.username,a.input_username = b.username";
-                    tmpWhere = "and SUBSTRING_INDEX(a.input_username,'.',-1) = b.username and a.input_department_id = b.department_id and a.id = " + strId;
-                    _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                }
-
+                
                 m_Result += "\n" + dTableDescript + "的" + dPolitContentDescript + "更新成功";
                 return true;
             }

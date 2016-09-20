@@ -159,21 +159,6 @@ namespace AgencyToERP_PHP
                     //    strPropertyTrust = "0";
                     //}
 
-                    //string strStatus = row["Status"].ToString().Trim();
-                    //if(strStatus == "预定")
-                    //{
-                    //    strStatus = "有效";
-                    //}else if(strStatus == "已租")
-                    //{
-                    //    strStatus = "他租";
-                    //}else if(strStatus == "已售")
-                    //{
-                    //    strStatus = "他售";
-                    //}else if(strStatus == "未知")
-                    //{
-                    //    strStatus = "无效";
-                    //}
-
                     string strTemp = GetConcatValues(FieldMap(), row);
                     lstValue.Add(strTemp);
                 }
@@ -244,6 +229,23 @@ namespace AgencyToERP_PHP
                 tmpValues = "key_status = '已收'";
                 tmpWhere = "if_key = 1";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                
+                tmpValues = "status = '有效'";
+                tmpWhere = "and status = '预定'";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                tmpValues = "status = '他租'";
+                tmpWhere = "and status = '已租'";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                tmpValues = "status = '他售'";
+                tmpWhere = "and status = '已售'";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                tmpValues = "status = '无效'";
+                tmpWhere = "and status = '未知'";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
                 m_Result += "\n" + dTableName + "中的" + dTableDescript + "更新成功";
                 return true;
             }

@@ -1,24 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <configuration>
   <appSettings>
-    <!--本地服务器配置-->
-    <!--源数据库配置文件-->
+    <!--服务器配置-->
     <add key="SourceType" value="0"/>
-    <add key="SourceName" value="ZHDC_ZMZ"/>
-    <add key="SourceDB" value="Agent_CS"/>
+    <add key="SourceName" value="(local)"/>
+    <add key="SourceDB" value="Agency"/>
     <add key="SourcePort" value="0"/>
-    <add key="SourceUsername" value="sa"/>
+    <add key="SourceUsername" value="zmz"/>
     <add key="SourcePassword" value="123456"/>
     <!--源分页-->
     <add key="SourcePageIndex" value="1"/>
     <add key="SourcePageSize" value="2500"/>
-    <!--目标数据库配置文件 12000-->
+
     <add key="DestType" value="2"/>
-    <add key="DestName" value="localhost"/>
-    <add key="DestDB" value="erp_test"/>
+    <add key="DestName" value="218.65.86.83"/>
+    <add key="DestDB" value="erp_zmz"/>
     <add key="DestPort" value="3306"/>
-    <add key="DestUsername" value="root"/>
-    <add key="DestPassword" value="123456"/>
+    <add key="DestUsername" value="zhonghuan"/>
+    <add key="DestPassword" value="h2Ym5wb2IyNW5hSFX"/>
     <!--目标分页-->
     <add key="DestPageIndex" value="1"/>
     <add key="DestPageSize" value="2500"/>
@@ -31,8 +30,8 @@
     <add key="DestExec" value="true"/>
     <!--<add key="DestExec" value="false"/>-->
     <!--更新数据-->
-    <!--<add key="DestUpdateData" value="true"/>-->
-    <add key="DestUpdateData" value="false"/>
+    <add key="DestUpdateData" value="true"/>
+    <!--<add key="DestUpdateData" value="false"/>-->
     <!--删除字段-->
     <!--<add key="DestDropField" value="true"/>-->
     <add key="DestDropField" value="false"/>

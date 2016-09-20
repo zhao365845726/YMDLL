@@ -11,11 +11,6 @@ namespace AgencyToERP_PHP
 {
     public class Contract : Base
     {
-        public void Descript()
-        {
-            //Dictionary<目标数据库,源数据库>
-        }
-
         /// <summary>
         /// 字段映射方法
         /// </summary>
@@ -59,6 +54,8 @@ namespace AgencyToERP_PHP
             sColumns = CombineSourceField(FieldMap());
             sOrder = "RegDate";
             dTableName = "erp_deal";
+            dTableDescript = "合同成交表";
+            dPolitContentDescript = "交易类型|房源信息";
             dColumns = CombineDestField(FieldMap());
         }
 
@@ -126,18 +123,18 @@ namespace AgencyToERP_PHP
                 Console.Write("\n数据已经成功写入" + sPageSize * sPageIndex + "条");
                 if (isResult)
                 {
-                    m_Result = "\n合同数据插入成功";
+                    m_Result = "\n" + dTableDescript + "数据插入成功";
                     return true;
                 }
                 else
                 {
-                    m_Result = "\n合同数据插入失败";
+                    m_Result = "\n" + dTableDescript + "数据插入失败";
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                m_Result = "导出合同异常.\n异常原因：" + ex.Message;
+                m_Result = "导出" + dTableDescript + "异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }
@@ -168,19 +165,18 @@ namespace AgencyToERP_PHP
                 tmpWhere = "";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
-                //tmpTable = "erp_deal as a,erp_house as b";
-                //tmpValues = "a.room_code = b.room_code,a.block = b.block,a.district = b.district";
-                //tmpValues = "a.district = b.district,a.district_id = b.district_id,a.region = b.region,a.biz_area_id = b.region_id,a.community = b.community,a.community_id = b.community_id,a.block = b.block,a.block_id = b.block_id,a.unit_name = b.unit_name,a.unit_id = b.unit_id,a.room_code = b.room_code,a.room_id = b.room_id";
-                //tmpWhere = "and a.erp_house_id = b.erp_id and a.erp_house_id <> ''";
-                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
+                tmpTable = "erp_deal as a,erp_house as b";
+                tmpValues = "a.district = b.district,a.district_id = b.district_id,a.region = b.region,a.biz_area_id = b.region_id,a.community = b.community,a.community_id = b.community_id,a.block = b.block,a.block_id = b.block_id,a.unit_name = b.unit_name,a.unit_id = b.unit_id,a.room_code = b.room_code,a.room_id = b.room_id";
+                tmpWhere = "and a.erp_house_id = b.erp_id and a.erp_house_id <> ''";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
 
-                m_Result += "\n合同表中交易类型|房源信息更新成功";
+                m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新成功";
                 return true;
             }
             catch (Exception ex)
             {
-                m_Result += "\n合同表中交易类型|房源信息更新异常.\n异常原因：" + ex.Message;
+                m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }

@@ -11,12 +11,6 @@ namespace AgencyToERP_PHP
 {
     public class ContractAct : Base
     {
-        public void Descript()
-        {
-            //Dictionary<目标数据库,源数据库>
-            //表增加索引：deal_id,
-        }
-
         /// <summary>
         /// 字段映射方法
         /// </summary>

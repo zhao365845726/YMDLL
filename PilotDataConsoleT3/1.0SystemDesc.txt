@@ -1,5 +1,4 @@
 ﻿================================计算可用数据和非可用数据 Start=================================
-
 -- 计算区域的数量是否有删除的区域
 select * from Area
 select count(1) from Area
@@ -73,22 +72,25 @@ select count(1) from MESSAGE where FlagDeleted = 0
 select count(1) from MESSAGE where FlagDeleted <> 0 and FlagTrashed <> 0
 
 -- 计算合同成交
-select * from CONTRACT
+select * from CONTRACT 
 select count(1) from CONTRACT
 select count(1) from CONTRACT where FlagDeleted = 0
 select count(1) from CONTRACT where FlagDeleted <> 0 and FlagTrashed <> 0
+select * from Contract WHERE ContractNo = '新LH2016090801'
 
 -- 计算合同实收
 select * from CONTRACTACT
 select count(1) from CONTRACTACT
 select count(1) from CONTRACTACT where FlagDeleted = 0
 select count(1) from CONTRACTACT where FlagDeleted <> 0 and FlagTrashed <> 0
+select * from ContractAct where ContractID = '160919140040F5D228FB89B361D68FFA'
 
 -- 计算合同
 select * from CONTRACTCOMM
 select count(1) from CONTRACTCOMM
 select count(1) from CONTRACTCOMM where FlagDeleted = 0
 select count(1) from CONTRACTCOMM where FlagDeleted <> 0 and FlagTrashed <> 0
+select * from ContractComm where ContractID = '160919140040F5D228FB89B361D68FFA'
 
 -- 计算合同应收
 select * from CONTRACTCON

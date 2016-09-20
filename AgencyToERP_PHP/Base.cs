@@ -168,14 +168,14 @@ namespace AgencyToERP_PHP
             _sqlServer.dbInitialization(ReadAppSetting("SourceName"), ReadAppSetting("SourceDB"));
             _mysql.Initialize(ReadAppSetting("DestName"), ReadAppSetting("DestDB"), ReadAppSetting("DestUsername"), ReadAppSetting("DestPassword"), ReadAppSetting("DestPort"));
             sWhere = "1=1";
-            sPageIndex = 1;
-            sPageSize = 2500;
+            sPageIndex = Convert.ToInt32(ReadAppSetting("SourcePageIndex"));
+            sPageSize = Convert.ToInt32(ReadAppSetting("SourcePageSize"));
             sTotalCount = 0;
             dWhere = "1=1";
-            dPageIndex = 1;
-            dPageSize = 2500;
+            dPageIndex = Convert.ToInt32(ReadAppSetting("DestPageIndex"));
+            dPageSize = Convert.ToInt32(ReadAppSetting("DestPageSize"));
             dTotalCount = 0;
-            dCompanyId = "999";
+            dCompanyId = ReadAppSetting("DestCompanyId");
             dDeleteMark = "0";
             dDefaultTime = "1472011552";
             m_ThreadEnabled = false;
@@ -465,27 +465,33 @@ namespace AgencyToERP_PHP
         /// <summary>
         /// 新增表字段索引
         /// </summary>
-        public bool AddIndex(List<string> lstField,MysqlIndexType type)
+        /// <param name="TableName">表名</param>
+        /// <param name="IndexCols">字段集合</param>
+        /// <param name="IndexName">索引名称</param>
+        /// <param name="type">索引类型</param>
+        /// <returns></returns>
+        public bool CreateIndex(string TableName,string IndexCols,string IndexName,MysqlIndexType type)
         {
+            string strsql = "";
             switch (type)
             {
                 case MysqlIndexType.INDEX:
-
+                    strsql = "create index " + IndexName + " on " + TableName + " (" + IndexCols + ");";
                     break;
                 case MysqlIndexType.UNIQUE:
-
+                    strsql = "create unique index " + IndexName + " on " + TableName + " (" + IndexCols + ");";
                     break;
-                case MysqlIndexType.PRIMARYKEY:
-
-                    break;
+                default:
+                    return false;
             }
+            _mysql.ExecuteSQL(strsql);
             return true;
         }
 
         /// <summary>
         /// 修改表字段索引
         /// </summary>
-        public bool ModifyIndex(List<string> lstField,MysqlIndexType type)
+        public bool AlterIndex(List<string> lstField,MysqlIndexType type)
         {
             switch (type)
             {
@@ -505,20 +511,22 @@ namespace AgencyToERP_PHP
         /// <summary>
         /// 移除表字段索引
         /// </summary>
-        public bool DropIndex(List<string> lstField, MysqlIndexType type)
+        /// <param name="TableName">表名</param>
+        /// <param name="IndexName">索引名</param>
+        /// <param name="type">索引类型</param>
+        /// <returns></returns>
+        public bool DropIndex(string TableName, string IndexName, MysqlIndexType type)
         {
+            string strsql = "";
             switch (type)
             {
                 case MysqlIndexType.INDEX:
-
+                    strsql = "drop index " + IndexName + " on " + TableName;
                     break;
-                case MysqlIndexType.UNIQUE:
-
-                    break;
-                case MysqlIndexType.PRIMARYKEY:
-
-                    break;
+                default:
+                    return false;
             }
+            _mysql.ExecuteSQL(strsql);
             return true;
         }
         #endregion

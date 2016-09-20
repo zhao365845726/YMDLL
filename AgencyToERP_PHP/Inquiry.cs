@@ -76,7 +76,7 @@ namespace AgencyToERP_PHP
             dicMap.Add("prefer_region", "DistrictName");                //需求区域
             dicMap.Add("city_id", ":String?Default=0");                 //默认城市的id
             dicMap.Add("fitment", "PropertyFloor");                     //配套设置
-            dicMap.Add("floor_max", "Floor");                           //楼层上限
+            dicMap.Add("fy_floor_max", "Floor");                        //楼层上限
             dicMap.Add("floor_min", ":String?Default=0");               //楼层下限
             dicMap.Add("building_age_max", ":String?Default=0");        //房龄上限
             dicMap.Add("building_age_min", ":String?Default=0");        //房龄下限

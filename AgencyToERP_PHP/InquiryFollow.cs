@@ -12,11 +12,6 @@ namespace AgencyToERP_PHP
 {
     public class InquiryFollow : Base
     {
-        public void Descript()
-        {
-
-        }
-
         /// <summary>
         /// 字段映射方法
         /// </summary>
@@ -26,13 +21,13 @@ namespace AgencyToERP_PHP
             //Dictionary<目标数据库,源数据库>
             Dictionary<string, string> dicMap = new Dictionary<string, string>();
             dicMap.Add("fy_followId", "FollowID");          //客源跟进ID
-            dicMap.Add("erp_client_id", "InquiryID");       //客源ID
-            dicMap.Add("erp_user_id", "EmpID");             //人员ID
+            dicMap.Add("fy_client_id", "InquiryID");       //客源ID
+            dicMap.Add("fy_user_id", "EmpID");             //人员ID
             dicMap.Add("follow_up_date", "FollowDate:DateTime");            //跟进日期
             dicMap.Add("content", "Content");               //跟进内容
             dicMap.Add("follow_way", "FollowType");         //跟进方式
             dicMap.Add("company_id", ":String?Default=" + dCompanyId);      //公司ID
-            dicMap.Add("if_deleted", ":String?Default=" + dDeleteMark);     //删除标识
+            dicMap.Add("if_deleted", "FlagDeleted");        //删除标识
             dicMap.Add("create_time", "ExDate:DateTime");   //录入时间
             dicMap.Add("update_time", "ModDate:DateTime");  //修改时间
 
@@ -144,24 +139,7 @@ namespace AgencyToERP_PHP
         {
             try
             {
-                List<string>[] lstHouseId = new List<string>[1];
-                lstHouseId = _mysql.Select("erp_house", "id", "");
-                string tmpTable = "", tmpValues = "", tmpWhere = "";
-                foreach (string strId in lstHouseId[0])
-                {
-                    //更新录入人ID，录入人部门ID
-                    tmpTable = "erp_house as a,erp_department as b";
-                    tmpValues = "a.input_department_id = b.dept_id,a.principal_department_id = b.dept_id";
-                    tmpWhere = "and SUBSTRING_INDEX(a.input_username,'.',1) = b.dept_name and a.id = " + strId;
-                    _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                    //更新维护人ID,维护人部门ID
-                    tmpTable = "erp_house as a,erp_user as b";
-                    tmpValues = "a.input_user_id = b.id,a.principal_user_id = b.id,a.principal_username = b.username,a.input_username = b.username";
-                    tmpWhere = "and SUBSTRING_INDEX(a.input_username,'.',-1) = b.username and a.input_department_id = b.department_id and a.id = " + strId;
-                    _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                }
-
-
+                
                 m_Result += "\n" + dTableDescript + "的" + dPolitContentDescript + "更新成功";
                 return true;
             }
