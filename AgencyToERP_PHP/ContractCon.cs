@@ -19,19 +19,20 @@ namespace AgencyToERP_PHP
         {
             //Dictionary<目标数据库,源数据库>
             Dictionary<string, string> dicMap = new Dictionary<string, string>();
-            dicMap.Add("fy_FeeID", "FeeID");
-            dicMap.Add("fy_deal_id", "ContractID");
-            dicMap.Add("price_name", "FeeType");
-            dicMap.Add("fy_shou_fee", "Money0");
-            dicMap.Add("fy_fu_fee", "Money1");
-            dicMap.Add("finance_date", "FeeDate:DateTime");
-            dicMap.Add("memo", "Remark");
-            dicMap.Add("update_time", "ModDate:DateTime");
-            dicMap.Add("if_deleted", "FlagDeleted");
-            dicMap.Add("create_time", "ExDate:DateTime");
-            dicMap.Add("fee_user", "FeeSource");
-            dicMap.Add("status", "Audit");
-            dicMap.Add("price_type", ":String?Default=");
+            dicMap.Add("fy_FeeID", "FeeID");                //费用ID
+            dicMap.Add("fy_deal_id", "ContractID");         //合同ID
+            dicMap.Add("price_name", "FeeType");            //费用名称
+            dicMap.Add("fy_shou_fee", "Money0");            //应收费用
+            dicMap.Add("fy_fu_fee", "Money1");              //应付费用
+            dicMap.Add("finance_date", "FeeDate:DateTime"); //收付日期
+            dicMap.Add("memo", "Remark");                   //备注
+            dicMap.Add("update_time", "ModDate:DateTime");  //修改日期
+            dicMap.Add("if_deleted", "FlagDeleted");        //删除标记
+            dicMap.Add("create_time", "ExDate:DateTime");   //创建日期
+            dicMap.Add("fee_user", "FeeSource");            //缴费人客户业主
+            dicMap.Add("status", "Audit");                  //审核状态
+            dicMap.Add("price_type", ":String?Default=");   //费用类型
+            dicMap.Add("company_id", ":String?Default=" + dCompanyId);      //公司ID
             return dicMap;
         }
 
@@ -139,8 +140,8 @@ namespace AgencyToERP_PHP
             {
                 tmpTable = "erp_receivable";
                 //更新合同实收费用表中company_id字段和if_deleted字段
-                tmpValues = "company_id = '" + dCompanyId + "',if_deleted = '" + dDeleteMark + "'";
-                tmpWhere = "";
+                tmpValues = "if_deleted = 1";
+                tmpWhere = "and if_deleted = -1";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
                 tmpValues = "status = '待确认'";
@@ -159,12 +160,17 @@ namespace AgencyToERP_PHP
                 tmpWhere = "and status = '3'";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
-                tmpValues = "price_charge = '实付',price_num = fy_fu_fee";
+                tmpValues = "cost_status = '未收',price_num = fy_fu_fee";
                 tmpWhere = "and fy_shou_fee = '0'";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
-                tmpValues = "price_charge = '实收',price_num = fy_shou_fee";
+                tmpValues = "cost_status = '已收',price_num = fy_shou_fee";
                 tmpWhere = "and fy_fu_fee = '0'";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                tmpTable = "erp_receivable a JOIN erp_deal b ON a.fy_deal_id = b.erp_deal_id";
+                tmpValues = "a.deal_id = b.deal_id,a.deal_type = b.type";
+                tmpWhere = "and a.fy_deal_id = b.erp_deal_id";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
                 //tmpTable = "erp_deal as a,erp_house as b";

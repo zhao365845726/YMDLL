@@ -42,6 +42,8 @@ namespace AgencyToERP_PHP
             dicMap.Add("owner_id_card", "OwnerCard");       //业主身份证
             dicMap.Add("contractor_place", "SignCenter");   //签约地点|签约中心
             dicMap.Add("deal_status", "Audit");             //合同审核状态
+            dicMap.Add("company_id", ":String?Default=" + dCompanyId);          //公司ID
+            dicMap.Add("if_deleted", "FlagDeleted");        //删除标记
             return dicMap;
         }
 
@@ -147,28 +149,29 @@ namespace AgencyToERP_PHP
             string tmpTable = "", tmpValues = "", tmpWhere = "";
             try
             {
-                tmpTable = "erp_deal";
-                //更新交易状态字段
-                tmpValues = "type = '买卖'";
-                tmpWhere = "and type = '出售'";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                //更新合同类别字段
-                tmpValues = "type = '租赁'";
-                tmpWhere = "and type = '出租'";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                //更新合同表中company_id字段和if_deleted字段
-                tmpValues = "company_id = '" + dCompanyId + "',if_deleted = '" + dDeleteMark + "'";
-                tmpWhere = "";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                //更新合同表审核状态字段
-                tmpValues = "deal_status = '已审核'";
-                tmpWhere = "";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //tmpTable = "erp_deal";
+                ////更新交易状态字段                    [已写入存储过程]
+                //tmpValues = "type = '买卖'";
+                //tmpWhere = "and type = '出售'";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
+                ////更新合同类别字段                      [已写入存储过程]
+                //tmpValues = "type = '租赁'";
+                //tmpWhere = "and type = '出租'";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //更新合同表中company_id字段和if_deleted字段                 [已写入存储过程]
+                //tmpValues = "company_id = '" + dCompanyId + "',if_deleted = '" + dDeleteMark + "'";
+                //tmpWhere = "";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //更新合同表审核状态字段          [已写入存储过程]
+                //tmpValues = "deal_status = '已审核'";
+                //tmpWhere = "";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
-                tmpTable = "erp_deal as a,erp_house as b";
-                tmpValues = "a.district = b.district,a.district_id = b.district_id,a.region = b.region,a.biz_area_id = b.region_id,a.community = b.community,a.community_id = b.community_id,a.block = b.block,a.block_id = b.block_id,a.unit_name = b.unit_name,a.unit_id = b.unit_id,a.room_code = b.room_code,a.room_id = b.room_id";
-                tmpWhere = "and a.erp_house_id = b.erp_id and a.erp_house_id <> ''";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //更新合同中的房源信息-----[已写入存储过程]
+                //tmpTable = "erp_deal as a,erp_house as b";
+                //tmpValues = "a.district = b.district,a.district_id = b.district_id,a.region = b.region,a.biz_area_id = b.region_id,a.community = b.community,a.community_id = b.community_id,a.block = b.block,a.block_id = b.block_id,a.unit_name = b.unit_name,a.unit_id = b.unit_id,a.room_code = b.room_code,a.room_id = b.room_id";
+                //tmpWhere = "and a.erp_house_id = b.erp_id and a.erp_house_id <> ''";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
 
                 m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新成功";

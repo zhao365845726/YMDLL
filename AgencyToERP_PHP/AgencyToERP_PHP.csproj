@@ -45,7 +45,9 @@
     <Compile Include="Area.cs" />
     <Compile Include="Base.cs" />
     <Compile Include="Building.cs" />
+    <Compile Include="Department.cs" />
     <Compile Include="Message.cs" />
+    <Compile Include="_Moban.cs" />
     <Compile Include="News.cs" />
     <Compile Include="ContractFollow.cs" />
     <Compile Include="ContractFee.cs" />
@@ -53,7 +55,6 @@
     <Compile Include="ContractComm.cs" />
     <Compile Include="ContractAct.cs" />
     <Compile Include="Contract.cs" />
-    <Compile Include="Department.cs" />
     <Compile Include="District.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Estate.cs" />
@@ -62,7 +63,6 @@
     <Compile Include="JoinStores.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyOld.cs" />
     <Compile Include="Property.cs" />
     <Compile Include="PropertyFollow.cs" />
   </ItemGroup>

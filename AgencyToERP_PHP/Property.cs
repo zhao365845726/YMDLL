@@ -195,56 +195,58 @@ namespace AgencyToERP_PHP
         {
             try
             {
-                List<string>[] lstHouseId = new List<string>[1];
-                lstHouseId = _mysql.Select("erp_house", "id", "");
-                string tmpTable = "", tmpValues = "", tmpWhere = "";
-                foreach(string strId in lstHouseId[0])
-                {
-                    //更新录入人ID，录入人部门ID
-                    tmpTable = "erp_house as a,erp_department as b";
-                    tmpValues = "a.input_department_id = b.dept_id,a.principal_department_id = b.dept_id";
-                    tmpWhere = "and SUBSTRING_INDEX(a.input_username,'.',1) = b.dept_name and a.id = " + strId;
-                    _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                    //更新维护人ID,维护人部门ID
-                    tmpTable = "erp_house as a,erp_user as b";
-                    tmpValues = "a.input_user_id = b.id,a.principal_user_id = b.id,a.principal_username = b.username,a.input_username = b.username";
-                    tmpWhere = "and SUBSTRING_INDEX(a.input_username,'.',-1) = b.username and a.input_department_id = b.department_id and a.id = " + strId;
-                    _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                }
+                //[已加入存储过程]
+                //List<string>[] lstHouseId = new List<string>[1];
+                //lstHouseId = _mysql.Select("erp_house", "id", "");
+                //string tmpTable = "", tmpValues = "", tmpWhere = "";
+                //foreach(string strId in lstHouseId[0])
+                //{
+                //    //更新录入人ID，录入人部门ID
+                //    tmpTable = "erp_house as a,erp_department as b";
+                //    tmpValues = "a.input_department_id = b.dept_id,a.principal_department_id = b.dept_id";
+                //    tmpWhere = "and SUBSTRING_INDEX(a.input_username,'.',1) = b.dept_name and a.id = " + strId;
+                //    _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //    //更新维护人ID,维护人部门ID
+                //    tmpTable = "erp_house as a,erp_user as b";
+                //    tmpValues = "a.input_user_id = b.id,a.principal_user_id = b.id,a.principal_username = b.username,a.input_username = b.username";
+                //    tmpWhere = "and SUBSTRING_INDEX(a.input_username,'.',-1) = b.username and a.input_department_id = b.department_id and a.id = " + strId;
+                //    _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //}
 
-                //更新房源的小区id和小区名称
-                tmpTable = "erp_house a,erp_community b";
-                tmpValues = "a.community = b.community_name,a.community_id = b.community_id,a.region = b.biz_area_name,a.region_id = b.biz_area_id,a.district_id = b.district_id";
-                tmpWhere = "and a.fy_community = b.erp_id";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //更新房源的小区id和小区名称[已放入存储过程]
+                //tmpTable = "erp_house a,erp_community b";
+                //tmpValues = "a.community = b.community_name,a.community_id = b.community_id,a.region = b.biz_area_name,a.region_id = b.biz_area_id,a.district_id = b.district_id";
+                //tmpWhere = "and a.fy_community = b.erp_id";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
-                //更新钥匙人和钥匙人所在部门
-                tmpTable = "erp_house a LEFT JOIN erp_user b ON a.fy_key_userid = b.erp_id";
-                tmpValues = "a.key_user_id = b.id,a.key_username = b.username,a.key_department_id = b.department_id,a.if_key = 1";
-                tmpWhere = "and a.fy_key_userid = b.erp_id";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //更新钥匙人和钥匙人所在部门[已放入存储过程]
+                //tmpTable = "erp_house a LEFT JOIN erp_user b ON a.fy_key_userid = b.erp_id";
+                //tmpValues = "a.key_user_id = b.id,a.key_username = b.username,a.key_department_id = b.department_id,a.if_key = 1";
+                //tmpWhere = "and a.fy_key_userid = b.erp_id";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
-                //更新钥匙管理的状态
-                tmpTable = "erp_house";
-                tmpValues = "key_status = '已收'";
-                tmpWhere = "if_key = 1";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                
-                tmpValues = "status = '有效'";
-                tmpWhere = "and status = '预定'";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //更新钥匙管理的状态[已放入存储过程]
+                //tmpTable = "erp_house";
+                //tmpValues = "key_status = '已收'";
+                //tmpWhere = "if_key = 1";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
-                tmpValues = "status = '他租'";
-                tmpWhere = "and status = '已租'";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //更新房源状态[已放入存储过程]
+                //tmpValues = "status = '有效'";
+                //tmpWhere = "and status = '预定'";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
-                tmpValues = "status = '他售'";
-                tmpWhere = "and status = '已售'";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //tmpValues = "status = '他租'";
+                //tmpWhere = "and status = '已租'";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
-                tmpValues = "status = '无效'";
-                tmpWhere = "and status = '未知'";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //tmpValues = "status = '他售'";
+                //tmpWhere = "and status = '已售'";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                //tmpValues = "status = '无效'";
+                //tmpWhere = "and status = '未知'";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
                 m_Result += "\n" + dTableName + "中的" + dTableDescript + "更新成功";
                 return true;

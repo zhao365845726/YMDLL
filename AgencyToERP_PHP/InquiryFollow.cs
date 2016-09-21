@@ -27,9 +27,11 @@ namespace AgencyToERP_PHP
             dicMap.Add("content", "Content");               //跟进内容
             dicMap.Add("follow_way", "FollowType");         //跟进方式
             dicMap.Add("company_id", ":String?Default=" + dCompanyId);      //公司ID
-            dicMap.Add("if_deleted", "FlagDeleted");        //删除标识
+            dicMap.Add("fy_if_deleted", "FlagDeleted");     //删除标识
             dicMap.Add("create_time", "ExDate:DateTime");   //录入时间
             dicMap.Add("update_time", "ModDate:DateTime");  //修改时间
+            dicMap.Add("if_abnormal", ":String?Default=0"); //是否异常
+            dicMap.Add("if_stick", ":String?Default=0");    //是否置顶
 
             return dicMap;
         }

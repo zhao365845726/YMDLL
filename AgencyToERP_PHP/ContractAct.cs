@@ -37,6 +37,8 @@ namespace AgencyToERP_PHP
             dicMap.Add("pigeonhole_username", "AuditPerson3");      //归档人
             dicMap.Add("entry_user_name", "RegPerson");             //录入人
             dicMap.Add("create_time", "RegDate:DateTime");          //录入日期
+            dicMap.Add("company_id", ":String?Default=" + dCompanyId);          //公司ID
+            dicMap.Add("if_deleted", "FlagDeleted");    //删除标记
             return dicMap;
         }
 
@@ -144,8 +146,8 @@ namespace AgencyToERP_PHP
             {
                 tmpTable = "erp_collect_pay";
                 //更新合同实收费用表中company_id字段和if_deleted字段
-                tmpValues = "company_id = '" + dCompanyId + "',if_deleted = '" + dDeleteMark + "'";
-                tmpWhere = "";
+                tmpValues = "if_deleted = 1";
+                tmpWhere = "and if_deleted = -1";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
                 tmpValues = "status = '待确认'";
@@ -170,6 +172,11 @@ namespace AgencyToERP_PHP
 
                 tmpValues = "price_charge = '实收',price_num = fy_shou_fee";
                 tmpWhere = "and fy_fu_fee = '0'";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                tmpTable = "erp_collect_pay a JOIN erp_deal b ON a.fy_deal_id = b.erp_deal_id";
+                tmpValues = "a.deal_id = b.deal_id,a.deal_type = b.type";
+                tmpWhere = "and a.fy_deal_id = b.erp_deal_id";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
                 //更新费用名称

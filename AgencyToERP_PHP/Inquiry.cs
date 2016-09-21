@@ -12,10 +12,6 @@ namespace AgencyToERP_PHP
 {
     public class Inquiry : Base
     {
-        public void Descript()
-        {
-        }
-
         /// <summary>
         /// 字段映射方法
         /// </summary>
@@ -189,32 +185,32 @@ namespace AgencyToERP_PHP
         {
             try
             {
-                string tmpTable = "", tmpValues = "", tmpWhere = "";
-                //更新录入人ID,录入人部门ID,维护人id,维护人姓名,维护人部门id
-                tmpTable = "erp_client a JOIN erp_user b ON a.fy_EmpID = b.erp_id";
-                tmpValues = "a.input_user_id = b.id,a.input_department_id = b.department_id,a.principal_user_id = b.id,a.principal_username = b.username,a.principal_department_id = b.department_id";
-                tmpWhere = "and a.fy_EmpID = b.erp_id";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //string tmpTable = "", tmpValues = "", tmpWhere = "";
+                //更新录入人ID,录入人部门ID,维护人id,维护人姓名,维护人部门id[已写入存储过程]
+                //tmpTable = "erp_client a JOIN erp_user b ON a.fy_EmpID = b.erp_id";
+                //tmpValues = "a.input_user_id = b.id,a.input_department_id = b.department_id,a.principal_user_id = b.id,a.principal_username = b.username,a.principal_department_id = b.department_id";
+                //tmpWhere = "and a.fy_EmpID = b.erp_id";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
-                //更新维护人最后跟进日期
-                tmpTable = "erp_client";
-                tmpValues = "last_principal_follow = last_follow";
-                tmpWhere = "";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
-                
-                tmpValues = "purpose = '住宅'";
-                tmpWhere = "and purpose = '' or purpose is NULL";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                ////更新维护人最后跟进日期[已写入存储过程]
+                //tmpTable = "erp_client";
+                //tmpValues = "last_principal_follow = last_follow";
+                //tmpWhere = "";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
-                tmpValues = "public = 1";
-                tmpWhere = "and public = 0";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //tmpValues = "purpose = '住宅'";
+                //tmpWhere = "and purpose = '' or purpose is NULL";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
-                //更新客源需求区域的内容
-                tmpTable = "erp_client a JOIN erp_region b ON a.fy_AreaId = b.erp_id JOIN erp_community c ON b.biz_area_name = c.biz_area_name";
-                tmpValues = "a.prefer_region = CONCAT('-',c.community_name,'-',b.district,'-',b.biz_area_name,';'),a.prefer_region_json = CONCAT('[{\"district_id\":\"', b.district_id, '\",\"district\":\"', b.district, '\",\"region_id\":\"', b.biz_area_id, '\",\"region\":\"', b.biz_area_name, '\",\"community_id\":\"', c.community_id, '\",\"community\":\"', c.community_name, '\",\"type\":\"district\"}]')";
-                tmpWhere = "";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+                //tmpValues = "public = 1";
+                //tmpWhere = "and public = 0";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                //更新客源需求区域的内容[已写入存储过程]
+                //tmpTable = "erp_client a JOIN erp_region b ON a.fy_AreaId = b.erp_id JOIN erp_community c ON b.biz_area_name = c.biz_area_name";
+                //tmpValues = "a.prefer_region = CONCAT('-',c.community_name,'-',b.district,'-',b.biz_area_name,';'),a.prefer_region_json = CONCAT('[{\"district_id\":\"', b.district_id, '\",\"district\":\"', b.district, '\",\"region_id\":\"', b.biz_area_id, '\",\"region\":\"', b.biz_area_name, '\",\"community_id\":\"', c.community_id, '\",\"community\":\"', c.community_name, '\",\"type\":\"district\"}]')";
+                //tmpWhere = "";
+                //_mysql.Update(tmpTable, tmpValues, tmpWhere);
 
                 m_Result += "\n" + dTableDescript + "的" + dPolitContentDescript + "更新成功";
                 return true;

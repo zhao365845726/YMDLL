@@ -136,10 +136,14 @@ namespace AgencyToERP_PHP
             string tmpTable = "", tmpValues = "", tmpWhere = "";
             try
             {
-                tmpTable = "erp_deal";
-                //更新交易状态字段
-                tmpValues = "type = '买卖'";
-                tmpWhere = "and type = '出售'";
+                tmpTable = "erp_deal_separate a JOIN erp_deal b";
+                tmpValues = "a.deal_id = b.deal_id";
+                tmpWhere = "and a.fy_DealId = b.erp_deal_id";
+                _mysql.Update(tmpTable, tmpValues, tmpWhere);
+
+                tmpTable = "erp_deal_separate a JOIN erp_user b ";
+                tmpValues = "a.department_id = b.department_id,a.username = b.username,a.user_id = b.id";
+                tmpWhere = "and a.fy_UserId = b.erp_id";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);
 
                 m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新成功";

@@ -115,6 +115,10 @@ SELECT count(1) FROM erp_business_review WHERE if_deleted <> 0;
 
 ================================执行导入后附加执行的sql Start=================================
 
+
+20160921导入成交信息后，公司ID,删除标记为null值
+
+
 -- 导入部门后
 SELECT dept_id,erp_id,erp_pid FROM erp_department WHERE `status` = '有效' and if_deleted = 0 ;
 SELECT erp_id,count(erp_id) FROM erp_department WHERE `status` = '有效' and if_deleted = 0 GROUP BY erp_id HAVING count(erp_id)>1 ;
@@ -169,10 +173,25 @@ a.community = b.community,a.community_id = b.community_id,a.block = b.block,a.bl
 a.unit_name = b.unit_name,a.unit_id = b.unit_id,a.room_code = b.room_code,a.room_id = b.room_id
 where 1 = 1 and a.erp_house_id = b.erp_id and a.erp_house_id <> '';
 
+-- 更新合同业绩信息
+UPDATE erp_deal_separate a JOIN erp_deal b 
+SET a.deal_id = b.deal_id
+WHERE a.fy_DealId = b.erp_deal_id;
 
+-- 更新合同业绩用户信息
+UPDATE erp_deal_separate a JOIN erp_user b 
+SET a.department_id = b.department_id,a.username = b.username,a.user_id = b.id
+WHERE a.fy_UserId = b.erp_id;
 
+-- 更新实收实付表
+UPDATE erp_collect_pay a JOIN erp_deal b ON a.fy_deal_id = b.erp_deal_id
+SET a.deal_id = b.deal_id,a.deal_type = b.type
+WHERE a.fy_deal_id = b.erp_deal_id
 
-
+-- 更新应收应付表
+UPDATE erp_receivable a JOIN erp_deal b ON a.fy_deal_id = b.erp_deal_id
+SET a.deal_id = b.deal_id,a.deal_type = b.type
+WHERE a.fy_deal_id = b.erp_deal_id
 
 ================================执行导入后附加执行的sql Start=================================
 

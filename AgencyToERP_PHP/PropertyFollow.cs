@@ -23,17 +23,17 @@ namespace AgencyToERP_PHP
             dicMap.Add("fy_followId", "FollowID");              //源房源跟进ID
             dicMap.Add("erp_house_id", "PropertyID");           //房源ID
             dicMap.Add("erp_user_id", "EmpID");                 //用户ID
-            dicMap.Add("follow_up_date", "FollowDate:DateTime");            //跟进日期
+            dicMap.Add("follow_up_date", "FollowDate:DateTime");//跟进日期
             dicMap.Add("content", "Content");                   //跟进内容
             dicMap.Add("follow_way", "FollowType");             //跟进方式
             dicMap.Add("company_id", ":String?Default=" + dCompanyId);      //公司ID
-            dicMap.Add("if_deleted", ":String?Default=" + dDeleteMark);     //删除标记
-            dicMap.Add("create_time", "ExDate:DateTime");                   //录入日期
-            dicMap.Add("update_time", "ModDate:DateTime");                  //更新日期
-            dicMap.Add("longitude", ":String?Default=0");                   //经度
-            dicMap.Add("latitude", ":String?Default=0");                    //纬度
-            dicMap.Add("if_abnormal", ":String?Default=0");                 //是否异常
-            dicMap.Add("if_stick", ":String?Default=0");                    //是否置顶
+            dicMap.Add("if_deleted", "FlagDeleted");            //删除标记
+            dicMap.Add("create_time", "ExDate:DateTime");       //录入日期
+            dicMap.Add("update_time", "ModDate:DateTime");      //更新日期
+            dicMap.Add("longitude", ":String?Default=0");       //经度
+            dicMap.Add("latitude", ":String?Default=0");        //纬度
+            dicMap.Add("if_abnormal", ":String?Default=0");     //是否异常
+            dicMap.Add("if_stick", ":String?Default=0");        //是否置顶
 
             return dicMap;
         }

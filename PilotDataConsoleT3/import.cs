@@ -207,6 +207,8 @@ namespace PilotDataConsoleT3
                             property.CreateIndex("erp_house", "fy_empid", "fy_empid", MysqlIndexType.INDEX);
                             property.CreateIndex("erp_house", "fy_key_userid", "fy_key_userid", MysqlIndexType.INDEX);
                             property.CreateIndex("erp_house", "id", "id", MysqlIndexType.INDEX);
+                            property.CreateIndex("erp_house", "status", "status", MysqlIndexType.INDEX);
+                            property.CreateIndex("erp_house", "if_key", "if_key", MysqlIndexType.INDEX);
                         }
 
                         if(bObject.dExec == "true")
@@ -215,11 +217,11 @@ namespace PilotDataConsoleT3
                             property.importProperty();
                         }
 
-                        if(bObject.dUpdateData == "true")
-                        {
-                            //更新数据
-                            property.UpdateData();
-                        }
+                        //if(bObject.dUpdateData == "true")
+                        //{
+                        //    //更新数据
+                        //    property.UpdateData();
+                        //}
 
                         //删除字段
                         if(bObject.dFieldDrop == "true")
@@ -237,6 +239,8 @@ namespace PilotDataConsoleT3
                             property.DropIndex("erp_house", "fy_empid", MysqlIndexType.INDEX);
                             property.DropIndex("erp_house", "fy_key_userid", MysqlIndexType.INDEX);
                             property.DropIndex("erp_house", "id", MysqlIndexType.INDEX);
+                            property.DropIndex("erp_house", "status", MysqlIndexType.INDEX);
+                            property.DropIndex("erp_house", "if_key", MysqlIndexType.INDEX);
                         }
 
                         //输出结果
@@ -252,10 +256,10 @@ namespace PilotDataConsoleT3
                             //新增字段
                             propertyfollow.AddField("fy_followId", "varchar(100)");
                         }
-                        if(bObject.dUpdateData == "true")
-                        {
-                            propertyfollow.UpdateData();
-                        }
+                        //if(bObject.dUpdateData == "true")
+                        //{
+                        //    propertyfollow.UpdateData();
+                        //}
                         if(bObject.dExec == "true")
                         {
                             //执行导数据的方法
@@ -314,11 +318,11 @@ namespace PilotDataConsoleT3
                             inquiry.DropIndex("erp_client", "fy_EmpID", MysqlIndexType.INDEX);
                             inquiry.DropIndex("erp_client", "fy_AreaID", MysqlIndexType.INDEX);
                         }
-                        if(bObject.dUpdateData == "true")
-                        {
-                            //更新数据
-                            inquiry.UpdateData();
-                        }
+                        //if(bObject.dUpdateData == "true")
+                        //{
+                        //    //更新数据
+                        //    inquiry.UpdateData();
+                        //}
 
                         //输出结果
                         strResult = inquiry.m_Result;
@@ -334,6 +338,7 @@ namespace PilotDataConsoleT3
                             inquiryfollow.AddField("fy_followId", "varchar(100)");
                             inquiryfollow.AddField("fy_client_id", "varchar(100)");
                             inquiryfollow.AddField("fy_user_id", "varchar(100)");
+                            inquiryfollow.AddField("fy_if_deleted", "varchar(20)");
                             inquiryfollow.CreateIndex("erp_client_follow", "fy_client_id", "fy_client_id", MysqlIndexType.INDEX);
                             inquiryfollow.CreateIndex("erp_client_follow", "fy_user_id", "fy_user_id", MysqlIndexType.INDEX);
                         }
@@ -348,6 +353,7 @@ namespace PilotDataConsoleT3
                             inquiryfollow.DropField("fy_followId");
                             inquiryfollow.DropField("fy_client_id");
                             inquiryfollow.DropField("fy_user_id");
+                            inquiryfollow.DropField("fy_if_deleted");
                             inquiryfollow.DropIndex("erp_client_follow", "fy_client_id", MysqlIndexType.INDEX);
                             inquiryfollow.DropIndex("erp_client_follow", "fy_user_id", MysqlIndexType.INDEX);
                         }
@@ -371,11 +377,11 @@ namespace PilotDataConsoleT3
                             //执行导数据的方法
                             contract.importContract();
                         }
-                        if(bObject.dUpdateData == "true")
-                        {
-                            //更新数据
-                            contract.UpdateData();
-                        }
+                        //if(bObject.dUpdateData == "true")
+                        //{
+                        //    //更新数据
+                        //    contract.UpdateData();
+                        //}
                         if(bObject.dFieldDrop == "true")
                         {
                             contract.DropIndex("erp_deal", "erp_deal_id", MysqlIndexType.INDEX);
@@ -432,11 +438,11 @@ namespace PilotDataConsoleT3
                             //执行导数据的方法
                             contractcomm.importContractComm();
                         }
-                        if (bObject.dUpdateData == "true")
-                        {
-                            //更新数据
-                            //contractcomm.UpdateData();
-                        }
+                        //if (bObject.dUpdateData == "true")
+                        //{
+                        //    //更新数据
+                        //    //contractcomm.UpdateData();
+                        //}
                         if(bObject.dFieldDrop == "true")
                         {
                             //删除字段
