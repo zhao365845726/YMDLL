@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMDLL", "YMDLL\YMDLL.csproj", "{FF06CFC9-4A33-420D-A6CE-809BEEC4F70D}"
 EndProject
@@ -41,28 +41,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelegateDemo", "DelegateDem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDemo", "EventDemo\EventDemo.csproj", "{1838A663-25F1-433B-B6A7-F481AEBBF570}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PilotDataWeb", "http://localhost:51732", "{E11124A4-A694-4F15-AFE2-46FC98C43EC3}"
-	ProjectSection(WebsiteProperties) = preProject
-		UseIISExpress = "true"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_51732"
-		Debug.AspNetCompiler.PhysicalPath = "PilotDataWeb\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51732\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_51732"
-		Release.AspNetCompiler.PhysicalPath = "PilotDataWeb\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51732\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "PilotDataWeb\"
-		DefaultWebSiteLanguage = "Visual C#"
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity_Base", "Entity_Base\Entity_Base.csproj", "{9B07F300-3CC5-4F95-827C-1BDCEBD288E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity_ToYM", "Entity_ToYM\Entity_ToYM.csproj", "{FDC5E24C-74A0-4E7E-9472-5ED92D75638E}"
@@ -82,6 +60,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_WebMVC", "Test_WebMVC\Test_WebMVC.csproj", "{AFF37B39-5335-4A23-84ED-DDF88D6EA61B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_WebMVC.Tests", "Test_WebMVC.Tests\Test_WebMVC.Tests.csproj", "{19BF98FD-0D2D-47F1-8AD0-F766FB6F1576}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZZLToERP_PHP", "ZZLToERP_PHP\ZZLToERP_PHP.csproj", "{C81D135B-57E7-477C-A0A9-F3551E565C80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -137,10 +117,6 @@ Global
 		{1838A663-25F1-433B-B6A7-F481AEBBF570}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1838A663-25F1-433B-B6A7-F481AEBBF570}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1838A663-25F1-433B-B6A7-F481AEBBF570}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E11124A4-A694-4F15-AFE2-46FC98C43EC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E11124A4-A694-4F15-AFE2-46FC98C43EC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E11124A4-A694-4F15-AFE2-46FC98C43EC3}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{E11124A4-A694-4F15-AFE2-46FC98C43EC3}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{9B07F300-3CC5-4F95-827C-1BDCEBD288E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9B07F300-3CC5-4F95-827C-1BDCEBD288E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B07F300-3CC5-4F95-827C-1BDCEBD288E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -181,6 +157,10 @@ Global
 		{19BF98FD-0D2D-47F1-8AD0-F766FB6F1576}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19BF98FD-0D2D-47F1-8AD0-F766FB6F1576}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19BF98FD-0D2D-47F1-8AD0-F766FB6F1576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C81D135B-57E7-477C-A0A9-F3551E565C80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C81D135B-57E7-477C-A0A9-F3551E565C80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C81D135B-57E7-477C-A0A9-F3551E565C80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C81D135B-57E7-477C-A0A9-F3551E565C80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -198,7 +178,6 @@ Global
 		{3EEAB05E-227B-4734-A019-D44688775279} = {46A97CAD-56BD-403F-BA8C-547CE3B015A0}
 		{8F23318E-B1F6-45B0-AEF7-943B44827212} = {46A97CAD-56BD-403F-BA8C-547CE3B015A0}
 		{1838A663-25F1-433B-B6A7-F481AEBBF570} = {46A97CAD-56BD-403F-BA8C-547CE3B015A0}
-		{E11124A4-A694-4F15-AFE2-46FC98C43EC3} = {955AAE89-EEE6-4C1E-BD8B-C0A52CC5C70C}
 		{9B07F300-3CC5-4F95-827C-1BDCEBD288E0} = {955AAE89-EEE6-4C1E-BD8B-C0A52CC5C70C}
 		{FDC5E24C-74A0-4E7E-9472-5ED92D75638E} = {955AAE89-EEE6-4C1E-BD8B-C0A52CC5C70C}
 		{39C47974-5A98-4FCD-B753-3F6CB5CC2045} = {7E439F66-BAF4-428F-878B-95EB78083783}
@@ -209,5 +188,6 @@ Global
 		{24D85E94-B7DE-40C3-8029-D6C30C3A9C3F} = {317B96A8-E8C4-4BD7-B21C-4C46A236BCD0}
 		{AFF37B39-5335-4A23-84ED-DDF88D6EA61B} = {317B96A8-E8C4-4BD7-B21C-4C46A236BCD0}
 		{19BF98FD-0D2D-47F1-8AD0-F766FB6F1576} = {317B96A8-E8C4-4BD7-B21C-4C46A236BCD0}
+		{C81D135B-57E7-477C-A0A9-F3551E565C80} = {955AAE89-EEE6-4C1E-BD8B-C0A52CC5C70C}
 	EndGlobalSection
 EndGlobal

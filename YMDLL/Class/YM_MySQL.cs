@@ -118,14 +118,14 @@ namespace YMDLL.Class
             }
         }
 
-        public DataTable GetSchema(string str, string[] restri)
-        {
-            return connection.GetSchema(str, restri);
-        }
-        public DataTable GetSchema(string str)
-        {
-            return connection.GetSchema(str);
-        }
+        //public DataTable GetSchema(string str, string[] restri)
+        //{
+        //    return connection.GetSchema(str, restri);
+        //}
+        //public DataTable GetSchema(string str)
+        //{
+        //    return connection.GetSchema(str);
+        //}
         // Get Database List  
 
         /// <summary>
