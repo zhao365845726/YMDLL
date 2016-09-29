@@ -8,3 +8,4 @@ F:\_GitCode\YMDLL\ThreadDemo\bin\Release\ThreadDemo.exe
 F:\_GitCode\YMDLL\ThreadDemo\bin\Release\ThreadDemo.pdb
 F:\_GitCode\YMDLL\ThreadDemo\obj\Release\ThreadDemo.exe
 F:\_GitCode\YMDLL\ThreadDemo\obj\Release\ThreadDemo.pdb
+F:\_GitCode\YMDLL\ThreadDemo\obj\Release\ThreadDemo.csprojResolveAssemblyReference.cache
