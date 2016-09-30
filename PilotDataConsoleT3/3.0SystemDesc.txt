@@ -166,6 +166,13 @@ SELECT * FROM erp_house_follow ORDER BY document_id DESC LIMIT 100;
 -- 查询合同信息
 SELECT * FROM erp_deal LIMIT 100;
 
+SELECT COUNT(*) FROM erp_deal 
+WHERE  deal_status IN ("待审核","已审核") AND type IN ("买卖","一手") AND  deal_id in 
+(select deal_id from erp_deal_separate  s where commission_type <> '资源管理' and proportion > 0 ) and  1 = 1 
+AND company_id = 999 AND if_deleted = 0
+
+SELECT deal_status,type,deal_id,company_id,if_deleted FROM erp_deal LIMIT 100;
+
 -- 更新合同房源信息
 update erp_deal a JOIN erp_house b ON a.erp_house_id = b.erp_id 
 set a.district = b.district,a.district_id = b.district_id,a.region = b.region,a.biz_area_id = b.region_id,
@@ -177,6 +184,10 @@ where 1 = 1 and a.erp_house_id = b.erp_id and a.erp_house_id <> '';
 UPDATE erp_deal_separate a JOIN erp_deal b 
 SET a.deal_id = b.deal_id
 WHERE a.fy_DealId = b.erp_deal_id;
+
+UPDATE erp_deal_separate a JOIN erp_deal b ON a.fy_DealId = b.erp_deal_id
+SET a.deal_id = b.deal_id
+WHERE a.fy_DealId = b.erp_deal_id
 
 -- 更新合同业绩用户信息
 UPDATE erp_deal_separate a JOIN erp_user b 

@@ -76,6 +76,7 @@
     <Content Include="config-local.txt" />
     <Content Include="import.ico" />
     <Content Include="1.0SystemDesc.txt" />
+    <Content Include="PilotDataExpression.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
