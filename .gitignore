@@ -26,3 +26,12 @@
 *.exe
 *.out
 *.app
+
+# Other
+*.pdb
+*.cache
+*.pdb
+*.cache
+AgencyToERP_PHP/obj/Debug/build.force
+*.cache
+ZZLToERP_PHP/bin/Release/YMDLL.pdb

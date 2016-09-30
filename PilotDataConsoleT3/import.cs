@@ -591,29 +591,29 @@ namespace PilotDataConsoleT3
                 case TableType.TEST:
                     {
                         //声明房源对象
-                        Property property = new Property();
+                        NewsOld newsold = new NewsOld();
                         if(bObject.dFieldAdd == "true")
                         {
                             //添加字段
-                            property.AddField("fy_community", "varchar(100)");
-                            property.AddField("fy_empid", "varchar(100)");
-                            property.AddField("fy_deptid", "varchar(100)");
-                            property.AddField("fy_visit_way", "varchar(20)");
-                            property.AddField("fy_common_telephone", "varchar(1000)");
+                            newsold.AddField("fy_community", "varchar(100)");
+                            newsold.AddField("fy_empid", "varchar(100)");
+                            newsold.AddField("fy_deptid", "varchar(100)");
+                            newsold.AddField("fy_visit_way", "varchar(20)");
+                            newsold.AddField("fy_common_telephone", "varchar(1000)");
                         }
                         if(bObject.dExec == "true")
                         {
                             //执行导数据的方法
-                            property.importProperty();
+                            newsold.importNews();
                         }
                         if(bObject.dUpdateData == "true")
                         {
                             //更新数据
-                            property.UpdateData();
+                            newsold.UpdateData();
                         }
 
                         //输出结果
-                        strResult = property.m_Result;
+                        strResult = newsold.m_Result;
                         break;
                     }
             }

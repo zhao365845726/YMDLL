@@ -4,7 +4,14 @@
     <Position X="0.5" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAEABAAACAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>YM_Web.cs</FileName>
+      <FileName>Class\Web\YM_Web.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="YMDLL.Common.StringHelper">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\StringHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="微软雅黑" Size="9" />
