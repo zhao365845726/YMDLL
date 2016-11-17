@@ -17,11 +17,11 @@ namespace HzlyToERP3_PHP
         /// <summary>
         /// 连接SQL Server数据库的对象
         /// </summary>
-        public YM_SQLServer _sqlServer;
+        public YM_MySQL _smysql;
         /// <summary>
         /// 连接mysql数据库的对象
         /// </summary>
-        public YM_MySQL _mysql;
+        public YM_MySQL _dmysql;
         /// <summary>
         /// 时间计算对象
         /// </summary>
@@ -163,10 +163,10 @@ namespace HzlyToERP3_PHP
         /// </summary>
         public Base()
         {
-            _sqlServer = new YM_SQLServer();
-            _mysql = new YM_MySQL();
-            _sqlServer.dbInitialization(ReadAppSetting("SourceName"), ReadAppSetting("SourceDB"));
-            _mysql.Initialize(ReadAppSetting("DestName"), ReadAppSetting("DestDB"), ReadAppSetting("DestUsername"), ReadAppSetting("DestPassword"), ReadAppSetting("DestPort"));
+            _smysql = new YM_MySQL();
+            _dmysql = new YM_MySQL();
+            _smysql.Initialize(ReadAppSetting("SourceName"), ReadAppSetting("SourceDB"), ReadAppSetting("SourceUsername"), ReadAppSetting("SourcePassword"), ReadAppSetting("SourcePort"));
+            _dmysql.Initialize(ReadAppSetting("DestName"), ReadAppSetting("DestDB"), ReadAppSetting("DestUsername"), ReadAppSetting("DestPassword"), ReadAppSetting("DestPort"));
             sWhere = "1=1";
             sPageIndex = Convert.ToInt32(ReadAppSetting("SourcePageIndex"));
             sPageSize = Convert.ToInt32(ReadAppSetting("SourcePageSize"));
@@ -187,8 +187,8 @@ namespace HzlyToERP3_PHP
         /// </summary>
         ~Base()
         {
-            _sqlServer = null;
-            _mysql = null;
+            _smysql = null;
+            _dmysql = null;
             sTableName = null;
             sColumns = null;
             sOrder = null;
@@ -216,134 +216,7 @@ namespace HzlyToERP3_PHP
         {
             return ConfigurationSettings.AppSettings[strKey].ToString();
         }
-
-        /// <summary>
-        /// 导入数据
-        /// </summary>
-        public void ImportData()
-        {
-            if (sPageIndex > 1)
-            {
-                dIsDelete = false;
-            }
-
-            ReadPagerData();
-
-            sRows = sTotalCount;
-
-            //数据的总数小于等于页面大小数时候
-            if (sRows > sPageSize)
-            {
-                //统计页数
-                int totalPage = 0;
-                if (sRows % sPageSize > 0)
-                {
-                    totalPage = (sRows / sPageSize) + 1;
-                    //如果有多页的，增加第二页数据的时候就不许删除
-                    dIsDelete = false;
-                }
-                else
-                {
-                    totalPage = (sRows / sPageSize);
-                }
-
-                for (int i = 1; i < totalPage; i++)
-                {
-                    sPageIndex = sPageIndex + 1;
-                    ReadPagerData();
-                }
-            }
-            else
-            {
-                return;
-            }
-        }
-
         
-
-        /// <summary>
-        /// 分页数据
-        /// </summary>
-        /// <returns></returns>
-        //public bool PagerData(Action<FieldMap>)
-        //{
-        //    try
-        //    {
-        //        DataTable dt = _sqlServer.GetPager(sTableName, sColumns, sOrder, sPageSize, sPageIndex, sWhere, out sTotalCount);
-
-        //        List<String> lstValue = new List<String>();
-        //        foreach (DataRow row in dt.Rows)
-        //        {
-        //            string strTemp = GetConcatValues(FieldMap(), row);
-
-        //            lstValue.Add(strTemp);
-        //        }
-        //        //如果允许删除，清空目标表数据
-        //        if (dIsDelete == true)
-        //        {
-        //            _mysql.Delete(dTableName, null);
-        //        }
-        //        //插入数据并返回插入的结果
-        //        bool isResult = _mysql.BatchInsert(dTableName, dColumns, lstValue);
-        //        Console.Write("\n数据已经成功写入" + sPageSize * sPageIndex + "条");
-        //        if (isResult)
-        //        {
-        //            m_Result = "\n" + dTableDescript + "数据插入成功";
-        //            return true;
-        //        }
-        //        else
-        //        {
-        //            m_Result = "\n" + dTableDescript + "数据插入失败";
-        //            return false;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        m_Result = "导出" + dTableDescript + "异常.\n异常原因：" + ex.Message;
-        //        return false;
-        //    }
-        //}
-
-        /// <summary>
-        /// 分页数据
-        /// </summary>
-        public bool ReadPagerData()
-        {
-            try
-            {
-                DataTable dt = _sqlServer.GetPager(sTableName, sColumns, sOrder, sPageSize, sPageIndex, sWhere, out sTotalCount);
-
-                List<String> lstValue = new List<String>();
-                foreach (DataRow row in dt.Rows)
-                {
-                    string strTemp = "'" + row["InquiryID"].ToString() + "'";
-                    lstValue.Add(strTemp);
-                }
-                //如果允许删除，清空目标表数据
-                if (dIsDelete == true)
-                {
-                    _mysql.Delete(dTableName, null);
-                }
-                //插入数据并返回插入的结果
-                bool isResult = _mysql.BatchInsert(dTableName, dColumns, lstValue);
-                Console.Write("\n数据已经成功写入" + sPageSize * sPageIndex + "条");
-                if (isResult)
-                {
-                    m_Result = "\n" + _TableName + "数据插入成功";
-                    return true;
-                }
-                else
-                {
-                    m_Result = "\n" + _TableName + "数据插入失败";
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                m_Result = "导出" + _TableName + "异常.\n异常原因：" + ex.Message;
-                return false;
-            }
-        }
 
         /// <summary>
         /// 过滤特殊字符
@@ -384,7 +257,15 @@ namespace HzlyToERP3_PHP
             {
                 if (dicItem.Value.IndexOf(":") == -1)
                 {
-                    strResult += "'" + FilterSpecialCharacter(drRow[dicItem.Value].ToString().Trim()) + "',";
+                    if(dicItem.Value.IndexOf(".") != -1)
+                    {
+                        string[] arrField = dicItem.Value.Split('.');
+                        strResult += "'" + FilterSpecialCharacter(drRow[arrField[1]].ToString().Trim()) + "',";
+                    }
+                    else
+                    {
+                        strResult += "'" + FilterSpecialCharacter(drRow[dicItem.Value].ToString().Trim()) + "',";
+                    }
                 }
                 else
                 {
@@ -394,6 +275,10 @@ namespace HzlyToERP3_PHP
                     {
                         strResult += "'" + _dateTime.DateTimeToStamp(drRow[saItem[0]].ToString().Trim()).ToString() + "',";
                     }
+                    //else if(saItem[1].ToUpper() == "DOUBLE")
+                    //{
+                    //    strResult += "'" + Convert.ToDouble(drRow[saItem[0]].ToString().Trim()).ToString() + "',";
+                    //}
                     else if (saItem[1].IndexOf('?') != -1)
                     {
                         strItemOne = saItem[1].Split('?');
@@ -486,8 +371,8 @@ namespace HzlyToERP3_PHP
         /// </summary>
         public void AddField(string FieldName, string FieldType)
         {
-            _mysql.UpdateField("add", dTableName, FieldName, FieldType);
-            m_Result = _mysql.m_Message;
+            _dmysql.UpdateField("add", dTableName, FieldName, FieldType);
+            m_Result = _dmysql.m_Message;
         }
 
         /// <summary>
@@ -495,8 +380,8 @@ namespace HzlyToERP3_PHP
         /// </summary>
         public void ModifyField(string FieldName, string FieldType)
         {
-            _mysql.UpdateField("modify column ", dTableName, FieldName, FieldType);
-            m_Result = _mysql.m_Message;
+            _dmysql.UpdateField("modify column ", dTableName, FieldName, FieldType);
+            m_Result = _dmysql.m_Message;
         }
 
         /// <summary>
@@ -504,8 +389,8 @@ namespace HzlyToERP3_PHP
         /// </summary>
         public void DropField(string FieldName)
         {
-            _mysql.UpdateField("drop ", dTableName, FieldName, "");
-            m_Result = _mysql.m_Message;
+            _dmysql.UpdateField("drop ", dTableName, FieldName, "");
+            m_Result = _dmysql.m_Message;
         }
         #endregion
 
@@ -532,7 +417,7 @@ namespace HzlyToERP3_PHP
                 default:
                     return false;
             }
-            _mysql.ExecuteSQL(strsql);
+            _dmysql.ExecuteSQL(strsql);
             return true;
         }
 
@@ -574,7 +459,7 @@ namespace HzlyToERP3_PHP
                 default:
                     return false;
             }
-            _mysql.ExecuteSQL(strsql);
+            _dmysql.ExecuteSQL(strsql);
             return true;
         }
         #endregion

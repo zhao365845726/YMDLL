@@ -1,0 +1,8 @@
+F:\_GitCode\YMDLL\HzlyToERP3_PHP\bin\Release\HzlyToERP3_PHP.dll
+F:\_GitCode\YMDLL\HzlyToERP3_PHP\bin\Release\HzlyToERP3_PHP.pdb
+F:\_GitCode\YMDLL\HzlyToERP3_PHP\bin\Release\YMDLL.dll
+F:\_GitCode\YMDLL\HzlyToERP3_PHP\bin\Release\MySql.Data.dll
+F:\_GitCode\YMDLL\HzlyToERP3_PHP\bin\Release\YMDLL.pdb
+F:\_GitCode\YMDLL\HzlyToERP3_PHP\obj\Release\HzlyToERP3_PHP.csprojResolveAssemblyReference.cache
+F:\_GitCode\YMDLL\HzlyToERP3_PHP\obj\Release\HzlyToERP3_PHP.dll
+F:\_GitCode\YMDLL\HzlyToERP3_PHP\obj\Release\HzlyToERP3_PHP.pdb

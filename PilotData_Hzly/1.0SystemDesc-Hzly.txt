@@ -1,0 +1,294 @@
+﻿Mysql数据库
+
+================================计算可用数据和非可用数据 Start=================================
+-- 计算城市
+select * from ta_area;
+select count(1) from ta_area;
+
+-- 计算行政区
+select * from ta_dstrict;
+select count(1) from ta_dstrict;
+
+-- 计算片区
+select * from ta_picearea;
+select count(1) from ta_picearea;
+select count(1) from ta_picearea where flagdeleted = 0;
+select count(1) from ta_picearea where flagdeleted <> 0 and FlagTrashed <> 0;
+
+-- 计算楼盘字典
+select * from ta_estate;
+select count(1) from ta_estate;
+select count(1) from ta_estate where flagdeleted = 0;
+select count(1) from ta_estate where flagdeleted <> 0 and FlagTrashed <> 0;
+
+-- 计算座栋
+select * from ta_building;
+select count(1) from ta_building;
+select count(1) from ta_building where FlagDeleted = 0;
+select count(1) from ta_building where FlagDeleted <> 0 and FlagTrashed <> 0;
+
+-- 计算单元
+select * from ta_buildingunit;
+select count(1) from ta_buildingunit;
+
+-- 计算部门
+select * from ta_department;
+select count(1) from ta_department;
+select count(1) from ta_department where FlagDeleted = 0;
+select count(1) from ta_department where FlagDeleted <> 0 and FlagTrashed <> 0;
+
+-- 计算职务
+select * from ta_positionmodel;
+select count(1) from ta_positionmodel;
+select count(1) from ta_positionmodel where FlagDeleted = 0;
+
+-- 计算人员
+select * from ta_emplyee;
+SELECT MD5('zh123456');
+select count(1) from ta_emplyee;
+select count(1) from ta_emplyee where FlagDeleted = 0;
+select count(1) from ta_emplyee where FlagDeleted <> 0 and FlagTrashed <> 0;
+
+select a.uid,a.sex,a.username,a.`password`,a.chname,a.spell,a.mobile,a.createdate,a.modidate,a.flagdeleted,a.email,
+b.birthday,b.idcard,b.joindate,b.awaydate,b.brief
+from ta_systemuser as a,ta_emplyee as b
+WHERE a.uid = b.uid
+ORDER BY a.username;
+
+-- 计算房源
+select * from ta_house;
+select count(1) from ta_house;
+select count(1) from ta_house where FlagDeleted = 0;
+select count(1) from ta_house where FlagDeleted <> 0 and FlagTrashed <> 0;
+
+-- 计算房源|客源跟进
+select * from ta_follow;
+select count(1) from ta_follow;
+select count(1) from ta_follow where FlagDeleted = 0;
+select count(1) from ta_follow where FlagDeleted <> 0 and FlagTrashed <> 0;
+
+-- 计算客源
+select * from ta_inquiry;
+select count(1) from ta_inquiry;
+
+-- 计算新闻
+select * from ta_news;
+select count(1) from ta_news;
+select count(1) from ta_news where FlagDeleted = 0;
+select count(1) from ta_news where FlagDeleted <> 0 and FlagTrashed <> 0;
+
+-- 计算公告
+select * from ta_notice;
+select count(1) from ta_notice;
+
+-- 计算情报站|业务审批
+select * from MESSAGE
+select count(1) from MESSAGE
+select count(1) from MESSAGE where FlagDeleted = 0
+select count(1) from MESSAGE where FlagDeleted <> 0 and FlagTrashed <> 0
+
+-- 计算合同成交
+select * from ta_contractinfo; 
+select count(1) from ta_contractinfo;
+select count(1) from ta_contractinfo where FlagDeleted = 0;
+
+-- 计算合同实收
+select * from CONTRACTACT
+select count(1) from CONTRACTACT
+select count(1) from CONTRACTACT where FlagDeleted = 0
+select count(1) from CONTRACTACT where FlagDeleted <> 0 and FlagTrashed <> 0
+
+-- 计算合同
+select * from CONTRACTCOMM
+select count(1) from CONTRACTCOMM
+select count(1) from CONTRACTCOMM where FlagDeleted = 0
+select count(1) from CONTRACTCOMM where FlagDeleted <> 0 and FlagTrashed <> 0
+select * from ContractComm where ContractID = '160919140040F5D228FB89B361D68FFA'
+
+-- 计算合同应收
+select * from CONTRACTCON
+select count(1) from CONTRACTCON
+select count(1) from CONTRACTCON where FlagDeleted = 0
+select count(1) from CONTRACTCON where FlagDeleted <> 0 and FlagTrashed <> 0
+
+-- 计算合同费用
+select * from CONTRACTFEE
+select count(1) from CONTRACTFEE
+select count(1) from CONTRACTFEE where FlagDeleted = 0
+select count(1) from CONTRACTFEE where FlagDeleted <> 0 and FlagTrashed <> 0
+
+-- 计算合同跟进
+select * from CONTRACTFOLLOW
+select count(1) from CONTRACTFOLLOW
+select count(1) from CONTRACTFOLLOW where FlagDeleted = 0
+select count(1) from CONTRACTFOLLOW where FlagDeleted <> 0 and FlagTrashed <> 0
+
+-- select FlagDeleted,FlagTrashed from ESTATE where FlagDeleted <> 0	
+================================计算可用数据和非可用数据 End=================================
+
+
+房友导入3.0系统的数据内容
+
+01.行政区------------本地耗时：0.3168882s
+02.片区------------本地耗时：0.4139865s
+03.小区楼盘字典------------本地耗时：06.3235811s
+04.栋座单元------------本地耗时：42.2761399s
+04.更新座栋------------本地耗时：684.445s
+05.部门------------本地耗时：01.1517681s
+05.更新部门归属-----本地耗时：1.353ms
+06.职务------------本地耗时：0.3586144s
+07.加盟店------------本地耗时：0.2849959s
+08.人员------------本地耗时：12.0462996s
+09.新闻公告------------本地耗时：02.9167501s
+11.房源---------------本地耗时：00:56:06.0242774s
+11.更新房源------------本地耗时：03:00:00.00
+13.房源跟进------------本地耗时：
+13.更新房跟------------本地耗时：143.783ms(350000条数据)
+12.导入客源------------本地耗时：00:25:26.8598616s
+12.更新客源------------本地耗时：416.345ms
+14.导入客跟------------本地耗时：
+14.更新客跟------------本地耗时：37.654ms(9002条数据)
+15.合同信息------------本地耗时：00:00:13.3258095s
+15.更新合同------------本地耗时：11.658ms
+15.业绩分成------------本地耗时：00:00:41.8712622s
+17.实收实付------------本地耗时：00:00:35.9427397s
+17.更新实收实付------------本地耗时：00:00:08.2331920s
+18.导入应收应付------------本地耗时：00:00:28.9039844s
+18.更新应收应付------------本地耗时：00:00:04.5345909s
+18.导入业务审批------------本地耗时：00:00:56.7054274s
+18.更新业务审批------------本地耗时：
+19.合同附件------------本地耗时：
+20.合同跟进------------本地耗时：
+
+
+导入3.0系统后
+1.首先初始化数据
+2.更新redis
+
+导入房源后，执行的更新的操作
+1.更新维护人，录入人【代码更新】
+UPDATE erp_house as a,erp_user as b
+SET a.input_user_id = b.id,a.principal_user_id = b.id,a.principal_username = b.username,a.input_username = b.username
+WHERE and SUBSTRING_INDEX(a.input_username,'.',-1) = b.username and a.input_department_id = b.department_id and a.id = 1
+
+2.更新维护人部门，录入人部门【代码更新】
+UPDATE erp_house as a,erp_department as b
+SET a.input_department_id = b.dept_id,a.principal_department_id = b.dept_id
+WHERE SUBSTRING_INDEX(a.input_username,'.',1) = b.dept_name and a.id = 1
+
+3.更新钥匙人，钥匙人部门【代码更新】
+UPDATE erp_house as a,erp_user as b
+SET a.input_user_id = b.id,a.principal_user_id = b.id,a.principal_username = b.username,a.input_username = b.username
+WHERE SUBSTRING_INDEX(a.input_username,'.',-1) = b.username and a.input_department_id = b.department_id and a.id = 1
+
+4.更新房源小区和小区名称
+UPDATE erp_house a,erp_community b
+SET a.community = b.community_name,a.community_id = b.community_id,a.region = b.biz_area_name,a.region_id = b.biz_area_id,a.district_id = b.district_id
+WHERE a.fy_community = b.erp_id
+
+
+导入部门后更新部门的状态操作
+1.调用存储过程UpdateDepartment 更新部门归属
+	可能出现的问题：
+	a).多个部门的erp_id是一样的，必须要询问长沙方面这个部门的归属是什么才能执行存储过程
+	b).查询多个部门的erp_id的sql语句
+		SELECT dept_id,erp_id,erp_pid,count(erp_id) as total FROM erp_department GROUP BY erp_id HAVING count(erp_id) > 1;
+		SELECT dept_id,erp_id,erp_pid FROM erp_department WHERE `status` = '有效';
+		SELECT * FROM erp_department WHERE erp_id in(210106,290102);
+	c).有可能部门多个是因为有有效的，也有关闭的
+	d).更新部门表中加盟店id,加盟店名称的字段
+		UPDATE erp_department a JOIN erp_join_stores b ON a.dept_name = b.Fstores_name 
+		SET a.join_stores_id = b.Fdocument_id,a.join_stores_name = a.dept_name
+		WHERE a.dept_name = b.Fstores_name
+
+导入房源跟进后更新操作
+1.调用存储过程UpdateHouseFollow 更新房源的信息，小区ID,小区信息，人员信息,房源状态，审核状态等信息
+2.更新钥匙状态[代码更新]
+
+
+导入客源更新后
+1.查询出客源需求区域的内容
+SELECT a.prefer_region,a.prefer_region_json,b.biz_area_id,b.biz_area_name,b.district_id,b.district,c.community_name,c.community_id,
+CONCAT('-',c.community_name,'-',b.district,'-',b.biz_area_name,';'),
+CONCAT('[{\"district_id\":\"',b.district_id,'\",\"district\":\"',b.district,'\",\"region_id\":\"',b.biz_area_id,'\",\"region\":\"',b.biz_area_name,'\",\"community_id\":\"',c.community_id,'\",\"community\":\"',c.community_name,'\",\"type\":\"district\"}]')
+FROM erp_client a JOIN erp_region b ON a.fy_AreaId = b.erp_id JOIN erp_community c ON b.biz_area_name = c.biz_area_name
+WHERE c.community_name = '安居乐'
+LIMIT 100
+
+-- 更新语句
+UPDATE erp_client a JOIN erp_region b ON a.fy_AreaId = b.erp_id JOIN erp_community c ON b.biz_area_name = c.biz_area_name
+SET a.prefer_region = CONCAT('-',c.community_name,'-',b.district,'-',b.biz_area_name,';'),
+a.prefer_region_json = CONCAT('[{\"district_id\":\"',b.district_id,'\",\"district\":\"',b.district,'\",\"region_id\":\"',b.biz_area_id,'\",\"region\":\"',b.biz_area_name,'\",\"community_id\":\"',c.community_id,'\",\"community\":\"',c.community_name,'\",\"type\":\"district\"}]')
+
+-- prefer_region_json字段格式
+[{"district_id":"9","district":"青山湖","region_id":"","region":"","community_id":"","community":"","type":"district"}]
+
+2.更新客源公客为私客
+
+
+导入业务审批数据并更新后
+-- 更新业务审批中的房源关联id
+UPDATE erp_business_review a LEFT JOIN erp_house b ON a.fk_code = b.contract_code 
+SET a.fk_id = b.id
+WHERE a.fk_code = b.contract_code and a.fk_code REGEXP '^[A-Za-z]*[0-9]*$'
+
+-- 更新业务审批的数据
+UPDATE erp_business_review a,erp_house b
+SET a.fk_id = b.id
+WHERE c.fk_code = b.contract_code and a.fk_code REGEXP '^[A-Za-z]*[0-9]*$'
+
+
+
+
+
+
+
+
+
+
+
+
+================================导数据完成后SQL语句执行 Start=================================
+
+-- 更新房源录入人
+UPDATE erp_house as a,erp_department as b
+SET a.input_department_id = b.dept_id,a.principal_department_id = b.dept_id
+WHERE SUBSTRING_INDEX(a.input_username,'.',1) = b.dept_name and a.id = 2
+-- 更新房源维护人
+UPDATE erp_house as a,erp_user as b
+SET a.input_user_id = b.id,a.principal_user_id = b.id,a.principal_username = b.username,a.input_username = b.username
+WHERE SUBSTRING_INDEX(a.input_username,'.',-1) = b.username and a.input_department_id = b.department_id and a.id = 1
+
+SELECT * FROM erp_house LIMIT 1000;
+-- 更新房源小区id,小区名称
+UPDATE erp_house a,erp_community b
+SET a.community = b.community_name,a.community_id = b.community_id,a.region = b.biz_area_name,a.region_id = b.biz_area_id,a.district_id = b.district_id
+WHERE a.fy_community = b.erp_id
+
+-- 更新小区id
+UPDATE erp_community_block a JOIN erp_community b ON a.fy_CommunityId = b.community_id 
+SET a.community_id = b.community_id
+WHERE a.fy_CommunityId = b.community_id
+
+-- 更新钥匙的状态
+SELECT count(1) FROM erp_house WHERE if_key <> 0;
+UPDATE erp_house SET key_status = '已收' WHERE if_key <> 0;
+
+-- 查询房源跟进数量
+SELECT * FROM erp_house_follow ORDER BY document_id DESC LIMIT 100;
+
+-- 更新新闻公告的用户id,部门id,用户姓名
+/*
+UPDATE erp_office_notice a,erp_user b
+SET a.department_id = b.department_id,a.username = b.username,a.user_id = b.id
+WHERE a.erp_user_id = b.erp_id and a.erp_user_id <> ''
+*/
+
+================================导数据完成后SQL语句执行 End=================================
+
+
+
+
+
+
+

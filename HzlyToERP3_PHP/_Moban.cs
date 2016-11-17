@@ -81,7 +81,7 @@ namespace HzlyToERP3_PHP
         {
             try
             {
-                DataTable dt = _sqlServer.GetPager(sTableName, sColumns, sOrder, sPageSize, sPageIndex, sWhere, out sTotalCount);
+                DataTable dt = _smysql.GetPager(sTableName, sColumns, sOrder, sPageSize, sPageIndex, sWhere, out sTotalCount);
 
                 List<String> lstValue = new List<String>();
                 foreach (DataRow row in dt.Rows)
@@ -93,10 +93,10 @@ namespace HzlyToERP3_PHP
                 //如果允许删除，清空目标表数据
                 if (dIsDelete == true)
                 {
-                    _mysql.Delete(dTableName, null);
+                    _dmysql.Delete(dTableName, null);
                 }
                 //插入数据并返回插入的结果
-                bool isResult = _mysql.BatchInsert(dTableName, dColumns, lstValue);
+                bool isResult = _dmysql.BatchInsert(dTableName, dColumns, lstValue);
                 Console.Write("\n数据已经成功写入" + sPageSize * sPageIndex + "条");
                 if (isResult)
                 {
@@ -112,29 +112,6 @@ namespace HzlyToERP3_PHP
             catch (Exception ex)
             {
                 m_Result = "导出" + dTableDescript + "异常.\n异常原因：" + ex.Message;
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// 更新关联数据
-        /// </summary>
-        public bool UpdateData()
-        {
-            string tmpTable = "", tmpValues = "", tmpWhere = "";
-            try
-            {
-                tmpTable = "erp_role";
-                tmpValues = "if_deleted = 1";
-                tmpWhere = "and if_deleted = -1";
-                _mysql.Update(tmpTable, tmpValues, tmpWhere);
-
-                m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新成功";
-                return true;
-            }
-            catch (Exception ex)
-            {
-                m_Result += "\n" + dTableDescript + "中" + dPolitContentDescript + "更新异常.\n异常原因：" + ex.Message;
                 return false;
             }
         }

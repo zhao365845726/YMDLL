@@ -1,0 +1,11 @@
+F:\_GitCode\YMDLL\PilotData_Hzly\bin\Release\PilotData_Hzly.exe
+F:\_GitCode\YMDLL\PilotData_Hzly\bin\Release\HzlyToERP3_PHP.dll
+F:\_GitCode\YMDLL\PilotData_Hzly\bin\Release\YMDLL.dll
+F:\_GitCode\YMDLL\PilotData_Hzly\bin\Release\PilotData_Hzly.exe.config
+F:\_GitCode\YMDLL\PilotData_Hzly\bin\Release\PilotData_Hzly.pdb
+F:\_GitCode\YMDLL\PilotData_Hzly\bin\Release\MySql.Data.dll
+F:\_GitCode\YMDLL\PilotData_Hzly\bin\Release\HzlyToERP3_PHP.pdb
+F:\_GitCode\YMDLL\PilotData_Hzly\bin\Release\YMDLL.pdb
+F:\_GitCode\YMDLL\PilotData_Hzly\obj\Release\PilotData_Hzly.csprojResolveAssemblyReference.cache
+F:\_GitCode\YMDLL\PilotData_Hzly\obj\Release\PilotData_Hzly.exe
+F:\_GitCode\YMDLL\PilotData_Hzly\obj\Release\PilotData_Hzly.pdb

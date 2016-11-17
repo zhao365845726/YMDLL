@@ -1,0 +1,215 @@
+﻿Mysql数据库
+
+================================计算可用数据和非可用数据 Start=================================
+-- 行政区信息表
+SELECT * FROM erp_district LIMIT 100;
+SELECT count(1) FROM erp_district;
+SELECT count(1) FROM erp_district WHERE if_deleted = 0;
+SELECT count(1) FROM erp_district WHERE if_deleted <> 0;
+
+-- 片区/商圈信息表
+SELECT * FROM erp_region LIMIT 100;
+SELECT count(1) FROM erp_region;
+SELECT count(1) FROM erp_region WHERE if_deleted = 0;
+SELECT count(1) FROM erp_region WHERE if_deleted <> 0;
+
+-- 楼盘字典表
+SELECT * FROM erp_community LIMIT 100;
+SELECT count(1) FROM erp_community;
+SELECT count(1) FROM erp_community WHERE if_deleted = 0;
+SELECT count(1) FROM erp_community WHERE if_deleted <> 0;
+
+-- 座栋信息表
+SELECT * FROM erp_community_block LIMIT 100;
+SELECT count(1) FROM erp_community_block;
+SELECT count(1) FROM erp_community_block WHERE if_deleted = 0;
+SELECT count(1) FROM erp_community_block WHERE if_deleted <> 0;
+
+-- 部门表
+SELECT * FROM erp_department LIMIT 100;
+SELECT count(1) FROM erp_department;
+SELECT count(1) FROM erp_department WHERE if_deleted = 0;
+SELECT count(1) FROM erp_department WHERE if_deleted <> 0;
+
+-- 加盟店表
+SELECT * FROM erp_join_stores LIMIT 100;
+SELECT count(1) FROM erp_join_stores;
+SELECT count(1) FROM erp_join_stores WHERE if_deleted = 0;
+SELECT count(1) FROM erp_join_stores WHERE if_deleted <> 0;
+
+-- 角色表
+SELECT * FROM erp_role LIMIT 100;
+SELECT count(1) FROM erp_role;
+SELECT count(1) FROM erp_role WHERE if_deleted = 0;
+SELECT count(1) FROM erp_role WHERE if_deleted <> 0;
+
+-- 用户表
+SELECT * FROM erp_user LIMIT 100;
+SELECT count(1) FROM erp_user;
+SELECT count(1) FROM erp_user WHERE if_deleted = 0;
+SELECT count(1) FROM erp_user WHERE if_deleted <> 0;
+
+-- 房源表
+SELECT * FROM erp_house LIMIT 100;
+SELECT count(1) FROM erp_house;
+SELECT count(1) FROM erp_house WHERE if_deleted = 0;
+SELECT count(1) FROM erp_house WHERE if_deleted <> 0;
+
+-- 房源跟进表
+SELECT * FROM erp_house_follow LIMIT 100;
+SELECT count(1) FROM erp_house_follow;
+SELECT count(1) FROM erp_house_follow WHERE if_deleted = 0;
+SELECT count(1) FROM erp_house_follow WHERE if_deleted <> 0;
+
+-- 客源表
+SELECT * FROM erp_client LIMIT 100;
+SELECT count(1) FROM erp_client;
+SELECT count(1) FROM erp_client WHERE if_deleted = 0;
+SELECT count(1) FROM erp_client WHERE if_deleted <> 0;
+
+-- 客源跟进表
+SELECT * FROM erp_client_follow LIMIT 100;
+SELECT count(1) FROM erp_client_follow;
+SELECT count(1) FROM erp_client_follow WHERE if_deleted = 0;
+SELECT count(1) FROM erp_client_follow WHERE if_deleted <> 0;
+
+-- 合同成交表
+SELECT * FROM erp_deal LIMIT 100;
+SELECT count(1) FROM erp_deal;
+SELECT count(1) FROM erp_deal WHERE if_deleted = 0;
+SELECT count(1) FROM erp_deal WHERE if_deleted <> 0;
+
+-- 应收应付表
+SELECT * FROM erp_receivable LIMIT 100;
+SELECT count(1) FROM erp_receivable;
+SELECT count(1) FROM erp_receivable WHERE if_deleted = 0;
+SELECT count(1) FROM erp_receivable WHERE if_deleted <> 0;
+
+-- 实收实付表
+SELECT * FROM erp_collect_pay LIMIT 100;
+SELECT count(1) FROM erp_collect_pay;
+SELECT count(1) FROM erp_collect_pay WHERE if_deleted = 0;
+SELECT count(1) FROM erp_collect_pay WHERE if_deleted <> 0;
+
+-- 合同分成表
+SELECT * FROM erp_deal_separate;
+SELECT count(1) FROM erp_deal_separate;
+SELECT count(1) FROM erp_deal_separate WHERE if_deleted = 0;
+SELECT count(1) FROM erp_deal_separate WHERE if_deleted <> 0;
+
+-- 公司公告表
+SELECT * FROM erp_office_notice LIMIT 100;
+SELECT count(1) FROM erp_office_notice;
+SELECT count(1) FROM erp_office_notice WHERE if_deleted = 0;
+SELECT count(1) FROM erp_office_notice WHERE if_deleted <> 0;
+
+-- 业务审批表
+SELECT * FROM erp_business_review LIMIT 100;
+SELECT count(1) FROM erp_business_review;
+SELECT count(1) FROM erp_business_review WHERE if_deleted = 0;
+SELECT count(1) FROM erp_business_review WHERE if_deleted <> 0;
+
+
+================================计算可用数据和非可用数据 End=================================
+
+
+
+
+================================执行导入后附加执行的sql Start=================================
+
+
+20160921导入成交信息后，公司ID,删除标记为null值
+
+
+-- 导入部门后
+SELECT dept_id,erp_id,erp_pid FROM erp_department WHERE `status` = '有效' and if_deleted = 0 ;
+SELECT erp_id,count(erp_id) FROM erp_department WHERE `status` = '有效' and if_deleted = 0 GROUP BY erp_id HAVING count(erp_id)>1 ;
+
+SELECT * FROM erp_department WHERE erp_id in ('210106');
+SELECT * FROM erp_department WHERE erp_id in ('290102');
+
+
+成交erp_deal建立索引
+erp_house_id
+erp_client_id
+erp_deal_id
+
+房源表erp_house建立索引
+erp_id
+fy_community
+
+-- 更新房源录入人
+UPDATE erp_house as a,erp_department as b
+SET a.input_department_id = b.dept_id,a.principal_department_id = b.dept_id
+WHERE SUBSTRING_INDEX(a.input_username,'.',1) = b.dept_name and a.id = 2
+-- 更新房源维护人
+UPDATE erp_house as a,erp_user as b
+SET a.input_user_id = b.id,a.principal_user_id = b.id,a.principal_username = b.username,a.input_username = b.username
+WHERE SUBSTRING_INDEX(a.input_username,'.',-1) = b.username and a.input_department_id = b.department_id and a.id = 1
+
+SELECT * FROM erp_house LIMIT 1000;
+-- 更新房源小区id,小区名称
+UPDATE erp_house a,erp_community b
+SET a.community = b.community_name,a.community_id = b.community_id,a.region = b.biz_area_name,a.region_id = b.biz_area_id,a.district_id = b.district_id
+WHERE a.fy_community = b.erp_id
+
+-- 更新座栋小区id
+UPDATE erp_community_block a JOIN erp_community b ON a.fy_CommunityId = b.community_id 
+SET a.community_id = b.community_id
+WHERE a.fy_CommunityId = b.community_id
+
+-- 更新钥匙的状态
+SELECT count(1) FROM erp_house WHERE if_key <> 0;
+UPDATE erp_house SET key_status = '已收' WHERE if_key <> 0;
+
+-- 查询房源跟进数量
+SELECT * FROM erp_house_follow ORDER BY document_id DESC LIMIT 100;
+
+-- 查询合同信息
+SELECT * FROM erp_deal LIMIT 100;
+
+SELECT COUNT(*) FROM erp_deal 
+WHERE  deal_status IN ("待审核","已审核") AND type IN ("买卖","一手") AND  deal_id in 
+(select deal_id from erp_deal_separate  s where commission_type <> '资源管理' and proportion > 0 ) and  1 = 1 
+AND company_id = 999 AND if_deleted = 0
+
+SELECT deal_status,type,deal_id,company_id,if_deleted FROM erp_deal LIMIT 100;
+
+-- 更新合同房源信息
+update erp_deal a JOIN erp_house b ON a.erp_house_id = b.erp_id 
+set a.district = b.district,a.district_id = b.district_id,a.region = b.region,a.biz_area_id = b.region_id,
+a.community = b.community,a.community_id = b.community_id,a.block = b.block,a.block_id = b.block_id,
+a.unit_name = b.unit_name,a.unit_id = b.unit_id,a.room_code = b.room_code,a.room_id = b.room_id
+where 1 = 1 and a.erp_house_id = b.erp_id and a.erp_house_id <> '';
+
+-- 更新合同业绩信息
+UPDATE erp_deal_separate a JOIN erp_deal b 
+SET a.deal_id = b.deal_id
+WHERE a.fy_DealId = b.erp_deal_id;
+
+UPDATE erp_deal_separate a JOIN erp_deal b ON a.fy_DealId = b.erp_deal_id
+SET a.deal_id = b.deal_id
+WHERE a.fy_DealId = b.erp_deal_id
+
+-- 更新合同业绩用户信息
+UPDATE erp_deal_separate a JOIN erp_user b 
+SET a.department_id = b.department_id,a.username = b.username,a.user_id = b.id
+WHERE a.fy_UserId = b.erp_id;
+
+-- 更新实收实付表
+UPDATE erp_collect_pay a JOIN erp_deal b ON a.fy_deal_id = b.erp_deal_id
+SET a.deal_id = b.deal_id,a.deal_type = b.type
+WHERE a.fy_deal_id = b.erp_deal_id
+
+-- 更新应收应付表
+UPDATE erp_receivable a JOIN erp_deal b ON a.fy_deal_id = b.erp_deal_id
+SET a.deal_id = b.deal_id,a.deal_type = b.type
+WHERE a.fy_deal_id = b.erp_deal_id
+
+================================执行导入后附加执行的sql Start=================================
+
+
+
+
+
+

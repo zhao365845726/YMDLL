@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>import1.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -42,11 +45,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="import.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="3.0SystemDesc.txt" />
+    <Content Include="config-local.txt" />
+    <Content Include="config-service.txt" />
+    <Content Include="1.0SystemDesc-Hzly.txt" />
+    <Content Include="import1.ico" />
+    <Content Include="PilotDataExpression.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HzlyToERP3_PHP\HzlyToERP3_PHP.csproj">
+      <Project>{22cb362e-0b63-4a27-bf2c-fa7528c56982}</Project>
+      <Name>HzlyToERP3_PHP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YMDLL\YMDLL.csproj">
+      <Project>{ff06cfc9-4a33-420d-a6ce-809beec4f70d}</Project>
+      <Name>YMDLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
