@@ -78,35 +78,26 @@ namespace PilotData_Hzly
                         strResult = estate.m_Result;
                         break;
                     }
-                //case TableType.BUILDING:
-                //    {
-                //        //声明栋座单元对象
-                //        Building building = new Building();
-                //        if (bObject.dFieldAdd == "true")
-                //        {
-                //            //添加字段
-                //            building.AddField("fy_CommunityId", "varchar(100)");
-                //        }
-                //        if (bObject.dExec == "true")
-                //        {
-                //            //执行导数据的方法
-                //            building.importBuilding();
-                //        }
-                //        if (bObject.dUpdateData == "true")
-                //        {
-                //            //更新数据
-                //            building.UpdateData();
-                //        }
-                //        if(bObject.dFieldDrop == "true")
-                //        {
-                //            building.DropField("fy_CommunityId");
-                //        }
+                case TableType.BUILDING:
+                    {
+                        //声明栋座单元对象
+                        ta_Building building = new ta_Building();
+                        if (bObject.dFieldAdd == "true")
+                        {
+                            //添加字段
+                            building.AddField("old_buildingid", "varchar(40)");
+                            building.AddField("old_estateid", "varchar(40)");
+                        }
+                        if (bObject.dExec == "true")
+                        {
+                            //执行导数据的方法
+                            building.importBuilding();
+                        }
 
-                //        //输出结果
-                //        strResult = building.m_Result;
-
-                //        break;
-                //    }
+                        //输出结果
+                        strResult = building.m_Result;
+                        break;
+                    }
                 case TableType.DEPARTMENT:
                     {
                         //声明部门对象
