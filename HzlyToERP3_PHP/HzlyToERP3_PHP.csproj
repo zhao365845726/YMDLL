@@ -57,6 +57,7 @@
     <Compile Include="ta_House.cs" />
     <Compile Include="ta_Inquiry.cs" />
     <Compile Include="ta_Building.cs" />
+    <Compile Include="ta_Unit.cs" />
     <Compile Include="_Moban.cs" />
   </ItemGroup>
   <ItemGroup>

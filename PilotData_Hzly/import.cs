@@ -98,6 +98,26 @@ namespace PilotData_Hzly
                         strResult = building.m_Result;
                         break;
                     }
+                case TableType.UNIT:
+                    {
+                        //声明栋座单元对象
+                        ta_Unit unit = new ta_Unit();
+                        if (bObject.dFieldAdd == "true")
+                        {
+                            //添加字段
+                            unit.AddField("old_unitid", "varchar(40)");
+                            unit.AddField("old_buildingid", "varchar(40)");
+                        }
+                        if (bObject.dExec == "true")
+                        {
+                            //执行导数据的方法
+                            unit.importUnit();
+                        }
+
+                        //输出结果
+                        strResult = unit.m_Result;
+                        break;
+                    }
                 case TableType.DEPARTMENT:
                     {
                         //声明部门对象
@@ -563,10 +583,8 @@ namespace PilotData_Hzly
         AREA = 2,               //片区
         ESTATE = 3,             //小区楼盘字典
         BUILDING = 4,           //栋座单元
-
         DEPARTMENT = 5,         //部门
         EMPLOYEE = 6,           //人员
-
         PROPERTY = 7,           //房源
         PROPERTYBOOK = 8,       //房源收藏夹
         PROPERTYDATA = 9,       //
@@ -574,28 +592,25 @@ namespace PilotData_Hzly
         FOLLOW = 11,            //房源跟进1
         FOLLOW2 = 12,            //房源跟进2
         PHOTO = 13,             //房源图片
-
         INQUIRY = 14,           //客源
         INQUIRYBOOK = 15,       //客源收藏夹
         INQUIRYFOLLOW = 16,     //客源跟进1
         INQUIRYFOLLOW2 = 17,    //客源跟进2
         INQUIRYSCHEDULE = 18,   //客源任务进度
-
         CONTRACT = 19,          //合同
         CONTRACTACT = 20,       //合同实收实付费用
         CONTRACTCOMM = 21,      //
         CONTRACTCON = 22,       //合同应收应付费用
         CONTRACTFEE = 23,       //合同费用
         CONTRACTFOLLOW = 24,    //合同跟进
-
         POSITION = 25,          //职务
         JOINSTORE = 26,         //加盟店
-
         NEWS = 27,              //新闻公告
         MESSAGE = 28,           //情报站|业务审批
         EMPLOYEEDETAIL = 29,    //人员详情
         HOUSELOG = 30,          //房源日志
         INQUIRYVISIT = 31,      //客源带看
+        UNIT = 32,              //单元
 
         TEST = 99,              //测试
     }
