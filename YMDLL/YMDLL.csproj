@@ -79,6 +79,7 @@
     <Compile Include="Common\CommandInfo.cs" />
     <Compile Include="Common\JsonHelper.cs" />
     <Compile Include="Common\Md5.cs" />
+    <Compile Include="Common\SessionHelper.cs" />
     <Compile Include="Common\SqlHelper.cs" />
     <Compile Include="Common\SqlInjection.cs" />
     <Compile Include="Common\SqlPagerHelper.cs" />
