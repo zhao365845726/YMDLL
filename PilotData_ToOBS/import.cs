@@ -54,6 +54,7 @@ namespace PilotData_ToOBS
                         if (bObject.dFieldAdd == "true")
                         {
                             userdetail.AddField("old_id", "varchar(11)");
+                            userdetail.AddField("CityId", "varchar(50)");
                         }
                         if (bObject.dExec == "true")
                         {

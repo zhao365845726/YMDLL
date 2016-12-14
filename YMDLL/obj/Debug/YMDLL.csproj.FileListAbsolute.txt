@@ -36,3 +36,4 @@ C:\zmz_workspace\_GitCode\YMDLL\YMDLL\bin\Debug\YMDLL.pdb
 C:\zmz_workspace\_GitCode\YMDLL\YMDLL\bin\Debug\MySql.Data.dll
 C:\zmz_workspace\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.dll
 C:\zmz_workspace\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.pdb
+C:\zmz_workspace\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.csprojResolveAssemblyReference.cache

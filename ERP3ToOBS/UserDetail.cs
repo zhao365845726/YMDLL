@@ -33,6 +33,7 @@ namespace ERP3ToOBS
             dicMap.Add("suggestCount", ":String?Default=");
             dicMap.Add("score", ":String?Default=");
             dicMap.Add("old_id", "id");
+            dicMap.Add("CityId", ":String?Default=" + dCityName);
             return dicMap;
         }
 
@@ -140,7 +141,7 @@ namespace ERP3ToOBS
             string strSQL = "";
             try
             {
-                strSQL = "update zhUserDetails set zhUserDetails.UserId = tbUser.Id,zhUserDetails.MarkId = tbUser.MarkId from tbUser where zhUserDetails.old_id = tbUser.old_id";
+                strSQL = "update zhUserDetails set zhUserDetails.UserId = tbUser.Id,zhUserDetails.MarkId = tbUser.MarkId from tbUser where zhUserDetails.old_id = tbUser.old_id and zhUserDetails.CityId = tbUser.CityId";
                 _dsqlserver.dbExec(strSQL);
 
                 strSQL = "update zhUserDetails set PhoneNo = REPLACE(PhoneNo,';','|')";

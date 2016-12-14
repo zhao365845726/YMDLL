@@ -22,7 +22,7 @@ namespace ERP3ToOBS
             dicMap.Add("MarkId", ":String?Default=" + Guid.NewGuid().ToString());
             dicMap.Add("UserName", "username");
             dicMap.Add("UserPwd", "pwd");
-            dicMap.Add("CityId", ":String?Default=" + GetCityIdByName(dCityName));
+            dicMap.Add("CityId", ":String?Default=" + dCityName);
             dicMap.Add("IsAble", ":String?Default=1");
             dicMap.Add("IfChangePwd", ":String?Default=1");
             dicMap.Add("AddDate", ":String?Default=" + DateTime.Now.ToShortDateString());
