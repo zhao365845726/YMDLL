@@ -568,18 +568,47 @@ namespace YMDLL.Class
         /// <summary>
         /// 更新表字段（包含添加|修改|删除）
         /// </summary>
-        //public void dbUpdateField(string OperaType,string Table,string Column,string ColType)
-        //{
-        //    m_SqlString = "ALTER TABLE " + Table + " " + OperaType + " " + Column + " " + ColType;
-        //    try
-        //    {
-        //        dbExec(m_SqlString);
-        //        ErrorMessage += "\n更新字段成功";
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        ErrorMessage += "\n更新字段错误:" + ex.Message;
-        //    }
-        //}
+        public void dbUpdateField(string OperaType,string Table,string Column,string ColType)
+        {
+            m_SqlString = "ALTER TABLE " + Table + " " + OperaType + " " + Column + " " + ColType;
+            try
+            {
+                dbExec(m_SqlString);
+                ErrorMessage += "\n更新字段成功";
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage += "\n更新字段错误:" + ex.Message;
+            }
+        }
+
+        /// <summary>
+        /// 批量插入
+        /// </summary>
+        /// <param name="tableName">表名</param>
+        /// <param name="columns">列名集合</param>
+        /// <param name="lstValue">数据集合</param>
+        public bool BatchInsert(string tableName, string columns, List<String> lstValue)
+        {
+            string batchValue = "";
+            foreach (string value in lstValue)
+            {
+                batchValue += "(" + value + "),";
+            }
+            //去掉结尾的,号
+            batchValue = batchValue.Substring(0, batchValue.Length - 1);
+
+            string query = "INSERT INTO " + tableName + " (" + columns + ") VALUES " + batchValue + "";
+
+            //判断执行是否成功  
+            if (dbExec(query) == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

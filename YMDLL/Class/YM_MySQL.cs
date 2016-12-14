@@ -555,10 +555,10 @@ namespace YMDLL.Class
         /// <returns></returns>
         public DataTable GetPager(string sTableName, string sColumns, string sOrder, int sPageSize, int sPageIndex, string sWhere, out int totalCount)
         {
-            sWhere = "1=1";
+            sWhere = " WHERE 1=1 " + sWhere;
             string strStart = Convert.ToString(sPageIndex * sPageSize);
             DataTable table = new DataTable();
-            m_sql = "SELECT " + sColumns + " FROM " + sTableName + " LIMIT " + strStart + "," + sPageSize.ToString();
+            m_sql = "SELECT " + sColumns + " FROM " + sTableName + sWhere + " LIMIT " + strStart + "," + sPageSize.ToString();
             if (this.OpenConnection() == true)
             {
                 MySqlDataAdapter adapter = new MySqlDataAdapter(m_sql,connection);

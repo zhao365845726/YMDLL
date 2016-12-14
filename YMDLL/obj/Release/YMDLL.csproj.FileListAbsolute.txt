@@ -8,3 +8,8 @@ F:\_GitCode\YMDLL\YMDLL\bin\Release\YMDLL.pdb
 F:\_GitCode\YMDLL\YMDLL\bin\Release\MySql.Data.dll
 F:\_GitCode\YMDLL\YMDLL\obj\Release\YMDLL.dll
 F:\_GitCode\YMDLL\YMDLL\obj\Release\YMDLL.pdb
+C:\zmz_workspace\_GitCode\YMDLL\YMDLL\bin\Release\YMDLL.dll
+C:\zmz_workspace\_GitCode\YMDLL\YMDLL\bin\Release\YMDLL.pdb
+C:\zmz_workspace\_GitCode\YMDLL\YMDLL\bin\Release\MySql.Data.dll
+C:\zmz_workspace\_GitCode\YMDLL\YMDLL\obj\Release\YMDLL.dll
+C:\zmz_workspace\_GitCode\YMDLL\YMDLL\obj\Release\YMDLL.pdb
