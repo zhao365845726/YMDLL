@@ -35,10 +35,10 @@ namespace HzlyToERP3_PHP
             //            dicMap.Add("prefer_region", "dsid");                //需求区域
             dicMap.Add("purpose", "propertyusage");         //房屋用途
             dicMap.Add("orientation", "propertydirction"); //装修
-            dicMap.Add("area_min", "squremin");            //面积下限
-            dicMap.Add("area_max", "squremax");            //面积上限
+            dicMap.Add("area_min", "squremin:String?Default=0");            //面积下限
+            dicMap.Add("area_max", "squremax:String?Default=0");            //面积上限
             dicMap.Add("pay_min", "priceminforbuy");              //价格下限
-            dicMap.Add("pay_max", "pricemaxforbuy");              //价格上限
+            dicMap.Add("pay_max", "pricemaxforbuy:String?Default=0");              //价格上限
             dicMap.Add("decoration", "propertydecoration"); //朝向
             //dicMap.Add("floor_max", "floormax");                        //楼层上限
             dicMap.Add("floor_min", "floormin:String?=0");               //楼层下限

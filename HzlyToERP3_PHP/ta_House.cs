@@ -20,10 +20,10 @@ namespace HzlyToERP3_PHP
             //Dictionary<目标数据库,源数据库>
             Dictionary<string, string> dicMap = new Dictionary<string, string>();
             dicMap.Add("room_code", "roomno");          //房号
-            dicMap.Add("key_code", "keyno");            //钥匙编号
+            dicMap.Add("key_code", "keyno:String?Default=");            //钥匙编号
             dicMap.Add("contract_code", "propertyno");  //房源编号
             //dicMap.Add("floor", "floor:String?=0");               //楼层
-            dicMap.Add("top_floor", "floorall");        //总楼层
+            dicMap.Add("top_floor", "floorall:String?Default=0");        //总楼层
             //dicMap.Add("room", "countf:String?=0");              //卧室
             dicMap.Add("living_room", "countt:String?=0");          //客厅
             dicMap.Add("washroom", "countw:String?=0");             //卫生间
@@ -35,7 +35,7 @@ namespace HzlyToERP3_PHP
             dicMap.Add("remark", "remark");             //房源备注
             dicMap.Add("direction", "propertydirction");           //房源朝向
             dicMap.Add("decoration", "propertydecoration");         //装修类型
-            dicMap.Add("area", "square");               //面积
+            dicMap.Add("area", "square:String?Default=0");               //面积
             dicMap.Add("licence", "idcard");            //房产证号
             //dicMap.Add("public", "privy:String?=0");              //房源的公私盘
             dicMap.Add("public", ":String?Default=0");              //房源的公私盘
