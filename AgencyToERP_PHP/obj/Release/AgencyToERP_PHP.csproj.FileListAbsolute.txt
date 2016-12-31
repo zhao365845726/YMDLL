@@ -1,10 +1,7 @@
 F:\_GitCode\YMDLL\AgencyToERP_PHP\bin\Release\AgencyToERP_PHP.dll
 F:\_GitCode\YMDLL\AgencyToERP_PHP\bin\Release\AgencyToERP_PHP.pdb
-F:\_GitCode\YMDLL\AgencyToERP_PHP\bin\Release\MySql.Data.dll
-F:\_GitCode\YMDLL\AgencyToERP_PHP\bin\Release\System.Net.Http.dll
 F:\_GitCode\YMDLL\AgencyToERP_PHP\bin\Release\YMDLL.dll
 F:\_GitCode\YMDLL\AgencyToERP_PHP\bin\Release\YMDLL.pdb
-F:\_GitCode\YMDLL\AgencyToERP_PHP\bin\Release\System.Net.Http.xml
 F:\_GitCode\YMDLL\AgencyToERP_PHP\obj\Release\AgencyToERP_PHP.csprojResolveAssemblyReference.cache
 F:\_GitCode\YMDLL\AgencyToERP_PHP\obj\Release\AgencyToERP_PHP.dll
 F:\_GitCode\YMDLL\AgencyToERP_PHP\obj\Release\AgencyToERP_PHP.pdb

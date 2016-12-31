@@ -8,4 +8,3 @@ F:\_GitCode\YMDLL\EventDemo\bin\Release\EventDemo.exe
 F:\_GitCode\YMDLL\EventDemo\bin\Release\EventDemo.pdb
 F:\_GitCode\YMDLL\EventDemo\obj\Release\EventDemo.exe
 F:\_GitCode\YMDLL\EventDemo\obj\Release\EventDemo.pdb
-F:\_GitCode\YMDLL\EventDemo\obj\Release\EventDemo.csprojResolveAssemblyReference.cache

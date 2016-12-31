@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using YMDLL.Class;
-using YMDLL.Common;
-using MySql.Data.MySqlClient;
 
 namespace AgencyToERP_PHP
 {

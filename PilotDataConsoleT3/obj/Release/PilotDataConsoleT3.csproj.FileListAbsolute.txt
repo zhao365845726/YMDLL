@@ -2,12 +2,10 @@ F:\_GitCode\YMDLL\PilotDataConsoleT3\bin\Release\PilotDataConsoleT3.exe.config
 F:\_GitCode\YMDLL\PilotDataConsoleT3\bin\Release\PilotDataConsoleT3.exe
 F:\_GitCode\YMDLL\PilotDataConsoleT3\bin\Release\PilotDataConsoleT3.pdb
 F:\_GitCode\YMDLL\PilotDataConsoleT3\bin\Release\AgencyToERP_PHP.dll
-F:\_GitCode\YMDLL\PilotDataConsoleT3\bin\Release\System.Net.Http.dll
 F:\_GitCode\YMDLL\PilotDataConsoleT3\bin\Release\YMDLL.dll
 F:\_GitCode\YMDLL\PilotDataConsoleT3\bin\Release\MySql.Data.dll
 F:\_GitCode\YMDLL\PilotDataConsoleT3\bin\Release\AgencyToERP_PHP.pdb
 F:\_GitCode\YMDLL\PilotDataConsoleT3\bin\Release\YMDLL.pdb
-F:\_GitCode\YMDLL\PilotDataConsoleT3\bin\Release\System.Net.Http.xml
 F:\_GitCode\YMDLL\PilotDataConsoleT3\obj\Release\PilotDataConsoleT3.csprojResolveAssemblyReference.cache
 F:\_GitCode\YMDLL\PilotDataConsoleT3\obj\Release\PilotDataConsoleT3.exe
 F:\_GitCode\YMDLL\PilotDataConsoleT3\obj\Release\PilotDataConsoleT3.pdb
