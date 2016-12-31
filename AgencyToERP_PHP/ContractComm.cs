@@ -136,7 +136,7 @@ namespace AgencyToERP_PHP
             string tmpTable = "", tmpValues = "", tmpWhere = "";
             try
             {
-                tmpTable = "erp_deal_separate a JOIN erp_deal b";
+                tmpTable = "erp_deal_separate a JOIN erp_deal b ON a.fy_DealId = b.erp_deal_id";
                 tmpValues = "a.deal_id = b.deal_id";
                 tmpWhere = "and a.fy_DealId = b.erp_deal_id";
                 _mysql.Update(tmpTable, tmpValues, tmpWhere);

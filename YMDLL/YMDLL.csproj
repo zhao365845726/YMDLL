@@ -31,7 +31,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Interop.Excel">
-      <HintPath>..\CommonDll\Interop.Excel.dll</HintPath>
+      <HintPath>Dll\Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.Office">
+      <HintPath>Dll\Interop.Office.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.VBIDE">
+      <HintPath>Dll\Interop.VBIDE.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -71,9 +79,12 @@
     <Compile Include="Common\CommandInfo.cs" />
     <Compile Include="Common\JsonHelper.cs" />
     <Compile Include="Common\Md5.cs" />
+    <Compile Include="Common\SecretHelper.cs" />
+    <Compile Include="Common\SessionHelper.cs" />
     <Compile Include="Common\SqlHelper.cs" />
     <Compile Include="Common\SqlInjection.cs" />
     <Compile Include="Common\SqlPagerHelper.cs" />
+    <Compile Include="Common\StringHelper.cs" />
     <Compile Include="Common\ToolbarHelper.cs" />
     <Compile Include="Interface\ICalcDateTime.cs" />
     <Compile Include="Interface\ICityCode.cs" />

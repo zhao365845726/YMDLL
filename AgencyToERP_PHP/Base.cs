@@ -27,6 +27,10 @@ namespace AgencyToERP_PHP
         /// </summary>
         public CS_CalcDateTime _dateTime;
         /// <summary>
+        /// 字符串类实例化对象
+        /// </summary>
+        public StringHelper strHelper;
+        /// <summary>
         /// 源-表名
         /// </summary>
         public string sTableName;
@@ -180,6 +184,7 @@ namespace AgencyToERP_PHP
             dDefaultTime = "1472011552";
             m_ThreadEnabled = false;
             _dateTime = new CS_CalcDateTime();
+            strHelper = new StringHelper();
         }
 
         /// <summary>

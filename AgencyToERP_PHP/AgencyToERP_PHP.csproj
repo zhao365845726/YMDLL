@@ -47,6 +47,7 @@
     <Compile Include="Building.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="Message.cs" />
+    <Compile Include="NewsOld.cs" />
     <Compile Include="_Moban.cs" />
     <Compile Include="News.cs" />
     <Compile Include="ContractFollow.cs" />

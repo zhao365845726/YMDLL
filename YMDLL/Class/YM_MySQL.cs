@@ -542,5 +542,37 @@ namespace YMDLL.Class
                 return;
             }
         }
+
+        /// <summary>
+        /// 分页方法
+        /// </summary>
+        /// <param name="sTableName"></param>
+        /// <param name="sColumns"></param>
+        /// <param name="sOrder"></param>
+        /// <param name="sPageSize"></param>
+        /// <param name="sPageIndex"></param>
+        /// <param name="sWhere"></param>
+        /// <returns></returns>
+        public DataTable GetPager(string sTableName, string sColumns, string sOrder, int sPageSize, int sPageIndex, string sWhere, out int totalCount)
+        {
+            sWhere = " WHERE 1=1 " + sWhere;
+            string strStart = Convert.ToString(sPageIndex * sPageSize);
+            DataTable table = new DataTable();
+            m_sql = "SELECT " + sColumns + " FROM " + sTableName + sWhere + " LIMIT " + strStart + "," + sPageSize.ToString();
+            if (this.OpenConnection() == true)
+            {
+                MySqlDataAdapter adapter = new MySqlDataAdapter(m_sql,connection);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                this.CloseConnection();
+                totalCount = Count(sTableName);
+                return ds.Tables[0];
+            }
+            else
+            {
+                totalCount = Count(sTableName);
+                return null;
+            }
+        }
     }
 }

@@ -1,0 +1,19 @@
+﻿Directory<DestField,SoureField>
+
+Expression Symbol 表达式符号
++ - * / ~ ` ! @ # $ % ^ & * () _ = | \ {} [] : ; "" ' < > , . ?
+
+SoureField Expression 目标字段表达式
+#       分隔符
+?:      如果有值就为字段的值，否则即为DefaultValue
+{}		传递一个数组，使用key->value的形式
+
+
+SoureField	-- 默认目标库字段
+SoureField#DataType		-- 说明源库的字段数据类型
+		DataType  [String|Date,Time,DateTime|Int|Bool|Array...]
+SoureField#DataType=DefaultValue		-- 三目运算
+SoureField#Array={K1->V1,K2->V2,K3->V3,...}		--传入数组
+		{K1->V1,K2->V2,...,Kn->Vn}      -- Kn为原来的值，Vn为将要变成的值
+
+

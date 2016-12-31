@@ -62,3 +62,4 @@ F:\_GitCode\YMDLL\Test_WindowsForm\obj\Debug\Test_WindowsForm.Properties.Resourc
 F:\_GitCode\YMDLL\Test_WindowsForm\obj\Debug\Test_WindowsForm.csproj.GenerateResource.Cache
 F:\_GitCode\YMDLL\Test_WindowsForm\obj\Debug\Test_WindowsForm.exe
 F:\_GitCode\YMDLL\Test_WindowsForm\obj\Debug\Test_WindowsForm.pdb
+F:\_GitCode\YMDLL\Test_WindowsForm\obj\Debug\Test_WindowsForm.frmErpMain.resources
