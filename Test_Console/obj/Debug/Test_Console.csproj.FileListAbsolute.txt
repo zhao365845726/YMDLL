@@ -16,3 +16,12 @@ F:\_GitCode\YMDLL\Test_Console\bin\Debug\YMDLL.pdb
 F:\_GitCode\YMDLL\Test_Console\obj\Debug\Test_Console.csprojResolveAssemblyReference.cache
 F:\_GitCode\YMDLL\Test_Console\obj\Debug\Test_Console.exe
 F:\_GitCode\YMDLL\Test_Console\obj\Debug\Test_Console.pdb
+C:\zmz_workspace\_GitCode\YMDLL\Test_Console\bin\Debug\Test_Console.exe.config
+C:\zmz_workspace\_GitCode\YMDLL\Test_Console\obj\Debug\Test_Console.pdb
+C:\zmz_workspace\_GitCode\YMDLL\Test_Console\bin\Debug\Test_Console.exe
+C:\zmz_workspace\_GitCode\YMDLL\Test_Console\bin\Debug\Test_Console.pdb
+C:\zmz_workspace\_GitCode\YMDLL\Test_Console\bin\Debug\YMDLL.dll
+C:\zmz_workspace\_GitCode\YMDLL\Test_Console\bin\Debug\MySql.Data.dll
+C:\zmz_workspace\_GitCode\YMDLL\Test_Console\bin\Debug\YMDLL.pdb
+C:\zmz_workspace\_GitCode\YMDLL\Test_Console\obj\Debug\Test_Console.csprojResolveAssemblyReference.cache
+C:\zmz_workspace\_GitCode\YMDLL\Test_Console\obj\Debug\Test_Console.exe

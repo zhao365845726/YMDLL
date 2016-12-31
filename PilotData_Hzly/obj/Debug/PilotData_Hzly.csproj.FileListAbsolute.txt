@@ -9,3 +9,4 @@ F:\_GitCode\YMDLL\PilotData_Hzly\bin\Debug\YMDLL.pdb
 F:\_GitCode\YMDLL\PilotData_Hzly\obj\Debug\PilotData_Hzly.csprojResolveAssemblyReference.cache
 F:\_GitCode\YMDLL\PilotData_Hzly\obj\Debug\PilotData_Hzly.exe
 F:\_GitCode\YMDLL\PilotData_Hzly\obj\Debug\PilotData_Hzly.pdb
+C:\zmz_workspace\_GitCode\YMDLL\PilotData_Hzly\bin\Debug\PilotData_Hzly.exe.config

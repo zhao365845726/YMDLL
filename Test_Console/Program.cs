@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YMDLL.Class;
+using YMDLL.Common;
 
 namespace Test_Console
 {
@@ -13,6 +14,9 @@ namespace Test_Console
         {
             CS_OperaWeb ow = new CS_OperaWeb();
             string strResult = ow.GetWebClient();
+
+            SecretHelper sh = new SecretHelper();
+            strResult = sh.EncryptToSHA1("0791zh");
             Console.WriteLine(strResult);
             Console.Read();
         }
