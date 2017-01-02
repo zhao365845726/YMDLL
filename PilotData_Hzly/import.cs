@@ -267,6 +267,31 @@ namespace PilotData_Hzly
                         strResult = propertyfollow.m_Result;
                         break;
                     }
+                case TableType.HOUSEIMAGE:
+                    {
+                        //声明房源跟进对象
+                        ta_Attachment attach = new ta_Attachment();
+                        if (bObject.dFieldAdd == "true")
+                        {
+                            //新增字段
+                            attach.AddField("old_phototype", "varchar(40)");
+                            attach.AddField("old_empid", "varchar(40)");
+                            attach.AddField("old_empname", "varchar(40)");
+                            attach.AddField("old_smallurl", "varchar(200)");
+                            attach.AddField("old_uploaddate", "varchar(40)");
+                            attach.AddField("old_attachmentid", "varchar(40)");
+                            attach.AddField("old_attachname", "varchar(200)");
+                        }
+                        if (bObject.dExec == "true")
+                        {
+                            //执行导数据的方法
+                            attach.importAttachment();
+                        }
+
+                        //输出结果
+                        strResult = attach.m_Result;
+                        break;
+                    }
                 case TableType.INQUIRY:
                     {
                         //声明客源对象
@@ -611,7 +636,7 @@ namespace PilotData_Hzly
         HOUSELOG = 30,          //房源日志
         INQUIRYVISIT = 31,      //客源带看
         UNIT = 32,              //单元
-
+        HOUSEIMAGE = 33,        //房源图片
         TEST = 99,              //测试
     }
 }
