@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base.cs" />
+    <Compile Include="ta_Attachment.cs" />
     <Compile Include="ta_ContractInfo.cs" />
     <Compile Include="ta_Employee.cs" />
     <Compile Include="ta_HouseLog.cs" />
