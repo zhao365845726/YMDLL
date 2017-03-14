@@ -13,3 +13,11 @@ F:\_GitCode\YMDLL\AgencyEntity\bin\Release\YMDLL.pdb
 F:\_GitCode\YMDLL\AgencyEntity\obj\Release\AgencyEntity.csprojResolveAssemblyReference.cache
 F:\_GitCode\YMDLL\AgencyEntity\obj\Release\AgencyEntity.dll
 F:\_GitCode\YMDLL\AgencyEntity\obj\Release\AgencyEntity.pdb
+G:\_GitCode\YMDLL\AgencyEntity\bin\Release\AgencyEntity.dll
+G:\_GitCode\YMDLL\AgencyEntity\bin\Release\AgencyEntity.pdb
+G:\_GitCode\YMDLL\AgencyEntity\bin\Release\YMDLL.dll
+G:\_GitCode\YMDLL\AgencyEntity\bin\Release\MySql.Data.dll
+G:\_GitCode\YMDLL\AgencyEntity\bin\Release\YMDLL.pdb
+G:\_GitCode\YMDLL\AgencyEntity\obj\Release\AgencyEntity.csprojResolveAssemblyReference.cache
+G:\_GitCode\YMDLL\AgencyEntity\obj\Release\AgencyEntity.dll
+G:\_GitCode\YMDLL\AgencyEntity\obj\Release\AgencyEntity.pdb

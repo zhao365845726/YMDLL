@@ -1,0 +1,9 @@
+G:\_GitCode\YMDLL\CW_PilotData\bin\Debug\netcoreapp1.1\CW_PilotData.deps.json
+G:\_GitCode\YMDLL\CW_PilotData\bin\Debug\netcoreapp1.1\CW_PilotData.runtimeconfig.json
+G:\_GitCode\YMDLL\CW_PilotData\bin\Debug\netcoreapp1.1\CW_PilotData.runtimeconfig.dev.json
+G:\_GitCode\YMDLL\CW_PilotData\bin\Debug\netcoreapp1.1\CW_PilotData.dll
+G:\_GitCode\YMDLL\CW_PilotData\bin\Debug\netcoreapp1.1\CW_PilotData.pdb
+G:\_GitCode\YMDLL\CW_PilotData\obj\Debug\netcoreapp1.1\CW_PilotData.csprojResolveAssemblyReference.cache
+G:\_GitCode\YMDLL\CW_PilotData\obj\Debug\netcoreapp1.1\CW_PilotData.AssemblyInfo.cs
+G:\_GitCode\YMDLL\CW_PilotData\obj\Debug\netcoreapp1.1\CW_PilotData.dll
+G:\_GitCode\YMDLL\CW_PilotData\obj\Debug\netcoreapp1.1\CW_PilotData.pdb

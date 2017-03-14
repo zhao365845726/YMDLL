@@ -9,3 +9,5 @@ F:\_GitCode\YMDLL\PilotDataConsoleT3\bin\Release\YMDLL.pdb
 F:\_GitCode\YMDLL\PilotDataConsoleT3\obj\Release\PilotDataConsoleT3.csprojResolveAssemblyReference.cache
 F:\_GitCode\YMDLL\PilotDataConsoleT3\obj\Release\PilotDataConsoleT3.exe
 F:\_GitCode\YMDLL\PilotDataConsoleT3\obj\Release\PilotDataConsoleT3.pdb
+G:\_GitCode\YMDLL\PilotDataConsoleT3\bin\Release\PilotDataConsoleT3.exe.config
+G:\_GitCode\YMDLL\PilotDataConsoleT3\obj\Release\PilotDataConsoleT3.pdb

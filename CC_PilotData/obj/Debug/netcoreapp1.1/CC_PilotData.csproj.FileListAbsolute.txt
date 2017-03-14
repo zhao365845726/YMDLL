@@ -1,0 +1,9 @@
+G:\_GitCode\YMDLL\CC_PilotData\bin\Debug\netcoreapp1.1\CC_PilotData.deps.json
+G:\_GitCode\YMDLL\CC_PilotData\bin\Debug\netcoreapp1.1\CC_PilotData.runtimeconfig.json
+G:\_GitCode\YMDLL\CC_PilotData\bin\Debug\netcoreapp1.1\CC_PilotData.runtimeconfig.dev.json
+G:\_GitCode\YMDLL\CC_PilotData\bin\Debug\netcoreapp1.1\CC_PilotData.dll
+G:\_GitCode\YMDLL\CC_PilotData\bin\Debug\netcoreapp1.1\CC_PilotData.pdb
+G:\_GitCode\YMDLL\CC_PilotData\obj\Debug\netcoreapp1.1\CC_PilotData.csprojResolveAssemblyReference.cache
+G:\_GitCode\YMDLL\CC_PilotData\obj\Debug\netcoreapp1.1\CC_PilotData.AssemblyInfo.cs
+G:\_GitCode\YMDLL\CC_PilotData\obj\Debug\netcoreapp1.1\CC_PilotData.dll
+G:\_GitCode\YMDLL\CC_PilotData\obj\Debug\netcoreapp1.1\CC_PilotData.pdb
