@@ -12,12 +12,16 @@ namespace Test_Console
     {
         static void Main(string[] args)
         {
-            CS_OperaWeb ow = new CS_OperaWeb();
-            string strResult = ow.GetWebClient();
+            //CS_OperaWeb ow = new CS_OperaWeb();
+            //string strResult = ow.GetWebClient();
 
-            SecretHelper sh = new SecretHelper();
-            strResult = sh.EncryptToSHA1("0791zh");
-            Console.WriteLine(strResult);
+            //SecretHelper sh = new SecretHelper();
+            //strResult = sh.EncryptToSHA1("0791zh");
+            //Console.WriteLine(strResult);
+            //Console.Read();
+
+            CS_CalcDateTime cdt = new CS_CalcDateTime();
+            Console.WriteLine(cdt.GetTimeStamp());
             Console.Read();
         }
     }
