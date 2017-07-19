@@ -114,6 +114,12 @@ namespace YMDLL.Class
                 m_ClientIPv4 = value;
             }
         }
+
+        /// <summary>
+        /// 报文头内容
+        /// </summary>
+        public string ContentType { get; set; }
+
         /// <summary>
         /// 获取客户端日期时间
         /// </summary>
@@ -193,7 +199,7 @@ namespace YMDLL.Class
         /// <param name="url"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public string HttpPostData(string url, string param)
+        public string HttpPostData(string url, string param,string contentType = "application/x-www-form-urlencoded")
         {
             var result = string.Empty;
             //注意提交的编码 这边是需要改变的 这边默认的是Default：系统当前编码
@@ -205,7 +211,7 @@ namespace YMDLL.Class
             request.Method = "POST";
             request.KeepAlive = false;
             request.AllowAutoRedirect = true;
-            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentType = contentType;
             request.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET CLR  3.0.04506.648; .NET CLR 3.5.21022; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)";
             request.ContentLength = postData.Length;
 
