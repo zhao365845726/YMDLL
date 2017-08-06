@@ -79,6 +79,7 @@
     <Compile Include="Common\CommandInfo.cs" />
     <Compile Include="Common\ConvertToJson.cs" />
     <Compile Include="Common\JsonHelper.cs" />
+    <Compile Include="Common\JsonMessage.cs" />
     <Compile Include="Common\Md5.cs" />
     <Compile Include="Common\SecretHelper.cs" />
     <Compile Include="Common\SessionHelper.cs" />
