@@ -235,6 +235,52 @@ namespace YMDLL.Class
         }
 
         /// <summary>
+        /// 模拟授权提交数据
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public string HttpPostDataByAuth(string url, string param, string user,string password,string contentType = "application/x-www-form-urlencoded")
+        {
+            var result = string.Empty;
+            //注意提交的编码 这边是需要改变的 这边默认的是Default：系统当前编码
+            byte[] postData = Encoding.UTF8.GetBytes(param);
+
+            // 设置提交的相关参数 
+            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+            Encoding myEncoding = Encoding.UTF8;
+            request.Method = "POST";
+            request.KeepAlive = false;
+            request.AllowAutoRedirect = true;
+            request.ContentType = contentType;
+            request.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET CLR  3.0.04506.648; .NET CLR 3.5.21022; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)";
+            request.ContentLength = postData.Length;
+            //获得用户名密码的Base64编码
+            string code = Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", user, password)));
+
+            //添加Authorization到HTTP头
+            request.Headers.Add("Authorization", "Basic " + code);
+
+            // 提交请求数据 
+            System.IO.Stream outputStream = request.GetRequestStream();
+            outputStream.Write(postData, 0, postData.Length);
+            outputStream.Close();
+
+            HttpWebResponse response;
+            Stream responseStream;
+            StreamReader reader;
+            string srcString;
+            response = request.GetResponse() as HttpWebResponse;
+            responseStream = response.GetResponseStream();
+            reader = new System.IO.StreamReader(responseStream, Encoding.GetEncoding("UTF-8"));
+            srcString = reader.ReadToEnd();
+            result = srcString;   //返回值赋值
+            reader.Close();
+
+            return result;
+        }
+
+        /// <summary>
         /// 获取不加密网页源码
         /// </summary>
         /// <param name="m_URL">网址</param>
