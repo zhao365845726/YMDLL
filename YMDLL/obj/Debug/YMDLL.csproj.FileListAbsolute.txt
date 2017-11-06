@@ -3,3 +3,4 @@ G:\_GitCode\YMDLL\YMDLL\bin\Debug\YMDLL.pdb
 G:\_GitCode\YMDLL\YMDLL\bin\Debug\MySql.Data.dll
 G:\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.dll
 G:\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.pdb
+G:\_GitCode\YMDLL\YMDLL\bin\Debug\MySql.Data.xml

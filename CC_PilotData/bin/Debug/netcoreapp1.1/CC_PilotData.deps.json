@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v1.1": {
       "cc_pilotdata/1.0.0": {
+        "dependencies": {
+          "YMDLL": "1.0.0"
+        },
         "runtime": {
           "CC_PilotData.dll": {}
+        }
+      },
+      "ymdll/1.0.0": {
+        "runtime": {
+          "YMDLL.dll": {}
         }
       }
     }
   },
   "libraries": {
     "cc_pilotdata/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ymdll/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
