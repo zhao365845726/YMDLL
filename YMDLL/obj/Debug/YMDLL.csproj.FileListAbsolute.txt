@@ -8,4 +8,4 @@ E:\_GitCode\YMDLL\YMDLL\bin\Debug\YMDLL.pdb
 E:\_GitCode\YMDLL\YMDLL\bin\Debug\MySql.Data.dll
 E:\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.dll
 E:\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.pdb
-E:\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.csprojResolveAssemblyReference.cache
+E:\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.csproj.CoreCompileInputs.cache
