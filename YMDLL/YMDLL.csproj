@@ -70,6 +70,7 @@
     <Compile Include="Class\CS_OperaWeb.cs" />
     <Compile Include="Class\CS_RealEstateInfo.cs" />
     <Compile Include="Class\Cutout.cs" />
+    <Compile Include="Class\Web\YM_Element.cs" />
     <Compile Include="Class\YM_SQLServer.cs" />
     <Compile Include="Class\PageValidate.cs" />
     <Compile Include="Class\Web\YM_Http.cs" />
