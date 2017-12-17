@@ -9813,10 +9813,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\_GitCode\\YMDLL\\CW_PilotData\\CW_PilotData.csproj",
+      "projectUniqueName": "F:\\_GitCode\\YMDLL\\CW_PilotData\\CW_PilotData.csproj",
       "projectName": "CW_PilotData",
-      "projectPath": "G:\\_GitCode\\YMDLL\\CW_PilotData\\CW_PilotData.csproj",
-      "outputPath": "G:\\_GitCode\\YMDLL\\CW_PilotData\\obj\\",
+      "projectPath": "F:\\_GitCode\\YMDLL\\CW_PilotData\\CW_PilotData.csproj",
+      "outputPath": "F:\\_GitCode\\YMDLL\\CW_PilotData\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
