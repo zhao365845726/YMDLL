@@ -234,6 +234,36 @@ namespace YMDLL.Class
             }
             return strResult;
         }
+
+        #region ----全文搜索【FullSearch】 简称FS----
+        /// <summary>
+        /// 截取全文搜索的开始字符和结束字符之间的内容
+        /// </summary>
+        /// <param name="strStart"></param>
+        /// <param name="strEnd"></param>
+        /// <returns></returns>
+        public string FS_BetweenStartAndEnd(string strDataSource,string strStart,string strEnd,int iCustom)
+        {
+            int iStart = strDataSource.IndexOf(strStart);
+            int iEnd = strDataSource.LastIndexOf(strEnd);
+            string strResult = strDataSource.Substring(iStart + strStart.Length + iCustom, strDataSource.Length - iStart - (strDataSource.Length - iEnd) - strStart.Length - iCustom).Trim();
+            return strResult;
+        }
+
+        /// <summary>
+        /// 跳过指定数量的字符截取全文搜索的开始字符和结束字符之间的内容
+        /// </summary>
+        /// <param name="strStart"></param>
+        /// <param name="strEnd"></param>
+        /// <returns></returns>
+        public string FS_BetweenStartAndEndOffset(string strDataSource, string strStart, string strEnd,int OffsetCount)
+        {
+            int iStart = strDataSource.IndexOf(strStart);
+            int iEnd = strDataSource.LastIndexOf(strEnd);
+            string strResult = strDataSource.Substring(iStart + OffsetCount, strDataSource.Length - iStart - (strDataSource.Length - iEnd) - OffsetCount).Trim();
+            return strResult;
+        }
+        #endregion
     }
 
 
