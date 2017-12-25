@@ -37,7 +37,12 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rtbStatus = new System.Windows.Forms.RichTextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnCXFWCode = new System.Windows.Forms.Button();
+            this.btnExec = new System.Windows.Forms.Button();
+            this.comboFWName = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -47,6 +52,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.comboFWName);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtModuleName);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -58,7 +67,7 @@
             // 
             // txtModuleName
             // 
-            this.txtModuleName.Location = new System.Drawing.Point(108, 20);
+            this.txtModuleName.Location = new System.Drawing.Point(393, 20);
             this.txtModuleName.Name = "txtModuleName";
             this.txtModuleName.Size = new System.Drawing.Size(173, 21);
             this.txtModuleName.TabIndex = 0;
@@ -66,7 +75,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 23);
+            this.label1.Location = new System.Drawing.Point(313, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 1;
@@ -125,21 +134,59 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.btnCXFWCode);
+            this.flowLayoutPanel1.Controls.Add(this.btnExec);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 17);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(710, 248);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
-            // btnCXFWCode
+            // btnExec
             // 
-            this.btnCXFWCode.Location = new System.Drawing.Point(3, 3);
-            this.btnCXFWCode.Name = "btnCXFWCode";
-            this.btnCXFWCode.Size = new System.Drawing.Size(159, 58);
-            this.btnCXFWCode.TabIndex = 0;
-            this.btnCXFWCode.Text = "生成初心框架代码";
-            this.btnCXFWCode.UseVisualStyleBackColor = true;
+            this.btnExec.Location = new System.Drawing.Point(3, 3);
+            this.btnExec.Name = "btnExec";
+            this.btnExec.Size = new System.Drawing.Size(159, 58);
+            this.btnExec.TabIndex = 0;
+            this.btnExec.Text = "执行";
+            this.btnExec.UseVisualStyleBackColor = true;
+            this.btnExec.Click += new System.EventHandler(this.btnExec_Click);
+            // 
+            // comboFWName
+            // 
+            this.comboFWName.FormattingEnabled = true;
+            this.comboFWName.Items.AddRange(new object[] {
+            "初心框架实体",
+            "初心框架代码"});
+            this.comboFWName.Location = new System.Drawing.Point(130, 20);
+            this.comboFWName.Name = "comboFWName";
+            this.comboFWName.Size = new System.Drawing.Size(168, 20);
+            this.comboFWName.TabIndex = 2;
+            this.comboFWName.SelectedIndexChanged += new System.EventHandler(this.comboFWName_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 23);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(113, 12);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "需要生成的框架名称";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(8, 65);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "存储路径";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(68, 65);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(498, 21);
+            this.textBox1.TabIndex = 4;
             // 
             // frmMain
             // 
@@ -173,9 +220,14 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btnCXFWCode;
+        private System.Windows.Forms.Button btnExec;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RichTextBox rtbStatus;
+        private System.Windows.Forms.ComboBox comboFWName;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label3;
     }
 }
 
