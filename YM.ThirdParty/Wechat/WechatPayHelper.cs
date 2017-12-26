@@ -240,6 +240,43 @@ namespace ML.ThirdParty.Wechat
         }
 
         /// <summary>
+        /// 微信支付
+        /// </summary>
+        /// <param name="wpp">微信支付参数</param>
+        /// <returns></returns>
+        public string H5Pay(WechatPayParam wpp)
+        {
+            string result = string.Empty;
+            dicWechatPay.Clear();
+            //基本信息
+            dicWechatPay.Add("appid", WxAppId);
+            dicWechatPay.Add("mch_id", SH_Number);
+            //dicWechatPay.Add("device_info", "WEB");
+            dicWechatPay.Add("nonce_str", Guid.NewGuid().ToString().Replace("-", ""));
+            //dicWechatPay.Add("sign_type", "MD5");
+            dicWechatPay.Add("body", "开通会员");
+            //dicWechatPay.Add("detail", "会员");
+            //dicWechatPay.Add("attach", "");
+            dicWechatPay.Add("out_trade_no", SetPayOrder());
+            //dicWechatPay.Add("fee_type", "CNY");
+            dicWechatPay.Add("total_fee", wpp.total_fee);
+            dicWechatPay.Add("spbill_create_ip", "");
+            //dicWechatPay.Add("time_start", DateTime.Now.ToString("yyyyMMddHHmmss"));
+            //dicWechatPay.Add("time_expire", DateTime.Now.AddMinutes(5.00).ToString("yyyyMMddHHmmss"));
+            //dicWechatPay.Add("goods_tag", "WXG");
+            dicWechatPay.Add("notify_url", "https://weixin.ymstudio.xyz/Api/Vip/PayNotice");
+            dicWechatPay.Add("trade_type", "MWEB");
+            //dicWechatPay.Add("limit_pay", "no_credit");
+            dicWechatPay.Add("openid", wpp.openid);
+            string strSign = GeneralKeyGen(dicWechatPay, SH_Secret);
+            dicWechatPay.Add("sign", strSign);
+            //result = FormatParamToXML(dicWechatPay);
+            result = ow.HttpPostData(WechatPay_URL + "pay/unifiedorder", FormatParamToXML(dicWechatPay));
+
+            return result;
+        }
+
+        /// <summary>
         /// 查询订单
         /// </summary>
         /// <param name="woqp">微信查询订单参数</param>
