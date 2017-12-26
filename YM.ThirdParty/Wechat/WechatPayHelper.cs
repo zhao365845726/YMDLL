@@ -5,29 +5,25 @@ using System.Text;
 using YMDLL.Class;
 using YMDLL.Common;
 
-namespace ML.ThirdParty
+namespace ML.ThirdParty.Wechat
 {
     public class WechatPayHelper
     {
-        public static CS_OperaWeb ow = new CS_OperaWeb();
-        public static CS_CalcDateTime cdt = new CS_CalcDateTime();
-        public static string WechatPay_URL = "https://api.mch.weixin.qq.com/";
-        public static string SH_Number = "1499847684150";
-        public static string SH_Secret = "8a82439ac83734cd20856a67fe181894";
-        public static Dictionary<string, string> dic_WechatRequestUrl = new Dictionary<string, string>();
-        public static Dictionary<string, object> dicWechatPay = new Dictionary<string, object>();
+        public CS_OperaWeb ow = new CS_OperaWeb();
+        public CS_CalcDateTime cdt = new CS_CalcDateTime();
+        public string WechatPay_URL = "https://api.mch.weixin.qq.com/";
+        public string WxAppId = "wx133b351ac060a310";
+        public string SH_Number = "1486565242";
+        public string SH_Secret = "ML28DB8180A44AC9F5E55139067783TE";
+        public Dictionary<string, string> dic_WechatRequestUrl = new Dictionary<string, string>();
+        public SortedDictionary<string, object> dicWechatPay = new SortedDictionary<string, object>();
 
         /// <summary>
         /// 初始化参数
         /// </summary>
-        public static void InitParam()
+        public void InitParam()
         {
             dicWechatPay.Clear();
-            //string strNonce = Guid.NewGuid().ToString().Replace("-", "").Substring(1, 30);
-            //dicWechatPay.Add("version", "1.0");
-            //dicWechatPay.Add("charset", "UTF-8");
-            //dicWechatPay.Add("signType", "MD5");
-            //dicWechatPay.Add("nonceStr", strNonce);
         }
 
         /// <summary>
@@ -36,7 +32,7 @@ namespace ML.ThirdParty
         /// <param name="dicParam">所有参数的集合</param>
         /// <param name="strSecret">商户秘钥</param>
         /// <returns></returns>
-        public static string GeneralKeyGen(Dictionary<string, object> dicParam, string strSecret)
+        public string GeneralKeyGen(SortedDictionary<string, object> dicParam, string strSecret)
         {
             string strUrlParam = "";
             List<String> lst_Param = new List<string>();
@@ -51,6 +47,35 @@ namespace ML.ThirdParty
             }
             strUrlParam = string.Join("&", lst_Param.ToArray());
             return Md5.GetMD5String(strUrlParam + "&key=" + strSecret).ToUpper();
+        }
+
+        /// <summary>
+        /// 格式化参数
+        /// </summary>
+        /// <param name="dicParam"></param>
+        /// <returns></returns>
+        public string XMLFormatParamToMD5(SortedDictionary<string, object> dicParam)
+        {
+            int i = 0;
+            string str_Content = "";
+            string str_Format = "";
+            string strValue = "";
+            foreach (KeyValuePair<string, object> dicItem in dicParam)
+            {
+                //如果字符为空或者null直接去掉这个参数
+                if (dicItem.Value == null || dicItem.Value.ToString() == "")
+                {
+                    i++;
+                    continue;
+                }
+                //去掉所有Value的空字符
+                strValue = dicItem.Value.ToString().Replace(" ", "");
+                str_Content += "<" + dicItem.Key + ">" + strValue + "</" + dicItem.Key + ">";
+                i++;
+            }
+            str_Content += "<key>" + SH_Secret + "</key>";
+            str_Format = "<xml>" + str_Content + "</xml>";
+            return Md5.GetMD5String(str_Format).ToUpper();
         }
 
         /// <summary>
@@ -114,7 +139,7 @@ namespace ML.ThirdParty
         /// </summary>
         /// <param name="dicParam"></param>
         /// <returns></returns>
-        public static string FormatParam(Dictionary<string, object> dicParam)
+        public static string FormatParam(SortedDictionary<string, object> dicParam)
         {
             int i = 0;
             string str_Format = "";
@@ -143,37 +168,73 @@ namespace ML.ThirdParty
         }
 
         /// <summary>
+        /// 格式化参数
+        /// </summary>
+        /// <param name="dicParam"></param>
+        /// <returns></returns>
+        public static string FormatParamToXML(SortedDictionary<string, object> dicParam)
+        {
+            int i = 0;
+            string str_Content = "";
+            string str_Format = "";
+            string strValue = "";
+            foreach (KeyValuePair<string, object> dicItem in dicParam)
+            {
+                //如果字符为空或者null直接去掉这个参数
+                if (dicItem.Value == null || dicItem.Value.ToString() == "")
+                {
+                    i++;
+                    continue;
+                }
+                //去掉所有Value的空字符
+                strValue = dicItem.Value.ToString().Replace(" ", "");
+                //if (i == dicParam.Count - 1)
+                //{
+                //    str_Content += dicItem.Key + "=" + strValue;
+                //}
+                //else
+                //{
+                    str_Content += "<" + dicItem.Key + ">" + strValue + "</" + dicItem.Key + ">";
+                //}
+                i++;
+            }
+            str_Format = "<xml>" + str_Content + "</xml>";
+            return str_Format;
+        }
+
+        /// <summary>
         /// 微信支付
         /// </summary>
         /// <param name="wpp">微信支付参数</param>
         /// <returns></returns>
-        public static string Pay(WechatPayParam wpp)
+        public string Pay(WechatPayParam wpp)
         {
             string result = string.Empty;
-            //InitParam();
+            dicWechatPay.Clear();
             //基本信息
-            dicWechatPay.Add("appid", wpp.appid);
-            dicWechatPay.Add("mch_id", wpp.mch_id);
-            dicWechatPay.Add("device_info", wpp.device_info);
-            dicWechatPay.Add("nonce_str", wpp.nonce_str);
-            dicWechatPay.Add("sign", wpp.sign);
-            dicWechatPay.Add("sign_type", wpp.sign_type);
-            dicWechatPay.Add("body", wpp.body);
-            dicWechatPay.Add("detail", wpp.detail);
-            dicWechatPay.Add("attach", wpp.attach);
-            dicWechatPay.Add("out_trade_no", wpp.out_trade_no);
-            dicWechatPay.Add("fee_type", wpp.fee_type);
+            dicWechatPay.Add("appid", WxAppId);
+            dicWechatPay.Add("mch_id", SH_Number);
+            //dicWechatPay.Add("device_info", "WEB");
+            dicWechatPay.Add("nonce_str", Guid.NewGuid().ToString().Replace("-",""));
+            //dicWechatPay.Add("sign_type", "MD5");
+            dicWechatPay.Add("body", "开通会员");
+            //dicWechatPay.Add("detail", "会员");
+            //dicWechatPay.Add("attach", "");
+            dicWechatPay.Add("out_trade_no", SetPayOrder());
+            //dicWechatPay.Add("fee_type", "CNY");
             dicWechatPay.Add("total_fee", wpp.total_fee);
-            dicWechatPay.Add("spbill_create_ip", wpp.spbill_create_ip);
-            dicWechatPay.Add("time_start", wpp.time_start);
-            dicWechatPay.Add("time_expire", wpp.time_expire);
-            dicWechatPay.Add("goods_tag", wpp.goods_tag);
-            dicWechatPay.Add("notify_url", wpp.notify_url);
-            dicWechatPay.Add("trade_type", wpp.trade_type);
-            dicWechatPay.Add("limit_pay", wpp.limit_pay);
-            dicWechatPay.Add("scene_info", wpp.scene_info);
-
-            result = ow.HttpPostData(WechatPay_URL + "pay/unifiedorder", FormatParam(dicWechatPay));
+            dicWechatPay.Add("spbill_create_ip", "");
+            //dicWechatPay.Add("time_start", DateTime.Now.ToString("yyyyMMddHHmmss"));
+            //dicWechatPay.Add("time_expire", DateTime.Now.AddMinutes(5.00).ToString("yyyyMMddHHmmss"));
+            //dicWechatPay.Add("goods_tag", "WXG");
+            dicWechatPay.Add("notify_url", "https://weixin.ymstudio.xyz/Api/Vip/PayNotice");
+            dicWechatPay.Add("trade_type", "JSAPI");
+            //dicWechatPay.Add("limit_pay", "no_credit");
+            dicWechatPay.Add("openid", wpp.openid);
+            string strSign = GeneralKeyGen(dicWechatPay, SH_Secret);
+            dicWechatPay.Add("sign", strSign);
+            //result = FormatParamToXML(dicWechatPay);
+            result = ow.HttpPostData(WechatPay_URL + "pay/unifiedorder", FormatParamToXML(dicWechatPay));
 
             return result;
         }
@@ -183,7 +244,7 @@ namespace ML.ThirdParty
         /// </summary>
         /// <param name="woqp">微信查询订单参数</param>
         /// <returns></returns>
-        public static string OrderQuery(WechatOrderQueryParam woqp)
+        public string OrderQuery(WechatOrderQueryParam woqp)
         {
             string result = string.Empty;
             //InitParam();
@@ -205,7 +266,7 @@ namespace ML.ThirdParty
         /// </summary>
         /// <param name="wcop">微信关闭订单参数</param>
         /// <returns></returns>
-        public static string CloseOrder(WechatCloseOrderParam wcop)
+        public string CloseOrder(WechatCloseOrderParam wcop)
         {
             string result = string.Empty;
             //InitParam();
@@ -226,7 +287,7 @@ namespace ML.ThirdParty
         /// </summary>
         /// <param name="wrp">微信申请退款参数</param>
         /// <returns></returns>
-        public static string Refund(WechatRefundParam wrp)
+        public string Refund(WechatRefundParam wrp)
         {
             string result = string.Empty;
             //InitParam();
@@ -247,7 +308,7 @@ namespace ML.ThirdParty
         /// </summary>
         /// <param name="wrqp">微信关闭订单参数</param>
         /// <returns></returns>
-        public static string RefundQuery(WechatRefundQueryParam wrqp)
+        public string RefundQuery(WechatRefundQueryParam wrqp)
         {
             string result = string.Empty;
             //InitParam();
@@ -271,7 +332,7 @@ namespace ML.ThirdParty
         /// </summary>
         /// <param name="wdbp">微信下载对账单参数</param>
         /// <returns></returns>
-        public static string DownloadBill(WechatDownloadBillParam wdbp)
+        public string DownloadBill(WechatDownloadBillParam wdbp)
         {
             string result = string.Empty;
             //InitParam();
@@ -296,7 +357,7 @@ namespace ML.ThirdParty
         /// </summary>
         /// <param name="wrep">微信交易保障参数</param>
         /// <returns></returns>
-        public static string Report(WechatReportParam wrep)
+        public string Report(WechatReportParam wrep)
         {
             string result = string.Empty;
             //InitParam();
@@ -592,85 +653,85 @@ namespace ML.ThirdParty
     /// </summary>
     public class WechatPayParam
     {
-        /// <summary>
-        /// 应用ID
-        /// </summary>
-        public string appid { get; set; }
-        /// <summary>
-        /// 商户号
-        /// </summary>
-        public string mch_id { get; set; }
-        /// <summary>
-        /// 设备号(非必填)
-        /// </summary>
-        public string device_info { get; set; }
-        /// <summary>
-        /// 随机字符串
-        /// </summary>
-        public string nonce_str { get; set; }
-        /// <summary>
-        /// 签名
-        /// </summary>
-        public string sign { get; set; }
-        /// <summary>
-        /// 签名类型(非必填)
-        /// </summary>
-        public string sign_type { get; set; }
-        /// <summary>
-        /// 商品描述
-        /// </summary>
-        public string body { get; set; }
-        /// <summary>
-        /// 商品详情(非必填)
-        /// </summary>
-        public string detail { get; set; }
-        /// <summary>
-        /// 附加数据(非必填)
-        /// </summary>
-        public string attach { get; set; }
-        /// <summary>
-        /// 商户订单号
-        /// </summary>
-        public string out_trade_no { get; set; }
-        /// <summary>
-        /// 货币类型(非必填)
-        /// </summary>
-        public string fee_type { get; set; }
+        ///// <summary>
+        ///// 应用ID
+        ///// </summary>
+        //public string appid { get; set; }
+        ///// <summary>
+        ///// 商户号
+        ///// </summary>
+        //public string mch_id { get; set; }
+        ///// <summary>
+        ///// 设备号(非必填)
+        ///// </summary>
+        //public string device_info { get; set; }
+        ///// <summary>
+        ///// 随机字符串
+        ///// </summary>
+        //public string nonce_str { get; set; }
+        ///// <summary>
+        ///// 签名
+        ///// </summary>
+        //public string sign { get; set; }
+        ///// <summary>
+        ///// 签名类型(非必填)
+        ///// </summary>
+        //public string sign_type { get; set; }
+        ///// <summary>
+        ///// 商品描述
+        ///// </summary>
+        //public string body { get; set; }
+        ///// <summary>
+        ///// 商品详情(非必填)
+        ///// </summary>
+        //public string detail { get; set; }
+        ///// <summary>
+        ///// 附加数据(非必填)
+        ///// </summary>
+        //public string attach { get; set; }
+        ///// <summary>
+        ///// 商户订单号
+        ///// </summary>
+        //public string out_trade_no { get; set; }
+        ///// <summary>
+        ///// 货币类型(非必填)
+        ///// </summary>
+        //public string fee_type { get; set; }
         /// <summary>
         /// 总金额
         /// </summary>
         public string total_fee { get; set; }
+        ///// <summary>
+        ///// 终端IP
+        ///// </summary>
+        //public string spbill_create_ip { get; set; }
+        ///// <summary>
+        ///// 交易起始时间(非必填)
+        ///// </summary>
+        //public string time_start { get; set; }
+        ///// <summary>
+        ///// 交易结束时间(非必填)
+        ///// </summary>
+        //public string time_expire { get; set; }
+        ///// <summary>
+        ///// 订单优惠标记(非必填)
+        ///// </summary>
+        //public string goods_tag { get; set; }
+        ///// <summary>
+        ///// 通知地址
+        ///// </summary>
+        //public string notify_url { get; set; }
+        ///// <summary>
+        ///// 交易类型
+        ///// </summary>
+        //public string trade_type { get; set; }
+        ///// <summary>
+        ///// 指定支付方式(非必填)
+        ///// </summary>
+        //public string limit_pay { get; set; }
         /// <summary>
-        /// 终端IP
+        /// 微信用户唯一标识
         /// </summary>
-        public string spbill_create_ip { get; set; }
-        /// <summary>
-        /// 交易起始时间(非必填)
-        /// </summary>
-        public string time_start { get; set; }
-        /// <summary>
-        /// 交易结束时间(非必填)
-        /// </summary>
-        public string time_expire { get; set; }
-        /// <summary>
-        /// 订单优惠标记(非必填)
-        /// </summary>
-        public string goods_tag { get; set; }
-        /// <summary>
-        /// 通知地址
-        /// </summary>
-        public string notify_url { get; set; }
-        /// <summary>
-        /// 交易类型
-        /// </summary>
-        public string trade_type { get; set; }
-        /// <summary>
-        /// 指定支付方式(非必填)
-        /// </summary>
-        public string limit_pay { get; set; }
-        /// <summary>
-        /// 场景信息(非必填)
-        /// </summary>
-        public string scene_info { get; set; }
+        public string openid { get; set; }
     }
 }

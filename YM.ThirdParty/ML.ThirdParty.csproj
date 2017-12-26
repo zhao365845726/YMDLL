@@ -58,10 +58,16 @@
     <Reference Include="lianlianpay-security-1.0.0">
       <HintPath>..\CommonDll\lianlianpay-security-1.0.0.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\CommonDll\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -82,8 +88,13 @@
     <Compile Include="Base.ThirdParty\MYPayHelper.cs" />
     <Compile Include="Base.ThirdParty\LLPayHelper.cs" />
     <Compile Include="Base.ThirdParty\SCHelper.cs" />
-    <Compile Include="Base.ThirdParty\WechatPayHelper.cs" />
+    <Compile Include="JGSMS\JGSMSHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wechat\SP_Auth.cs" />
+    <Compile Include="Wechat\WechatPayHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
