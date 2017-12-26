@@ -9,3 +9,9 @@ E:\_GitCode\YMDLL\YMDLL\bin\Debug\MySql.Data.dll
 E:\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.dll
 E:\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.pdb
 E:\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.csproj.CoreCompileInputs.cache
+F:\_GitCode\YMDLL\YMDLL\bin\Debug\YMDLL.dll
+F:\_GitCode\YMDLL\YMDLL\bin\Debug\YMDLL.pdb
+F:\_GitCode\YMDLL\YMDLL\bin\Debug\MySql.Data.dll
+F:\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.csproj.CoreCompileInputs.cache
+F:\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.dll
+F:\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.pdb
