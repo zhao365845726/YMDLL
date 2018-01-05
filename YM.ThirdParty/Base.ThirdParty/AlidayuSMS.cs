@@ -13,23 +13,23 @@ namespace ML.ThirdParty
     /// </summary>
     public class AlidayuSMS
     {
-        /// <summary>
-        /// 发送短信
-        /// </summary>
-        /// <returns></returns>
-        public string SendSMS(AppInfo ai,SMSInfo si)
-        {
-            ITopClient client = new DefaultTopClient(ai.ServerUrl, ai.AppKey, ai.Secret);
-            AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
-            req.Extend = si.Extend;
-            req.SmsType = si.SmsType;
-            req.SmsFreeSignName = si.SmsFreeSignName;
-            req.SmsParam = si.SmsParam;
-            req.RecNum = si.RecNum;
-            req.SmsTemplateCode = si.SmsTemplateCode;
-            AlibabaAliqinFcSmsNumSendResponse rsp = client.Execute(req);
-            return rsp.Body;
-        }
+        ///// <summary>
+        ///// 发送短信
+        ///// </summary>
+        ///// <returns></returns>
+        //public string SendSMS(AppInfo ai,SMSInfo si)
+        //{
+        //    ITopClient client = new DefaultTopClient(ai.ServerUrl, ai.AppKey, ai.Secret);
+        //    AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+        //    req.Extend = si.Extend;
+        //    req.SmsType = si.SmsType;
+        //    req.SmsFreeSignName = si.SmsFreeSignName;
+        //    req.SmsParam = si.SmsParam;
+        //    req.RecNum = si.RecNum;
+        //    req.SmsTemplateCode = si.SmsTemplateCode;
+        //    AlibabaAliqinFcSmsNumSendResponse rsp = client.Execute(req);
+        //    return rsp.Body;
+        //}
     }
 
     /// <summary>

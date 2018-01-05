@@ -75,11 +75,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TopSdk">
-      <HintPath>..\Lib\TopSdk.dll</HintPath>
-    </Reference>
-    <Reference Include="YMDLL">
-      <HintPath>..\Lib\YMDLL.dll</HintPath>
+    <Reference Include="TopSdk, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TopSdk.1.0.20728.1\lib\net40\TopSdk.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +92,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YMDLL\YMDLL.csproj">
+      <Project>{ff06cfc9-4a33-420d-a6ce-809beec4f70d}</Project>
+      <Name>YMDLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

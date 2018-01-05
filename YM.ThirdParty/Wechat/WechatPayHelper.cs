@@ -12,7 +12,7 @@ namespace ML.ThirdParty.Wechat
         public CS_OperaWeb ow = new CS_OperaWeb();
         public CS_CalcDateTime cdt = new CS_CalcDateTime();
         public string WechatPay_URL = "https://api.mch.weixin.qq.com/";
-        public string WxAppId = "wx133b351ac060a310";
+        public string WxAppId = "wx09f4345fc8eaf58f";
         public string SH_Number = "1486565242";
         public string SH_Secret = "ML28DB8180A44AC9F5E55139067783TE";
         public Dictionary<string, string> dic_WechatRequestUrl = new Dictionary<string, string>();
@@ -251,28 +251,27 @@ namespace ML.ThirdParty.Wechat
             //基本信息
             dicWechatPay.Add("appid", WxAppId);
             dicWechatPay.Add("mch_id", SH_Number);
-            //dicWechatPay.Add("device_info", "WEB");
+            dicWechatPay.Add("device_info", "WEB");
             dicWechatPay.Add("nonce_str", Guid.NewGuid().ToString().Replace("-", ""));
-            //dicWechatPay.Add("sign_type", "MD5");
-            dicWechatPay.Add("body", "开通会员");
-            //dicWechatPay.Add("detail", "会员");
+            dicWechatPay.Add("sign_type", "MD5");
+            dicWechatPay.Add("body", "买单");
+            dicWechatPay.Add("detail", "普通用户");
             //dicWechatPay.Add("attach", "");
             dicWechatPay.Add("out_trade_no", SetPayOrder());
-            //dicWechatPay.Add("fee_type", "CNY");
+            dicWechatPay.Add("fee_type", "CNY");
             dicWechatPay.Add("total_fee", wpp.total_fee);
             dicWechatPay.Add("spbill_create_ip", "");
             //dicWechatPay.Add("time_start", DateTime.Now.ToString("yyyyMMddHHmmss"));
             //dicWechatPay.Add("time_expire", DateTime.Now.AddMinutes(5.00).ToString("yyyyMMddHHmmss"));
             //dicWechatPay.Add("goods_tag", "WXG");
-            dicWechatPay.Add("notify_url", "https://weixin.ymstudio.xyz/Api/Vip/PayNotice");
+            dicWechatPay.Add("notify_url", wpp.notify_url);
             dicWechatPay.Add("trade_type", "MWEB");
-            //dicWechatPay.Add("limit_pay", "no_credit");
+            dicWechatPay.Add("limit_pay", "no_credit");
             dicWechatPay.Add("openid", wpp.openid);
             string strSign = GeneralKeyGen(dicWechatPay, SH_Secret);
             dicWechatPay.Add("sign", strSign);
             //result = FormatParamToXML(dicWechatPay);
             result = ow.HttpPostData(WechatPay_URL + "pay/unifiedorder", FormatParamToXML(dicWechatPay));
-
             return result;
         }
 
@@ -754,10 +753,10 @@ namespace ML.ThirdParty.Wechat
         ///// 订单优惠标记(非必填)
         ///// </summary>
         //public string goods_tag { get; set; }
-        ///// <summary>
-        ///// 通知地址
-        ///// </summary>
-        //public string notify_url { get; set; }
+        /// <summary>
+        /// 通知地址
+        /// </summary>
+        public string notify_url { get; set; }
         ///// <summary>
         ///// 交易类型
         ///// </summary>
