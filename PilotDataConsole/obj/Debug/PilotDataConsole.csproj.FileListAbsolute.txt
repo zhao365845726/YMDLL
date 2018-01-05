@@ -52,16 +52,3 @@ F:\working-zhdcCode\common\YMDLL\PilotDataConsole\obj\Debug\PilotDataConsole.Pro
 F:\working-zhdcCode\common\YMDLL\PilotDataConsole\obj\Debug\PilotDataConsole.csproj.GenerateResource.Cache
 F:\working-zhdcCode\common\YMDLL\PilotDataConsole\obj\Debug\PilotDataConsole.exe
 F:\working-zhdcCode\common\YMDLL\PilotDataConsole\obj\Debug\PilotDataConsole.pdb
-F:\_GitCode\YMDLL\PilotDataConsole\bin\Debug\PilotDataConsole.exe.config
-F:\_GitCode\YMDLL\PilotDataConsole\obj\Debug\PilotDataConsole.exe
-F:\_GitCode\YMDLL\PilotDataConsole\obj\Debug\PilotDataConsole.pdb
-F:\_GitCode\YMDLL\PilotDataConsole\bin\Debug\PilotDataConsole.exe
-F:\_GitCode\YMDLL\PilotDataConsole\bin\Debug\PilotDataConsole.pdb
-F:\_GitCode\YMDLL\PilotDataConsole\bin\Debug\AgencyEntity.dll
-F:\_GitCode\YMDLL\PilotDataConsole\bin\Debug\YMDLL.dll
-F:\_GitCode\YMDLL\PilotDataConsole\bin\Debug\MySql.Data.dll
-F:\_GitCode\YMDLL\PilotDataConsole\bin\Debug\AgencyEntity.pdb
-F:\_GitCode\YMDLL\PilotDataConsole\bin\Debug\YMDLL.pdb
-F:\_GitCode\YMDLL\PilotDataConsole\obj\Debug\PilotDataConsole.csprojResolveAssemblyReference.cache
-F:\_GitCode\YMDLL\PilotDataConsole\obj\Debug\PilotDataConsole.Properties.Resources.resources
-F:\_GitCode\YMDLL\PilotDataConsole\obj\Debug\PilotDataConsole.csproj.GenerateResource.Cache

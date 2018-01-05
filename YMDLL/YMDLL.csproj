@@ -70,6 +70,7 @@
     <Compile Include="Class\CS_OperaWeb.cs" />
     <Compile Include="Class\CS_RealEstateInfo.cs" />
     <Compile Include="Class\Cutout.cs" />
+    <Compile Include="Class\Web\YM_Element.cs" />
     <Compile Include="Class\YM_SQLServer.cs" />
     <Compile Include="Class\PageValidate.cs" />
     <Compile Include="Class\Web\YM_Http.cs" />
@@ -77,7 +78,9 @@
     <Compile Include="Class\YM_MySQL.cs" />
     <Compile Include="Common\ChangeLanguage.cs" />
     <Compile Include="Common\CommandInfo.cs" />
+    <Compile Include="Common\ConvertToJson.cs" />
     <Compile Include="Common\JsonHelper.cs" />
+    <Compile Include="Common\JsonMessage.cs" />
     <Compile Include="Common\Md5.cs" />
     <Compile Include="Common\SecretHelper.cs" />
     <Compile Include="Common\SessionHelper.cs" />

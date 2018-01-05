@@ -191,6 +191,28 @@ namespace YMDLL.Class
             return (int)(time - startTime).TotalSeconds;
         }
 
+        public DateTime FromUnixTime(long unixTime)
+        {
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            return epoch.AddMilliseconds(unixTime);
+        }
+
+        public long ToUnixTime(DateTime date)
+        {
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            return Convert.ToInt64((date.ToUniversalTime() - epoch).TotalMilliseconds);
+        }
+
+        /// <summary>  
+        /// 获取时间戳  
+        /// </summary>  
+        /// <returns></returns>  
+        public string GetTimeStamp()
+        {
+            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return Convert.ToInt64(ts.TotalMilliseconds).ToString();
+        }
+
         ///// <summary>
         ///// 计算日期时间构造函数
         ///// </summary>
