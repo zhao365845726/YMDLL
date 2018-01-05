@@ -260,7 +260,7 @@ namespace ML.ThirdParty.Wechat
             dicWechatPay.Add("out_trade_no", SetPayOrder());
             dicWechatPay.Add("fee_type", "CNY");
             dicWechatPay.Add("total_fee", wpp.total_fee);
-            dicWechatPay.Add("spbill_create_ip", ow.IPAddress);
+            dicWechatPay.Add("spbill_create_ip", "");
             //dicWechatPay.Add("time_start", DateTime.Now.ToString("yyyyMMddHHmmss"));
             //dicWechatPay.Add("time_expire", DateTime.Now.AddMinutes(5.00).ToString("yyyyMMddHHmmss"));
             //dicWechatPay.Add("goods_tag", "WXG");
