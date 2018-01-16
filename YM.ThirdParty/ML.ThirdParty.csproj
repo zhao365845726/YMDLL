@@ -33,6 +33,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="aliyun-net-sdk-core">
+      <HintPath>..\CommonDll\aliyun-net-sdk-core.dll</HintPath>
+    </Reference>
+    <Reference Include="aliyun-net-sdk-dysmsapi">
+      <HintPath>..\CommonDll\aliyun-net-sdk-dysmsapi.dll</HintPath>
+    </Reference>
     <Reference Include="AopSdk">
       <HintPath>..\CommonDll\AopSdk.dll</HintPath>
     </Reference>
@@ -80,6 +86,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base.ThirdParty\AliCloudCommunication.cs" />
     <Compile Include="Base.ThirdParty\AlidayuSMS.cs" />
     <Compile Include="Base.ThirdParty\AliPayHelper.cs" />
     <Compile Include="Base.ThirdParty\MYPayHelper.cs" />
@@ -94,6 +101,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\YM.Utilities\ML.Utilities.csproj">
+      <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
+      <Name>ML.Utilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YMDLL\YMDLL.csproj">
       <Project>{ff06cfc9-4a33-420d-a6ce-809beec4f70d}</Project>
       <Name>YMDLL</Name>

@@ -47,7 +47,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="TopSdk">
-      <HintPath>..\YM.ThirdParty\bin\Debug\TopSdk.dll</HintPath>
+      <HintPath>..\CommonDll\TopSdk.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -104,12 +104,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base.Document\PDF\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\YM.DataAccess\ML.DataAccess.csproj">
-      <Project>{7d1a96cf-9b89-443f-ab95-12343f52a1ac}</Project>
-      <Name>ML.DataAccess</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

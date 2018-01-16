@@ -9,7 +9,7 @@ using Top.Api.Response;
 namespace ML.ThirdParty
 {
     /// <summary>
-    /// 阿里大鱼短信第三方对接
+    /// 阿里大鱼短信第三方对接（2018-01-17失效）
     /// </summary>
     public class AlidayuSMS
     {

@@ -42,7 +42,7 @@
       <HintPath>..\packages\log4net.2.0.8\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data">
-      <HintPath>..\Lib\MySql.Data.dll</HintPath>
+      <HintPath>..\CommonDll\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.DataAccess, Version=2.112.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
       <HintPath>..\packages\Oracle.DataAccess.x86.2.112.1.0\lib\Oracle.DataAccess.dll</HintPath>
@@ -87,12 +87,6 @@
     <Compile Include="DataAccess\DataBase\Database.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\YM.Cache\LeaRun.Cache.csproj">
-      <Project>{ce495c65-356d-453a-919e-329879fdf47c}</Project>
-      <Name>LeaRun.Cache</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
