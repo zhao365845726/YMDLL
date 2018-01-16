@@ -14,10 +14,13 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            SendSMSTest();
+            PayTest();
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// 阿里云通讯测试
+        /// </summary>
         public static void SendSMSTest()
         {
             AliCloudCommunication acc = new AliCloudCommunication();

@@ -151,6 +151,10 @@ namespace YMDLL.Class
         public string GetRealIPAddress()
         {
             string result = String.Empty;
+            if (HttpContext.Current == null)
+            {
+                return GetClientIPv4();
+            }
             result = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
             if (result != null && result != String.Empty)
             {

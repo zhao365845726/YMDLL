@@ -1,1 +1,14 @@
 C:\zmz_workspace\_GitCode\YMDLL\PilotData_Hzly\bin\Debug\PilotData_Hzly.exe.config
+G:\_GitCode\MLSDK\PilotData_Hzly\bin\Debug\PilotData_Hzly.exe.config
+G:\_GitCode\MLSDK\PilotData_Hzly\bin\Debug\PilotData_Hzly.exe
+G:\_GitCode\MLSDK\PilotData_Hzly\bin\Debug\PilotData_Hzly.pdb
+G:\_GitCode\MLSDK\PilotData_Hzly\bin\Debug\HzlyToERP3_PHP.dll
+G:\_GitCode\MLSDK\PilotData_Hzly\bin\Debug\YMDLL.dll
+G:\_GitCode\MLSDK\PilotData_Hzly\bin\Debug\MySql.Data.dll
+G:\_GitCode\MLSDK\PilotData_Hzly\bin\Debug\HzlyToERP3_PHP.pdb
+G:\_GitCode\MLSDK\PilotData_Hzly\bin\Debug\YMDLL.pdb
+G:\_GitCode\MLSDK\PilotData_Hzly\bin\Debug\MySql.Data.xml
+G:\_GitCode\MLSDK\PilotData_Hzly\obj\Debug\PilotData_Hzly.csprojResolveAssemblyReference.cache
+G:\_GitCode\MLSDK\PilotData_Hzly\obj\Debug\PilotData_Hzly.csproj.CoreCompileInputs.cache
+G:\_GitCode\MLSDK\PilotData_Hzly\obj\Debug\PilotData_Hzly.exe
+G:\_GitCode\MLSDK\PilotData_Hzly\obj\Debug\PilotData_Hzly.pdb

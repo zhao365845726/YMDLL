@@ -9,3 +9,16 @@ F:\working-zhdcCode\common\YMDLL\PilotDataConsoleT3\bin\Debug\YMDLL.pdb
 F:\working-zhdcCode\common\YMDLL\PilotDataConsoleT3\obj\Debug\PilotDataConsoleT3.csprojResolveAssemblyReference.cache
 F:\working-zhdcCode\common\YMDLL\PilotDataConsoleT3\obj\Debug\PilotDataConsoleT3.exe
 F:\working-zhdcCode\common\YMDLL\PilotDataConsoleT3\obj\Debug\PilotDataConsoleT3.pdb
+G:\_GitCode\MLSDK\PilotDataConsoleT3\bin\Debug\PilotDataConsoleT3.exe.config
+G:\_GitCode\MLSDK\PilotDataConsoleT3\bin\Debug\PilotDataConsoleT3.exe
+G:\_GitCode\MLSDK\PilotDataConsoleT3\bin\Debug\PilotDataConsoleT3.pdb
+G:\_GitCode\MLSDK\PilotDataConsoleT3\bin\Debug\AgencyToERP_PHP.dll
+G:\_GitCode\MLSDK\PilotDataConsoleT3\bin\Debug\YMDLL.dll
+G:\_GitCode\MLSDK\PilotDataConsoleT3\bin\Debug\MySql.Data.dll
+G:\_GitCode\MLSDK\PilotDataConsoleT3\bin\Debug\AgencyToERP_PHP.pdb
+G:\_GitCode\MLSDK\PilotDataConsoleT3\bin\Debug\YMDLL.pdb
+G:\_GitCode\MLSDK\PilotDataConsoleT3\bin\Debug\MySql.Data.xml
+G:\_GitCode\MLSDK\PilotDataConsoleT3\obj\Debug\PilotDataConsoleT3.csprojResolveAssemblyReference.cache
+G:\_GitCode\MLSDK\PilotDataConsoleT3\obj\Debug\PilotDataConsoleT3.csproj.CoreCompileInputs.cache
+G:\_GitCode\MLSDK\PilotDataConsoleT3\obj\Debug\PilotDataConsoleT3.exe
+G:\_GitCode\MLSDK\PilotDataConsoleT3\obj\Debug\PilotDataConsoleT3.pdb

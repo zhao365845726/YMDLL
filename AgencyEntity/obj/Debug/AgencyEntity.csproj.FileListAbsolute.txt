@@ -45,3 +45,13 @@ G:\_GitCode\YMDLL\AgencyEntity\bin\Debug\YMDLL.pdb
 G:\_GitCode\YMDLL\AgencyEntity\obj\Debug\AgencyEntity.csprojResolveAssemblyReference.cache
 G:\_GitCode\YMDLL\AgencyEntity\obj\Debug\AgencyEntity.dll
 G:\_GitCode\YMDLL\AgencyEntity\obj\Debug\AgencyEntity.pdb
+G:\_GitCode\MLSDK\AgencyEntity\bin\Debug\AgencyEntity.dll
+G:\_GitCode\MLSDK\AgencyEntity\bin\Debug\AgencyEntity.pdb
+G:\_GitCode\MLSDK\AgencyEntity\bin\Debug\YMDLL.dll
+G:\_GitCode\MLSDK\AgencyEntity\bin\Debug\MySql.Data.dll
+G:\_GitCode\MLSDK\AgencyEntity\bin\Debug\YMDLL.pdb
+G:\_GitCode\MLSDK\AgencyEntity\bin\Debug\MySql.Data.xml
+G:\_GitCode\MLSDK\AgencyEntity\obj\Debug\AgencyEntity.csprojResolveAssemblyReference.cache
+G:\_GitCode\MLSDK\AgencyEntity\obj\Debug\AgencyEntity.csproj.CoreCompileInputs.cache
+G:\_GitCode\MLSDK\AgencyEntity\obj\Debug\AgencyEntity.dll
+G:\_GitCode\MLSDK\AgencyEntity\obj\Debug\AgencyEntity.pdb

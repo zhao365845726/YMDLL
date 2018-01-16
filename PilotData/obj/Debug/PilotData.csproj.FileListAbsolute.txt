@@ -117,3 +117,17 @@ G:\_GitCode\YMDLL\PilotData\obj\Debug\PilotData.Properties.Resources.resources
 G:\_GitCode\YMDLL\PilotData\obj\Debug\PilotData.csproj.GenerateResource.Cache
 G:\_GitCode\YMDLL\PilotData\obj\Debug\PilotData.exe
 G:\_GitCode\YMDLL\PilotData\obj\Debug\PilotData.pdb
+G:\_GitCode\MLSDK\PilotData\bin\Debug\PilotData.exe.config
+G:\_GitCode\MLSDK\PilotData\bin\Debug\PilotData.exe
+G:\_GitCode\MLSDK\PilotData\bin\Debug\PilotData.pdb
+G:\_GitCode\MLSDK\PilotData\bin\Debug\AgencyEntity.dll
+G:\_GitCode\MLSDK\PilotData\bin\Debug\YMDLL.dll
+G:\_GitCode\MLSDK\PilotData\bin\Debug\AgencyEntity.pdb
+G:\_GitCode\MLSDK\PilotData\bin\Debug\YMDLL.pdb
+G:\_GitCode\MLSDK\PilotData\obj\Debug\PilotData.csprojResolveAssemblyReference.cache
+G:\_GitCode\MLSDK\PilotData\obj\Debug\PilotData.frmMain.resources
+G:\_GitCode\MLSDK\PilotData\obj\Debug\PilotData.Properties.Resources.resources
+G:\_GitCode\MLSDK\PilotData\obj\Debug\PilotData.csproj.GenerateResource.Cache
+G:\_GitCode\MLSDK\PilotData\obj\Debug\PilotData.csproj.CoreCompileInputs.cache
+G:\_GitCode\MLSDK\PilotData\obj\Debug\PilotData.exe
+G:\_GitCode\MLSDK\PilotData\obj\Debug\PilotData.pdb

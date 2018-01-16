@@ -6,3 +6,13 @@ F:\working-zhdcCode\common\YMDLL\Entity_Base\bin\Debug\YMDLL.pdb
 F:\working-zhdcCode\common\YMDLL\Entity_Base\obj\Debug\Entity_Base.csprojResolveAssemblyReference.cache
 F:\working-zhdcCode\common\YMDLL\Entity_Base\obj\Debug\Entity_Base.dll
 F:\working-zhdcCode\common\YMDLL\Entity_Base\obj\Debug\Entity_Base.pdb
+G:\_GitCode\MLSDK\Entity_Base\bin\Debug\Entity_Base.dll
+G:\_GitCode\MLSDK\Entity_Base\bin\Debug\Entity_Base.pdb
+G:\_GitCode\MLSDK\Entity_Base\bin\Debug\YMDLL.dll
+G:\_GitCode\MLSDK\Entity_Base\bin\Debug\MySql.Data.dll
+G:\_GitCode\MLSDK\Entity_Base\bin\Debug\YMDLL.pdb
+G:\_GitCode\MLSDK\Entity_Base\bin\Debug\MySql.Data.xml
+G:\_GitCode\MLSDK\Entity_Base\obj\Debug\Entity_Base.csprojResolveAssemblyReference.cache
+G:\_GitCode\MLSDK\Entity_Base\obj\Debug\Entity_Base.csproj.CoreCompileInputs.cache
+G:\_GitCode\MLSDK\Entity_Base\obj\Debug\Entity_Base.dll
+G:\_GitCode\MLSDK\Entity_Base\obj\Debug\Entity_Base.pdb

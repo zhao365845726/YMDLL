@@ -9,3 +9,16 @@ C:\zmz_workspace\_GitCode\YMDLL\PilotData_ToOBS\bin\Debug\YMDLL.pdb
 C:\zmz_workspace\_GitCode\YMDLL\PilotData_ToOBS\obj\Debug\PilotData_ToOBS.csprojResolveAssemblyReference.cache
 C:\zmz_workspace\_GitCode\YMDLL\PilotData_ToOBS\obj\Debug\PilotData_ToOBS.exe
 C:\zmz_workspace\_GitCode\YMDLL\PilotData_ToOBS\obj\Debug\PilotData_ToOBS.pdb
+G:\_GitCode\MLSDK\PilotData_ToOBS\bin\Debug\PilotData_ToOBS.exe.config
+G:\_GitCode\MLSDK\PilotData_ToOBS\bin\Debug\PilotData_ToOBS.exe
+G:\_GitCode\MLSDK\PilotData_ToOBS\bin\Debug\PilotData_ToOBS.pdb
+G:\_GitCode\MLSDK\PilotData_ToOBS\bin\Debug\ERP3ToOBS.dll
+G:\_GitCode\MLSDK\PilotData_ToOBS\bin\Debug\YMDLL.dll
+G:\_GitCode\MLSDK\PilotData_ToOBS\bin\Debug\MySql.Data.dll
+G:\_GitCode\MLSDK\PilotData_ToOBS\bin\Debug\ERP3ToOBS.pdb
+G:\_GitCode\MLSDK\PilotData_ToOBS\bin\Debug\YMDLL.pdb
+G:\_GitCode\MLSDK\PilotData_ToOBS\bin\Debug\MySql.Data.xml
+G:\_GitCode\MLSDK\PilotData_ToOBS\obj\Debug\PilotData_ToOBS.csprojResolveAssemblyReference.cache
+G:\_GitCode\MLSDK\PilotData_ToOBS\obj\Debug\PilotData_ToOBS.csproj.CoreCompileInputs.cache
+G:\_GitCode\MLSDK\PilotData_ToOBS\obj\Debug\PilotData_ToOBS.exe
+G:\_GitCode\MLSDK\PilotData_ToOBS\obj\Debug\PilotData_ToOBS.pdb

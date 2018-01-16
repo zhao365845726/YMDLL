@@ -6,3 +6,11 @@ F:\working-zhdcCode\common\YMDLL\AgencyToERP_PHP\bin\Debug\YMDLL.pdb
 F:\working-zhdcCode\common\YMDLL\AgencyToERP_PHP\obj\Debug\AgencyToERP_PHP.dll
 F:\working-zhdcCode\common\YMDLL\AgencyToERP_PHP\obj\Debug\AgencyToERP_PHP.pdb
 F:\working-zhdcCode\common\YMDLL\AgencyToERP_PHP\obj\Debug\AgencyToERP_PHP.csprojResolveAssemblyReference.cache
+G:\_GitCode\MLSDK\AgencyToERP_PHP\bin\Debug\AgencyToERP_PHP.dll
+G:\_GitCode\MLSDK\AgencyToERP_PHP\bin\Debug\AgencyToERP_PHP.pdb
+G:\_GitCode\MLSDK\AgencyToERP_PHP\bin\Debug\YMDLL.dll
+G:\_GitCode\MLSDK\AgencyToERP_PHP\bin\Debug\YMDLL.pdb
+G:\_GitCode\MLSDK\AgencyToERP_PHP\obj\Debug\AgencyToERP_PHP.csprojResolveAssemblyReference.cache
+G:\_GitCode\MLSDK\AgencyToERP_PHP\obj\Debug\AgencyToERP_PHP.csproj.CoreCompileInputs.cache
+G:\_GitCode\MLSDK\AgencyToERP_PHP\obj\Debug\AgencyToERP_PHP.dll
+G:\_GitCode\MLSDK\AgencyToERP_PHP\obj\Debug\AgencyToERP_PHP.pdb

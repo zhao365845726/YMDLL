@@ -18,3 +18,9 @@ F:\working-zhdcCode\common\YMDLL\Model\bin\Debug\Model.pdb
 F:\working-zhdcCode\common\YMDLL\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
 F:\working-zhdcCode\common\YMDLL\Model\obj\Debug\Model.dll
 F:\working-zhdcCode\common\YMDLL\Model\obj\Debug\Model.pdb
+G:\_GitCode\MLSDK\Model\bin\Debug\Model.dll
+G:\_GitCode\MLSDK\Model\bin\Debug\Model.pdb
+G:\_GitCode\MLSDK\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+G:\_GitCode\MLSDK\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+G:\_GitCode\MLSDK\Model\obj\Debug\Model.dll
+G:\_GitCode\MLSDK\Model\obj\Debug\Model.pdb

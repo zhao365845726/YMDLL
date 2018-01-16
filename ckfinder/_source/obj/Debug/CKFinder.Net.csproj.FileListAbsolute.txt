@@ -18,3 +18,9 @@ F:\working-zhdcCode\common\YMDLL\ckfinder\_source\bin\Debug\CKFinder.pdb
 F:\working-zhdcCode\common\YMDLL\ckfinder\_source\obj\Debug\CKFinder.Net.csprojResolveAssemblyReference.cache
 F:\working-zhdcCode\common\YMDLL\ckfinder\_source\obj\Debug\CKFinder.dll
 F:\working-zhdcCode\common\YMDLL\ckfinder\_source\obj\Debug\CKFinder.pdb
+G:\_GitCode\MLSDK\ckfinder\_source\bin\Debug\CKFinder.dll
+G:\_GitCode\MLSDK\ckfinder\_source\bin\Debug\CKFinder.pdb
+G:\_GitCode\MLSDK\ckfinder\_source\obj\Debug\CKFinder.Net.csprojResolveAssemblyReference.cache
+G:\_GitCode\MLSDK\ckfinder\_source\obj\Debug\CKFinder.Net.csproj.CoreCompileInputs.cache
+G:\_GitCode\MLSDK\ckfinder\_source\obj\Debug\CKFinder.dll
+G:\_GitCode\MLSDK\ckfinder\_source\obj\Debug\CKFinder.pdb
