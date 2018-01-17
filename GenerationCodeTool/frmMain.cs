@@ -98,10 +98,9 @@ namespace GenerationCodeTool
                     }
                     else
                     {
-                        CreateDocument(strRootDir + strFolderSplit + module + strFolderSplit + strTempModuleName + strFileName + strFileSuffix);
+                        CreateDocument(strRootDir + strFolderSplit + module + strFolderSplit + strTempModuleName + strFolderSplit + strFileName + strFileSuffix);
                     }
                 }
-                //MessageBox.Show("存在");
                 //CreateFolder(strRootDir + "\\Business\\proposal");
                 //CreateFolder(strRootDir + "\\IBusiness\\proposal");
                 //CreateFolder(strRootDir + "\\IRepository\\proposal");
@@ -120,7 +119,7 @@ namespace GenerationCodeTool
             }
             else
             {
-                MessageBox.Show("不存在");
+                MessageBox.Show("根目录：" + strRootDir + " 不存在");
             }
             return true;
         }
