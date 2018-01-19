@@ -7,6 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using ML.ThirdParty;
 using ML.ThirdParty.Wechat;
+using System.Net;
+using System.IO;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 
 namespace TestConsole
 {
@@ -14,8 +18,23 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            PayTest();
+            QryBankCardBy4Element();
             Console.ReadLine();
+        }
+
+        /// <summary>
+        /// 阿里四要素验证
+        /// </summary>
+        public static void QryBankCardBy4Element()
+        {
+            BankCardBy4ElementRequestParam bcberp = new BankCardBy4ElementRequestParam();
+            bcberp.appcode = "412d4d16760245bb9d1d269f69f1bdcc";
+            bcberp.accountNo = "6214837910347495";
+            bcberp.bankPreMobile = "15879052605";
+            bcberp.idCardCode = "140581198810231111";
+            bcberp.name = "赵铭哲";
+            string strResult = AliService.QryBankCardBy4Element(bcberp);
+            Console.WriteLine(strResult);
         }
 
         /// <summary>

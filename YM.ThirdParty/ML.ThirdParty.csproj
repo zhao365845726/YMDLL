@@ -89,6 +89,7 @@
     <Compile Include="Base.ThirdParty\AliCloudCommunication.cs" />
     <Compile Include="Base.ThirdParty\AlidayuSMS.cs" />
     <Compile Include="Base.ThirdParty\AliPayHelper.cs" />
+    <Compile Include="Base.ThirdParty\AliService.cs" />
     <Compile Include="Base.ThirdParty\MYPayHelper.cs" />
     <Compile Include="Base.ThirdParty\LLPayHelper.cs" />
     <Compile Include="Base.ThirdParty\SCHelper.cs" />
