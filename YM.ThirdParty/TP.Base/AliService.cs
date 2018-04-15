@@ -7,8 +7,11 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-namespace ML.ThirdParty
+namespace ML.ThirdParty.Base
 {
+    /// <summary>
+    /// 阿里服务
+    /// </summary>
     public class AliService
     {
         private const String host = "http://aliyuncardby4element.haoservice.com";

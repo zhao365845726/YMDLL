@@ -5,34 +5,31 @@ using System.Text;
 using YMDLL.Class;
 using YMDLL.Common;
 
-namespace ML.ThirdParty
+namespace ML.ThirdParty.Base
 {
     public class MYPayHelper
     {
         public static CS_OperaWeb ow = new CS_OperaWeb();
         public static CS_CalcDateTime cdt = new CS_CalcDateTime();
         public static string MYPay_URL = "http://www.51mayun.com/";
-        public static string SH_Number = "1499847684150";
-        public static string SH_Secret = "8a82439ac83734cd20856a67fe181894";
+        public static string SH_Number = "1499917935884";
+        public static string SH_Secret = "c9944b220c9eb53586a361d324221d4a";
         public static Dictionary<string, string> dic_MYRequestUrl = new Dictionary<string, string>();
         public static Dictionary<string, object> dicMYPay = new Dictionary<string, object>();
+        /// <summary>
+        /// 聚合支付宝App支付的接口类型
+        /// </summary>
+        public static string AliAppPayService = "pay.alipay.native";
+        /// <summary>
+        /// 聚合微信App支付的接口类型
+        /// </summary>
+        public static string WechatAppPayService = "pay.weixin.raw.app";
 
         /// <summary>
         /// 初始化参数
         /// </summary>
         public static void InitParam()
         {
-            ////支付api
-            //dic_MYRequestUrl.Add("openPay", MYPay_URL + "pay/gateway/openPay.do");
-            ////查询订单api
-            //dic_MYRequestUrl.Add("orderQuery", MYPay_URL + "pay/gateway/orderQuery.do");
-            ////申请退款api
-            //dic_MYRequestUrl.Add("refund", MYPay_URL + "refundOrder/refund.do");
-            ////查询退款api
-            //dic_MYRequestUrl.Add("refundQuery", MYPay_URL + "refundOrder/query.do");
-            ////关闭订单api
-            //dic_MYRequestUrl.Add("closeOrder", MYPay_URL + "pay/gateway/closeOrder.do");
-
             dicMYPay.Clear();
             string strNonce = Guid.NewGuid().ToString().Replace("-", "").Substring(1,30);
             dicMYPay.Add("version", "1.0");
@@ -157,32 +154,104 @@ namespace ML.ThirdParty
         /// 微信/支付宝支付
         /// </summary>
         /// <param name="opp"></param>
+        /// <param name="UserId"></param>
         /// <returns></returns>
-        public static string OpenPay(OpenPayParam opp)
+        public static string OpenPay(OpenPayParam opp,string UserId)
         {
             string result = string.Empty;
+            string SH_OrderNum = SetPayOrder();
             InitParam();
             //基本信息
             dicMYPay.Add("service", opp.service);
-            dicMYPay.Add("mchCode", opp.mchCode);
-            dicMYPay.Add("outTradeNo", SetPayOrder());
+            dicMYPay.Add("mchCode", SH_Number);
+            dicMYPay.Add("outTradeNo", SH_OrderNum);
             dicMYPay.Add("body", opp.body);
             dicMYPay.Add("totalFee", opp.totalFee);
-            dicMYPay.Add("mchCreateIp", opp.mchCreateIp);
-            dicMYPay.Add("notifyUrl", opp.notifyUrl);
-            dicMYPay.Add("callbackUrl", opp.callbackUrl);
-            dicMYPay.Add("limitCreditPay", opp.limitCreditPay);
-            dicMYPay.Add("deviceInfo", opp.deviceInfo);
-            dicMYPay.Add("attach", opp.attach);
-            dicMYPay.Add("timeStart", opp.timeStart);
-            dicMYPay.Add("timeExpire", opp.timeExpire);
-            dicMYPay.Add("opUserId", opp.opUserId);
-            dicMYPay.Add("goodsTag", opp.goodsTag);
-            dicMYPay.Add("productId", opp.productId);
+            dicMYPay.Add("mchCreateIp", "47.93.255.23:81");
+            dicMYPay.Add("notifyUrl", "http://47.93.255.23:81/Api/MYPay/PayNotice");
+            dicMYPay.Add("callbackUrl", "http://47.93.255.23:81/Api/MYPay/PayNotice");
+            dicMYPay.Add("limitCreditPay", "");
+            dicMYPay.Add("deviceInfo", "");
+            dicMYPay.Add("attach", "");
+            dicMYPay.Add("timeStart", "");
+            dicMYPay.Add("timeExpire", "");
+            dicMYPay.Add("opUserId", "");
+            dicMYPay.Add("goodsTag", "");
+            dicMYPay.Add("productId", "");
             dicMYPay.Add("sign", GeneralKeyGen(dicMYPay,SH_Secret));
 
             result = ow.HttpPostData(MYPay_URL + "pay/gateway/openPay.do", FormatParam(dicMYPay));
+            //new Base_SysLogBll().InsertLog("提交给码云支付的参数：" + FormatParam(dicMYPay));
+            //记录充值的订单信息
+            //new Base_CashChangeDetailsBll().RechargeInsertCashDetailInfo(UserId, SH_OrderNum,Convert.ToDecimal(opp.totalFee));
+            return result;
+        }
 
+        /// <summary>
+        /// 支付宝App支付
+        /// </summary>
+        /// <param name="aapp"></param>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        public static string AliAppPay(AliAppPayParam aapp, string UserId)
+        {
+            string result = string.Empty;
+            string SH_OrderNum = SetPayOrder();
+            InitParam();
+            //基本信息
+            dicMYPay.Add("service", AliAppPayService);
+            dicMYPay.Add("mchCode", SH_Number);
+            dicMYPay.Add("outTradeNo", SH_OrderNum);
+            dicMYPay.Add("body", "支付宝APP支付充值");
+            dicMYPay.Add("totalFee", aapp.totalFee);
+            dicMYPay.Add("mchCreateIp", "47.93.255.23:81");
+            dicMYPay.Add("notifyUrl", "http://47.93.255.23:81/Api/MYPay/PayNotice");
+            dicMYPay.Add("callbackUrl", "http://47.93.255.23:81/Api/MYPay/PayNotice");
+            dicMYPay.Add("limitCreditPay", "");
+            dicMYPay.Add("deviceId", "");
+            dicMYPay.Add("attach", "");
+            dicMYPay.Add("timeStart", "");
+            dicMYPay.Add("timeExpire", "");
+            dicMYPay.Add("sign", GeneralKeyGen(dicMYPay, SH_Secret));
+
+            result = ow.HttpPostData(MYPay_URL + "pay/gateway/openPay.do", FormatParam(dicMYPay));
+            //new Base_SysLogBll().InsertLog("提交给码云支付的参数：" + FormatParam(dicMYPay));
+            //记录充值的订单信息
+            //new Base_CashChangeDetailsBll().RechargeInsertCashDetailInfo(UserId, SH_OrderNum, Convert.ToDecimal(aapp.totalFee));
+            return result;
+        }
+
+        /// <summary>
+        /// 微信App支付
+        /// </summary>
+        /// <param name="wapp"></param>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        public static string WechatAppPay(WechatAppPayParam wapp, string UserId)
+        {
+            string result = string.Empty;
+            string SH_OrderNum = SetPayOrder();
+            InitParam();
+            //基本信息
+            dicMYPay.Add("service", WechatAppPayService);
+            dicMYPay.Add("mchCode", SH_Number);
+            dicMYPay.Add("outTradeNo", SH_OrderNum);
+            dicMYPay.Add("body", "微信APP支付充值");
+            dicMYPay.Add("totalFee", wapp.totalFee);
+            dicMYPay.Add("mchCreateIp", "47.93.255.23:81");
+            dicMYPay.Add("notifyUrl", "http://47.93.255.23:81/Api/MYPay/PayNotice");
+            dicMYPay.Add("limitCreditPay", "");
+            dicMYPay.Add("deviceId", "");
+            dicMYPay.Add("attach", "");
+            dicMYPay.Add("timeStart", "");
+            dicMYPay.Add("timeExpire", "");
+            dicMYPay.Add("appId", "wx10edfb81b2127702");
+            dicMYPay.Add("sign", GeneralKeyGen(dicMYPay, SH_Secret));
+
+            result = ow.HttpPostData(MYPay_URL + "pay/gateway/openPay.do", FormatParam(dicMYPay));
+            //new Base_SysLogBll().InsertLog("提交给码云支付的参数：" + FormatParam(dicMYPay));
+            //记录充值的订单信息
+            //new Base_CashChangeDetailsBll().RechargeInsertCashDetailInfo(UserId, SH_OrderNum, Convert.ToDecimal(wapp.totalFee));
             return result;
         }
 
@@ -230,7 +299,7 @@ namespace ML.ThirdParty
             string result = string.Empty;
             InitParam();
             dicMYPay.Add("service", "unified.trade.query");
-            dicMYPay.Add("mchCode", oqp.mchCode);
+            dicMYPay.Add("mchCode", SH_Number);
             dicMYPay.Add("outTradeNo", oqp.outTradeNo);
             //dicMYPay.Add("tradeNo", oqp.tradeNo);
             dicMYPay.Add("sign", GeneralKeyGen(dicMYPay, SH_Secret));
@@ -249,7 +318,7 @@ namespace ML.ThirdParty
         {
             string result = string.Empty;
             InitParam();
-            dicMYPay.Add("mchCode", rp.mchCode);
+            dicMYPay.Add("mchCode", SH_Number);
             dicMYPay.Add("outTradeNo", rp.outTradeNo);
             dicMYPay.Add("outRefundNo", SetRefundOrder());
             dicMYPay.Add("totalFee", rp.totalFee);
@@ -276,7 +345,7 @@ namespace ML.ThirdParty
             dicMYPay.Add("charset", "UTF-8");
             dicMYPay.Add("signType", "MD5");
             dicMYPay.Add("nonceStr", strNonce);
-            dicMYPay.Add("mchCode", rqp.mchCode);
+            dicMYPay.Add("mchCode", SH_Number);
             dicMYPay.Add("outTradeNo", rqp.outTradeNo);
             dicMYPay.Add("tradeNo", rqp.tradeNo);
             dicMYPay.Add("outRefundNo", rqp.outRefundNo);
@@ -317,10 +386,10 @@ namespace ML.ThirdParty
         /// 接口类型
         /// </summary>
         public string service { get; set; }
-        /// <summary>
-        /// 商户号
-        /// </summary>
-        public string mchCode { get; set; }
+        ///// <summary>
+        ///// 商户号
+        ///// </summary>
+        //public string mchCode { get; set; }
         /// <summary>
         /// 商户订单号
         /// </summary>
@@ -333,22 +402,22 @@ namespace ML.ThirdParty
         /// 总金额
         /// </summary>
         public string totalFee { get; set; }
-        /// <summary>
-        /// 终端IP
-        /// </summary>
-        public string mchCreateIp { get; set; }
-        /// <summary>
-        /// 通知地址
-        /// </summary>
-        public string notifyUrl { get; set; }
-        /// <summary>
-        /// 跳转地址
-        /// </summary>
-        public string callbackUrl { get; set; }
-        /// <summary>
-        /// 限制信用卡
-        /// </summary>
-        public string limitCreditPay { get; set; }
+        ///// <summary>
+        ///// 终端IP
+        ///// </summary>
+        //public string mchCreateIp { get; set; }
+        ///// <summary>
+        ///// 通知地址
+        ///// </summary>
+        //public string notifyUrl { get; set; }
+        ///// <summary>
+        ///// 跳转地址
+        ///// </summary>
+        //public string callbackUrl { get; set; }
+        ///// <summary>
+        ///// 限制信用卡
+        ///// </summary>
+        //public string limitCreditPay { get; set; }
         /// <summary>
         /// 随机字符串
         /// </summary>
@@ -365,38 +434,60 @@ namespace ML.ThirdParty
         /// 签名方式
         /// </summary>
         //public string signType { get; set; }
-        /// <summary>
-        /// 设备号
-        /// </summary>
-        public string deviceInfo { get; set; }
-        /// <summary>
-        /// 附加信息
-        /// </summary>
-        public string attach { get; set; }
-        /// <summary>
-        /// 订单生成时间
-        /// </summary>
-        public string timeStart { get; set; }
-        /// <summary>
-        /// 订单超时时间
-        /// </summary>
-        public string timeExpire { get; set; }
-        /// <summary>
-        /// 操作员
-        /// </summary>
-        public string opUserId { get; set; }
-        /// <summary>
-        /// 商品标记
-        /// </summary>
-        public string goodsTag { get; set; }
-        /// <summary>
-        /// 商品Id
-        /// </summary>
-        public string productId { get; set; }
+        ///// <summary>
+        ///// 设备号
+        ///// </summary>
+        //public string deviceInfo { get; set; }
+        ///// <summary>
+        ///// 附加信息
+        ///// </summary>
+        //public string attach { get; set; }
+        ///// <summary>
+        ///// 订单生成时间
+        ///// </summary>
+        //public string timeStart { get; set; }
+        ///// <summary>
+        ///// 订单超时时间
+        ///// </summary>
+        //public string timeExpire { get; set; }
+        ///// <summary>
+        ///// 操作员
+        ///// </summary>
+        //public string opUserId { get; set; }
+        ///// <summary>
+        ///// 商品标记
+        ///// </summary>
+        //public string goodsTag { get; set; }
+        ///// <summary>
+        ///// 商品Id
+        ///// </summary>
+        //public string productId { get; set; }
         /// <summary>
         /// 签名
         /// </summary>
         //public string sign { get; set; }
+    }
+
+    /// <summary>
+    /// 支付宝App支付参数
+    /// </summary>
+    public class AliAppPayParam
+    {
+        /// <summary>
+        /// 总金额
+        /// </summary>
+        public string totalFee { get; set; }
+    }
+
+    /// <summary>
+    /// 微信App支付参数
+    /// </summary>
+    public class WechatAppPayParam
+    {
+        /// <summary>
+        /// 总金额
+        /// </summary>
+        public string totalFee { get; set; }
     }
 
     /// <summary>
@@ -503,41 +594,41 @@ namespace ML.ThirdParty
     /// </summary>
     public class OrderQueryParam
     {
-        /// <summary>
-        /// 接口类型
-        /// </summary>
+        ///// <summary>
+        ///// 接口类型
+        ///// </summary>
         //public string service { get; set; }
-        /// <summary>
-        /// 版本号
-        /// </summary>
+        ///// <summary>
+        ///// 版本号
+        ///// </summary>
         //public string version { get; set; }
-        /// <summary>
-        /// 字符集
-        /// </summary>
+        ///// <summary>
+        ///// 字符集
+        ///// </summary>
         //public string charset { get; set; }
-        /// <summary>
-        /// 签名方式
-        /// </summary>
+        ///// <summary>
+        ///// 签名方式
+        ///// </summary>
         //public string signType { get; set; }
-        /// <summary>
-        /// 商户号
-        /// </summary>
-        public string mchCode { get; set; }
+        ///// <summary>
+        ///// 商户号
+        ///// </summary>
+        //public string mchCode { get; set; }
         /// <summary>
         /// 商户订单号
         /// </summary>
         public string outTradeNo { get; set; }
-        /// <summary>
-        /// 平台订单号
-        /// </summary>
+        ///// <summary>
+        ///// 平台订单号
+        ///// </summary>
         //public string tradeNo { get; set; }
-        /// <summary>
-        /// 随机字符串
-        /// </summary>
+        ///// <summary>
+        ///// 随机字符串
+        ///// </summary>
         //public string nonceStr { get; set; }
-        /// <summary>
-        /// 签名
-        /// </summary>
+        ///// <summary>
+        ///// 签名
+        ///// </summary>
         //public string sign { get; set; }
     }
 
@@ -558,10 +649,10 @@ namespace ML.ThirdParty
         /// 签名方式
         /// </summary>
         //public string signType { get; set; }
-        /// <summary>
-        /// 商户号
-        /// </summary>
-        public string mchCode { get; set; }
+        ///// <summary>
+        ///// 商户号
+        ///// </summary>
+        //public string mchCode { get; set; }
         /// <summary>
         /// 商户订单号
         /// </summary>
@@ -617,10 +708,10 @@ namespace ML.ThirdParty
         /// 签名方式
         /// </summary>
         //public string signType { get; set; }
-        /// <summary>
-        /// 商户号
-        /// </summary>
-        public string mchCode { get; set; }
+        ///// <summary>
+        ///// 商户号
+        ///// </summary>
+        //public string mchCode { get; set; }
         /// <summary>
         /// 商户订单号
         /// </summary>

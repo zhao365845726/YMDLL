@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ML.ThirdParty
+namespace ML.ThirdParty.Base
 {
     /// <summary>
     /// 阿里云短信

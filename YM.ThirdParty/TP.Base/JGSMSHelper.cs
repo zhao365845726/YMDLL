@@ -9,7 +9,7 @@
 //using System.Threading.Tasks;
 //using System.Web;
 
-//namespace ML.ThirdParty.JGSMS
+//namespace ML.ThirdParty.Base
 //{
 //    //public class JGSMSHelper
 //    //{

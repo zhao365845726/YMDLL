@@ -23,3 +23,10 @@ G:\_GitCode\MLSDK\YMDLL\obj\Debug\YMDLL.csproj.CoreCompileInputs.cache
 G:\_GitCode\MLSDK\YMDLL\obj\Debug\YMDLL.dll
 G:\_GitCode\MLSDK\YMDLL\obj\Debug\YMDLL.pdb
 E:\_GitCode\YMDLL\YMDLL\obj\Debug\YMDLL.csprojResolveAssemblyReference.cache
+F:\_GitCode\ML.SDK\YMDLL\bin\Debug\YMDLL.dll
+F:\_GitCode\ML.SDK\YMDLL\bin\Debug\YMDLL.pdb
+F:\_GitCode\ML.SDK\YMDLL\bin\Debug\MySql.Data.dll
+F:\_GitCode\ML.SDK\YMDLL\obj\Debug\YMDLL.csproj.CoreCompileInputs.cache
+F:\_GitCode\ML.SDK\YMDLL\obj\Debug\YMDLL.csproj.CopyComplete
+F:\_GitCode\ML.SDK\YMDLL\obj\Debug\YMDLL.dll
+F:\_GitCode\ML.SDK\YMDLL\obj\Debug\YMDLL.pdb

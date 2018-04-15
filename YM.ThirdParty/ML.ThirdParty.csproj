@@ -81,27 +81,53 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TopSdk, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TopSdk.1.0.20728.1\lib\net40\TopSdk.dll</HintPath>
+    <Reference Include="TopSdk, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\TopSdk.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base.ThirdParty\AliCloudCommunication.cs" />
-    <Compile Include="Base.ThirdParty\AlidayuSMS.cs" />
-    <Compile Include="Base.ThirdParty\AliPayHelper.cs" />
-    <Compile Include="Base.ThirdParty\AliService.cs" />
-    <Compile Include="Base.ThirdParty\MYPayHelper.cs" />
-    <Compile Include="Base.ThirdParty\LLPayHelper.cs" />
-    <Compile Include="Base.ThirdParty\SCHelper.cs" />
-    <Compile Include="JGSMS\JGSMSHelper.cs" />
+    <Compile Include="TP.Base\AliCloudCommunication.cs" />
+    <Compile Include="TP.Base\JGSMSHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Wechat\SP_Auth.cs" />
-    <Compile Include="Wechat\WechatPayHelper.cs" />
+    <Compile Include="TP.AliPay\AlipayConfig.cs" />
+    <Compile Include="TP.AliPay\AlipayCore.cs" />
+    <Compile Include="TP.AliPay\AlipayNotify.cs" />
+    <Compile Include="TP.AliPay\AlipaySubmit.cs" />
+    <Compile Include="TP.AliPay\RSA.cs" />
+    <Compile Include="TP.Base\AlidayuSMS.cs" />
+    <Compile Include="TP.Base\AliPayHelper.cs" />
+    <Compile Include="TP.Base\AliService.cs" />
+    <Compile Include="TP.Base\JGPush.cs" />
+    <Compile Include="TP.Base\LLPayHelper.cs" />
+    <Compile Include="TP.Base\MYPayHelper.cs" />
+    <Compile Include="TP.Base\SCHelper.cs" />
+    <Compile Include="TP.Base\WechatPayHelper.cs" />
+    <Compile Include="TP.Base\ZitoPayHelper.cs" />
+    <Compile Include="TP.EaseMob\EaseMobHelper.cs" />
+    <Compile Include="TP.LLYTPay\Md5Algorithm.cs" />
+    <Compile Include="TP.LLYTPay\PartnerConfig.cs" />
+    <Compile Include="TP.LLYTPay\QueryPaymentRequestBean.cs" />
+    <Compile Include="TP.LLYTPay\ResourceConfig.cs" />
+    <Compile Include="TP.LLYTPay\RSA.cs" />
+    <Compile Include="TP.LLYTPay\ServerURLConfig.cs" />
+    <Compile Include="TP.LLYTPay\SignTypeEnum.cs" />
+    <Compile Include="TP.LLYTPay\YinTongUtil.cs" />
+    <Compile Include="TP.TencentCloud\BaseHelper.cs" />
+    <Compile Include="TP.TencentCloud\DemandHelper.cs" />
+    <Compile Include="TP.TencentCloud\LiveHelper.cs" />
+    <Compile Include="TP.TencentCloud\ParamHelper.cs" />
+    <Compile Include="TP.Wechat\SP_Auth.cs" />
+    <Compile Include="TP.Wechat\WechatPayHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Plug\QCloudAPI_SDK\QCloudAPI_SDK.csproj">
+      <Project>{3dfe79c5-b2f4-4254-81b9-1fe0b42239ef}</Project>
+      <Name>QCloudAPI_SDK</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YM.Utilities\ML.Utilities.csproj">
       <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
       <Name>ML.Utilities</Name>
@@ -111,5 +137,6 @@
       <Name>YMDLL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

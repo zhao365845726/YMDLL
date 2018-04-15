@@ -5,13 +5,41 @@ using System.Text;
 using YMDLL.Class;
 using YMDLL.Common;
 
-namespace ML.ThirdParty
+namespace ML.ThirdParty.Base
 {
+    /// <summary>
+    /// 善彩帮助类
+    /// </summary>
     public class SCHelper
     {
+        /// <summary>
+        /// 网页操作对象
+        /// </summary>
         public static CS_OperaWeb ow = new CS_OperaWeb();
+        /// <summary>
+        /// 日期时间操作对象
+        /// </summary>
         public static CS_CalcDateTime cdt = new CS_CalcDateTime();
-        public static string SC_URL = "http://122.144.133.213:8047/ChinaLotteryPlatform/lotteryAgent";
+        /// <summary>
+        /// 善彩测试商户号
+        /// </summary>
+        public static string SH_CS_Number = "29002000143";
+        /// <summary>
+        /// 善彩商户号
+        /// </summary>
+        public static string SH_Number = "29002000145";
+        /// <summary>
+        /// 善彩测试链接
+        /// </summary>
+        public static string SC_CS_URL = "http://122.144.133.213:8047/ChinaLotteryPlatform/lotteryAgent";
+        /// <summary>
+        /// 善彩链接
+        /// </summary>
+        public static string SC_URL = "http://150.242.239.195:8047/ChinaLotteryPlatform/lotteryAgent";
+        /// <summary>
+        /// 善彩测试环境的Key
+        /// </summary>
+        public static string SC_KEY = "AUTOLOTTERY";
 
         /// <summary>
         /// 自动生成校验码
@@ -20,7 +48,7 @@ namespace ML.ThirdParty
         /// <returns></returns>
         public static string GeneralKeyGen(AgentBaseInfo abi)
         {
-            return Md5.GetMD5String(abi.Key + abi.Service + abi.TimeStamp + abi.Key);    //校验码
+            return Md5.GetMD5String(SC_KEY + abi.Service + abi.TimeStamp + SC_KEY);    //校验码
         }
 
         /// <summary>
@@ -62,7 +90,7 @@ namespace ML.ThirdParty
             string result = string.Empty;
             Dictionary<string, string> dicKind = new Dictionary<string, string>();
             abi.TimeStamp = cdt.GetTimeStamp();
-            dicKind.Add("merid", abi.Number);
+            dicKind.Add("merid", SH_Number);
             dicKind.Add("service", abi.Service);
             dicKind.Add("timestamp", abi.TimeStamp);
             dicKind.Add("digest", GeneralKeyGen(abi));
@@ -75,24 +103,25 @@ namespace ML.ThirdParty
         /// <summary>
         /// 彩种期次查询
         /// </summary>
-        public static string GetLotteryAwardPeriod(AgentBaseInfo abi)
+        public static string GetLotteryAwardPeriod(LotteryAwardPeriodParam lapp)
         {
             string strUrl = SC_URL + "!queryPeriodInfo";
             string result = string.Empty;
             Dictionary<string, string> dicAwardPeriod = new Dictionary<string, string>();
-            abi.TimeStamp = cdt.GetTimeStamp();
-            dicAwardPeriod.Add("merid", abi.Number);
-            dicAwardPeriod.Add("lotteryCode", abi.LotteryCode);
-            dicAwardPeriod.Add("periodCode", abi.PeriodCode);
-            dicAwardPeriod.Add("status", abi.Status);
-            dicAwardPeriod.Add("size", abi.Size);
-            dicAwardPeriod.Add("service", abi.Service);
-            dicAwardPeriod.Add("timestamp", abi.TimeStamp);
+            string strTimeStamp = cdt.GetTimeStamp();
+            dicAwardPeriod.Add("merid", SH_Number);
+            dicAwardPeriod.Add("service", "queryPeriodInfo");
+            dicAwardPeriod.Add("lotteryCode", lapp.lotteryCode);
+            dicAwardPeriod.Add("periodCode", lapp.periodCode);
+            dicAwardPeriod.Add("status", lapp.status.ToString());
+            dicAwardPeriod.Add("size", lapp.size.ToString());
+            dicAwardPeriod.Add("timestamp", strTimeStamp);
+            AgentBaseInfo abi = new AgentBaseInfo();
+            abi.TimeStamp = strTimeStamp;
+            abi.Service = "queryPeriodInfo";
             dicAwardPeriod.Add("digest", GeneralKeyGen(abi));
             result = ow.HttpPostData(strUrl, FormatParam(dicAwardPeriod));
 
-            //Console.Write("GetLotteryAwardPeriod---->" + result);
-            //Console.ReadLine();
             return result;
         }
 
@@ -130,7 +159,7 @@ namespace ML.ThirdParty
             string result = string.Empty;
             Dictionary<string, string> dicOrderStatus = new Dictionary<string, string>();
             abi.TimeStamp = cdt.GetTimeStamp();
-            dicOrderStatus.Add("merid", abi.Number);
+            dicOrderStatus.Add("merid", SH_Number);
             dicOrderStatus.Add("lotteryCode", abi.LotteryCode);
             dicOrderStatus.Add("orderID", abi.OrderId);
             dicOrderStatus.Add("service", abi.Service);
@@ -151,7 +180,7 @@ namespace ML.ThirdParty
             string result = string.Empty;
             Dictionary<string, string> dicOpenNotice = new Dictionary<string, string>();
             abi.TimeStamp = cdt.GetTimeStamp();
-            dicOpenNotice.Add("merid", abi.Number);
+            dicOpenNotice.Add("merid", SH_Number);
             dicOpenNotice.Add("lotteryCode", abi.LotteryCode);
             dicOpenNotice.Add("periodCode", abi.PeriodCode);
             dicOpenNotice.Add("service", abi.Service);
@@ -165,43 +194,49 @@ namespace ML.ThirdParty
         /// <summary>
         /// 期次返奖查询
         /// </summary>
-        public static void GetWinRecordPageList(AgentBaseInfo abi)
+        public static string GetWinRecordPageList(AwardWinRecordParam awrp)
         {
             string strUrl = SC_URL + "!queryWinRecordPageList";
             string result = string.Empty;
             Dictionary<string, string> dicWinRecordPageList = new Dictionary<string, string>();
-            abi.TimeStamp = cdt.GetTimeStamp();
-            dicWinRecordPageList.Add("merid", abi.Number);
-            dicWinRecordPageList.Add("lotteryCode", abi.LotteryCode);
-            dicWinRecordPageList.Add("periodCode", abi.PeriodCode);
-            dicWinRecordPageList.Add("page", abi.Page);
-            dicWinRecordPageList.Add("pageSize", abi.PageSize);
-            dicWinRecordPageList.Add("service", abi.Service);
-            dicWinRecordPageList.Add("timestamp", abi.TimeStamp);
+            string strTimeStamp = cdt.GetTimeStamp();
+            dicWinRecordPageList.Add("merid", SH_Number);
+            dicWinRecordPageList.Add("lotteryCode", awrp.lotteryCode);
+            dicWinRecordPageList.Add("periodCode", awrp.periodCode);
+            dicWinRecordPageList.Add("page", awrp.page.ToString());
+            dicWinRecordPageList.Add("pageSize", awrp.pageSize.ToString());
+            dicWinRecordPageList.Add("service", "queryWinRecordPageList");
+            dicWinRecordPageList.Add("timestamp", strTimeStamp);
+            AgentBaseInfo abi = new AgentBaseInfo();
+            abi.TimeStamp = strTimeStamp;
+            abi.Service = "queryWinRecordPageList";
             dicWinRecordPageList.Add("digest", GeneralKeyGen(abi));
             result = ow.HttpPostData(strUrl, FormatParam(dicWinRecordPageList));
-            Console.Write("GetWinRecordPageList---->" + result);
-            Console.ReadLine();
+            return result;
         }
 
         /// <summary>
         /// 竞彩订单返奖查询
         /// </summary>
-        public static void GetOrderPrize(AgentBaseInfo abi)
+        public static string GetOrderPrize(OrderPrizeQueryParam opqp)
         {
             string strUrl = SC_URL + "!orderPrizeQuery";
             string result = string.Empty;
             Dictionary<string, string> dicOrderPrize = new Dictionary<string, string>();
-            abi.TimeStamp = cdt.GetTimeStamp();
-            dicOrderPrize.Add("merid", abi.Number);
-            dicOrderPrize.Add("lotteryCode", abi.LotteryCode);
-            dicOrderPrize.Add("orderID", abi.OrderId);
-            dicOrderPrize.Add("service", abi.Service);
-            dicOrderPrize.Add("timestamp", abi.TimeStamp);
+            string strTimeStamp = cdt.GetTimeStamp();
+            dicOrderPrize.Add("merid", SH_Number);
+            dicOrderPrize.Add("lotteryCode", opqp.LotteryCode);
+            dicOrderPrize.Add("orderID", opqp.OrderId);
+            dicOrderPrize.Add("service", "orderPrizeQuery");
+            dicOrderPrize.Add("timestamp", strTimeStamp);
+            AgentBaseInfo abi = new AgentBaseInfo();
+            abi.TimeStamp = strTimeStamp;
+            abi.Service = "queryWinRecordPageList";
             dicOrderPrize.Add("digest", GeneralKeyGen(abi));
             result = ow.HttpPostData(strUrl, FormatParam(dicOrderPrize));
-            Console.Write("GetOrderPrize---->" + result);
-            Console.ReadLine();
+            //new Base_SysLogBll().InsertLog("竞彩订单返奖查询--->" + FormatParam(dicOrderPrize));
+            Console.WriteLine(FormatParam(dicOrderPrize));
+            return result;
         }
 
         /// <summary>
@@ -213,9 +248,9 @@ namespace ML.ThirdParty
             string result = string.Empty;
             Dictionary<string, string> dicLottery = new Dictionary<string, string>();
             abi.TimeStamp = cdt.GetTimeStamp();
-            dicLottery.Add("merid", abi.Number);
+            dicLottery.Add("merid", SH_Number);
             dicLottery.Add("agentOrderId", abi.AgentOrderId);
-            dicLottery.Add("userid", abi.UserId);
+            dicLottery.Add("userid", "bblgroup");
             dicLottery.Add("cardType", abi.CardType);
             dicLottery.Add("cardNumber", abi.CardNumber);
             dicLottery.Add("name", abi.UserName);
@@ -224,16 +259,81 @@ namespace ML.ThirdParty
             dicLottery.Add("lotteryCode", abi.LotteryCode);
             dicLottery.Add("periodCode", abi.PeriodCode);
             dicLottery.Add("castcode", abi.CastCode);
-            dicLottery.Add("isAdd", abi.IsAdd);
+            dicLottery.Add("isAdd", "0");
             dicLottery.Add("amount", abi.Amount);
             dicLottery.Add("count", abi.Count);
             dicLottery.Add("msg", abi.Msg);
             dicLottery.Add("service", abi.Service);
             dicLottery.Add("timestamp", abi.TimeStamp);
             dicLottery.Add("digest", GeneralKeyGen(abi));
-            result = ow.HttpPostData(strUrl, FormatParam(dicLottery));
-            //Console.Write("BetLottery---->" + result);
-            //Console.ReadLine();
+            string strParamResult = FormatParam(dicLottery);
+            result = ow.HttpPostData(strUrl, strParamResult);
+            //new Base_SysLogBll().InsertLog("提交给善彩的参数:" + strParamResult);
+            return result;
+        }
+
+        /// <summary>
+        /// 投注
+        /// </summary>
+        public static string BetLotteryConsole(AgentBaseInfo abi)
+        {
+            string strUrl = SC_URL + "!bet";
+            string result = string.Empty;
+            Dictionary<string, string> dicLottery = new Dictionary<string, string>();
+            abi.TimeStamp = cdt.GetTimeStamp();
+            dicLottery.Add("merid", SH_Number);
+            dicLottery.Add("agentOrderId", abi.AgentOrderId);
+            dicLottery.Add("userid", "bblgroup");
+            dicLottery.Add("cardType", abi.CardType);
+            dicLottery.Add("cardNumber", abi.CardNumber);
+            dicLottery.Add("name", abi.UserName);
+            dicLottery.Add("mail", abi.UserMail);
+            dicLottery.Add("mobile", abi.UserMobile);
+            dicLottery.Add("lotteryCode", abi.LotteryCode);
+            dicLottery.Add("periodCode", abi.PeriodCode);
+            dicLottery.Add("castcode", abi.CastCode);
+            dicLottery.Add("isAdd", "0");
+            dicLottery.Add("amount", abi.Amount);
+            dicLottery.Add("count", abi.Count);
+            dicLottery.Add("msg", abi.Msg);
+            dicLottery.Add("service", abi.Service);
+            dicLottery.Add("timestamp", abi.TimeStamp);
+            dicLottery.Add("digest", GeneralKeyGen(abi));
+            string strParamResult = FormatParam(dicLottery);
+            result = ow.HttpPostData(strUrl, strParamResult);
+            return result;
+        }
+
+        /// <summary>
+        /// 投注
+        /// </summary>
+        public static string BetLotteryBeta(AgentBaseInfo abi)
+        {
+            string strUrl = SC_CS_URL + "!bet";
+            string result = string.Empty;
+            Dictionary<string, string> dicLottery = new Dictionary<string, string>();
+            abi.TimeStamp = cdt.GetTimeStamp();
+            dicLottery.Add("merid", SH_CS_Number);
+            dicLottery.Add("agentOrderId", abi.AgentOrderId);
+            dicLottery.Add("userid", "bblgroup");
+            dicLottery.Add("cardType", abi.CardType);
+            dicLottery.Add("cardNumber", abi.CardNumber);
+            dicLottery.Add("name", abi.UserName);
+            dicLottery.Add("mail", abi.UserMail);
+            dicLottery.Add("mobile", abi.UserMobile);
+            dicLottery.Add("lotteryCode", abi.LotteryCode);
+            dicLottery.Add("periodCode", abi.PeriodCode);
+            dicLottery.Add("castcode", abi.CastCode);
+            dicLottery.Add("isAdd", "0");
+            dicLottery.Add("amount", abi.Amount);
+            dicLottery.Add("count", abi.Count);
+            dicLottery.Add("msg", abi.Msg);
+            dicLottery.Add("service", abi.Service);
+            dicLottery.Add("timestamp", abi.TimeStamp);
+            dicLottery.Add("digest", GeneralKeyGen(abi));
+            string strParamResult = FormatParam(dicLottery);
+            result = ow.HttpPostData(strUrl, strParamResult);
+            //new Base_SysLogBll().InsertLog("提交给善彩的参数:" + strParamResult);
             return result;
         }
 
@@ -300,42 +400,44 @@ namespace ML.ThirdParty
         /// <summary>
         /// 代理商订单查询
         /// </summary>
-        public static void GetAgentOrder(AgentBaseInfo abi)
+        public static string GetAgentOrder(AgentBaseInfo abi)
         {
             string strUrl = SC_URL + "!queryAgentOrder";
             string result = string.Empty;
             Dictionary<string, string> dicAgentOrder = new Dictionary<string, string>();
             abi.TimeStamp = cdt.GetTimeStamp();
-            dicAgentOrder.Add("merid", abi.Number);
+            dicAgentOrder.Add("merid", SH_Number);
             dicAgentOrder.Add("lotteryCode", abi.LotteryCode);
             dicAgentOrder.Add("orderID", abi.OrderId);
             dicAgentOrder.Add("agentOrderId", abi.AgentOrderId);
             dicAgentOrder.Add("service", abi.Service);
             dicAgentOrder.Add("timestamp", abi.TimeStamp);
             dicAgentOrder.Add("digest", GeneralKeyGen(abi));
-            result = ow.HttpPostData(strUrl, FormatParam(dicAgentOrder));
-            Console.Write("GetAgentOrder---->" + result);
-            Console.ReadLine();
+            string strParamResult = FormatParam(dicAgentOrder);
+            result = ow.HttpPostData(strUrl, strParamResult);
+            //new Base_SysLogBll().InsertLog("提交给善彩的代理商订单查询参数:" + strParamResult);
+            return result;
         }
 
         /// <summary>
         /// 代理商余额查询
         /// </summary>
-        public static void GetAgentAccount(AgentBaseInfo abi)
+        public static string GetAgentAccount(AgentBaseInfo abi)
         {
             string strUrl = SC_URL + "!agentAccountQuery";
             string result = string.Empty;
             Dictionary<string, string> dicAgentAccount = new Dictionary<string, string>();
             abi.TimeStamp = cdt.GetTimeStamp();
-            dicAgentAccount.Add("merid", abi.Number);
+            dicAgentAccount.Add("merid", SH_Number);
             dicAgentAccount.Add("lotteryCode", abi.LotteryCode);
             dicAgentAccount.Add("orderID", abi.OrderId);
             dicAgentAccount.Add("service", abi.Service);
             dicAgentAccount.Add("timestamp", abi.TimeStamp);
             dicAgentAccount.Add("digest", GeneralKeyGen(abi));
-            result = ow.HttpPostData(strUrl, FormatParam(dicAgentAccount));
-            Console.Write("GetAgentAccount---->" + result);
-            Console.ReadLine();
+            string strParamResult = FormatParam(dicAgentAccount);
+            result = ow.HttpPostData(strUrl, strParamResult);
+            //new Base_SysLogBll().InsertLog("提交给善彩的代理商余额查询参数:" + strParamResult);
+            return result;
         }
 
         /// <summary>
@@ -347,7 +449,7 @@ namespace ML.ThirdParty
             string result = string.Empty;
             Dictionary<string, string> dicAgentCashPrize = new Dictionary<string, string>();
             abi.TimeStamp = cdt.GetTimeStamp();
-            dicAgentCashPrize.Add("merid", abi.Number);
+            dicAgentCashPrize.Add("merid", SH_Number);
             dicAgentCashPrize.Add("service", abi.Service);
             dicAgentCashPrize.Add("timestamp", abi.TimeStamp);
             dicAgentCashPrize.Add("digest", GeneralKeyGen(abi));
@@ -361,14 +463,83 @@ namespace ML.ThirdParty
     }
 
     /// <summary>
+    /// 彩票期次参数
+    /// </summary>
+    public class LotteryAwardPeriodParam
+    {
+        ///// <summary>
+        ///// 加密key
+        ///// </summary>
+        //public string key { get; set; }
+        ///// <summary>
+        ///// 方法
+        ///// </summary>
+        //public string service { get; set; }
+        /// <summary>
+        /// 彩票代码
+        /// </summary>
+        public string lotteryCode { get; set; }
+        /// <summary>
+        /// 期次代码
+        /// </summary>
+        public string periodCode { get; set; }
+        /// <summary>
+        /// 销售状态(-1:已售;0:在售)
+        /// </summary>
+        public int status { get; set; }
+        /// <summary>
+        /// 查询数
+        /// </summary>
+        public int size { get; set; }
+    }
+
+    /// <summary>
+    /// 期次返奖参数
+    /// </summary>
+    public class AwardWinRecordParam
+    {
+        /// <summary>
+        /// 彩种代码
+        /// </summary>
+        public string lotteryCode { get; set; }
+        /// <summary>
+        /// 期次编码
+        /// </summary>
+        public string periodCode { get; set; }
+        /// <summary>
+        /// 页码
+        /// </summary>
+        public int page { get; set; }
+        /// <summary>
+        /// 页面大小
+        /// </summary>
+        public int pageSize { get; set; }
+    }
+
+    /// <summary>
+    /// 竞彩订单返奖查询参数
+    /// </summary>
+    public class OrderPrizeQueryParam
+    {
+        /// <summary>
+        /// 彩种代码
+        /// </summary>
+        public string LotteryCode { get; set; }
+        /// <summary>
+        /// 平台订单号
+        /// </summary>
+        public string OrderId { get; set; }
+    }
+
+    /// <summary>
     /// 商户基本信息
     /// </summary>
     public class AgentBaseInfo
     {
-        /// <summary>
-        /// 商户号
-        /// </summary>
-        public string Number { get; set; }
+        ///// <summary>
+        ///// 商户号
+        ///// </summary>
+        //public string Number { get; set; }
         /// <summary>
         /// 操作描述
         /// </summary>
@@ -417,10 +588,10 @@ namespace ML.ThirdParty
         /// 页大小
         /// </summary>
         public string PageSize { get; set; }
-        /// <summary>
-        /// 用户ID
-        /// </summary>
-        public string UserId { get; set; }
+        ///// <summary>
+        ///// 用户ID
+        ///// </summary>
+        //public string UserId { get; set; }
         /// <summary>
         /// 证件类型
         /// </summary>
@@ -445,10 +616,6 @@ namespace ML.ThirdParty
         /// 投注号码
         /// </summary>
         public string CastCode { get; set; }
-        /// <summary>
-        /// 是否追加
-        /// </summary>
-        public string IsAdd { get; set; }
         /// <summary>
         /// 总金额
         /// </summary>
