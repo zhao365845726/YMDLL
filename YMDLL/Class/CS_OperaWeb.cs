@@ -12,6 +12,7 @@ using System.Data;
 using System.Net;
 using YMDLL.Interface;
 using System.Text.RegularExpressions;
+using System.Web.Script.Serialization;
 
 namespace YMDLL.Class
 {
@@ -299,6 +300,34 @@ namespace YMDLL.Class
             reader.Close();
 
             return result;
+        }
+
+        /// <summary>
+        /// 模拟提交Json数据
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public string HttpPostJsonData(string url, object obj)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.ContentType = "application/json";
+            request.Method = "POST";
+            string strResult = string.Empty;
+
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                string json = new JavaScriptSerializer().Serialize(obj);
+
+                streamWriter.Write(json);
+            }
+
+            var response = (HttpWebResponse)request.GetResponse();
+            using (var streamReader = new StreamReader(response.GetResponseStream()))
+            {
+                strResult = streamReader.ReadToEnd();
+            }
+            return strResult;
         }
 
         /// <summary>
