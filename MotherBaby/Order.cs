@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ML.Utilities;
 
 namespace MotherBaby
 {
@@ -11,16 +12,15 @@ namespace MotherBaby
   {
     public void Descript()
     {
-      /* 1.目标库中b_bus_area中的外键删除了，主键去掉了，并默认为空
-       */
+      
     }
 
     /// <summary>
-    /// 城区类的构造函数
+    /// 构造函数
     /// </summary>
     public Order()
     {
-      sTableName = "tplay_order_dest";
+      sTableName = "tplay_order_source_5";
       sColumns = "roomid,userid,start_time,end_time,use_duration,cost,create_time";
       sOrder = "start_time";
       dTableName = "tplay_order_dest_1";
@@ -75,19 +75,53 @@ namespace MotherBaby
       {
         DataTable dt = _smysql.GetPager(sTableName, sColumns, sOrder, sPageSize, sPageIndex, sWhere, out sTotalCount);
         List<String> lstValue = new List<String>();
+        RandomHelper rh = new RandomHelper();
+        //int iStartTime = 1551402000;    //20190301-上午9点
+        //int iStartTime = 1554080400;    //20190401-上午9点
+        int iStartTime = 1556672400;    //20190501-上午9点
+
+        int iStartRandMinute = 0;       //每天开始时间的随机分钟数
+        int iOrderTimeInterval = 0;     //2笔订单之间的随机分钟数
+        int iOrderRunTime = 0;          //订单运行时间
+        int iEveryMinuteSecond = 60;    //每分钟的秒数
+        int iEverySecond = 86400;       //24小时的总计秒数
+        int iCurDay = 0;                //天的起始，第一天,够30单,进入第二天,同时开始时间增加86400秒
+        int iOrderCount = 0;
+        int iStart = 0; //订单开始时间
+        int iEnd = 0;   //订单结束时间
         foreach (DataRow row in dt.Rows)
         {
           string strTemp = string.Empty;
+          if(iOrderCount % 30 == 0)
+          {
+            iStartRandMinute = rh.GetRandomInt(1, 600);    //每天开始时间的随机秒数
+            iOrderRunTime = rh.GetRandomInt(180, 1080);       //订单运行时间
+            //订单开始时间
+            iStart = iStartTime + (iCurDay * iEverySecond) + iStartRandMinute;
+            //订单结束时间
+            iEnd = iStart + iOrderRunTime;
+          }
+          else
+          {
+            //2笔订单之间的时间间隔
+            iOrderTimeInterval = rh.GetRandomInt(900, 1200);
+            iOrderRunTime = rh.GetRandomInt(180, 1080);       //订单运行时间
+            //订单开始时间
+            iStart = iEnd + iOrderTimeInterval;
+            //订单结束时间
+            iEnd = iStart + iOrderRunTime;
+          }
           strTemp = string.Format("'{0}','{1}','{2}','{3}','{4}','{5}','{6}'",
             Convert.ToInt32(row[0].ToString()),
             Convert.ToInt32(row[1].ToString()),
-            Convert.ToInt32(row[2].ToString()),
-            Convert.ToInt32(row[3].ToString()),
-            Convert.ToInt32(row[4].ToString()),
+            Convert.ToInt32(iStart.ToString()),
+            Convert.ToInt32(iEnd.ToString()),
+            Convert.ToInt32(iOrderRunTime.ToString()),
             Convert.ToDouble(row[5].ToString()),
-            Convert.ToInt32(row[6].ToString())
+            Convert.ToInt32(iStart.ToString())
             );
           lstValue.Add(strTemp);
+          iOrderCount++;
         }
         //如果允许删除，清空目标表数据
         if (dIsDelete == true)

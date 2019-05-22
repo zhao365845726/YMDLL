@@ -46,6 +46,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\YM.Utilities\ML.Utilities.csproj">
+      <Project>{7a9e54b1-d54d-4af2-99e9-06e9baff4846}</Project>
+      <Name>ML.Utilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YMDLL\YMDLL.csproj">
       <Project>{ff06cfc9-4a33-420d-a6ce-809beec4f70d}</Project>
       <Name>YMDLL</Name>
