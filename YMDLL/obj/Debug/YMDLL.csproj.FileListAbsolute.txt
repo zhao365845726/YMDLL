@@ -37,3 +37,10 @@ E:\_GitCode\MLSDK\YMDLL\obj\Debug\YMDLL.csproj.CoreCompileInputs.cache
 E:\_GitCode\MLSDK\YMDLL\obj\Debug\YMDLL.dll
 E:\_GitCode\MLSDK\YMDLL\obj\Debug\YMDLL.pdb
 E:\_GitCode\MLSDK\YMDLL\obj\Debug\YMDLL.csproj.CopyComplete
+E:\00._GitHub\YMDLL\YMDLL\bin\Debug\YMDLL.dll
+E:\00._GitHub\YMDLL\YMDLL\bin\Debug\YMDLL.pdb
+E:\00._GitHub\YMDLL\YMDLL\bin\Debug\MySql.Data.dll
+E:\00._GitHub\YMDLL\YMDLL\obj\Debug\YMDLL.csproj.CoreCompileInputs.cache
+E:\00._GitHub\YMDLL\YMDLL\obj\Debug\YMDLL.csproj.CopyComplete
+E:\00._GitHub\YMDLL\YMDLL\obj\Debug\YMDLL.dll
+E:\00._GitHub\YMDLL\YMDLL\obj\Debug\YMDLL.pdb
