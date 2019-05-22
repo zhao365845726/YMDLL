@@ -55,3 +55,14 @@ G:\_GitCode\MLSDK\AgencyEntity\obj\Debug\AgencyEntity.csprojResolveAssemblyRefer
 G:\_GitCode\MLSDK\AgencyEntity\obj\Debug\AgencyEntity.csproj.CoreCompileInputs.cache
 G:\_GitCode\MLSDK\AgencyEntity\obj\Debug\AgencyEntity.dll
 G:\_GitCode\MLSDK\AgencyEntity\obj\Debug\AgencyEntity.pdb
+E:\_GitCode\MLSDK\AgencyEntity\bin\Debug\AgencyEntity.dll
+E:\_GitCode\MLSDK\AgencyEntity\bin\Debug\AgencyEntity.pdb
+E:\_GitCode\MLSDK\AgencyEntity\bin\Debug\YMDLL.dll
+E:\_GitCode\MLSDK\AgencyEntity\bin\Debug\MySql.Data.dll
+E:\_GitCode\MLSDK\AgencyEntity\bin\Debug\YMDLL.pdb
+E:\_GitCode\MLSDK\AgencyEntity\bin\Debug\MySql.Data.xml
+E:\_GitCode\MLSDK\AgencyEntity\obj\Debug\AgencyEntity.csprojAssemblyReference.cache
+E:\_GitCode\MLSDK\AgencyEntity\obj\Debug\AgencyEntity.csproj.CoreCompileInputs.cache
+E:\_GitCode\MLSDK\AgencyEntity\obj\Debug\AgencyEntity.csproj.CopyComplete
+E:\_GitCode\MLSDK\AgencyEntity\obj\Debug\AgencyEntity.dll
+E:\_GitCode\MLSDK\AgencyEntity\obj\Debug\AgencyEntity.pdb

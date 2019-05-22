@@ -36,3 +36,4 @@ E:\_GitCode\MLSDK\YMDLL\bin\Debug\MySql.Data.dll
 E:\_GitCode\MLSDK\YMDLL\obj\Debug\YMDLL.csproj.CoreCompileInputs.cache
 E:\_GitCode\MLSDK\YMDLL\obj\Debug\YMDLL.dll
 E:\_GitCode\MLSDK\YMDLL\obj\Debug\YMDLL.pdb
+E:\_GitCode\MLSDK\YMDLL\obj\Debug\YMDLL.csproj.CopyComplete
