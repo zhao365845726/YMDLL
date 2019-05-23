@@ -83,33 +83,40 @@ namespace MotherBaby
         int iStartRandMinute = 0;       //每天开始时间的随机分钟数
         int iOrderTimeInterval = 0;     //2笔订单之间的随机分钟数
         int iOrderRunTime = 0;          //订单运行时间
-        int iEveryMinuteSecond = 60;    //每分钟的秒数
         int iEverySecond = 86400;       //24小时的总计秒数
         int iCurDay = 0;                //天的起始，第一天,够30单,进入第二天,同时开始时间增加86400秒
         int iOrderCount = 0;
         int iStart = 0; //订单开始时间
         int iEnd = 0;   //订单结束时间
+        int iNextStartTime = 0;   //下一次开始时间
+        int iNextStartRandTime = 0;
         foreach (DataRow row in dt.Rows)
         {
           string strTemp = string.Empty;
-          if(iOrderCount % 30 == 0)
+          if(iOrderCount % 300 == 0)
           {
             iStartRandMinute = rh.GetRandomInt(1, 600);    //每天开始时间的随机秒数
             iOrderRunTime = rh.GetRandomInt(180, 1080);       //订单运行时间
+            iNextStartRandTime = rh.GetRandomInt(100, 130);   //每单开始时间的随机数
             //订单开始时间
             iStart = iStartTime + (iCurDay * iEverySecond) + iStartRandMinute;
             //订单结束时间
             iEnd = iStart + iOrderRunTime;
+            //下一次开始时间
+            iNextStartTime = iStart + iNextStartRandTime;
           }
           else
           {
             //2笔订单之间的时间间隔
             iOrderTimeInterval = rh.GetRandomInt(900, 1200);
             iOrderRunTime = rh.GetRandomInt(180, 1080);       //订单运行时间
+            iNextStartRandTime = rh.GetRandomInt(100, 130);   //每单开始时间的随机数
             //订单开始时间
-            iStart = iEnd + iOrderTimeInterval;
+            iStart = iNextStartTime + iOrderTimeInterval;
             //订单结束时间
             iEnd = iStart + iOrderRunTime;
+            //下一次开始时间
+            iNextStartTime = iStart + iNextStartRandTime;
           }
           strTemp = string.Format("'{0}','{1}','{2}','{3}','{4}','{5}','{6}'",
             Convert.ToInt32(row[0].ToString()),
