@@ -1,6 +1,0 @@
-G:\_GitCode\YMDLL\YMDLL\bin\Release\YMDLL.dll
-G:\_GitCode\YMDLL\YMDLL\bin\Release\YMDLL.pdb
-G:\_GitCode\YMDLL\YMDLL\bin\Release\MySql.Data.dll
-G:\_GitCode\YMDLL\YMDLL\obj\Release\YMDLL.csprojResolveAssemblyReference.cache
-G:\_GitCode\YMDLL\YMDLL\obj\Release\YMDLL.dll
-G:\_GitCode\YMDLL\YMDLL\obj\Release\YMDLL.pdb
