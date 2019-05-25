@@ -72,49 +72,108 @@ namespace MotherBaby
     {
       //取数据的变量
       int iQStartTime = 1551369600;   //20190301000000
+      //int iQStartTime = 1554048000;   //20190401000000
+      //int iQStartTime = 1556640000;   //20190501000000
+      
+      int iAStartTime = 32400;        //实际距离开始时间的时间间隔9小时
       int iDayIndex = 0;              //天数索引
       int iDayTotalSecond = 86400;    //一天的总秒数
-      
-      sWhere += " AND start_time Between " + iQStartTime.ToString() + " AND " + (iQStartTime + iDayTotalSecond).ToString() + " group by roomid ";
-      //获取3月1日的所有设备数据
-      DataTable dt = _smysql.GetPager(sTableName, "roomid,count(1) as room_used_time", "roomid", sPageSize, sPageIndex, sWhere, out sTotalCount);
-      foreach(DataRow dr in dt.Rows)
+      RandomHelper rh = new RandomHelper();
+
+      while(iQStartTime <= 1559318400)
       {
-        //声明列表对象
-        List<String> lstValue = new List<String>();
-        sWhere = " 1=1 AND roomid = '" + dr[0].ToString() + "'";
-        DataTable dtRoom = _smysql.GetPager(sTableName, sColumns, sOrder, sPageSize, sPageIndex, sWhere, out sTotalCount);
-        int iOrderCount = 0;
-        foreach (DataRow row in dtRoom.Rows)
+        iQStartTime += iDayIndex * iDayTotalSecond;
+        sWhere = " AND start_time Between " + iQStartTime.ToString() + " AND " + (iQStartTime + iDayTotalSecond).ToString();
+        //获取3月1日的所有设备数据
+        DataTable dt = _smysql.GetPager(sTableName, "roomid,count(1) as room_used_time", sWhere, "roomid", "roomid", sPageSize, sPageIndex, out sTotalCount);
+        foreach (DataRow dr in dt.Rows)
         {
-          string strTemp = string.Empty;
-          strTemp = string.Format("'{0}','{1}','{2}','{3}','{4}','{5}','{6}'",
-            Convert.ToInt32(row[0].ToString()),
-            Convert.ToInt32(row[1].ToString()),
-            Convert.ToInt32(row[1].ToString()),
-            Convert.ToInt32(row[1].ToString()),
-            Convert.ToInt32(row[1].ToString()),
-            Convert.ToDouble(row[5].ToString()),
-            Convert.ToInt32(row[1].ToString())
-            );
-          lstValue.Add(strTemp);
-          iOrderCount++;
+          //声明列表对象
+          List<String> lstValue = new List<String>();
+          sWhere = " 1=1 AND roomid = '" + dr[0].ToString() + "' AND start_time Between " + iQStartTime.ToString() + " AND " + (iQStartTime + iDayTotalSecond).ToString();
+          //sWhere = " 1=1 AND roomid = '" + dr[0].ToString() + "' ";
+          DataTable dtRoom = _smysql.GetPager(sTableName, sColumns, sOrder, sPageSize, sPageIndex, sWhere, out sTotalCount);
+          int iCurDayRuntimeTotal = 36000;    //当天运行总时间
+          int iRemainder = 0;
+          int iOrderAvgInterval = Math.DivRem(iCurDayRuntimeTotal, dtRoom.Rows.Count, out iRemainder);    //订单平均时间间隔
+
+          //开始计算当天这台设备的开始时间及时间间隔
+          int iStartTime = iQStartTime + iAStartTime;    //20190301-上午9点
+          //int iStartTime = 1554080400;    //20190401-上午9点
+          //int iStartTime = 1556672400;    //20190501-上午9点
+
+          int iCurOrderIndex = 0;         //当前订单索引
+          int iStartRandMinute = 0;       //每天开始时间的随机秒数
+          int iOrderRunTime = 0;          //订单运行时间
+          int iStart = 0; //订单开始时间
+          int iEnd = 0;   //订单结束时间
+          int iNextStartTime = 0;   //下一次开始时间
+          int iNextStartRandTime = 0;
+
+          foreach (DataRow row in dtRoom.Rows)
+          {
+            iOrderRunTime = rh.GetRandomInt(180, 1080);       //订单运行时间
+            iNextStartRandTime = rh.GetRandomInt(10, 50);   //每单开始时间的随机数
+            if (iCurOrderIndex == 0)
+            {
+              iStartRandMinute = rh.GetRandomInt(1, 600);    //每天开始时间的随机秒数
+              //订单开始时间
+              iStart = iStartTime + iStartRandMinute;
+              //订单结束时间
+              iEnd = iStart + iOrderRunTime;
+              if((iStart + iOrderAvgInterval) > iEnd)
+              {
+                //下一次开始时间
+                iNextStartTime = iStart + iOrderAvgInterval;
+              }
+              else
+              {
+                iNextStartTime = iEnd + iNextStartRandTime;
+              }
+            }
+            else
+            {
+              iStartRandMinute = rh.GetRandomInt(1, 600);    //每天开始时间的随机秒数
+              //订单开始时间
+              iStart = iNextStartTime + iStartRandMinute;
+              //订单结束时间
+              iEnd = iStart + iOrderRunTime;
+              if ((iStart + iOrderAvgInterval) > iEnd)
+              {
+                //下一次开始时间
+                iNextStartTime = iStart + iOrderAvgInterval;
+              }
+              else
+              {
+                iNextStartTime = iEnd + iNextStartRandTime;
+              }
+            }
+
+            string strTemp = string.Empty;
+            strTemp = string.Format("'{0}','{1}','{2}','{3}','{4}','{5}','{6}'",
+              Convert.ToInt32(row[0].ToString()),
+              Convert.ToInt32(row[1].ToString()),
+              Convert.ToInt32(iStart.ToString()),
+              Convert.ToInt32(iEnd.ToString()),
+              Convert.ToInt32(iOrderRunTime.ToString()),
+              Convert.ToDouble(row[5].ToString()),
+              Convert.ToInt32(iStart.ToString())
+              );
+            lstValue.Add(strTemp);
+            iCurOrderIndex++;
+          }
+          if (lstValue.Count > 0)
+          {
+            //写入目标表
+            _dmysql.BatchInsert(dTableName, dColumns, lstValue);
+          }
+          else
+          {
+            continue;
+          }
         }
-        if(lstValue.Count > 0)
-        {
-          //写入目标表
-          _dmysql.BatchInsert(dTableName, dColumns, lstValue);
-        }
-        else
-        {
-          continue;
-        }
+        iDayIndex++;
       }
-
-      //int iStartTime = 1551402000;    //20190301-上午9点
-      //int iStartTime = 1554080400;    //20190401-上午9点
-      //int iStartTime = 1556672400;    //20190501-上午9点
-
     }
 
     /// <summary>
