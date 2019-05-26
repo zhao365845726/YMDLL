@@ -20,10 +20,10 @@ namespace MotherBaby
     /// </summary>
     public Order()
     {
-      sTableName = "tplay_order_source_5_copy";
+      sTableName = "tplay_order_source_5";
       sColumns = "roomid,userid,start_time,end_time,use_duration,cost,create_time";
       sOrder = "roomid";
-      dTableName = "tplay_order_dest_copy";
+      dTableName = "tplay_order_dest_1";
       dTableDescript = "订单表";
       dColumns = "roomid,userid,start_time,end_time,use_duration,cost,create_time";
     }
@@ -115,7 +115,7 @@ namespace MotherBaby
 
           foreach (DataRow row in dtRoom.Rows)
           {
-            iOrderRunTime = rh.GetRandomInt(180, 1080);       //订单运行时间
+            iOrderRunTime = rh.GetRandomInt(60, 1080);       //订单运行时间
             iNextStartRandTime = rh.GetRandomInt(10, 50);   //每单开始时间的随机数
             if (iCurOrderIndex == 0)
             {

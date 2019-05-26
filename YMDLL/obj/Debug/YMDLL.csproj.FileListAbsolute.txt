@@ -51,3 +51,4 @@ E:\_GitHub\YMDLL\YMDLL\obj\Debug\YMDLL.csproj.CoreCompileInputs.cache
 E:\_GitHub\YMDLL\YMDLL\obj\Debug\YMDLL.csproj.CopyComplete
 E:\_GitHub\YMDLL\YMDLL\obj\Debug\YMDLL.dll
 E:\_GitHub\YMDLL\YMDLL\obj\Debug\YMDLL.pdb
+E:\00._GitHub\YMDLL\YMDLL\obj\Debug\YMDLL.csprojAssemblyReference.cache
