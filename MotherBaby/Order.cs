@@ -20,10 +20,10 @@ namespace MotherBaby
     /// </summary>
     public Order()
     {
-      sTableName = "tplay_order_source_5";
+      sTableName = "tplay_order_source_5_copy";
       sColumns = "roomid,userid,start_time,end_time,use_duration,cost,create_time";
       sOrder = "roomid";
-      dTableName = "tplay_order_dest_1";
+      dTableName = "tplay_order_dest_copy";
       dTableDescript = "订单表";
       dColumns = "roomid,userid,start_time,end_time,use_duration,cost,create_time";
     }
