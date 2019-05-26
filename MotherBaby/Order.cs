@@ -20,7 +20,7 @@ namespace MotherBaby
     /// </summary>
     public Order()
     {
-      sTableName = "tplay_order_source_3";
+      sTableName = "tplay_order_source_5";
       sColumns = "roomid,userid,start_time,end_time,use_duration,cost,create_time";
       sOrder = "roomid";
       dTableName = "tplay_order_dest_1";
@@ -70,27 +70,30 @@ namespace MotherBaby
     /// </summary>
     public void importOrders()
     {
-      //取数据的变量
-      int iQStartTime = 1551369600;   //20190301000000
+      //取数据的变量(仅作为初始计算值)
+      //int iQStartTime = 1551369600;   //20190301000000
       //int iQStartTime = 1554048000;   //20190401000000
-      //int iQStartTime = 1556640000;   //20190501000000
+      int iQStartTime = 1556640000;   //20190501000000
+
+      //实际每天的开始时间变量
+      int iActualStartTime = 0;
       
       int iAStartTime = 32400;        //实际距离开始时间的时间间隔9小时
       int iDayIndex = 0;              //天数索引
       int iDayTotalSecond = 86400;    //一天的总秒数
       RandomHelper rh = new RandomHelper();
 
-      while(iQStartTime <= 1559318400)
+      while(iActualStartTime <= 1559318400)
       {
-        iQStartTime += iDayIndex * iDayTotalSecond;
-        sWhere = " AND start_time Between " + iQStartTime.ToString() + " AND " + (iQStartTime + iDayTotalSecond).ToString();
+        iActualStartTime = iQStartTime + (iDayIndex * iDayTotalSecond);
+        sWhere = " AND start_time Between " + iActualStartTime.ToString() + " AND " + (iActualStartTime + iDayTotalSecond).ToString();
         //获取3月1日的所有设备数据
         DataTable dt = _smysql.GetPager(sTableName, "roomid,count(1) as room_used_time", sWhere, "roomid", "roomid", sPageSize, sPageIndex, out sTotalCount);
         foreach (DataRow dr in dt.Rows)
         {
           //声明列表对象
           List<String> lstValue = new List<String>();
-          sWhere = " 1=1 AND roomid = '" + dr[0].ToString() + "' AND start_time Between " + iQStartTime.ToString() + " AND " + (iQStartTime + iDayTotalSecond).ToString();
+          sWhere = " 1=1 AND roomid = '" + dr[0].ToString() + "' AND start_time Between " + iActualStartTime.ToString() + " AND " + (iActualStartTime + iDayTotalSecond).ToString();
           //sWhere = " 1=1 AND roomid = '" + dr[0].ToString() + "' ";
           DataTable dtRoom = _smysql.GetPager(sTableName, sColumns, sOrder, sPageSize, sPageIndex, sWhere, out sTotalCount);
           int iCurDayRuntimeTotal = 36000;    //当天运行总时间
@@ -98,7 +101,7 @@ namespace MotherBaby
           int iOrderAvgInterval = Math.DivRem(iCurDayRuntimeTotal, dtRoom.Rows.Count, out iRemainder);    //订单平均时间间隔
 
           //开始计算当天这台设备的开始时间及时间间隔
-          int iStartTime = iQStartTime + iAStartTime;    //20190301-上午9点
+          int iStartTime = iActualStartTime + iAStartTime;    //20190301-上午9点
           //int iStartTime = 1554080400;    //20190401-上午9点
           //int iStartTime = 1556672400;    //20190501-上午9点
 
