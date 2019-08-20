@@ -20,10 +20,10 @@ namespace MotherBaby
     /// </summary>
     public Order()
     {
-      sTableName = "tplay_order_source_5";
+      sTableName = "tplay_order_20190816";
       sColumns = "roomid,userid,start_time,end_time,use_duration,cost,create_time";
       sOrder = "roomid";
-      dTableName = "tplay_order_dest_1";
+      dTableName = "tplay_order_20190816_res";
       dTableDescript = "订单表";
       dColumns = "roomid,userid,start_time,end_time,use_duration,cost,create_time";
     }
@@ -73,7 +73,8 @@ namespace MotherBaby
       //取数据的变量(仅作为初始计算值)
       //int iQStartTime = 1551369600;   //20190301000000
       //int iQStartTime = 1554048000;   //20190401000000
-      int iQStartTime = 1556640000;   //20190501000000
+      //int iQStartTime = 1556640000;   //20190501000000
+      int iQStartTime = 1561564800;     //20190627000000
 
       //实际每天的开始时间变量
       int iActualStartTime = 0;
@@ -83,7 +84,7 @@ namespace MotherBaby
       int iDayTotalSecond = 86400;    //一天的总秒数
       RandomHelper rh = new RandomHelper();
 
-      while(iActualStartTime <= 1559318400)
+      while(iActualStartTime <= 1565539200)
       {
         iActualStartTime = iQStartTime + (iDayIndex * iDayTotalSecond);
         sWhere = " AND start_time Between " + iActualStartTime.ToString() + " AND " + (iActualStartTime + iDayTotalSecond).ToString();
